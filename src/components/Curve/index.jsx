@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import gsap from 'gsap'
 
 const routes = {
-  '/': 'Нүүр хуудас',
+  '/': 'Сайн байна уу',
   '/about': 'Бидний тухай',
   '/work': 'Брэндүүд',
   '/process': 'Үйл ажиллагаа',
@@ -90,9 +90,7 @@ export function CurveProvider({ children }) {
 
     tl.set(words, {
       opacity: 0,
-      y: -30,
-      xPercent: -50,
-      yPercent: -50,
+      y: 0,
     })
 
     tl.set('.loading-words .active', {
@@ -110,13 +108,13 @@ export function CurveProvider({ children }) {
       })
     })
 
-    // 2. Dennis Snellenberg iconic smooth floating entrance (delay 0.25s)
+    // 2. Dennis Snellenberg iconic smooth floating entrance (delay 0.15s)
     tl.to(words, {
-      duration: 0.6,
+      duration: 0.5,
       opacity: 1,
-      y: 0,
+      y: -30,
       ease: 'power3.out',
-      delay: 0.25,
+      delay: 0.15,
     })
 
     // 3. Sequentially switch words according to each word's data-duration
