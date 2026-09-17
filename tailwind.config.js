@@ -27,6 +27,7 @@ module.exports = {
           ['Montserrat', ...defaultTheme.fontFamily.sans],
           { fontVariationSettings: 'normal' },
         ],
+        philosopher: ['Philosopher', ...defaultTheme.fontFamily.sans],
       },
     },
   },

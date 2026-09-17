@@ -5,7 +5,7 @@ export function HeroIntro() {
     <div className="max-w-2xl xl:max-w-3xl">
       <div className="overflow-hidden">
         <div className="once-in">
-          <h1 className="font-display text-5xl font-medium tracking-tight text-neutral-950 [text-wrap:balance] sm:text-7xl">
+          <h1 className="font-philosopher font-bold italic text-5xl tracking-tight text-neutral-950 [text-wrap:balance] sm:text-7xl">
             МОНГОЛ УЛСЫН ЭКО ОРЧИН НОГООН ДЭЛХИЙГ БҮТЭЭНЭ
           </h1>
         </div>
