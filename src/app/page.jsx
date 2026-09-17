@@ -20,12 +20,12 @@ const stats = [
   ['2013', 'Байгуулагдсан он'],
   ['70+', 'Ажилтан'],
   ['14', 'Салбар (УБ, Дархан, Эрдэнэт)'],
-  ['4.5 тэрбум₮', '2024 оны борлуулалт'],
+  ['4.5 Тэрбум ₮', '2026 оны борлуулалт'],
 ]
 
 function Clients() {
   return (
-    <div className="mt-24 rounded-4xl bg-neutral-950 py-20 sm:mt-32 sm:py-32 lg:mt-56">
+    <div className="relative z-10 mt-24 rounded-4xl bg-neutral-950 py-20 sm:mt-32 sm:py-32 lg:mt-56">
       <Container>
         <FadeIn className="flex items-center gap-x-8">
           <h2 className="text-center font-display text-sm font-semibold tracking-wider text-white sm:text-left">
@@ -180,9 +180,30 @@ export const metadata = {
 export default async function Home() {
   return (
     <>
-      <Container className="mt-24 sm:mt-32 md:mt-56">
-        <HeroIntro />
-      </Container>
+      <div className="relative">
+        {/* Текст агуулах гол контейнер */}
+        <Container className="relative z-10 mt-24 sm:mt-32 md:mt-56">
+          <HeroIntro />
+        </Container>
+
+        {/* Дэлгэцийн БАРУУН ТАЛД байрлах 4K лого */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute right-0 top-[37%] -translate-y-1/2 translate-x-[50%] z-0 select-none"
+        >
+          <div className="once-in">
+            <Image
+              src="/logomark.png"
+              alt=""
+              width={2053}
+              height={2308}
+              unoptimized
+              priority
+              className="w-[780px] h-auto max-w-none"
+            />
+          </div>
+        </div>
+      </div>
 
       <Clients />
 
@@ -196,3 +217,4 @@ export default async function Home() {
     </>
   )
 }
+
