@@ -1,36 +1,26 @@
 import Image from 'next/image'
-import Link from 'next/link'
 
 import { ContactSection } from '@/components/ContactSection'
 import { Container } from '@/components/Container'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { HeroIntro } from '@/components/HeroIntro'
-import { Preloader } from '@/components/Preloader'
 import { List, ListItem } from '@/components/List'
 import { SectionIntro } from '@/components/SectionIntro'
-import { StylizedImage } from '@/components/StylizedImage'
-import { Testimonial } from '@/components/Testimonial'
-import logoBrightPath from '@/images/clients/bright-path/logo-light.svg'
-import logoFamilyFund from '@/images/clients/family-fund/logo-light.svg'
-import logoGreenLife from '@/images/clients/green-life/logo-light.svg'
-import logoHomeWork from '@/images/clients/home-work/logo-light.svg'
-import logoMailSmirk from '@/images/clients/mail-smirk/logo-light.svg'
-import logoNorthAdventures from '@/images/clients/north-adventures/logo-light.svg'
-import logoPhobiaDark from '@/images/clients/phobia/logo-dark.svg'
-import logoPhobiaLight from '@/images/clients/phobia/logo-light.svg'
-import logoUnseal from '@/images/clients/unseal/logo-light.svg'
-import imageLaptop from '@/images/laptop.jpg'
-import { loadMDXMetadata } from '@/lib/loadMDXMetadata'
+import logoEstel from '@/images/clients/estel/logo-light.png'
+import logoSynergetic from '@/images/clients/synergetic/logo-light.png'
+import logoConstantDelight from '@/images/clients/constant-delight/logo-light.png'
 
-const clients = [
-  ['Phobia', logoPhobiaLight],
-  ['Family Fund', logoFamilyFund],
-  ['Unseal', logoUnseal],
-  ['Mail Smirk', logoMailSmirk],
-  ['Home Work', logoHomeWork],
-  ['Green Life', logoGreenLife],
-  ['Bright Path', logoBrightPath],
-  ['North Adventures', logoNorthAdventures],
+const brands = [
+  ['ESTEL', logoEstel],
+  ['SYNERGETIC', logoSynergetic],
+  ['Constant Delight', logoConstantDelight],
+]
+
+const stats = [
+  ['2013', 'Байгуулагдсан он'],
+  ['70+', 'Ажилтан'],
+  ['14', 'Салбар (УБ, Дархан, Эрдэнэт)'],
+  ['4.5 тэрбум₮', '2024 оны борлуулалт'],
 ]
 
 function Clients() {
@@ -39,19 +29,24 @@ function Clients() {
       <Container>
         <FadeIn className="flex items-center gap-x-8">
           <h2 className="text-center font-display text-sm font-semibold tracking-wider text-white sm:text-left">
-            We’ve worked with hundreds of amazing people
+            Бидний албан ёсны дистрибьютерээр төлөөлж буй олон улсын брэндүүд
           </h2>
           <div className="h-px flex-auto bg-neutral-800" />
         </FadeIn>
         <FadeInStagger faster>
           <ul
             role="list"
-            className="mt-10 grid grid-cols-2 gap-x-8 gap-y-10 lg:grid-cols-4"
+            className="mt-10 grid grid-cols-1 items-center gap-x-8 gap-y-10 sm:grid-cols-3"
           >
-            {clients.map(([client, logo]) => (
-              <li key={client}>
+            {brands.map(([client, logo]) => (
+              <li key={client} className="flex justify-center">
                 <FadeIn>
-                  <Image src={logo} alt={client} unoptimized />
+                  <Image
+                    src={logo}
+                    alt={client}
+                    unoptimized
+                    className="max-h-16 w-auto brightness-0 invert"
+                  />
                 </FadeIn>
               </li>
             ))}
@@ -62,49 +57,76 @@ function Clients() {
   )
 }
 
-function CaseStudies({ caseStudies }) {
+function Stats() {
+  return (
+    <Container className="mt-24 sm:mt-32 lg:mt-40">
+      <FadeInStagger>
+        <ul
+          role="list"
+          className="grid grid-cols-2 gap-x-8 gap-y-12 lg:grid-cols-4"
+        >
+          {stats.map(([value, label]) => (
+            <li key={label}>
+              <FadeIn>
+                <p className="font-display text-4xl font-semibold text-neutral-950 sm:text-5xl">
+                  {value}
+                </p>
+                <p className="mt-2 text-base text-neutral-600">{label}</p>
+              </FadeIn>
+            </li>
+          ))}
+        </ul>
+      </FadeInStagger>
+    </Container>
+  )
+}
+
+const directions = [
+  {
+    title: 'Сургалтын Академи',
+    description:
+      'Мэргэжлийн үсчин, гоо засалчдад зориулсан тогтмол сургалт явуулдаг бөгөөд жил бүр дунджаар 500 гаруй үсчинд мэдлэг түгээдэг.',
+  },
+  {
+    title: 'Салон худалдаа, үйлчилгээ',
+    description:
+      'Мэргэжлийн салонд чиглэсэн бүтээгдэхүүн нийлүүлж, хот, хөдөө орон нутагт 1000 гаруй салонтой байнгын гэрээтэй ажилладаг.',
+  },
+  {
+    title: 'Нэрийн болон сүлжээ дэлгүүр',
+    description:
+      'Улаанбаатар, Дархан, Эрдэнэт хотуудад нийт 14 салбартай нэрийн болон сүлжээ дэлгүүрийн худалдаа эрхэлдэг.',
+  },
+  {
+    title: 'Бөөний болон онлайн худалдаа',
+    description:
+      'Жижиглэн-бөөний болон онлайн худалдааны сувгаар бүтээгдэхүүнээ хэрэглэгчиддээ шууд хүргэдэг.',
+  },
+]
+
+function Directions() {
   return (
     <>
       <SectionIntro
-        title="Harnessing technology for a brighter future"
+        eyebrow="Чиглэлүүд"
+        title="Дараах чиглэлээр үйл ажиллагаагаа явуулж байна"
         className="mt-24 sm:mt-32 lg:mt-40"
       >
         <p>
-          We believe technology is the answer to the world’s greatest
-          challenges. It’s also the cause, so we find ourselves in bit of a
-          catch 22 situation.
+          2013 оноос хойш үс арчилгаа, гоо сайхны салбарт брэндийн албан ёсны
+          дистрибьютерээр тогтвортой ажиллаж, чиглэлээ өргөжүүлсээр байна.
         </p>
       </SectionIntro>
       <Container className="mt-16">
-        <FadeInStagger className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-          {caseStudies.map((caseStudy) => (
-            <FadeIn key={caseStudy.href} className="flex">
-              <article className="relative flex w-full flex-col rounded-3xl p-6 ring-1 ring-neutral-950/5 transition hover:bg-neutral-50 sm:p-8">
-                <h3>
-                  <Link href={caseStudy.href}>
-                    <span className="absolute inset-0 rounded-3xl" />
-                    <Image
-                      src={caseStudy.logo}
-                      alt={caseStudy.client}
-                      className="h-16 w-16"
-                      unoptimized
-                    />
-                  </Link>
-                </h3>
-                <p className="mt-6 flex gap-x-2 text-sm text-neutral-950">
-                  <time dateTime={caseStudy.year} className="font-semibold">
-                    {caseStudy.date.split('-')[0]}
-                  </time>
-                  <span className="text-neutral-300" aria-hidden="true">
-                    /
-                  </span>
-                  <span>Case study</span>
-                </p>
-                <p className="mt-6 font-display text-2xl font-semibold text-neutral-950">
-                  {caseStudy.title}
+        <FadeInStagger className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+          {directions.map((direction) => (
+            <FadeIn key={direction.title} className="flex">
+              <article className="relative flex w-full flex-col rounded-3xl p-6 ring-1 ring-neutral-950/5 sm:p-8">
+                <p className="font-display text-2xl font-semibold text-neutral-950">
+                  {direction.title}
                 </p>
                 <p className="mt-4 text-base text-neutral-600">
-                  {caseStudy.description}
+                  {direction.description}
                 </p>
               </article>
             </FadeIn>
@@ -115,52 +137,36 @@ function CaseStudies({ caseStudies }) {
   )
 }
 
-function Services() {
+function EcoPrinciples() {
   return (
     <>
       <SectionIntro
-        eyebrow="Services"
-        title="We help you identify, explore and respond to new opportunities."
+        eyebrow="Эко зарчим"
+        title="Монгол улсын эко орчин, ногоон дэлхийг бүтээлцэх үйлст"
         className="mt-24 sm:mt-32 lg:mt-40"
       >
         <p>
-          As long as those opportunities involve giving us money to re-purpose
-          old projects — we can come up with an endless number of those.
+          Компанийн нэг салшгүй хэсэг болгон ажиллах зарчим баримталдаг бөгөөд
+          хамтран ажилладаг брэндүүд эко, байгальд ээлтэй бүтээгдэхүүн
+          үйлдвэрлэдэг.
         </p>
       </SectionIntro>
       <Container className="mt-16">
-        <div className="lg:flex lg:items-center lg:justify-end">
-          <div className="flex justify-center lg:w-1/2 lg:justify-end lg:pr-12">
-            <FadeIn className="w-[33.75rem] flex-none lg:w-[45rem]">
-              <StylizedImage
-                src={imageLaptop}
-                sizes="(min-width: 1024px) 41rem, 31rem"
-                className="justify-center lg:justify-end"
-              />
-            </FadeIn>
-          </div>
-          <List className="mt-16 lg:mt-0 lg:w-1/2 lg:min-w-[33rem] lg:pl-4">
-            <ListItem title="Web development">
-              We specialise in crafting beautiful, high quality marketing pages.
-              The rest of the website will be a shell that uses lorem ipsum
-              everywhere.
-            </ListItem>
-            <ListItem title="Application development">
-              We have a team of skilled developers who are experts in the latest
-              app frameworks, like Angular 1 and Google Web Toolkit.
-            </ListItem>
-            <ListItem title="E-commerce">
-              We are at the forefront of modern e-commerce development. Which
-              mainly means adding your logo to the Shopify store template we’ve
-              used for the past six years.
-            </ListItem>
-            <ListItem title="Custom content management">
-              At Studio we understand the importance of having a robust and
-              customised CMS. That’s why we run all of our client projects out
-              of a single, enormous Joomla instance.
-            </ListItem>
-          </List>
-        </div>
+        <List className="lg:w-2/3">
+          <ListItem title="98.8% байгалийн гаралтай">
+            SYNERGETIC брэндийн бүтээгдэхүүн 98.8%-ийн байгалийн гаралтай
+            ургамлын орцтой, харшил үүсгэгчгүй, үнэртүүлэгч агуулаагүй.
+          </ListItem>
+          <ListItem title="Эрүүл, аюулгүй найрлага">
+            SLS, SLES, парабен, силикон, эрдэс тос, будагч бодисгүй эко
+            бүтээгдэхүүнийг гэр бүл, хүрээлэн буй орчинд ээлтэй байхаар
+            сонгодог.
+          </ListItem>
+          <ListItem title="25 жилийн итгэлцэл">
+            Дэлхийн шилдэг брэнд ESTEL 6 дахь жилдээ Монгол Улсад нутагшиж,
+            25 жилийн түүхтэйгээр хэрэглэгчиддээ хүрч байна.
+          </ListItem>
+        </List>
       </Container>
     </>
   )
@@ -168,12 +174,10 @@ function Services() {
 
 export const metadata = {
   description:
-    'We are developer studio working at the intersection of design and technology.',
+    'Тэнгэрийн Илгээмж ХХК — ESTEL, SYNERGETIC, Constant Delight брэндүүдийн албан ёсны дистрибьютер. 2013 оноос хойш Монголын үсчин, гоо сайхны салбарт ажиллаж байна.',
 }
 
 export default async function Home() {
-  let caseStudies = (await loadMDXMetadata('work')).slice(0, 3)
-
   return (
     <>
       <Container className="mt-24 sm:mt-32 md:mt-56">
@@ -182,18 +186,11 @@ export default async function Home() {
 
       <Clients />
 
-      <CaseStudies caseStudies={caseStudies} />
+      <Stats />
 
-      <Testimonial
-        className="mt-24 sm:mt-32 lg:mt-40"
-        client={{ name: 'Phobia', logo: logoPhobiaDark }}
-      >
-        The team at Studio went above and beyond with our onboarding, even
-        finding a way to access the user’s microphone without triggering one of
-        those annoying permission dialogs.
-      </Testimonial>
+      <Directions />
 
-      <Services />
+      <EcoPrinciples />
 
       <ContactSection />
     </>

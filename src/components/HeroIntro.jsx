@@ -14,9 +14,9 @@ export function HeroIntro() {
       <div className="overflow-hidden">
         <div className="once-in">
           <p className="mt-6 text-xl text-neutral-600">
-            We are developer studio working at the intersection of design and
-            technology. It’s a really busy intersection though — a lot of our
-            staff have been involved in hit and runs.
+         Тэнгэрийн Илгээмж ХХК — ESTEL, SYNERGETIC, Constant Delight
+            брэндүүдийн албан ёсны дистрибьютер. 2013 оноос хойш Монголын
+            үсчин, гоо сайхны салбарт тогтвортой хөгжиж байна.
           </p>
         </div>
       </div>
