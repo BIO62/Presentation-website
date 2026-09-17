@@ -140,16 +140,3 @@
    will-change: transform, opacity;
 }
 
-@keyframes float3d {
-   0%, 100% {
-      transform: translateY(0px) rotate(0deg);
-   }
-   50% {
-      transform: translateY(-14px) rotate(1.2deg);
-   }
-}
-
-.animate-float-3d {
-   animation: float3d 5.5s ease-in-out infinite;
-}
-
