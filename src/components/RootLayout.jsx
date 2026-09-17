@@ -79,7 +79,7 @@ function Header({
             />
           </Link>
         </div>
-        <div className="flex items-center gap-x-8">
+        <div className="flex items-center gap-x-4 sm:gap-x-8">
           {/* "Холбоо барих" товч — navigateTo ашиглана */}
           <div className="once-in">
             <Button

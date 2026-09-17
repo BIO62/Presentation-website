@@ -36,7 +36,7 @@ function Clients() {
         <FadeInStagger faster>
           <ul
             role="list"
-            className="mt-10 grid grid-cols-1 items-center gap-x-8 gap-y-10 sm:grid-cols-3"
+            className="mt-10 grid grid-cols-3 items-center gap-x-4 gap-y-10 sm:gap-x-8"
           >
             {brands.map(([client, logo]) => (
               <li key={client} className="flex justify-center">
@@ -45,7 +45,7 @@ function Clients() {
                     src={logo}
                     alt={client}
                     unoptimized
-                    className="max-h-16 w-auto brightness-0 invert"
+                    className="max-h-10 sm:max-h-16 w-auto brightness-0 invert"
                   />
                 </FadeIn>
               </li>
@@ -180,16 +180,16 @@ export const metadata = {
 export default async function Home() {
   return (
     <>
-      <div className="relative">
+      <div className="relative overflow-hidden">
         {/* Текст агуулах гол контейнер */}
-        <Container className="relative z-10 mt-24 sm:mt-32 md:mt-56">
+        <Container className="relative z-10 mt-10 sm:mt-24 md:mt-36 lg:mt-56">
           <HeroIntro />
         </Container>
 
         {/* Дэлгэцийн БАРУУН ТАЛД байрлах 4K лого */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute right-0 top-[37%] -translate-y-1/2 translate-x-[50%] z-0 select-none"
+          className="pointer-events-none absolute right-0 top-[40%] sm:top-[37%] -translate-y-1/2 translate-x-[40%] sm:translate-x-[50%] z-0 select-none opacity-20 sm:opacity-100"
         >
           <div className="once-in">
             <Image
@@ -199,7 +199,7 @@ export default async function Home() {
               height={2308}
               unoptimized
               priority
-              className="w-[780px] h-auto max-w-none"
+              className="w-[280px] sm:w-[500px] lg:w-[780px] h-auto max-w-none"
             />
           </div>
         </div>
