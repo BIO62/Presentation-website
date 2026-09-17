@@ -16,6 +16,7 @@ const routes = {
 const CurveContext = createContext({
   navigateTo: () => {},
   introComplete: true,
+  isRevealed: true,
 })
 
 export const useCurveNavigation = () => useContext(CurveContext)
@@ -25,6 +26,7 @@ export function CurveProvider({ children }) {
   const pathname = usePathname()
 
   const [currentWord, setCurrentWord] = useState('Home')
+  const [isRevealed, setIsRevealed] = useState(true)
 
   const isTransitioningRef = useRef(false)
   const currentTlRef = useRef(null)
@@ -140,6 +142,9 @@ export function CurveProvider({ children }) {
       ease: 'power4.inOut',
       delay: 0.05,
     })
+    tl.call(() => {
+      setIsRevealed(true)
+    }, null, '<0.1')
 
     tl.to(
       bottomRound,
@@ -246,6 +251,11 @@ export function CurveProvider({ children }) {
       ease: 'power3.inOut',
     })
 
+    // Агуулгын урсдаг анимацийг хөшиг дээшээ нээгдэх яг тэр агшинд эхлүүлнэ
+    tl.call(() => {
+      setIsRevealed(true)
+    }, null, '<0.08')
+
     // 2. Word fades out smoothly
     tl.to(
       words,
@@ -284,6 +294,7 @@ export function CurveProvider({ children }) {
       }
 
       isTransitioningRef.current = true
+      setIsRevealed(false)
 
       const label =
         routes[targetHref] ??
@@ -429,7 +440,7 @@ export function CurveProvider({ children }) {
   }, [navigateTo, pageTransitionIn])
 
   return (
-    <CurveContext.Provider value={{ navigateTo, introComplete: true }}>
+    <CurveContext.Provider value={{ navigateTo, introComplete: true, isRevealed }}>
       {/* 
         Dennis Snellenberg Official HTML Structure (dennissnellenberg.com):
         .loading-container
