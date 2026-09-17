@@ -59,43 +59,53 @@ const team = [
     title: 'Удирдлага',
     people: [
       {
-        name: 'Leslie Alexander',
-        role: 'Co-Founder / CEO',
-        image: { src: imageLeslieAlexander },
+        name: 'Тулин Олег',
+        role: 'Ерөнхий захирал',
+        image: { src: imageBenjaminRussel},
       },
       {
-        name: 'Michael Foster',
-        role: 'Co-Founder / CTO',
+        name: 'Н. Өлзий-Хутаг',
+        role: 'Гүйцэтгэх захирал',
+        image: { src:  imageLeslieAlexander  },
+      },
+      {
+        name: 'Ж. Нямдорж',
+        role: 'Орлогч захирал',
         image: { src: imageMichaelFoster },
       },
-      {
-        name: 'Dries Vincent',
-        role: 'Partner & Business Relations',
+            {
+        name: 'Б. Уранчимэг',
+        role: 'Санхүү хариуцсан захирал',
+        image: { src: imageLeslieAlexander },
+      },
+                  {
+        name: 'Д. Мөнхбаяр',
+        role: 'Борлуулалт, үйлчилгээ хөгжил хариуцсан захирал',
         image: { src: imageDriesVincent },
       },
     ],
   },
   {
-    title: 'Менежерүүд, Баг хамт олон',
+    title: 'Менежер\nБаг хамт олон',
     people: [
       {
-        name: 'Chelsea Hagon',
-        role: 'Senior Developer',
+        name: 'О. Золжаргал',
+        role: 'Дархан салбар харицсан менежер',
         image: { src: imageChelseaHagon },
       },
       {
-        name: 'Emma Dorsey',
-        role: 'Senior Designer',
+        name: 'М. Гэрэлтуяа',
+        role: 'Эрдэнэт салбар хариуцсан менежер',
         image: { src: imageEmmaDorsey },
       },
       {
-        name: 'Leonard Krasner',
-        role: 'VP, User Experience',
+        name: 'Ч. Дуламсүрэн',
+        role: 'Нэрийн дэлгүүр хариуцсан менежер',
         image: { src: imageLeonardKrasner },
       },
       {
-        name: 'Blake Reid',
-        role: 'Junior Copywriter',
+        name: 'Х. Отгонбаатар',
+        role: 'Ахлан технологич багш',
         image: { src: imageBlakeReid },
       },
       {
@@ -136,7 +146,7 @@ function Team() {
             <Border as={FadeIn} />
             <div className="grid grid-cols-1 gap-6 pt-12 sm:pt-16 lg:grid-cols-4 xl:gap-8">
               <FadeIn>
-                <h2 className="font-display text-2xl font-semibold text-neutral-950">
+                <h2 className="whitespace-pre-line font-display text-2xl font-semibold text-neutral-950">
                   {group.title}
                 </h2>
               </FadeIn>
