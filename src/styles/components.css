@@ -1,3 +1,142 @@
 @tailwind components;
 
 @import './typography.css';
+
+/* ─────────────────────────────────────────────────────────────
+   Dennis Snellenberg Official Page Transition & Loader CSS
+   Exact classes extracted directly from dennissnellenberg.com
+   ───────────────────────────────────────────────────────────── */
+
+:root {
+   --color-dark: #1C1D20;
+   --color-dark-dark: #141517;
+   --color-light: #FFFFFF;
+   --color-white: #FFFFFF;
+}
+
+.no-scroll-overlay {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100vh;
+   overflow: hidden;
+   z-index: 900;
+   display: none;
+}
+
+.loading-container {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100vh;
+   overflow: hidden;
+   z-index: 99999;
+   pointer-events: none;
+   background: transparent;
+}
+
+.loading-screen {
+   position: relative;
+   padding: 0;
+   width: 100%;
+   height: 100%;
+   left: 0;
+   top: 0;
+   will-change: top;
+   background: var(--color-dark-dark);
+}
+
+.loading-container .rounded-div-wrap {
+   width: 100%;
+   position: relative;
+   overflow: hidden;
+}
+
+.loading-container .rounded-div-wrap.top {
+   top: 0;
+   position: absolute;
+   transform: translateY(-99%) scale(1,-1);
+   z-index: 2;
+   height: 0vh;
+   will-change: height;
+}
+
+.loading-container .rounded-div-wrap.bottom {
+   top: unset;
+   bottom: 0;
+   position: absolute;
+   transform: translateY(99%);
+   z-index: 2;
+   height: 0vh;
+   will-change: height;
+}
+
+.loading-container .rounded-div-wrap.top .rounded-div,
+.loading-container .rounded-div-wrap.bottom .rounded-div {
+   background: var(--color-dark-dark);
+   width: 150%;
+   content: "";
+   display: block;
+   position: absolute;
+   height: 745%;
+   left: 50%;
+   border-radius: 50%;
+   transform: translate(-50%, -86.666%);
+   z-index: 1;
+}
+
+.loading-container .loading-words {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   opacity: 0;
+   pointer-events: none;
+   display: block;
+   will-change: opacity, transform;
+}
+
+.loading-container .loading-words h2 {
+   margin: 0;
+   padding: 0;
+   color: var(--color-white);
+   position: absolute;
+   top: 0;
+   left: 50%;
+   transform: translateX(-50%);
+   display: none;
+   white-space: nowrap;
+   font-size: clamp(2.2em, 4vw, 3.8em);
+   font-weight: 500;
+   line-height: 1;
+   will-change: opacity;
+}
+
+.loading-container .loading-words h2.active {
+   display: inline-flex;
+   align-items: center;
+}
+
+.loading-container .loading-words h2.home-active-first {
+   display: inline-flex;
+   align-items: center;
+}
+
+.loading-container .dot {
+   display: inline-block;
+   flex-shrink: 0;
+   border-radius: 50%;
+   background: var(--color-white);
+   width: clamp(10px, 1vw, 14px);
+   height: clamp(10px, 1vw, 14px);
+   margin-right: 0.25em; /* үгтэйгээ илүү ойрхон */
+   position: relative;
+   top: -0.05em; /* үсгийн baseline болон cap-height-ийн яг төвд тааруулсан */
+}
+
+.once-in {
+   will-change: transform, opacity;
+}
+

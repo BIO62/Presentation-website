@@ -1,4 +1,5 @@
 import { RootLayout } from '@/components/RootLayout'
+import { CurveProvider } from '@/components/Curve'
 
 import '@/styles/tailwind.css'
 
@@ -11,9 +12,20 @@ export const metadata = {
 
 export default function Layout({ children }) {
   return (
-    <html lang="en" className="h-full bg-neutral-950 text-base antialiased">
-      <body className="flex min-h-full flex-col">
-        <RootLayout>{children}</RootLayout>
+    <html
+      lang="mn"
+      className="h-full bg-neutral-950 text-base antialiased"
+    >
+      <body className="flex min-h-full flex-col font-sans bg-neutral-950 text-neutral-950">
+        {/*
+          CurveProvider:
+          - SVG transition overlay-г (AnimatePresence mode='wait' + key=displayPathname) агуулна
+          - navigateTo() context-г хуваалцана
+          - RootLayout болон хуудасны контентыг хүүхэд болгоно
+        */}
+        <CurveProvider>
+          <RootLayout>{children}</RootLayout>
+        </CurveProvider>
       </body>
     </html>
   )

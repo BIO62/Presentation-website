@@ -7,7 +7,7 @@ import { socialMediaProfiles } from '@/components/SocialMedia'
 
 const navigation = [
   {
-    title: 'Work',
+    title: 'Бусад',
     links: [
       { title: 'FamilyFund', href: '/work/family-fund' },
       { title: 'Unseal', href: '/work/unseal' },
@@ -23,16 +23,16 @@ const navigation = [
     ],
   },
   {
-    title: 'Company',
+    title: 'Компани',
     links: [
-      { title: 'About', href: '/about' },
-      { title: 'Process', href: '/process' },
-      { title: 'Blog', href: '/blog' },
-      { title: 'Contact us', href: '/contact' },
+      { title: 'Бидний тухай', href: '/about' },
+      { title: 'Үйл ажиллагаа', href: '/process' },
+      { title: 'Мэдээ мэдээлэл', href: '/blog' },
+      { title: 'Хүний нөөц', href: '/contact' },
     ],
   },
   {
-    title: 'Connect',
+    title: 'Холбоос',
     links: socialMediaProfiles,
   },
 ]
@@ -82,16 +82,15 @@ function NewsletterForm() {
   return (
     <form className="max-w-sm">
       <h2 className="font-display text-sm font-semibold tracking-wider text-neutral-950">
-        Sign up for our newsletter
+       Шинэ мэдээлэл хүлээн авах
       </h2>
       <p className="mt-4 text-sm text-neutral-700">
-        Subscribe to get the latest design news, articles, resources and
-        inspiration.
+       Бидний шинэ төсөл, сонирхолтой нийтлэл болон салбарын шинэ содон мэдээллүүдийг цаг алдалгүй аваарай.
       </p>
       <div className="relative mt-6">
         <input
           type="email"
-          placeholder="Email address"
+          placeholder="И-мэйл хаягаа оруулна уу..."
           autoComplete="email"
           aria-label="Email address"
           className="block w-full rounded-2xl border border-neutral-300 bg-transparent py-4 pl-6 pr-20 text-base/6 text-neutral-950 ring-4 ring-transparent transition placeholder:text-neutral-500 focus:border-neutral-950 focus:outline-none focus:ring-neutral-950/5"
@@ -120,12 +119,12 @@ export function Footer() {
             <NewsletterForm />
           </div>
         </div>
-        <div className="mb-20 mt-24 flex flex-wrap items-end justify-between gap-x-6 gap-y-4 border-t border-neutral-950/10 pt-12">
-          <Link href="/" aria-label="Home">
-            <Logo className="h-8" fillOnHover />
+        <div className="mb-20 mt-24 flex flex-wrap items-center justify-between gap-x-6 gap-y-4 border-t border-neutral-950/10 pt-12">
+          <Link href="/" aria-label="Home" className="flex items-center">
+            <Logo fillOnHover />
           </Link>
-          <p className="text-sm text-neutral-700">
-            © Studio Agency Inc. {new Date().getFullYear()}
+          <p className="text-sm text-neutral-700 leading-none">
+            © {new Date().getFullYear()} Тэнгэрийн Илгээмж. Бүх эрх хуулиар хамгаалагдсан
           </p>
         </div>
       </FadeIn>

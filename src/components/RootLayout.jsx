@@ -15,6 +15,7 @@ import { motion, MotionConfig, useReducedMotion } from 'framer-motion'
 
 import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
+import { useCurveNavigation } from '@/components/Curve'
 import { Footer } from '@/components/Footer'
 import { GridPattern } from '@/components/GridPattern'
 import { Logo, Logomark } from '@/components/Logo'
@@ -49,52 +50,72 @@ function Header({
   toggleRef,
 }) {
   let { logoHovered, setLogoHovered } = useContext(RootLayoutContext)
+  const { navigateTo } = useCurveNavigation()
 
   return (
     <Container>
       <div className="flex items-center justify-between">
-        <Link
-          href="/"
-          aria-label="Home"
-          onMouseEnter={() => setLogoHovered(true)}
-          onMouseLeave={() => setLogoHovered(false)}
-        >
-          <Logomark
-            className="h-8 sm:hidden"
-            invert={invert}
-            filled={logoHovered}
-          />
-          <Logo
-            className="hidden h-8 sm:block"
-            invert={invert}
-            filled={logoHovered}
-          />
-        </Link>
-        <div className="flex items-center gap-x-8">
-          <Button href="/contact" invert={invert}>
-            Contact us
-          </Button>
-          <button
-            ref={toggleRef}
-            type="button"
-            onClick={onToggle}
-            aria-expanded={expanded.toString()}
-            aria-controls={panelId}
-            className={clsx(
-              'group -m-2.5 rounded-full p-2.5 transition',
-              invert ? 'hover:bg-white/10' : 'hover:bg-neutral-950/10'
-            )}
-            aria-label="Toggle navigation"
+        {/* Logo — navigateTo ашиглана (transition-тай) */}
+        <div className="once-in">
+          <Link
+            href="/"
+            aria-label="Home"
+            onMouseEnter={() => setLogoHovered(true)}
+            onMouseLeave={() => setLogoHovered(false)}
+            onClick={(e) => {
+              e.preventDefault()
+              navigateTo('/')
+            }}
           >
-            <Icon
-              className={clsx(
-                'h-6 w-6',
-                invert
-                  ? 'fill-white group-hover:fill-neutral-200'
-                  : 'fill-neutral-950 group-hover:fill-neutral-700'
-              )}
+            <Logomark
+              className="sm:hidden"
+              invert={invert}
+              filled={logoHovered}
             />
-          </button>
+            <Logo
+              className="hidden sm:block"
+              invert={invert}
+              filled={logoHovered}
+            />
+          </Link>
+        </div>
+        <div className="flex items-center gap-x-8">
+          {/* "Холбоо барих" товч — navigateTo ашиглана */}
+          <div className="once-in">
+            <Button
+              href="/contact"
+              invert={invert}
+              onClick={(e) => {
+                e.preventDefault()
+                navigateTo('/contact')
+              }}
+            >
+              Хүний нөөц
+            </Button>
+          </div>
+          <div className="once-in">
+            <button
+              ref={toggleRef}
+              type="button"
+              onClick={onToggle}
+              aria-expanded={expanded.toString()}
+              aria-controls={panelId}
+              className={clsx(
+                'group -m-2.5 rounded-full p-2.5 transition',
+                invert ? 'hover:bg-white/10' : 'hover:bg-neutral-950/10'
+              )}
+              aria-label="Toggle navigation"
+            >
+              <Icon
+                className={clsx(
+                  'h-6 w-6',
+                  invert
+                    ? 'fill-white group-hover:fill-neutral-200'
+                    : 'fill-neutral-950 group-hover:fill-neutral-700'
+                )}
+              />
+            </button>
+          </div>
         </div>
       </div>
     </Container>
@@ -112,9 +133,17 @@ function NavigationRow({ children }) {
 }
 
 function NavigationItem({ href, children }) {
+  const { navigateTo } = useCurveNavigation()
+  let { setExpanded } = useContext(RootLayoutContext)
+
   return (
     <Link
       href={href}
+      onClick={(e) => {
+        e.preventDefault()
+        setExpanded(false)
+        navigateTo(href)
+      }}
       className="group relative isolate -mx-6 bg-neutral-950 px-6 py-10 even:mt-px sm:mx-0 sm:px-0 sm:py-16 sm:odd:pr-16 sm:even:mt-0 sm:even:border-l sm:even:border-neutral-800 sm:even:pl-16"
     >
       {children}
@@ -127,12 +156,12 @@ function Navigation() {
   return (
     <nav className="mt-px font-display text-5xl font-medium tracking-tight text-white">
       <NavigationRow>
-        <NavigationItem href="/work">Our Work</NavigationItem>
-        <NavigationItem href="/about">About Us</NavigationItem>
+        <NavigationItem href="/work">Дистрибьютер</NavigationItem>
+        <NavigationItem href="/about">Бидний тухай</NavigationItem>
       </NavigationRow>
       <NavigationRow>
-        <NavigationItem href="/process">Our Process</NavigationItem>
-        <NavigationItem href="/blog">Blog</NavigationItem>
+        <NavigationItem href="/process">Үйл ажиллагаа</NavigationItem>
+        <NavigationItem href="/blog">Мэдээ мэдээлэл</NavigationItem>
       </NavigationRow>
     </nav>
   )
@@ -140,7 +169,8 @@ function Navigation() {
 
 function RootLayoutInner({ children }) {
   let panelId = useId()
-  let [expanded, setExpanded] = useState(false)
+  let { expanded, setExpanded } = useContext(RootLayoutContext)
+  const { introComplete } = useCurveNavigation()
   let openRef = useRef()
   let closeRef = useRef()
   let navRef = useRef()
@@ -183,14 +213,15 @@ function RootLayoutInner({ children }) {
         </div>
 
         <motion.div
-          layout
           id={panelId}
-          style={{ height: expanded ? 'auto' : '0.5rem' }}
+          initial={false}
+          animate={{ height: expanded ? 'auto' : '0.5rem' }}
+          transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
           className="relative z-50 overflow-hidden bg-neutral-950 pt-2"
           aria-hidden={expanded ? undefined : 'true'}
           inert={expanded ? undefined : ''}
         >
-          <motion.div layout className="bg-neutral-800">
+          <div className="bg-neutral-800">
             <div ref={navRef} className="bg-neutral-950 pb-16 pt-14">
               <Header
                 invert
@@ -212,7 +243,7 @@ function RootLayoutInner({ children }) {
                 <div className="grid grid-cols-1 gap-y-10 pb-16 pt-10 sm:grid-cols-2 sm:pt-16">
                   <div>
                     <h2 className="font-display text-base font-semibold text-white">
-                      Our offices
+                      Оффис
                     </h2>
                     <Offices
                       invert
@@ -221,24 +252,22 @@ function RootLayoutInner({ children }) {
                   </div>
                   <div className="sm:border-l sm:border-transparent sm:pl-16">
                     <h2 className="font-display text-base font-semibold text-white">
-                      Follow us
+                      Бидэнтэй нэгд
                     </h2>
                     <SocialMedia className="mt-6" invert />
                   </div>
                 </div>
               </Container>
             </div>
-          </motion.div>
+          </div>
         </motion.div>
       </header>
 
-      <motion.div
-        layout
+      <div
         style={{ borderTopLeftRadius: 40, borderTopRightRadius: 40 }}
         className="relative flex flex-auto overflow-hidden bg-white pt-14"
       >
-        <motion.div
-          layout
+        <div
           className="relative isolate flex w-full flex-col pt-9"
         >
           <GridPattern
@@ -250,19 +279,26 @@ function RootLayoutInner({ children }) {
           <main className="w-full flex-auto">{children}</main>
 
           <Footer />
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </MotionConfig>
   )
 }
 
 export function RootLayout({ children }) {
-  let pathname = usePathname()
   let [logoHovered, setLogoHovered] = useState(false)
+  let [expanded, setExpanded] = useState(false)
+  let pathname = usePathname()
+
+  // Хуудас солигдох бүрт цэс автоматаар хаагдаж, дэлгэц хамгийн дээшээ (0, 0) очино
+  useEffect(() => {
+    setExpanded(false)
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+  }, [pathname])
 
   return (
-    <RootLayoutContext.Provider value={{ logoHovered, setLogoHovered }}>
-      <RootLayoutInner key={pathname}>{children}</RootLayoutInner>
+    <RootLayoutContext.Provider value={{ logoHovered, setLogoHovered, expanded, setExpanded }}>
+      <RootLayoutInner>{children}</RootLayoutInner>
     </RootLayoutContext.Provider>
   )
 }
