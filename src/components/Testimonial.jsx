@@ -26,7 +26,12 @@ export function Testimonial({ children, client, className }) {
               </p>
             </blockquote>
             <figcaption className="mt-10">
-              <Image src={client.logo} alt={client.name} unoptimized />
+              <Image
+                src={client.logo}
+                alt={client.name}
+                unoptimized
+                className="max-h-12 w-auto object-contain"
+              />
             </figcaption>
           </figure>
         </FadeIn>
