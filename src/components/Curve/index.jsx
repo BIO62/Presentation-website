@@ -25,8 +25,8 @@ export function CurveProvider({ children }) {
   const router = useRouter()
   const pathname = usePathname()
 
-  const [currentWord, setCurrentWord] = useState('Home')
-  const [isRevealed, setIsRevealed] = useState(true)
+  const [currentWord, setCurrentWord] = useState(routes[pathname] || 'Сайн байна уу')
+  const [isRevealed, setIsRevealed] = useState(pathname !== '/')
 
   const isTransitioningRef = useRef(false)
   const currentTlRef = useRef(null)
@@ -38,6 +38,7 @@ export function CurveProvider({ children }) {
 
   const initialMountedRef = useRef(false)
   const fallbackTimerRef = useRef(null)
+  const prevPathnameRef = useRef(pathname)
 
   // ─────────────────────────────────────────────────────────────
   // Dennis Snellenberg Exact initLoaderHome()
@@ -90,6 +91,8 @@ export function CurveProvider({ children }) {
 
     tl.set(words, {
       opacity: 0,
+      xPercent: -50,
+      yPercent: -50,
       y: 0,
     })
 
@@ -112,6 +115,8 @@ export function CurveProvider({ children }) {
     tl.to(words, {
       duration: 0.5,
       opacity: 1,
+      xPercent: -50,
+      yPercent: -50,
       y: -30,
       ease: 'power3.out',
       delay: 0.15,
@@ -325,7 +330,7 @@ export function CurveProvider({ children }) {
 
       // Initial state
       tl.set(screen, { top: '100%' })
-      tl.set(words, { opacity: 0, y: 0 })
+      tl.set(words, { opacity: 0, xPercent: -50, yPercent: -50, y: 0 })
       tl.set('.loading-words .home-word', {
         display: 'none',
         opacity: 0,
@@ -360,6 +365,8 @@ export function CurveProvider({ children }) {
       tl.to(words, {
         duration: 0.5,
         opacity: 1,
+        xPercent: -50,
+        yPercent: -50,
         y: -30,
         ease: 'power3.out',
         delay: 0.05,
@@ -376,7 +383,9 @@ export function CurveProvider({ children }) {
   // At this exact moment, we reveal the new page smoothly.
   // ─────────────────────────────────────────────────────────────
   useEffect(() => {
-    if (!initialMountedRef.current) return
+    // Only handle route transitions, NEVER on initial mount:
+    if (prevPathnameRef.current === pathname) return
+    prevPathnameRef.current = pathname
 
     if (isTransitioningRef.current) {
       // Let React finish DOM commit, then slide the curtain away
@@ -451,6 +460,7 @@ export function CurveProvider({ children }) {
         <div
           ref={loadingScreenRef}
           className="loading-screen"
+          style={{ top: pathname === '/' ? '0%' : '100%' }}
         >
           <div ref={topRoundRef} className="rounded-div-wrap top">
             <div className="rounded-div" />
