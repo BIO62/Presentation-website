@@ -49,37 +49,51 @@ function ContactForm() {
     <FadeIn className="lg:order-last">
       <form>
         <h2 className="font-display text-base font-semibold text-neutral-950">
-          Work inquiries
+          Хамтран ажиллах хүсэлт
         </h2>
         <div className="isolate mt-6 -space-y-px rounded-2xl bg-white/50">
-          <TextInput label="Name" name="name" autoComplete="name" />
+          <TextInput label="Нэр" name="name" autoComplete="name" />
           <TextInput
-            label="Email"
+            label="Имэйл"
             type="email"
             name="email"
             autoComplete="email"
           />
           <TextInput
-            label="Company"
+            label="Байгууллага (эсвэл салон)"
             name="company"
             autoComplete="organization"
           />
-          <TextInput label="Phone" type="tel" name="phone" autoComplete="tel" />
-          <TextInput label="Message" name="message" />
+          <TextInput label="Утас" type="tel" name="phone" autoComplete="tel" />
+          <TextInput label="Мессеж" name="message" />
           <div className="border border-neutral-300 px-6 py-8 first:rounded-t-2xl last:rounded-b-2xl">
             <fieldset>
-              <legend className="text-base/6 text-neutral-500">Budget</legend>
+              <legend className="text-base/6 text-neutral-500">
+                Хүсэлтийн төрөл
+              </legend>
               <div className="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-2">
-                <RadioInput label="$25K – $50K" name="budget" value="25" />
-                <RadioInput label="$50K – $100K" name="budget" value="50" />
-                <RadioInput label="$100K – $150K" name="budget" value="100" />
-                <RadioInput label="More than $150K" name="budget" value="150" />
+                <RadioInput
+                  label="Дилер/салонд бараа авах"
+                  name="inquiry"
+                  value="dealer"
+                />
+                <RadioInput
+                  label="Бөөний захиалга"
+                  name="inquiry"
+                  value="wholesale"
+                />
+                <RadioInput
+                  label="Сургалтад бүртгүүлэх"
+                  name="inquiry"
+                  value="academy"
+                />
+                <RadioInput label="Бусад асуулт" name="inquiry" value="other" />
               </div>
             </fieldset>
           </div>
         </div>
         <Button type="submit" className="mt-10">
-          Let’s work together
+          Хүсэлт илгээх
         </Button>
       </form>
     </FadeIn>
@@ -93,29 +107,26 @@ function ContactDetails() {
         Оффис
       </h2>
       <p className="mt-6 text-base text-neutral-600">
-        Prefer doing things in person? We don’t but we have to list our
-        addresses here for legal reasons.
+        Дилер, бөөний захиалга, сургалтад бүртгүүлэх хүсэлтээ манай оффис
+        дээр биечлэн ирж, эсвэл доорх утсаар холбогдож өгч болно.
       </p>
 
       <Offices className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2" />
 
       <Border className="mt-16 pt-16">
         <h2 className="font-display text-base font-semibold text-neutral-950">
-          Email us
+          Утсаар холбогдох
         </h2>
         <dl className="mt-6 grid grid-cols-1 gap-8 text-sm sm:grid-cols-2">
-          {[
-            ['Careers', 'careers@studioagency.com'],
-            ['Press', 'press@studioagency.com'],
-          ].map(([label, email]) => (
-            <div key={email}>
+          {[['Утас', '976 7707-2207']].map(([label, phone]) => (
+            <div key={phone}>
               <dt className="font-semibold text-neutral-950">{label}</dt>
               <dd>
                 <Link
-                  href={`mailto:${email}`}
+                  href={`tel:${phone.replace(/\s|-/g, '')}`}
                   className="text-neutral-600 hover:text-neutral-950"
                 >
-                  {email}
+                  {phone}
                 </Link>
               </dd>
             </div>
@@ -134,15 +145,19 @@ function ContactDetails() {
 }
 
 export const metadata = {
-  title: 'Contact Us',
-  description: 'Let’s work together. We can’t wait to hear from you.',
+  title: 'Холбоо барих',
+  description:
+    'Тэнгэрийн Илгээмж ХХК-тай холбогдох — дилер, бөөний захиалга, сургалт, бусад асуултаа илгээгээрэй.',
 }
 
 export default function Contact() {
   return (
     <>
-      <PageIntro eyebrow="Contact us" title="Let’s work together">
-        <p>We can’t wait to hear from you.</p>
+      <PageIntro eyebrow="Холбоо барих" title="Бидэнтэй холбогдоорой">
+        <p>
+          Дилер болох, бараа захиалах, эсвэл сургалтад бүртгүүлэх хүсэлтээ
+          доор бичээд илгээгээрэй.
+        </p>
       </PageIntro>
 
       <Container className="mt-24 sm:mt-32 lg:mt-40">

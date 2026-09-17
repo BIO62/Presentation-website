@@ -156,7 +156,7 @@ function Navigation() {
   return (
     <nav className="mt-px font-display text-5xl font-medium tracking-tight text-white">
       <NavigationRow>
-        <NavigationItem href="/work">Дистрибьютер</NavigationItem>
+        <NavigationItem href="/work">Брэндүүд</NavigationItem>
         <NavigationItem href="/about">Бидний тухай</NavigationItem>
       </NavigationRow>
       <NavigationRow>
@@ -294,6 +294,9 @@ export function RootLayout({ children }) {
   useEffect(() => {
     setExpanded(false)
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+    // Анимаци болон IntersectionObserver-ийг шинэ хуудасны (0,0) байрлалаар сэрээнэ
+    window.dispatchEvent(new Event('scroll'))
+    window.dispatchEvent(new Event('resize'))
   }, [pathname])
 
   return (

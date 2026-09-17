@@ -1,4 +1,3 @@
-import { Blockquote } from '@/components/Blockquote'
 import { ContactSection } from '@/components/ContactSection'
 import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
@@ -43,131 +42,105 @@ function Section({ title, image, children }) {
   )
 }
 
-function Discover() {
+function Distribution() {
   return (
-    <Section title="Discover" image={{ src: imageWhiteboard }}>
+    <Section title="Нийлүүлэлт" image={{ src: imageWhiteboard }}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>
-          We work closely with our clients to understand their{' '}
-          <strong className="font-semibold text-neutral-950">needs</strong> and
-          goals, embedding ourselves in their every day operations to understand
-          what makes their business tick.
+          ESTEL, SYNERGETIC, Constant Delight брэндүүдийн{' '}
+          <strong className="font-semibold text-neutral-950">
+            албан ёсны дистрибьютер
+          </strong>{' '}
+          эрхтэйгээр гадаадаас чанарын баталгаатай бүтээгдэхүүнийг Монгол
+          Улсад нийлүүлдэг.
         </p>
         <p>
-          Our team of private investigators shadow the company director’s for
-          several weeks while our account managers focus on going through their
-          trash. Our senior security experts then perform social engineering
-          hacks to gain access to their{' '}
-          <strong className="font-semibold text-neutral-950">business</strong>{' '}
-          accounts — handing that information over to our forensic accounting
-          team.
-        </p>
-        <p>
-          Once the full audit is complete, we report back with a comprehensive{' '}
-          <strong className="font-semibold text-neutral-950">plan</strong> and,
-          more importantly, a budget.
+          Нийлүүлсэн бүтээгдэхүүнээ Улаанбаатар, Дархан, Эрдэнэт хотуудад
+          нийт 14 салбар, нэрийн болон сүлжээ дэлгүүрээр дамжуулан хот,
+          хөдөө орон нутгийн{' '}
+          <strong className="font-semibold text-neutral-950">
+            хэрэглэгчид
+          </strong>{' '}
+          хүртээмжтэй хүргэдэг.
         </p>
       </div>
 
       <h3 className="mt-12 font-display text-base font-semibold text-neutral-950">
-        Included in this phase
+        Энэ шатанд багтдаг
       </h3>
       <TagList className="mt-4">
-        <TagListItem>In-depth questionnaires</TagListItem>
-        <TagListItem>Feasibility studies</TagListItem>
-        <TagListItem>Blood samples</TagListItem>
-        <TagListItem>Employee surveys</TagListItem>
-        <TagListItem>Proofs-of-concept</TagListItem>
-        <TagListItem>Forensic audit</TagListItem>
+        <TagListItem>Албан ёсны дистрибьюшн эрх</TagListItem>
+        <TagListItem>Чанарын баталгаа</TagListItem>
+        <TagListItem>14 салбарын логистик</TagListItem>
+        <TagListItem>Нэрийн болон сүлжээ дэлгүүр</TagListItem>
       </TagList>
     </Section>
   )
 }
 
-function Build() {
+function Academy() {
   return (
-    <Section title="Build" image={{ src: imageLaptop, shape: 1 }}>
+    <Section title="Сургалт" image={{ src: imageLaptop, shape: 1 }}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>
-          Based off of the discovery phase, we develop a comprehensive roadmap
-          for each product and start working towards delivery. The roadmap is an
-          intricately tangled mess of technical nonsense designed to drag the
-          project out as long as possible.
+          ESTEL Академийн хүрээнд мэргэжлийн үсчин, гоо засалчдад зориулсан
+          тогтмол сургалт явуулж, жил бүр дунджаар{' '}
+          <strong className="font-semibold text-neutral-950">
+            500 гаруй үсчинд
+          </strong>{' '}
+          мэдлэг, ур чадвар түгээдэг.
         </p>
         <p>
-          Each client is assigned a key account manager to keep lines of
-          communication open and obscure the actual progress of the project.
-          They act as a buffer between the client’s incessant nagging and the
-          development team who are hard at work scouring open source projects
-          for code to re-purpose.
+          Сургалтын хэлбэрээр зогсохгүй, улс орон даяар 21 аймгаар тойрч
+          сургалт зохион байгуулж, орон нутгийн мэргэжилтнүүдэд хүрч
+          ажилладаг.
         </p>
         <p>
-          Our account managers are trained to only reply to client emails after
-          9pm, several days after the initial email. This reinforces the general
-          aura that we are very busy and dissuades clients from asking for
-          changes.
+          Мөн улс, нийслэл, аймаг, бүсийн үсчин гоо сайханчдын тэмцээн
+          уралдаанд жил бүр 40-50 сая төгрөгийн ивээн тэтгэлэг зарцуулж,
+          салбарын хөгжлийг дэмждэг.
         </p>
       </div>
-
-      <Blockquote
-        author={{ name: 'Debra Fiscal', role: 'CEO of Unseal' }}
-        className="mt-12"
-      >
-        Studio were so regular with their progress updates we almost began to
-        think they were automated!
-      </Blockquote>
     </Section>
   )
 }
 
-function Deliver() {
+function Retail() {
   return (
-    <Section title="Deliver" image={{ src: imageMeeting, shape: 2 }}>
+    <Section title="Худалдаа" image={{ src: imageMeeting, shape: 2 }}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>
-          About halfway through the Build phase, we push each project out by 6
-          weeks due to a change in{' '}
+          Мэргэжлийн салонд чиглэсэн зориулалтын бүтээгдэхүүнийг{' '}
           <strong className="font-semibold text-neutral-950">
-            requirements
-          </strong>
-          . This allows us to increase the budget a final time before launch.
+            салон худалдаа, үйлчилгээ
+          </strong>{' '}
+          хэлбэрээр 1000 гаруй салонтой байнгын гэрээгээр ханган ажилладаг.
         </p>
         <p>
-          Despite largely using pre-built components, most of the{' '}
-          <strong className="font-semibold text-neutral-950">progress</strong>{' '}
-          on each project takes place in the final 24 hours. The development
-          time allocated to each client is actually spent making augmented
-          reality demos that go viral on Twitter.
-        </p>
-        <p>
-          We ensure that the main pages of the site are{' '}
+          Хэрэглэгчиддээ ойртохын тулд нэрийн болон сүлжээ дэлгүүр, жижиглэн
+          бөөний болон{' '}
           <strong className="font-semibold text-neutral-950">
-            fully functional
+            онлайн худалдааны
           </strong>{' '}
-          at launch — the auxiliary pages will, of course, be lorem ipusm shells
-          which get updated as part of our exorbitant{' '}
-          <strong className="font-semibold text-neutral-950">
-            maintenance
-          </strong>{' '}
-          retainer.
+          сувгуудаар зэрэг ажилладаг.
         </p>
       </div>
 
       <h3 className="mt-12 font-display text-base font-semibold text-neutral-950">
-        Included in this phase
+        Энэ шатанд багтдаг
       </h3>
       <List className="mt-8">
-        <ListItem title="Testing">
-          Our projects always have 100% test coverage, which would be impressive
-          if our tests weren’t as porous as a sieve.
+        <ListItem title="Салон гэрээ">
+          Хот, хөдөө орон нутагт 1000 гаруй мэргэжлийн салонтой байнгын
+          гэрээгээр ажилладаг.
         </ListItem>
-        <ListItem title="Infrastructure">
-          To ensure reliability we only use the best Digital Ocean droplets that
-          $4 a month can buy.
+        <ListItem title="Нэрийн дэлгүүр">
+          Мэргэжлийн салонд чиглэсэн зориулалтын бүтээгдэхүүний 5 салбар
+          дэлгүүртэй.
         </ListItem>
-        <ListItem title="Support">
-          Because we hold the API keys for every critical service your business
-          uses, you can expect a lifetime of support, and invoices, from us.
+        <ListItem title="Онлайн худалдаа">
+          Бөөний болон онлайн сувгаар бүтээгдэхүүнээ шууд хэрэглэгчдэд
+          хүргэдэг.
         </ListItem>
       </List>
     </Section>
@@ -185,43 +158,40 @@ function Values() {
       </div>
 
       <SectionIntro
-        eyebrow="Our values"
-        title="Balancing reliability and innovation"
+        eyebrow="Бидний зарчим"
+        title="Найдвартай байдал, тасралтгүй хөгжлийг эрхэмлэнэ"
       >
         <p>
-          We strive to stay at the forefront of emerging trends and
-          technologies, while completely ignoring them and forking that old
-          Rails project we feel comfortable using. We stand by our core values
-          to justify that decision.
+          2013 оноос хойш баримталж ирсэн зарчмуудаа хадгалсаар, чиглэлээ
+          өргөжүүлсээр байна.
         </p>
       </SectionIntro>
 
       <Container className="mt-24">
         <GridList>
-          <GridListItem title="Meticulous">
-            The first part of any partnership is getting our designer to put
-            your logo in our template. The second step is getting them to do the
-            colors.
+          <GridListItem title="Найдвартай">
+            Дэлхийд танигдсан брэндүүдийн албан ёсны эрхтэй нийлүүлэгчээр
+            ажиллаж, чанарын баталгаагаа хадгалдаг.
           </GridListItem>
-          <GridListItem title="Efficient">
-            We pride ourselves on never missing a deadline which is easy because
-            most of the work was done years ago.
+          <GridListItem title="Тогтвортой">
+            2013 оноос хойш тасралтгүй өсөж, өнөөдөр 14 салбар, 70 гаруй
+            ажилтантайгаар ажиллаж байна.
           </GridListItem>
-          <GridListItem title="Adaptable">
-            Every business has unique needs and our greatest challenge is
-            shoe-horning those needs into something we already built.
+          <GridListItem title="Мэргэшсэн">
+            ESTEL Академиар дамжуулан жил бүр мэргэжлийн үсчдэд тогтмол
+            сургалт зохион байгуулдаг.
           </GridListItem>
-          <GridListItem title="Honest">
-            We are transparent about all of our processes, banking on the simple
-            fact our clients never actually read anything.
+          <GridListItem title="Байгальд ээлтэй">
+            SYNERGETIC зэрэг 98.8% байгалийн гаралтай, эко бүтээгдэхүүнийг
+            хэрэглэгчдэдээ санал болгодог.
           </GridListItem>
-          <GridListItem title="Loyal">
-            We foster long-term relationships with our clients that go beyond
-            just delivering a product, allowing us to invoice them for decades.
+          <GridListItem title="Хүртээмжтэй">
+            Нэрийн, сүлжээ дэлгүүр, бөөний болон онлайн худалдаагаар хот,
+            хөдөө орон нутагт хүрч ажилладаг.
           </GridListItem>
-          <GridListItem title="Innovative">
-            The technological landscape is always evolving and so are we. We are
-            constantly on the lookout for new open source projects to clone.
+          <GridListItem title="Дэмжигч">
+            Салбарын тэмцээн, уралдаанд жил бүр ивээн тэтгэлэг зарцуулж,
+            мэргэжлийн хамт олноо дэмждэг.
           </GridListItem>
         </GridList>
       </Container>
@@ -230,26 +200,26 @@ function Values() {
 }
 
 export const metadata = {
-  title: 'Our Process',
+  title: 'Үйл ажиллагаа',
   description:
-    'We believe in efficiency and maximizing our resources to provide the best value to our clients.',
+    'Тэнгэрийн Илгээмж ХХК — нийлүүлэлт, сургалт, худалдааны гурван үндсэн чиглэлээр ажилладаг.',
 }
 
 export default function Process() {
   return (
     <>
-      <PageIntro eyebrow="Our process" title="How we work">
+      <PageIntro eyebrow="Үйл ажиллагаа" title="Бид хэрхэн ажилладаг вэ">
         <p>
-          We believe in efficiency and maximizing our resources to provide the
-          best value to our clients. The primary way we do that is by re-using
-          the same five projects we’ve been developing for the past decade.
+          Нийлүүлэлт, сургалт, худалдаа гэсэн гурван үндсэн чиглэлээр
+          хэрэглэгчиддээ чанартай бүтээгдэхүүн, үйлчилгээг тасралтгүй
+          хүргэдэг.
         </p>
       </PageIntro>
 
       <div className="mt-24 space-y-24 [counter-reset:section] sm:mt-32 sm:space-y-32 lg:mt-40 lg:space-y-40">
-        <Discover />
-        <Build />
-        <Deliver />
+        <Distribution />
+        <Academy />
+        <Retail />
       </div>
 
       <Values />

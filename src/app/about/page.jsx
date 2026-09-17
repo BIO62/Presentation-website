@@ -6,7 +6,6 @@ import { Container } from '@/components/Container'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { GridList, GridListItem } from '@/components/GridList'
 import { PageIntro } from '@/components/PageIntro'
-import { PageLinks } from '@/components/PageLinks'
 import { SectionIntro } from '@/components/SectionIntro'
 import { StatList, StatListItem } from '@/components/StatList'
 import imageAngelaFisher from '@/images/team/angela-fisher.jpeg'
@@ -21,33 +20,33 @@ import imageLeonardKrasner from '@/images/team/leonard-krasner.jpeg'
 import imageLeslieAlexander from '@/images/team/leslie-alexander.jpeg'
 import imageMichaelFoster from '@/images/team/michael-foster.jpeg'
 import imageWhitneyFrancis from '@/images/team/whitney-francis.jpeg'
-import { loadMDXMetadata } from '@/lib/loadMDXMetadata'
 
 function Culture() {
   return (
     <div className="mt-24 rounded-4xl bg-neutral-950 py-24 sm:mt-32 lg:mt-40 lg:py-32">
       <SectionIntro
-        eyebrow="Our culture"
-        title="Balance your passion with your passion for life."
+        eyebrow="Бидний зарчим"
+        title="Чанар, байгальд ээлтэй байдал, тасралтгүй суралцахуйг эрхэмлэнэ"
         invert
       >
         <p>
-          We are a group of like-minded people who share the same core values.
+          2013 оноос хойш баримталж ирсэн зарчмаа хадгалсаар, чиглэлээ
+          өргөжүүлсээр байна.
         </p>
       </SectionIntro>
       <Container className="mt-16">
         <GridList>
-          <GridListItem title="Loyalty" invert>
-            Our team has been with us since the beginning because none of them
-            are allowed to have LinkedIn profiles.
+          <GridListItem title="Чанар" invert>
+            Дэлхийд танигдсан брэндүүдийн албан ёсны дистрибьютерээр ажиллаж,
+            хэрэглэгчдэдээ баталгаатай, чанартай бүтээгдэхүүн хүргэдэг.
           </GridListItem>
-          <GridListItem title="Trust" invert>
-            We don’t care when our team works just as long as they are working
-            every waking second.
+          <GridListItem title="Байгальд ээлтэй" invert>
+            SYNERGETIC зэрэг 98.8% байгалийн гаралтай, SLS/парабенгүй эко
+            бүтээгдэхүүнийг сонгож, ногоон дэлхийг бүтээлцэхийг эрхэмлэдэг.
           </GridListItem>
-          <GridListItem title="Compassion" invert>
-            You never know what someone is going through at home and we make
-            sure to never find out.
+          <GridListItem title="Тасралтгүй суралцахуй" invert>
+            Сургалтын Академийн хүрээнд жил бүр 500 гаруй мэргэжлийн үсчинд
+            мэдлэгээ түгээж, салбарын хөгжилд хувь нэмрээ оруулдаг.
           </GridListItem>
         </GridList>
       </Container>
@@ -57,7 +56,7 @@ function Culture() {
 
 const team = [
   {
-    title: 'Leadership',
+    title: 'Удирдлага',
     people: [
       {
         name: 'Leslie Alexander',
@@ -77,7 +76,7 @@ const team = [
     ],
   },
   {
-    title: 'Team',
+    title: 'Менежерүүд, Баг хамт олон',
     people: [
       {
         name: 'Chelsea Hagon',
@@ -178,54 +177,46 @@ function Team() {
 }
 
 export const metadata = {
-  title: 'About Us',
+  title: 'Бидний тухай',
   description:
-    'We believe that our strength lies in our collaborative approach, which puts our clients at the center of everything we do.',
+    'Тэнгэрийн Илгээмж ХХК — 2013 оноос хойш ESTEL, SYNERGETIC, Constant Delight брэндүүдийн албан ёсны дистрибьютерээр ажиллаж байна.',
 }
 
 export default async function About() {
-  let blogArticles = (await loadMDXMetadata('blog')).slice(0, 2)
-
   return (
     <>
-      <PageIntro eyebrow="About us" title="Our strength is collaboration">
+      <PageIntro eyebrow="Бидний тухай" title="2013 оноос хойших итгэлцэл">
         <p>
-          We believe that our strength lies in our collaborative approach, which
-          puts our clients at the center of everything we do.
+          Тэнгэрийн Илгээмж ХХК нь 2013 онд байгуулагдсан бөгөөд ESTEL,
+          SYNERGETIC, Constant Delight брэндүүдийн Монгол дахь албан ёсны
+          дистрибьютер юм.
         </p>
         <div className="mt-10 max-w-2xl space-y-6 text-base">
           <p>
-            Studio was started by three friends who noticed that developer
-            studios were charging clients double what an in-house team would
-            cost. Since the beginning, we have been committed to doing things
-            differently by charging triple instead.
+            Сургалтын Академи, салон худалдаа/үйлчилгээ, нэрийн болон сүлжээ
+            дэлгүүр, жижиглэн-бөөний болон онлайн худалдаа гэсэн үндсэн
+            чиглэлүүдээр ажилладаг. Улаанбаатар, Дархан, Эрдэнэт хотуудад
+            нийт 14 салбартай.
           </p>
           <p>
-            At Studio, we’re more than just colleagues — we’re a family. This
-            means we pay very little and expect people to work late. We want our
-            employees to bring their whole selves to work. In return, we just
-            ask that they keep themselves there until at least 6:30pm.
+            ESTEL брэнд 1000 гаруй салонтой байнгын гэрээтэй ажилладаг бол
+            SYNERGETIC нь 98.8% байгалийн гаралтай, эко бүтээгдэхүүнээрээ
+            танигдсан. Жил бүр 500 гаруй мэргэжлийн үсчинд сургалт явуулж,
+            салбарын хөгжилд тогтмол хувь нэмрээ оруулсаар байна.
           </p>
         </div>
       </PageIntro>
       <Container className="mt-16">
         <StatList>
-          <StatListItem value="35" label="Underpaid employees" />
-          <StatListItem value="52" label="Placated clients" />
-          <StatListItem value="$25M" label="Invoices billed" />
+          <StatListItem value="70+" label="Ажилтан" />
+          <StatListItem value="14" label="Салбар" />
+          <StatListItem value="4.5 тэрбум₮" label="2024 оны борлуулалт" />
         </StatList>
       </Container>
 
       <Culture />
 
       <Team />
-
-      <PageLinks
-        className="mt-24 sm:mt-32 lg:mt-40"
-        title="From the blog"
-        intro="Our team of experienced designers and developers has just one thing on their mind; working on your ideas to draw a smile on the face of your users worldwide. From conducting Brand Sprints to UX Design."
-        pages={blogArticles}
-      />
 
       <ContactSection />
     </>

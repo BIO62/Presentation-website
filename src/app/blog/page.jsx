@@ -11,9 +11,8 @@ import { formatDate } from '@/lib/formatDate'
 import { loadMDXMetadata } from '@/lib/loadMDXMetadata'
 
 export const metadata = {
-  title: 'Blog',
-  description:
-    'Stay up-to-date with the latest industry news as our marketing teams finds new ways to re-purpose old CSS tricks articles.',
+  title: 'Мэдээ мэдээлэл',
+  description: 'Тэнгэрийн Илгээмж ХХК-ийн сүүлийн үеийн мэдээ, мэдээлэл.',
 }
 
 export default async function Blog() {
@@ -21,11 +20,8 @@ export default async function Blog() {
 
   return (
     <>
-      <PageIntro eyebrow="Blog" title="The latest articles and news">
-        <p>
-          Stay up-to-date with the latest industry news as our marketing teams
-          finds new ways to re-purpose old CSS tricks articles.
-        </p>
+      <PageIntro eyebrow="Мэдээ мэдээлэл" title="Сүүлийн үеийн мэдээ, мэдээлэл">
+        <p>Компанийн үйл ажиллагаа, брэндүүдийн шинэ мэдээллийг эндээс дагана уу.</p>
       </PageIntro>
 
       <Container className="mt-24 sm:mt-32 lg:mt-40">

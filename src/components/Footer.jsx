@@ -1,21 +1,22 @@
 import Link from 'next/link'
 
 import { Container } from '@/components/Container'
+import { useCurveNavigation } from '@/components/Curve'
 import { FadeIn } from '@/components/FadeIn'
 import { Logo } from '@/components/Logo'
 import { socialMediaProfiles } from '@/components/SocialMedia'
 
 const navigation = [
   {
-    title: 'Бусад',
+    title: 'Брэндүүд',
     links: [
-      { title: 'FamilyFund', href: '/work/family-fund' },
-      { title: 'Unseal', href: '/work/unseal' },
-      { title: 'Phobia', href: '/work/phobia' },
+      { title: 'ESTEL', href: '/work' },
+      { title: 'SYNERGETIC', href: '/work' },
+      { title: 'Constant Delight', href: '/work' },
       {
         title: (
           <>
-            See all <span aria-hidden="true">&rarr;</span>
+            Дэлгэрэнгүй <span aria-hidden="true">&rarr;</span>
           </>
         ),
         href: '/work',
@@ -28,7 +29,7 @@ const navigation = [
       { title: 'Бидний тухай', href: '/about' },
       { title: 'Үйл ажиллагаа', href: '/process' },
       { title: 'Мэдээ мэдээлэл', href: '/blog' },
-      { title: 'Хүний нөөц', href: '/contact' },
+      { title: 'Холбоо барих', href: '/contact' },
     ],
   },
   {
@@ -38,6 +39,8 @@ const navigation = [
 ]
 
 function Navigation() {
+  const { navigateTo } = useCurveNavigation()
+
   return (
     <nav>
       <ul role="list" className="grid grid-cols-2 gap-8 sm:grid-cols-3">
@@ -47,16 +50,32 @@ function Navigation() {
               {section.title}
             </div>
             <ul role="list" className="mt-4 text-sm text-neutral-700">
-              {section.links.map((link) => (
-                <li key={link.title} className="mt-4">
-                  <Link
-                    href={link.href}
-                    className="transition hover:text-neutral-950"
-                  >
-                    {link.title}
-                  </Link>
-                </li>
-              ))}
+              {section.links.map((link, idx) => {
+                const isInternal = typeof link.href === 'string' && link.href.startsWith('/')
+                return (
+                  <li key={typeof link.title === 'string' ? link.title : idx} className="mt-4">
+                    {isInternal ? (
+                      <Link
+                        href={link.href}
+                        onClick={(e) => {
+                          e.preventDefault()
+                          navigateTo(link.href)
+                        }}
+                        className="transition hover:text-neutral-950"
+                      >
+                        {link.title}
+                      </Link>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        className="transition hover:text-neutral-950"
+                      >
+                        {link.title}
+                      </Link>
+                    )}
+                  </li>
+                )
+              })}
             </ul>
           </li>
         ))}
@@ -110,6 +129,8 @@ function NewsletterForm() {
 }
 
 export function Footer() {
+  const { navigateTo } = useCurveNavigation()
+
   return (
     <Container as="footer" className="mt-24 w-full sm:mt-32 lg:mt-40">
       <FadeIn>
@@ -120,7 +141,15 @@ export function Footer() {
           </div>
         </div>
         <div className="mb-20 mt-24 flex flex-wrap items-center justify-between gap-x-6 gap-y-4 border-t border-neutral-950/10 pt-12">
-          <Link href="/" aria-label="Home" className="flex items-center">
+          <Link
+            href="/"
+            aria-label="Home"
+            className="flex items-center"
+            onClick={(e) => {
+              e.preventDefault()
+              navigateTo('/')
+            }}
+          >
             <Logo fillOnHover />
           </Link>
           <p className="text-sm text-neutral-700 leading-none">

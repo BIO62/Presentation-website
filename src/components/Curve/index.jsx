@@ -221,6 +221,7 @@ export function CurveProvider({ children }) {
           gsap.set(bottomRound, { height: isMobile ? '5vh' : '10vh' })
           gsap.set(screen, { top: '100%' })
           gsap.set(words, { opacity: 0 })
+          gsap.set('header .once-in, main .once-in', { clearProps: 'all' })
           isTransitioningRef.current = false
           currentTlRef.current = null
         },
