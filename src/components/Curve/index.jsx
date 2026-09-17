@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import gsap from 'gsap'
 
 const routes = {
-  '/': 'Сайн байна уу',
+  '/': 'Нүүр хуудас',
   '/about': 'Бидний тухай',
   '/work': 'Брэндүүд',
   '/process': 'Үйл ажиллагаа',
@@ -25,7 +25,7 @@ export function CurveProvider({ children }) {
   const router = useRouter()
   const pathname = usePathname()
 
-  const [currentWord, setCurrentWord] = useState(routes[pathname] || 'Сайн байна уу')
+  const [currentWord, setCurrentWord] = useState(routes[pathname] || 'Нүүр хуудас')
   const [isRevealed, setIsRevealed] = useState(pathname !== '/')
 
   const isTransitioningRef = useRef(false)
@@ -156,7 +156,7 @@ export function CurveProvider({ children }) {
         height: '0vh',
         ease: 'power4.inOut',
       },
-      '=-0.8'
+      '-=0.8'
     )
 
     tl.to(
@@ -166,7 +166,7 @@ export function CurveProvider({ children }) {
         opacity: 0,
         ease: 'linear',
       },
-      '=-0.8'
+      '-=0.8'
     )
 
     tl.set(screen, {
@@ -188,7 +188,7 @@ export function CurveProvider({ children }) {
         ease: 'expo.out',
         clearProps: 'all',
       },
-      '=-0.8'
+      '-=0.8'
     )
 
     // Safety timeout: If anything interrupts, screen is never stuck
@@ -232,6 +232,12 @@ export function CurveProvider({ children }) {
       currentTlRef.current.kill()
     }
 
+    // Set new page's once-in elements ready to float up smoothly
+    gsap.set('main .once-in', {
+      y: isMobile ? '20vh' : '50vh',
+      opacity: 0,
+    })
+
     const tl = gsap.timeline({
       onComplete: () => {
         gsap.set(bottomRound, { height: isMobile ? '5vh' : '10vh' })
@@ -249,7 +255,7 @@ export function CurveProvider({ children }) {
 
     // 1. Screen slides away to top (-100%) revealing the already-loaded new page!
     tl.to(screen, {
-      duration: 0.75,
+      duration: 0.8,
       top: '-100%',
       ease: 'power3.inOut',
     })
@@ -274,11 +280,25 @@ export function CurveProvider({ children }) {
     tl.to(
       bottomRound,
       {
-        duration: 0.75,
+        duration: 0.8,
         height: '0vh',
         ease: 'power3.inOut',
       },
       '<0.05'
+    )
+
+    // 4. Hero text and once-in elements float up smoothly through overflow mask!
+    tl.to(
+      'main .once-in',
+      {
+        duration: 1.4,
+        y: '0vh',
+        opacity: 1,
+        stagger: 0.08,
+        ease: 'expo.out',
+        clearProps: 'all',
+      },
+      '-=0.65'
     )
   }, [])
 
@@ -297,7 +317,6 @@ export function CurveProvider({ children }) {
       }
 
       isTransitioningRef.current = true
-      setIsRevealed(false)
 
       const label =
         routes[targetHref] ??
@@ -313,6 +332,9 @@ export function CurveProvider({ children }) {
       const tl = gsap.timeline({
         onComplete: () => {
           // Screen has reached 0% and is 100% black covering the old page!
+          // Only now reset revealed state behind the black screen:
+          setIsRevealed(false)
+
           // NOW change route behind the black screen:
           if (!isPopState) {
             router.push(targetHref)
@@ -345,32 +367,35 @@ export function CurveProvider({ children }) {
 
       // 1. Screen slides in from bottom to 0% (covers viewport)
       tl.to(screen, {
-        duration: 0.45,
+        duration: 0.5,
         top: '0%',
         ease: 'power4.in',
       })
 
-      // 2. Top curve grows
+      // 2. Top curve grows concurrently with the screen rising
       tl.to(
         topRound,
         {
-          duration: 0.35,
+          duration: 0.4,
           height: isMobile ? '5vh' : '10vh',
           ease: 'power4.in',
         },
-        '=-0.45'
+        '<'
       )
 
       // 3. Word slides up into center
-      tl.to(words, {
-        duration: 0.5,
-        opacity: 1,
-        xPercent: -50,
-        yPercent: -50,
-        y: -30,
-        ease: 'power3.out',
-        delay: 0.05,
-      })
+      tl.to(
+        words,
+        {
+          duration: 0.6,
+          opacity: 1,
+          xPercent: -50,
+          yPercent: -50,
+          y: -30,
+          ease: 'power3.out',
+        },
+        '<0.1'
+      )
 
       tl.set(topRound, { height: '0vh' })
     },
