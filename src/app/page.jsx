@@ -227,7 +227,24 @@ export default async function Home() {
   return (
     <>
       <Container className="mt-24 sm:mt-32 md:mt-56">
-        <HeroIntro />
+        <div className="grid grid-cols-1 gap-y-12 lg:grid-cols-12 lg:gap-x-8 lg:items-center">
+          <div className="lg:col-span-7">
+            <HeroIntro />
+          </div>
+          <div className="hidden lg:col-span-5 lg:flex lg:justify-end">
+            <div className="once-in">
+              <Image
+                src="/logomark.png"
+                alt="Тэнгэрийн Илгээмж"
+                width={2053}
+                height={2308}
+                unoptimized
+                priority
+                className="w-[300px] xl:w-[380px] h-auto object-contain select-none pointer-events-none"
+              />
+            </div>
+          </div>
+        </div>
       </Container>
 
       <Clients />
