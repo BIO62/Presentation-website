@@ -7,7 +7,7 @@ import gsap from 'gsap'
 const routes = {
   '/': 'Нүүр хуудас',
   '/about': 'Бидний тухай',
-  '/work': 'Ажлын ажиллагаа',
+  '/work': 'Брэндүүд',
   '/process': 'Үйл ажиллагаа',
   '/blog': 'Мэдээ мэдээлэл',
   '/contact': 'Хүний нөөц',
@@ -35,6 +35,7 @@ export function CurveProvider({ children }) {
   const wordsRef = useRef(null)
 
   const initialMountedRef = useRef(false)
+  const fallbackTimerRef = useRef(null)
 
   // ─────────────────────────────────────────────────────────────
   // Dennis Snellenberg Exact initLoaderHome()
@@ -195,14 +196,93 @@ export function CurveProvider({ children }) {
   }, [])
 
   // ─────────────────────────────────────────────────────────────
-  // Dennis Snellenberg Exact Page Transition (pageTransitionIn & Out)
-  // Handles link clicks and Alt + Left / Right Arrow (popstate)
+  // Phase 2: Reveal New Page (Out)
+  // Runs ONLY after Next.js has mounted the new route!
   // ─────────────────────────────────────────────────────────────
-  const runTransition = useCallback(
+  const pageTransitionOut = useCallback(() => {
+    if (fallbackTimerRef.current) {
+      clearTimeout(fallbackTimerRef.current)
+      fallbackTimerRef.current = null
+    }
+
+    const screen = loadingScreenRef.current
+    const bottomRound = bottomRoundRef.current
+    const words = wordsRef.current
+    if (!screen || !bottomRound || !words) {
+      isTransitioningRef.current = false
+      return
+    }
+
+    const isMobile = window.innerWidth <= 540
+
+    // Ensure scroll is at the very top for the new page
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+    window.dispatchEvent(new Event('scroll'))
+    window.dispatchEvent(new Event('resize'))
+
+    if (currentTlRef.current) {
+      currentTlRef.current.kill()
+    }
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        gsap.set(bottomRound, { height: isMobile ? '5vh' : '10vh' })
+        gsap.set(screen, { top: '100%' })
+        gsap.set(words, { opacity: 0 })
+        gsap.set('header .once-in, main .once-in', { clearProps: 'all' })
+        isTransitioningRef.current = false
+        currentTlRef.current = null
+      },
+    })
+    currentTlRef.current = tl
+
+    // Screen is at 0% (solid black covering the whole screen)
+    tl.set(screen, { top: '0%' })
+
+    // 1. Screen slides away to top (-100%) revealing the already-loaded new page!
+    tl.to(screen, {
+      duration: 0.75,
+      top: '-100%',
+      ease: 'power3.inOut',
+    })
+
+    // 2. Word fades out smoothly
+    tl.to(
+      words,
+      {
+        duration: 0.35,
+        opacity: 0,
+        ease: 'power2.out',
+      },
+      '<0.05'
+    )
+
+    // 3. Bottom curve shrinks to 0vh
+    tl.to(
+      bottomRound,
+      {
+        duration: 0.75,
+        height: '0vh',
+        ease: 'power3.inOut',
+      },
+      '<0.05'
+    )
+  }, [])
+
+  // ─────────────────────────────────────────────────────────────
+  // Phase 1: Cover Screen (In)
+  // Covers screen in black, displays destination title, and calls router.push()
+  // ─────────────────────────────────────────────────────────────
+  const pageTransitionIn = useCallback(
     (targetHref, isPopState = false) => {
       if (currentTlRef.current) {
         currentTlRef.current.kill()
       }
+      if (fallbackTimerRef.current) {
+        clearTimeout(fallbackTimerRef.current)
+        fallbackTimerRef.current = null
+      }
+
       isTransitioningRef.current = true
 
       const label =
@@ -218,12 +298,18 @@ export function CurveProvider({ children }) {
 
       const tl = gsap.timeline({
         onComplete: () => {
-          gsap.set(bottomRound, { height: isMobile ? '5vh' : '10vh' })
-          gsap.set(screen, { top: '100%' })
-          gsap.set(words, { opacity: 0 })
-          gsap.set('header .once-in, main .once-in', { clearProps: 'all' })
-          isTransitioningRef.current = false
-          currentTlRef.current = null
+          // Screen has reached 0% and is 100% black covering the old page!
+          // NOW change route behind the black screen:
+          if (!isPopState) {
+            router.push(targetHref)
+          }
+
+          // Safety fallback: if router takes unusually long (>2.5s), auto-reveal so it never hangs
+          fallbackTimerRef.current = setTimeout(() => {
+            if (isTransitioningRef.current) {
+              pageTransitionOut()
+            }
+          }, 2500)
         },
       })
       currentTlRef.current = tl
@@ -231,112 +317,73 @@ export function CurveProvider({ children }) {
       // Initial state
       tl.set(screen, { top: '100%' })
       tl.set(words, { opacity: 0, y: 0 })
-      tl.set('.loading-words .home-active, .loading-words .home-active-last', {
+      tl.set('.loading-words .home-word', {
         display: 'none',
+        opacity: 0,
       })
       tl.set('.loading-words .active', {
-        display: 'block',
+        display: 'inline-flex',
+        alignItems: 'center',
         opacity: 1,
       })
       tl.set(bottomRound, { height: isMobile ? '5vh' : '10vh' })
       tl.set(topRound, { height: '0vh' })
 
-      // 1. Screen slides in from bottom (0.5s Power4.easeIn)
+      // 1. Screen slides in from bottom to 0% (covers viewport)
       tl.to(screen, {
-        duration: 0.5,
+        duration: 0.45,
         top: '0%',
         ease: 'power4.in',
       })
 
-      // 2. Top curve grows (0.4s Power4.easeIn, starts at same time)
+      // 2. Top curve grows
       tl.to(
         topRound,
         {
-          duration: 0.4,
+          duration: 0.35,
           height: isMobile ? '5vh' : '10vh',
           ease: 'power4.in',
         },
-        '=-0.5'
+        '=-0.45'
       )
 
-      // 3. Word slides up into center (0.8s Power4.easeOut)
+      // 3. Word slides up into center
       tl.to(words, {
-        duration: 0.8,
+        duration: 0.5,
         opacity: 1,
-        y: -50,
-        ease: 'power4.out',
+        y: -30,
+        ease: 'power3.out',
         delay: 0.05,
       })
 
       tl.set(topRound, { height: '0vh' })
-
-      // At 0.5s: Screen has reached 0% and is 100% black.
-      // Switch route and scroll to top!
-      tl.call(() => {
-        if (!isPopState) {
-          router.push(targetHref)
-        }
-        window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
-        gsap.set('header .once-in, main .once-in', {
-          y: isMobile ? '20vh' : '50vh',
-          opacity: 0,
-        })
-      })
-
-      // 4. Screen slides away to top (0.8s Power3.easeInOut, begins 0.2s before word finishes)
-      tl.to(
-        screen,
-        {
-          duration: 0.8,
-          top: '-100%',
-          ease: 'power3.inOut',
-        },
-        '=-0.2'
-      )
-
-      tl.to(
-        words,
-        {
-          duration: 0.6,
-          opacity: 0,
-          ease: 'linear',
-        },
-        '=-0.8'
-      )
-
-      tl.to(
-        bottomRound,
-        {
-          duration: 0.85,
-          height: '0vh',
-          ease: 'power3.inOut',
-        },
-        '=-0.6'
-      )
-
-      // Hero text & header float up on the new page!
-      tl.to(
-        'header .once-in, main .once-in',
-        {
-          duration: 1.2,
-          y: '0vh',
-          opacity: 1,
-          stagger: 0.05,
-          ease: 'expo.out',
-          clearProps: 'all',
-        },
-        '=-0.8'
-      )
     },
-    [router]
+    [router, pageTransitionOut]
   )
+
+  // ─────────────────────────────────────────────────────────────
+  // Listen for Route Mounting:
+  // When Next.js renders the new page, pathname changes!
+  // At this exact moment, we reveal the new page smoothly.
+  // ─────────────────────────────────────────────────────────────
+  useEffect(() => {
+    if (!initialMountedRef.current) return
+
+    if (isTransitioningRef.current) {
+      // Let React finish DOM commit, then slide the curtain away
+      const frameId = requestAnimationFrame(() => {
+        pageTransitionOut()
+      })
+      return () => cancelAnimationFrame(frameId)
+    }
+  }, [pathname, pageTransitionOut])
 
   const navigateTo = useCallback(
     (href) => {
       if (href === pathname || isTransitioningRef.current) return
-      runTransition(href, false)
+      pageTransitionIn(href, false)
     },
-    [pathname, runTransition]
+    [pathname, pageTransitionIn]
   )
 
   // ─────────────────────────────────────────────────────────────
@@ -349,9 +396,7 @@ export function CurveProvider({ children }) {
 
     function handlePopState() {
       const targetPath = window.location.pathname
-      // Alt + Left/Right эсвэл Browser Back/Forward дээр:
-      // Өмнөх timeline-г шууд kill хийж, Next.js хуудсыг хөшгөөр даруй хаан Dennis transition тоглуулна
-      runTransition(targetPath, true)
+      pageTransitionIn(targetPath, true)
     }
 
     function handleGlobalClick(e) {
@@ -381,7 +426,7 @@ export function CurveProvider({ children }) {
       window.removeEventListener('popstate', handlePopState)
       document.removeEventListener('click', handleGlobalClick)
     }
-  }, [navigateTo, runTransition])
+  }, [navigateTo, pageTransitionIn])
 
   return (
     <CurveContext.Provider value={{ navigateTo, introComplete: true }}>
