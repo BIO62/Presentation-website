@@ -226,26 +226,60 @@ export const metadata = {
 export default async function Home() {
   return (
     <>
-      <Container className="mt-24 sm:mt-32 md:mt-56">
-        <div className="grid grid-cols-1 gap-y-12 lg:grid-cols-12 lg:gap-x-8 lg:items-center">
-          <div className="lg:col-span-7">
-            <HeroIntro />
-          </div>
-          <div className="hidden lg:col-span-5 lg:flex lg:justify-end">
-            <div className="once-in">
-              <Image
-                src="/logomark.png"
-                alt="Тэнгэрийн Илгээмж"
-                width={2053}
-                height={2308}
-                unoptimized
-                priority
-                className="w-[300px] xl:w-[380px] h-auto object-contain select-none pointer-events-none"
-              />
-            </div>
+      <div className="relative overflow-hidden">
+        {/* Текст агуулах гол контейнер */}
+        <Container className="relative z-10 mt-24 sm:mt-32 md:mt-56">
+          <HeroIntro />
+        </Container>
+
+        {/* =========================================================================
+            1. DESKTOP ХУВИЛБАР (hidden lg:block)
+            Таны яг өөрөө тааруулсан 780px хэмжээтэй, баруун тийш 50% тайрагдсан лого.
+            Зөвхөн том дэлгэц (Desktop)-т харагдах бөгөөд утасны хувилбарт ОГТ нөлөөлөхгүй!
+           ========================================================================= */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute right-0 top-[37%] -translate-y-1/2 translate-x-[50%] z-0 select-none hidden lg:block"
+        >
+          <div className="once-in">
+            <Image
+              src="/logomark.png"
+              alt=""
+              width={2053}
+              height={2308}
+              unoptimized
+              priority
+              className="w-[780px] h-auto max-w-none"
+            />
           </div>
         </div>
-      </Container>
+
+        {/* =========================================================================
+            2. MOBILE ХУВИЛБАР (lg:hidden)
+            Утасны дэлгэц дээр харагдах БҮРЭН ТУСДАА тохиргоо.
+            Desktop-т огт нөлөөлөхгүйгээр та өөрөө дараах утгуудыг хүссэнээрээ өөрчлөх боломжтой:
+            - top-[40%]        -> Дээш доош байршил
+            - translate-x-[40%]-> Баруун тийш цухуйх шилжилт (50% болговол яг тал нь цухуйна)
+            - opacity-20       -> Тод бүдэг
+            - w-[280px]        -> Логоны өргөн хэмжээ
+           ========================================================================= */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute right-0 top-[40%] -translate-y-1/2 translate-x-[40%] z-0 select-none opacity-20 lg:hidden"
+        >
+          <div className="once-in">
+            <Image
+              src="/logomark.png"
+              alt=""
+              width={2053}
+              height={2308}
+              unoptimized
+              priority
+              className="w-[280px] h-auto max-w-none"
+            />
+          </div>
+        </div>
+      </div>
 
       <Clients />
 
