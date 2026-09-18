@@ -9,8 +9,12 @@ export const metadata = {
     default: 'Тэнгэрийн Илгээмж ХХК',
   },
   icons: {
-    icon: '/logomark.png',
-    apple: '/logomark.png',
+    icon: [
+      { url: '/logomark-white.png?v=3', type: 'image/png' },
+      { url: '/favicon.ico?v=3' },
+    ],
+    shortcut: '/logomark-white.png?v=3',
+    apple: '/logomark-white.png?v=3',
   },
 }
 
