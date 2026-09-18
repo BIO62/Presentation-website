@@ -8,6 +8,10 @@ export const metadata = {
     template: '%s - Studio',
     default: 'Тэнгэрийн Илгээмж ХХК',
   },
+  icons: {
+    icon: '/logomark.png',
+    apple: '/logomark.png',
+  },
 }
 
 export default function Layout({ children }) {

@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
+
 import { ContactSection } from '@/components/ContactSection'
 import { Container } from '@/components/Container'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
@@ -11,13 +12,11 @@ import { StylizedImage } from '@/components/StylizedImage'
 import { Testimonial } from '@/components/Testimonial'
 import logoEstel from '@/images/clients/estel/logo-light.png'
 import logoSynergetic from '@/images/clients/synergetic/logo-light.png'
-import logoConstantDelight from '@/images/clients/constant-delight/logo-light.png'
 import imageLaptop from '@/images/laptop.jpg'
 
 const brands = [
   ['ESTEL', logoEstel],
   ['SYNERGETIC', logoSynergetic],
-  ['Constant Delight', logoConstantDelight],
 ]
 
 const stats = [
@@ -30,9 +29,9 @@ const stats = [
 const caseStudies = [
   {
     client: 'ESTEL',
-    href: '/work',
+    href: '/work/estel',
     logo: logoEstel,
-    year: '2013 оноос хойш',
+    year: '2013',
     tag: 'Мэргэжлийн үс арчилгаа',
     title: 'Монголын 1000+ мэргэжлийн салон, 500+ үсчдийн сонголт',
     description:
@@ -40,23 +39,13 @@ const caseStudies = [
   },
   {
     client: 'SYNERGETIC',
-    href: '/work',
+    href: '/work/synergetic',
     logo: logoSynergetic,
-    year: '98.8% байгалийн гаралтай',
+    year: '2018',
     tag: 'Эко цэвэрлэгээ, арчилгаа',
     title: 'Гэр бүл, хүүхдийн эрүүл мэндэд ээлтэй ногоон хэрэглээ',
     description:
       'Ургамлын гаралтай, харшил үүсгэгчгүй, SLS болон парабенгүй эко бүтээгдэхүүн. Монголын айл өрхийн эрүүл ахуй, байгаль орчныг хамгаалахад хувь нэмэр оруулж байна.',
-  },
-  {
-    client: 'Constant Delight',
-    href: '/work',
-    logo: logoConstantDelight,
-    year: 'Итали улс',
-    tag: 'Салон арчилгааны шинэ түнш',
-    title: 'Итали чанарыг Монголын мэргэжлийн салон бүрт',
-    description:
-      '2024 оны 9 дүгээр сараас эхлэн Монгол Улсад албан ёсны эрхтэйгээр мэргэжлийн үсчдийн зах зээл болон салон худалдаанд нийлүүлэгдэж буй шинэ түнш брэнд.',
   },
 ]
 
@@ -64,31 +53,31 @@ function Clients() {
   return (
     <div className="mt-24 rounded-4xl bg-neutral-950 py-20 sm:mt-32 sm:py-32 lg:mt-56">
       <Container>
-        <FadeIn className="flex items-center gap-x-8">
-          <h2 className="text-center font-display text-sm font-semibold tracking-wider text-white sm:text-left">
-            Бидний албан ёсны дистрибьютер олон улсын брэндүүд
-          </h2>
-          <div className="h-px flex-auto bg-neutral-800" />
-        </FadeIn>
-        <FadeInStagger faster>
-          <ul
-            role="list"
-            className="mt-10 grid grid-cols-3 items-center gap-x-4 gap-y-10 sm:gap-x-8"
-          >
-            {brands.map(([client, logo]) => (
-              <li key={client} className="flex justify-center">
-                <FadeIn>
-                  <Image
-                    src={logo}
-                    alt={client}
-                    unoptimized
-                    className="max-h-10 sm:max-h-16 w-auto brightness-0 invert"
-                  />
-                </FadeIn>
-              </li>
-            ))}
-          </ul>
-        </FadeInStagger>
+        <div className="overflow-hidden">
+          <div className="once-in flex items-center gap-x-8">
+            <h2 className="text-center font-display text-sm font-semibold tracking-wider text-white sm:text-left">
+              Бидний албан ёсны дистрибьютер олон улсын брэндүүд
+            </h2>
+            <div className="h-px flex-auto bg-neutral-800" />
+          </div>
+        </div>
+        <ul
+          role="list"
+          className="mt-10 grid grid-cols-2 items-center gap-x-8 gap-y-10 sm:gap-x-16"
+        >
+          {brands.map(([client, logo]) => (
+            <li key={client} className="flex justify-center overflow-hidden">
+              <div className="once-in">
+                <Image
+                  src={logo}
+                  alt={client}
+                  unoptimized
+                  className="max-h-12 sm:max-h-16 w-auto brightness-0 invert"
+                />
+              </div>
+            </li>
+          ))}
+        </ul>
       </Container>
     </div>
   )
@@ -132,7 +121,7 @@ function CaseStudies() {
         </p>
       </SectionIntro>
       <Container className="mt-16">
-        <FadeInStagger className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+        <FadeInStagger className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           {caseStudies.map((caseStudy) => (
             <FadeIn key={caseStudy.client} className="flex">
               <article className="relative flex w-full flex-col rounded-3xl p-6 ring-1 ring-neutral-950/5 transition hover:bg-neutral-50 sm:p-8">
@@ -142,16 +131,15 @@ function CaseStudies() {
                     <Image
                       src={caseStudy.logo}
                       alt={caseStudy.client}
-                      className="h-12 w-auto max-w-[140px] object-contain"
+                      className="h-12 w-auto object-contain"
+                      style={{ filter: 'brightness(0)' }}
                       unoptimized
                     />
                   </Link>
                 </h3>
                 <p className="mt-6 flex gap-x-2 text-sm text-neutral-950">
                   <span className="font-semibold">{caseStudy.year}</span>
-                  <span className="text-neutral-300" aria-hidden="true">
-                    /
-                  </span>
+                  <span className="text-neutral-300" aria-hidden="true">/</span>
                   <span>{caseStudy.tag}</span>
                 </p>
                 <p className="mt-6 font-display text-2xl font-semibold text-neutral-950">
@@ -168,6 +156,7 @@ function CaseStudies() {
     </>
   )
 }
+
 
 function Services() {
   return (
@@ -220,14 +209,14 @@ function Services() {
 
 export const metadata = {
   description:
-    'Тэнгэрийн Илгээмж ХХК — ESTEL, SYNERGETIC, Constant Delight брэндүүдийн албан ёсны дистрибьютер. 2013 оноос хойш Монголын үсчин, гоо сайхны салбарт ажиллаж байна.',
+    'Тэнгэрийн Илгээмж ХХК — ESTEL, SYNERGETIC брэндүүдийн албан ёсны дистрибьютер. 2013 оноос хойш Монголын үсчин, гоо сайхны салбарт ажиллаж байна.',
 }
 
 export default async function Home() {
   return (
     <>
-      <div className="relative overflow-hidden">
-        {/* Текст агуулах гол контейнер */}
+      <div className="relative overflow-x-clip overflow-y-visible">
+        {/* Текст агуулах гол контейнер (Studio-ийн яг үндсэн mt-24 sm:mt-32 md:mt-56 хэмжээс) */}
         <Container className="relative z-10 mt-24 sm:mt-32 md:mt-56">
           <HeroIntro />
         </Container>
@@ -235,7 +224,9 @@ export default async function Home() {
         {/* =========================================================================
             1. DESKTOP ХУВИЛБАР (hidden lg:block)
             Таны яг өөрөө тааруулсан 780px хэмжээтэй, баруун тийш 50% тайрагдсан лого.
-            Зөвхөн том дэлгэц (Desktop)-т харагдах бөгөөд утасны хувилбарт ОГТ нөлөөлөхгүй!
+            - overflow-x-clip overflow-y-visible тул доороосоо тайрагдахгүй
+            - once-in класс хэвээрээ тул урсаж орж ирэх хөдөлгөөнтэй
+            - layout шахаж түлхэхгүйгээр overlay байдлаар шууд дээр нь сууна
            ========================================================================= */}
         <div
           aria-hidden="true"
@@ -256,16 +247,15 @@ export default async function Home() {
 
         {/* =========================================================================
             2. MOBILE ХУВИЛБАР (lg:hidden)
-            Утасны дэлгэц дээр харагдах БҮРЭН ТУСДАА тохиргоо.
-            Desktop-т огт нөлөөлөхгүйгээр та өөрөө дараах утгуудыг хүссэнээрээ өөрчлөх боломжтой:
-            - top-[40%]        -> Дээш доош байршил
-            - translate-x-[40%]-> Баруун тийш цухуйх шилжилт (50% болговол яг тал нь цухуйна)
-            - opacity-20       -> Тод бүдэг
-            - w-[280px]        -> Логоны өргөн хэмжээ
+            Studio загварын яг ард суух 50% тайралттай лого:
+            - translate-x-[50%] -> Баруун тийш яг 50% тайрагдсан
+            - top-[42%] -translate-y-1/2 -> Гарчиг болон текстийн ард яг тэнцвэртэй байрлалтай
+            - w-[360px] sm:w-[460px] -> 50% цухуйхад маш гоёмсог харагдах өргөн
+            - opacity-20 -> Текст уншихад саад болохгүй усны тамга (watermark)
            ========================================================================= */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute right-0 top-[40%] -translate-y-1/2 translate-x-[40%] z-0 select-none opacity-20 lg:hidden"
+          className="pointer-events-none absolute right-0 top-[42%] -translate-y-1/2 translate-x-[50%] z-0 select-none opacity-20 lg:hidden"
         >
           <div className="once-in">
             <Image
@@ -275,7 +265,7 @@ export default async function Home() {
               height={2308}
               unoptimized
               priority
-              className="w-[280px] h-auto max-w-none"
+              className="w-[360px] sm:w-[460px] h-auto max-w-none"
             />
           </div>
         </div>

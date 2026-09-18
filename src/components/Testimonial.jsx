@@ -30,7 +30,8 @@ export function Testimonial({ children, client, className }) {
                 src={client.logo}
                 alt={client.name}
                 unoptimized
-                className="max-h-12 w-auto object-contain"
+                className="h-12 w-auto object-contain"
+                style={{ filter: 'brightness(0)' }}
               />
             </figcaption>
           </figure>

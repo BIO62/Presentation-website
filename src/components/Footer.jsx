@@ -10,9 +10,8 @@ const navigation = [
   {
     title: 'Брэндүүд',
     links: [
-      { title: 'ESTEL', href: '/work' },
-      { title: 'SYNERGETIC', href: '/work' },
-      { title: 'Constant Delight', href: '/work' },
+      { title: 'ESTEL', href: '/work/estel' },
+      { title: 'SYNERGETIC', href: '/work/synergetic' },
       {
         title: (
           <>

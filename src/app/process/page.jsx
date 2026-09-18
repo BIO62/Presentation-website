@@ -47,7 +47,7 @@ function Distribution() {
     <Section title="Нийлүүлэлт" image={{ src: imageWhiteboard }}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>
-          ESTEL, SYNERGETIC, Constant Delight брэндүүдийн{' '}
+          ESTEL, SYNERGETIC брэндүүдийн{' '}
           <strong className="font-semibold text-neutral-950">
             албан ёсны дистрибьютер
           </strong>{' '}

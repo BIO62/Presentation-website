@@ -189,7 +189,7 @@ function Team() {
 export const metadata = {
   title: 'Бидний тухай',
   description:
-    'Тэнгэрийн Илгээмж ХХК — 2013 оноос хойш ESTEL, SYNERGETIC, Constant Delight брэндүүдийн албан ёсны дистрибьютерээр ажиллаж байна.',
+    'Тэнгэрийн Илгээмж ХХК — 2013 оноос хойш ESTEL, SYNERGETIC брэндүүдийн албан ёсны дистрибьютерээр ажиллаж байна.',
 }
 
 export default async function About() {
@@ -198,7 +198,7 @@ export default async function About() {
       <PageIntro eyebrow="Бидний тухай" title="2013 оноос хойших итгэлцэл">
         <p>
           Тэнгэрийн Илгээмж ХХК нь 2013 онд байгуулагдсан бөгөөд ESTEL,
-          SYNERGETIC, Constant Delight брэндүүдийн Монгол дахь албан ёсны
+          SYNERGETIC брэндүүдийн Монгол дахь албан ёсны
           дистрибьютер юм.
         </p>
         <div className="mt-10 max-w-2xl space-y-6 text-base">
