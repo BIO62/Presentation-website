@@ -64,7 +64,7 @@ const team = [
         image: { src: imageBenjaminRussel},
       },
       {
-        name: 'Н. Өлзий-Хутаг',
+        name: 'Н. Өлзийхутаг',
         role: 'Гүйцэтгэх захирал',
         image: { src:  imageLeslieAlexander  },
       },
