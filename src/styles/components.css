@@ -1,6 +1,6 @@
-@tailwind components;
-
 @import './typography.css';
+
+@tailwind components;
 
 /* ─────────────────────────────────────────────────────────────
    Dennis Snellenberg Official Page Transition & Loader CSS

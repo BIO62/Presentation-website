@@ -13,7 +13,7 @@ import { unifiedConditional } from 'unified-conditional'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  pageExtensions: ['jsx', 'mdx'],
+  pageExtensions: ['js', 'jsx', 'mdx'],
 }
 
 function remarkMDXLayout(source) {
@@ -71,12 +71,14 @@ export default async function config() {
         [
           unifiedConditional,
           [
-            new RegExp(`^${escapeStringRegexp(path.resolve('src/app/blog'))}`),
-            [[remarkMDXLayout, '@/app/blog/wrapper']],
+            // Supports both old src/app/blog and new src/app/[lang]/blog
+            new RegExp(`^${escapeStringRegexp(path.resolve('src/app'))}[/\\\\](\\[lang\\]|[a-z]{2})[/\\\\]blog|^${escapeStringRegexp(path.resolve('src/app/blog'))}`),
+            [[remarkMDXLayout, '@/app/[lang]/blog/wrapper']],
           ],
           [
-            new RegExp(`^${escapeStringRegexp(path.resolve('src/app/work'))}`),
-            [[remarkMDXLayout, '@/app/work/wrapper']],
+            // Supports both old src/app/work and new src/app/[lang]/work
+            new RegExp(`^${escapeStringRegexp(path.resolve('src/app'))}[/\\\\](\\[lang\\]|[a-z]{2})[/\\\\]work|^${escapeStringRegexp(path.resolve('src/app/work'))}`),
+            [[remarkMDXLayout, '@/app/[lang]/work/wrapper']],
           ],
         ],
       ],

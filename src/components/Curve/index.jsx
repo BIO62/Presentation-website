@@ -4,17 +4,95 @@ import React, { useEffect, useRef, useState, createContext, useContext, useCallb
 import { usePathname, useRouter } from 'next/navigation'
 import gsap from 'gsap'
 
-const routes = {
-  '/': 'Нүүр хуудас',
-  '/about': 'Бидний тухай',
-  '/work': 'Брэндүүд',
-  '/process': 'Үйл ажиллагаа',
-  '/blog': 'Мэдээ мэдээлэл',
-  '/contact': 'Хүний нөөц',
+const routeLabels = {
+  mn: {
+    '/': 'Нүүр хуудас',
+    '/about': 'Бидний тухай',
+    '/work': 'Брэндүүд',
+    '/work/estel': 'ESTEL Professional',
+    '/work/synergetic': 'SYNERGETIC',
+    '/process': 'Үйл ажиллагаа',
+    '/blog': 'Мэдээ мэдээлэл',
+    '/contact': 'Хүний нөөц',
+  },
+  ru: {
+    '/': 'Главная',
+    '/about': 'О компании',
+    '/work': 'Бренды',
+    '/work/estel': 'ESTEL Professional',
+    '/work/synergetic': 'SYNERGETIC',
+    '/process': 'Деятельность',
+    '/blog': 'Новости',
+    '/contact': 'Контакты',
+  },
+  en: {
+    '/': 'Home',
+    '/about': 'About Us',
+    '/work': 'Brands',
+    '/work/estel': 'ESTEL Professional',
+    '/work/synergetic': 'SYNERGETIC',
+    '/process': 'Our Business',
+    '/blog': 'News',
+    '/contact': 'Contact',
+  },
+}
+
+function getRouteLabel(href) {
+  if (!href) return '...'
+  const langMatch = href.match(/^\/(mn|ru|en)(\/|$)/)
+  const lang = langMatch ? langMatch[1] : 'mn'
+  const pure = href.replace(/^\/(mn|ru|en)/, '') || '/'
+  return (
+    routeLabels[lang]?.[pure] ??
+    routeLabels.mn[pure] ??
+    (pure.slice(1).charAt(0).toUpperCase() + pure.slice(2))
+  )
+}
+
+function isHomeRoute(path) {
+  if (!path || path === '/') return true
+  return /^\/(mn|ru|en)\/?$/.test(path)
+}
+
+function getActiveLang(path) {
+  if (!path) return 'mn'
+  const match = path.match(/^\/(mn|ru|en)(\/|$)/)
+  return match ? match[1] : 'mn'
+}
+
+const baseGreetings = [
+  { code: 'mn', text: 'Сайн байна уу' },
+  { code: 'ru', text: 'Привет' },
+  { code: 'en', text: 'Hello' },
+  { code: 'fr', text: 'Bonjour' },
+  { code: 'it', text: 'Ciao' },
+  { code: 'pt', text: 'Olá' },
+  { code: 'ja', text: 'おい' },
+  { code: 'sv', text: 'Hallå' },
+  { code: 'de', text: 'Guten tag' },
+  { code: 'nl', text: 'Hallo' },
+]
+
+function getGreetingsForLocale(locale) {
+  const primary = baseGreetings.find((g) => g.code === locale)
+  if (!primary) {
+    return baseGreetings.map((g, i) => ({
+      ...g,
+      duration: i === 0 ? 600 : i === 1 ? 500 : 150,
+    }))
+  }
+
+  const others = baseGreetings.filter((g) => g.code !== locale)
+  const ordered = [primary, ...others]
+
+  return ordered.map((g, i) => ({
+    ...g,
+    duration: i === 0 ? 600 : i === 1 ? 500 : 150,
+  }))
 }
 
 const CurveContext = createContext({
-  navigateTo: () => {},
+  navigateTo: () => { },
   introComplete: true,
   isRevealed: true,
 })
@@ -24,9 +102,11 @@ export const useCurveNavigation = () => useContext(CurveContext)
 export function CurveProvider({ children }) {
   const router = useRouter()
   const pathname = usePathname()
+  const currentLang = getActiveLang(pathname)
+  const greetings = getGreetingsForLocale(currentLang)
 
-  const [currentWord, setCurrentWord] = useState(routes[pathname] || 'Нүүр хуудас')
-  const [isRevealed, setIsRevealed] = useState(pathname !== '/')
+  const [currentWord, setCurrentWord] = useState(() => getRouteLabel(pathname))
+  const [isRevealed, setIsRevealed] = useState(true)
 
   const isTransitioningRef = useRef(false)
   const currentTlRef = useRef(null)
@@ -42,7 +122,7 @@ export function CurveProvider({ children }) {
 
   // ─────────────────────────────────────────────────────────────
   // Dennis Snellenberg Exact initLoaderHome()
-  // Runs ONLY ONCE on initial page load / refresh of home page ('/')
+  // Runs ONLY on initial page load / refresh of home page
   // ─────────────────────────────────────────────────────────────
   useEffect(() => {
     if (initialMountedRef.current) return
@@ -55,157 +135,159 @@ export function CurveProvider({ children }) {
     if (!screen || !bottomRound || !words || !topRound) return
 
     const isMobile = window.innerWidth <= 540
+    const isHome = isHomeRoute(window.location.pathname)
 
-    if (window.location.pathname !== '/') {
-      // Home биш хуудсан дээр бол хөшгийг доор бэлэн байдалд тавина
+    // Хэрэв Home биш хуудсан дээр бол хөшгийг доор бэлэн байдалд тавина
+    if (!isHome) {
       gsap.set(screen, { top: '100%' })
-      gsap.set(topRound, { height: '0vh' })
-      gsap.set(bottomRound, { height: isMobile ? '5vh' : '10vh' })
       gsap.set(words, { opacity: 0 })
+      gsap.set('header .once-in, main .once-in', { clearProps: 'all' })
+      setIsRevealed(true)
       return
     }
 
-    // Home хуудсан дээр refresh хийх эсвэл анх ороход Dennis Snellenberg initLoaderHome ажиллана
     isTransitioningRef.current = true
 
-    const tl = gsap.timeline({
-      onComplete: () => {
-        gsap.set(bottomRound, { height: isMobile ? '5vh' : '10vh' })
-        gsap.set(screen, { top: '100%' })
-        gsap.set(words, { opacity: 0 })
-        isTransitioningRef.current = false
-        currentTlRef.current = null
-      },
-    })
-    currentTlRef.current = tl
-
-    // 1. Initial State (Dennis exact setup)
-    tl.set(screen, { top: '0%' })
-    tl.set(topRound, { height: '0vh' })
-    tl.set(bottomRound, { height: isMobile ? '5vh' : '10vh' })
-
-    tl.set('header .once-in, main .once-in', {
-      y: isMobile ? '20vh' : '50vh',
-      opacity: 0,
-    })
-
-    tl.set(words, {
-      opacity: 0,
-      xPercent: -50,
-      yPercent: -50,
-      y: 0,
-    })
-
-    tl.set('.loading-words .active', {
-      display: 'none',
-    })
-
-    const wordEls = words.querySelectorAll('.home-word')
-
-    // Initial word states: only the first word ("Сайн байна уу") is active
-    wordEls.forEach((el, i) => {
-      tl.set(el, {
-        display: i === 0 ? 'inline-flex' : 'none',
-        opacity: i === 0 ? 1 : 0,
-        alignItems: 'center',
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        onComplete: () => {
+          gsap.set(bottomRound, { height: isMobile ? '5vh' : '10vh' })
+          gsap.set(screen, { top: '100%' })
+          gsap.set(words, { opacity: 0 })
+          gsap.set('header .once-in, main .once-in', { clearProps: 'all' })
+          isTransitioningRef.current = false
+          currentTlRef.current = null
+          setIsRevealed(true)
+        },
       })
-    })
+      currentTlRef.current = tl
 
-    // 2. Dennis Snellenberg iconic smooth floating entrance (delay 0.15s)
-    tl.to(words, {
-      duration: 0.5,
-      opacity: 1,
-      xPercent: -50,
-      yPercent: -50,
-      y: -30,
-      ease: 'power3.out',
-      delay: 0.15,
-    })
+      // 1. Initial State
+      tl.set(screen, { top: '0%' })
+      tl.set(topRound, { height: '0vh' })
+      tl.set(bottomRound, { height: isMobile ? '5vh' : '10vh' })
 
-    // 3. Sequentially switch words according to each word's data-duration
-    wordEls.forEach((el, index) => {
-      const ms = parseInt(el.getAttribute('data-duration') || '150', 10)
-      const sec = Math.max(0.04, ms / 1000)
-
-      if (index < wordEls.length - 1) {
-        const nextEl = wordEls[index + 1]
-        // Hold current word for `sec` duration, then switch instantly to next word
-        tl.set(el, { display: 'none', opacity: 0 }, `+=${sec}`)
-        tl.set(nextEl, { display: 'inline-flex', opacity: 1, alignItems: 'center' }, '<')
-      } else {
-        // Hold last word for its duration
-        tl.to({}, { duration: sec })
-      }
-    })
-
-    // 4. Loading screen sweeps up to -100%
-    tl.to(screen, {
-      duration: 0.8,
-      top: '-100%',
-      ease: 'power4.inOut',
-      delay: 0.05,
-    })
-    tl.call(() => {
-      setIsRevealed(true)
-    }, null, '<0.1')
-
-    tl.to(
-      bottomRound,
-      {
-        duration: 1.0,
-        height: '0vh',
-        ease: 'power4.inOut',
-      },
-      '-=0.8'
-    )
-
-    tl.to(
-      words,
-      {
-        duration: 0.3,
+      tl.set('header .once-in, main .once-in', {
+        y: isMobile ? '20vh' : '50vh',
         opacity: 0,
-        ease: 'linear',
-      },
-      '-=0.8'
-    )
+      })
 
-    tl.set(screen, {
-      top: '-100%',
-    })
+      tl.set(words, {
+        opacity: 0,
+        xPercent: -50,
+        yPercent: -50,
+        y: 0,
+      })
 
-    tl.set(bottomRound, {
-      height: '0vh',
-    })
+      tl.set('.loading-words .active', {
+        display: 'none',
+      })
 
-    // 5. Dennis signature: Header and Hero text float up smoothly with curtain retracting!
-    tl.to(
-      'header .once-in, main .once-in',
-      {
-        duration: 1.5,
-        y: '0vh',
+      const wordEls = words.querySelectorAll('.home-word')
+      wordEls.forEach((el, i) => {
+        tl.set(el, {
+          display: i === 0 ? 'inline-flex' : 'none',
+          opacity: i === 0 ? 1 : 0,
+          alignItems: 'center',
+        })
+      })
+
+      // 2. Floating entrance
+      tl.to(words, {
+        duration: 0.4,
         opacity: 1,
-        stagger: 0.08,
-        ease: 'expo.out',
-        clearProps: 'all',
-      },
-      '-=0.8'
-    )
+        xPercent: -50,
+        yPercent: -50,
+        y: -30,
+        ease: 'power3.out',
+        delay: 0.1,
+      })
 
-    // Safety timeout: If anything interrupts, screen is never stuck
+      // 3. Sequential word switch
+      wordEls.forEach((el, index) => {
+        const ms = parseInt(el.getAttribute('data-duration') || '150', 10)
+        const sec = Math.max(0.04, ms / 1000)
+
+        if (index < wordEls.length - 1) {
+          const nextEl = wordEls[index + 1]
+          tl.set(el, { display: 'none', opacity: 0 }, `+=${sec}`)
+          tl.set(nextEl, { display: 'inline-flex', opacity: 1, alignItems: 'center' }, '<')
+        } else {
+          tl.to({}, { duration: sec })
+        }
+      })
+
+      // 4. Loading screen sweeps up to -100%
+      tl.to(screen, {
+        duration: 0.75,
+        top: '-100%',
+        ease: 'power4.inOut',
+        delay: 0.05,
+      })
+      tl.call(() => {
+        setIsRevealed(true)
+      }, null, '<0.1')
+
+      tl.to(
+        bottomRound,
+        {
+          duration: 0.85,
+          height: '0vh',
+          ease: 'power4.inOut',
+        },
+        '-=0.75'
+      )
+
+      tl.to(
+        words,
+        {
+          duration: 0.3,
+          opacity: 0,
+          ease: 'linear',
+        },
+        '-=0.75'
+      )
+
+      tl.set(screen, { top: '-100%' })
+      tl.set(bottomRound, { height: '0vh' })
+
+      // 5. Header and Hero float up
+      tl.to(
+        'header .once-in, main .once-in',
+        {
+          duration: 1.1,
+          y: '0vh',
+          opacity: 1,
+          stagger: 0.06,
+          ease: 'expo.out',
+          clearProps: 'all',
+        },
+        '-=0.75'
+      )
+    })
+
+    // Safety timeout: If anything hangs, force reveal so screen is never black
     const safety = setTimeout(() => {
-      if (isTransitioningRef.current) {
-        gsap.set(screen, { top: '100%' })
-        gsap.set('header .once-in, main .once-in', { clearProps: 'all' })
-        isTransitioningRef.current = false
-      }
-    }, 8000)
+      setIsRevealed(true)
+      gsap.set(screen, { top: '100%' })
+      gsap.set(topRound, { height: '0vh' })
+      gsap.set(bottomRound, { height: '0vh' })
+      gsap.set('header .once-in, main .once-in', { clearProps: 'all' })
+      isTransitioningRef.current = false
+    }, 3500)
 
-    return () => clearTimeout(safety)
+    return () => {
+      clearTimeout(safety)
+      ctx.revert()
+    }
   }, [])
 
   // ─────────────────────────────────────────────────────────────
   // Phase 2: Reveal New Page (Out)
   // Runs ONLY after Next.js has mounted the new route!
+  // Dennis Snellenberg Out physics:
+  // Curtain pulls up (-100%). Bottom curve starts at 10vh bulging
+  // downwards, and smoothly flattens to 0vh as curtain exits screen.
   // ─────────────────────────────────────────────────────────────
   const pageTransitionOut = useCallback(() => {
     if (fallbackTimerRef.current) {
@@ -215,8 +297,9 @@ export function CurveProvider({ children }) {
 
     const screen = loadingScreenRef.current
     const bottomRound = bottomRoundRef.current
+    const topRound = topRoundRef.current
     const words = wordsRef.current
-    if (!screen || !bottomRound || !words) {
+    if (!screen || !bottomRound || !words || !topRound) {
       isTransitioningRef.current = false
       return
     }
@@ -234,14 +317,15 @@ export function CurveProvider({ children }) {
 
     // Set new page's once-in elements ready to float up smoothly
     gsap.set('main .once-in', {
-      y: isMobile ? '20vh' : '50vh',
+      y: isMobile ? '16vh' : '36vh',
       opacity: 0,
     })
 
     const tl = gsap.timeline({
       onComplete: () => {
-        gsap.set(bottomRound, { height: isMobile ? '5vh' : '10vh' })
         gsap.set(screen, { top: '100%' })
+        gsap.set(topRound, { height: '0vh' })
+        gsap.set(bottomRound, { height: '0vh' })
         gsap.set(words, { opacity: 0 })
         gsap.set('header .once-in, main .once-in', { clearProps: 'all' })
         isTransitioningRef.current = false
@@ -250,61 +334,67 @@ export function CurveProvider({ children }) {
     })
     currentTlRef.current = tl
 
-    // Screen is at 0% (solid black covering the whole screen)
+    // Start state for reveal:
+    // Screen covers viewport (top: 0%)
+    // Top arch is 0vh
+    // Bottom round starts with 10vh curve protruding downwards
     tl.set(screen, { top: '0%' })
+    tl.set(topRound, { height: '0vh' })
+    tl.set(bottomRound, { height: isMobile ? '5vh' : '10vh' })
 
-    // 1. Screen slides away to top (-100%) revealing the already-loaded new page!
+    // 1. Screen slides away to top (0% -> -100%)
     tl.to(screen, {
-      duration: 0.8,
+      duration: 0.55,
       top: '-100%',
-      ease: 'power3.inOut',
+      ease: 'power4.inOut',
     })
 
-    // Агуулгын урсдаг анимацийг хөшиг дээшээ нээгдэх яг тэр агшинд эхлүүлнэ
     tl.call(() => {
       setIsRevealed(true)
-    }, null, '<0.08')
+    }, null, '<0.05')
 
     // 2. Word fades out smoothly
     tl.to(
       words,
       {
-        duration: 0.35,
+        duration: 0.22,
         opacity: 0,
         ease: 'power2.out',
       },
-      '<0.05'
+      '<'
     )
 
-    // 3. Bottom curve shrinks to 0vh
+    // 3. Bottom curve smoothly flattens (10vh -> 0vh) as screen sweeps out
     tl.to(
       bottomRound,
       {
-        duration: 0.8,
+        duration: 0.55,
         height: '0vh',
-        ease: 'power3.inOut',
+        ease: 'power4.inOut',
       },
-      '<0.05'
+      '<'
     )
 
     // 4. Hero text and once-in elements float up smoothly through overflow mask!
     tl.to(
       'main .once-in',
       {
-        duration: 1.4,
+        duration: 0.75,
         y: '0vh',
         opacity: 1,
-        stagger: 0.08,
+        stagger: 0.05,
         ease: 'expo.out',
         clearProps: 'all',
       },
-      '-=0.65'
+      '-=0.42'
     )
   }, [])
 
   // ─────────────────────────────────────────────────────────────
   // Phase 1: Cover Screen (In)
-  // Covers screen in black, displays destination title, and calls router.push()
+  // Dennis Snellenberg In physics:
+  // Curtain rises (100% -> 0%). Top arch starts at 10vh protruding
+  // upwards, and smoothly flattens to 0vh as screen seals at 0%.
   // ─────────────────────────────────────────────────────────────
   const pageTransitionIn = useCallback(
     (targetHref, isPopState = false) => {
@@ -318,9 +408,12 @@ export function CurveProvider({ children }) {
 
       isTransitioningRef.current = true
 
-      const label =
-        routes[targetHref] ??
-        (targetHref.slice(1).charAt(0).toUpperCase() + targetHref.slice(2))
+      // Prefetch the target route right away so there is zero waiting time in black
+      try {
+        router.prefetch(targetHref)
+      } catch {}
+
+      const label = getRouteLabel(targetHref)
       setCurrentWord(label)
 
       const screen = loadingScreenRef.current
@@ -332,7 +425,6 @@ export function CurveProvider({ children }) {
       const tl = gsap.timeline({
         onComplete: () => {
           // Screen has reached 0% and is 100% black covering the old page!
-          // Only now reset revealed state behind the black screen:
           setIsRevealed(false)
 
           // NOW change route behind the black screen:
@@ -340,19 +432,24 @@ export function CurveProvider({ children }) {
             router.push(targetHref)
           }
 
-          // Safety fallback: if router takes unusually long (>2.5s), auto-reveal so it never hangs
+          // Safety fallback: if router takes unusually long (>1.2s), auto-reveal so it never hangs
           fallbackTimerRef.current = setTimeout(() => {
             if (isTransitioningRef.current) {
               pageTransitionOut()
             }
-          }, 2500)
+          }, 1200)
         },
       })
       currentTlRef.current = tl
 
-      // Initial state
+      // Initial state before sliding in:
+      // Screen is at bottom (100%)
+      // Top round arch starts at 10vh leading the motion
+      // Bottom round is 0vh
       tl.set(screen, { top: '100%' })
-      tl.set(words, { opacity: 0, xPercent: -50, yPercent: -50, y: 0 })
+      tl.set(topRound, { height: isMobile ? '5vh' : '10vh' })
+      tl.set(bottomRound, { height: '0vh' })
+      tl.set(words, { opacity: 0, xPercent: -50, yPercent: -50, y: 30 })
       tl.set('.loading-words .home-word', {
         display: 'none',
         opacity: 0,
@@ -362,42 +459,38 @@ export function CurveProvider({ children }) {
         alignItems: 'center',
         opacity: 1,
       })
-      tl.set(bottomRound, { height: isMobile ? '5vh' : '10vh' })
-      tl.set(topRound, { height: '0vh' })
 
-      // 1. Screen slides in from bottom to 0% (covers viewport)
+      // 1. Screen slides in from bottom (100% -> 0%)
       tl.to(screen, {
-        duration: 0.5,
+        duration: 0.38,
         top: '0%',
-        ease: 'power4.in',
+        ease: 'power3.inOut',
       })
 
-      // 2. Top curve grows concurrently with the screen rising
+      // 2. Top curve smoothly flattens (10vh -> 0vh) synchronously with screen reaching 0%
       tl.to(
         topRound,
         {
-          duration: 0.4,
-          height: isMobile ? '5vh' : '10vh',
-          ease: 'power4.in',
+          duration: 0.38,
+          height: '0vh',
+          ease: 'power3.inOut',
         },
         '<'
       )
 
-      // 3. Word slides up into center
+      // 3. Target label glides smoothly up into center
       tl.to(
         words,
         {
-          duration: 0.6,
+          duration: 0.35,
           opacity: 1,
           xPercent: -50,
           yPercent: -50,
           y: -30,
           ease: 'power3.out',
         },
-        '<0.1'
+        '<0.04'
       )
-
-      tl.set(topRound, { height: '0vh' })
     },
     [router, pageTransitionOut]
   )
@@ -485,53 +578,18 @@ export function CurveProvider({ children }) {
         <div
           ref={loadingScreenRef}
           className="loading-screen"
-          style={{ top: pathname === '/' ? '0%' : '100%' }}
         >
           <div ref={topRoundRef} className="rounded-div-wrap top">
             <div className="rounded-div" />
           </div>
 
           <div ref={wordsRef} className="loading-words">
-            <h2 className="home-word" data-duration="600">
-              <div className="dot" />
-              Сайн байна уу
-            </h2>
-            <h2 className="home-word" data-duration="500">
-              <div className="dot" />
-              Привет
-            </h2>
-            <h2 className="home-word" data-duration="150">
-              <div className="dot" />
-              Hello
-            </h2>
-            <h2 className="home-word" data-duration="150">
-              <div className="dot" />
-              Bonjour
-            </h2>
-            <h2 className="home-word" data-duration="150">
-              <div className="dot" />
-              Ciao
-            </h2>
-            <h2 className="home-word" data-duration="150">
-              <div className="dot" />
-              Olá
-            </h2>
-            <h2 className="home-word" data-duration="150">
-              <div className="dot" />
-              おい
-            </h2>
-            <h2 className="home-word" data-duration="150">
-              <div className="dot" />
-              Hallå
-            </h2>
-            <h2 className="home-word" data-duration="150">
-              <div className="dot" />
-              Guten tag
-            </h2>
-            <h2 className="home-word" data-duration="200">
-              <div className="dot" />
-              Hallo
-            </h2>
+            {greetings.map((g) => (
+              <h2 key={g.text} className="home-word" data-duration={g.duration}>
+                <div className="dot" />
+                {g.text}
+              </h2>
+            ))}
 
             <h2 className="active">
               <div className="dot" />

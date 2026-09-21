@@ -18,6 +18,7 @@ import { Container } from '@/components/Container'
 import { useCurveNavigation } from '@/components/Curve'
 import { Footer } from '@/components/Footer'
 import { GridPattern } from '@/components/GridPattern'
+import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import { Logo, Logomark } from '@/components/Logo'
 import { Offices } from '@/components/Offices'
 import { SocialMedia } from '@/components/SocialMedia'
@@ -48,23 +49,28 @@ function Header({
   expanded,
   onToggle,
   toggleRef,
+  lang = 'mn',
+  dict,
 }) {
   let { logoHovered, setLogoHovered } = useContext(RootLayoutContext)
   const { navigateTo } = useCurveNavigation()
+  const contactHref = `/${lang}/contact`
+  const contactLabel = dict?.nav?.contact ?? 'Хүний нөөц'
+  const homeHref = `/${lang}`
 
   return (
     <Container>
       <div className="flex items-center justify-between">
-        {/* Logo — navigateTo ашиглана (transition-тай) */}
+        {/* Logo */}
         <div className="once-in">
           <Link
-            href="/"
+            href={homeHref}
             aria-label="Home"
             onMouseEnter={() => setLogoHovered(true)}
             onMouseLeave={() => setLogoHovered(false)}
             onClick={(e) => {
               e.preventDefault()
-              navigateTo('/')
+              navigateTo(homeHref)
             }}
           >
             <Logomark
@@ -79,18 +85,22 @@ function Header({
             />
           </Link>
         </div>
-        <div className="flex items-center gap-x-4 sm:gap-x-8">
-          {/* "Холбоо барих" товч — navigateTo ашиглана */}
+        <div className="flex items-center gap-x-3 sm:gap-x-6">
+          {/* Language Switcher */}
+          <div className="once-in">
+            <LanguageSwitcher invert={invert} currentLang={lang} />
+          </div>
+          {/* Contact button */}
           <div className="once-in">
             <Button
-              href="/contact"
+              href={contactHref}
               invert={invert}
               onClick={(e) => {
                 e.preventDefault()
-                navigateTo('/contact')
+                navigateTo(contactHref)
               }}
             >
-              Хүний нөөц
+              {contactLabel}
             </Button>
           </div>
           <div className="once-in">
@@ -152,22 +162,22 @@ function NavigationItem({ href, children }) {
   )
 }
 
-function Navigation() {
+function Navigation({ lang = 'mn', dict }) {
   return (
     <nav className="mt-px font-display text-5xl font-medium tracking-tight text-white">
       <NavigationRow>
-        <NavigationItem href="/work">Брэндүүд</NavigationItem>
-        <NavigationItem href="/about">Бидний тухай</NavigationItem>
+        <NavigationItem href={`/${lang}/work`}>{dict?.nav?.brands ?? 'Брэндүүд'}</NavigationItem>
+        <NavigationItem href={`/${lang}/about`}>{dict?.nav?.about ?? 'Бидний тухай'}</NavigationItem>
       </NavigationRow>
       <NavigationRow>
-        <NavigationItem href="/process">Үйл ажиллагаа</NavigationItem>
-        <NavigationItem href="/blog">Мэдээ мэдээлэл</NavigationItem>
+        <NavigationItem href={`/${lang}/process`}>{dict?.nav?.process ?? 'Үйл ажиллагаа'}</NavigationItem>
+        <NavigationItem href={`/${lang}/blog`}>{dict?.nav?.blog ?? 'Мэдээ мэдээлэл'}</NavigationItem>
       </NavigationRow>
     </nav>
   )
 }
 
-function RootLayoutInner({ children }) {
+function RootLayoutInner({ children, lang, dict }) {
   let panelId = useId()
   let { expanded, setExpanded } = useContext(RootLayoutContext)
   const { introComplete } = useCurveNavigation()
@@ -175,6 +185,12 @@ function RootLayoutInner({ children }) {
   let closeRef = useRef()
   let navRef = useRef()
   let shouldReduceMotion = useReducedMotion()
+
+  useEffect(() => {
+    if (lang) {
+      document.documentElement.lang = lang
+    }
+  }, [lang])
 
   useEffect(() => {
     function onClick(event) {
@@ -203,6 +219,8 @@ function RootLayoutInner({ children }) {
             icon={MenuIcon}
             toggleRef={openRef}
             expanded={expanded}
+            lang={lang}
+            dict={dict}
             onToggle={() => {
               setExpanded((expanded) => !expanded)
               window.setTimeout(() =>
@@ -229,6 +247,8 @@ function RootLayoutInner({ children }) {
                 icon={XIcon}
                 toggleRef={closeRef}
                 expanded={expanded}
+                lang={lang}
+                dict={dict}
                 onToggle={() => {
                   setExpanded((expanded) => !expanded)
                   window.setTimeout(() =>
@@ -237,22 +257,23 @@ function RootLayoutInner({ children }) {
                 }}
               />
             </div>
-            <Navigation />
+            <Navigation lang={lang} dict={dict} />
             <div className="relative bg-neutral-950 before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-neutral-800">
               <Container>
                 <div className="grid grid-cols-1 gap-y-10 pb-16 pt-10 sm:grid-cols-2 sm:pt-16">
                   <div>
                     <h2 className="font-display text-base font-semibold text-white">
-                      Оффис
+                      {dict?.navPanel?.office ?? 'Оффис'}
                     </h2>
                     <Offices
+                      dict={dict}
                       invert
                       className="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-2"
                     />
                   </div>
                   <div className="sm:border-l sm:border-transparent sm:pl-16">
                     <h2 className="font-display text-base font-semibold text-white">
-                      Бидэнтэй нэгд
+                      {dict?.navPanel?.followUs ?? 'Бидэнтэй нэгд'}
                     </h2>
                     <SocialMedia className="mt-6" invert />
                   </div>
@@ -278,14 +299,14 @@ function RootLayoutInner({ children }) {
 
           <main className="w-full flex-auto">{children}</main>
 
-          <Footer />
+          <Footer lang={lang} dict={dict} />
         </div>
       </div>
     </MotionConfig>
   )
 }
 
-export function RootLayout({ children }) {
+export function RootLayout({ children, lang = 'mn', dict = {} }) {
   let [logoHovered, setLogoHovered] = useState(false)
   let [expanded, setExpanded] = useState(false)
   let pathname = usePathname()
@@ -301,7 +322,7 @@ export function RootLayout({ children }) {
 
   return (
     <RootLayoutContext.Provider value={{ logoHovered, setLogoHovered, expanded, setExpanded }}>
-      <RootLayoutInner>{children}</RootLayoutInner>
+      <RootLayoutInner lang={lang} dict={dict}>{children}</RootLayoutInner>
     </RootLayoutContext.Provider>
   )
 }

@@ -6,39 +6,53 @@ import { FadeIn } from '@/components/FadeIn'
 import { Logo } from '@/components/Logo'
 import { socialMediaProfiles } from '@/components/SocialMedia'
 
-const navigation = [
-  {
-    title: 'Брэндүүд',
-    links: [
-      { title: 'ESTEL', href: '/work/estel' },
-      { title: 'SYNERGETIC', href: '/work/synergetic' },
-      {
-        title: (
-          <>
-            Дэлгэрэнгүй <span aria-hidden="true">&rarr;</span>
-          </>
-        ),
-        href: '/work',
-      },
-    ],
-  },
-  {
-    title: 'Компани',
-    links: [
-      { title: 'Бидний тухай', href: '/about' },
-      { title: 'Үйл ажиллагаа', href: '/process' },
-      { title: 'Мэдээ мэдээлэл', href: '/blog' },
-      { title: 'Холбоо барих', href: '/contact' },
-    ],
-  },
-  {
-    title: 'Холбоос',
-    links: socialMediaProfiles,
-  },
-]
+function ArrowIcon(props) {
+  return (
+    <svg viewBox="0 0 16 6" aria-hidden="true" {...props}>
+      <path
+        fill="currentColor"
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M16 3 10 .5v2H0v1h10v2L16 3Z"
+      />
+    </svg>
+  )
+}
 
-function Navigation() {
+function FooterNavigation({ lang, dict }) {
   const { navigateTo } = useCurveNavigation()
+
+  const navigation = [
+    {
+      title: dict?.footer?.brands ?? 'Брэндүүд',
+      links: [
+        { title: 'ESTEL', href: `/${lang}/work/estel` },
+        { title: 'SYNERGETIC', href: `/${lang}/work/synergetic` },
+        {
+          title: (
+            <>
+              {dict?.footer?.more ?? 'Дэлгэрэнгүй'}{' '}
+              <span aria-hidden="true">&rarr;</span>
+            </>
+          ),
+          href: `/${lang}/work`,
+        },
+      ],
+    },
+    {
+      title: dict?.footer?.company ?? 'Компани',
+      links: [
+        { title: dict?.footer?.about ?? 'Бидний тухай', href: `/${lang}/about` },
+        { title: dict?.footer?.process ?? 'Үйл ажиллагаа', href: `/${lang}/process` },
+        { title: dict?.footer?.blog ?? 'Мэдээ мэдээлэл', href: `/${lang}/blog` },
+        { title: dict?.footer?.contactLink ?? 'Холбоо барих', href: `/${lang}/contact` },
+      ],
+    },
+    {
+      title: dict?.footer?.links ?? 'Холбоос',
+      links: socialMediaProfiles,
+    },
+  ]
 
   return (
     <nav>
@@ -83,32 +97,20 @@ function Navigation() {
   )
 }
 
-function ArrowIcon(props) {
-  return (
-    <svg viewBox="0 0 16 6" aria-hidden="true" {...props}>
-      <path
-        fill="currentColor"
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M16 3 10 .5v2H0v1h10v2L16 3Z"
-      />
-    </svg>
-  )
-}
-
-function NewsletterForm() {
+function NewsletterForm({ dict }) {
+  const newsletter = dict?.footer?.newsletter ?? {}
   return (
     <form className="max-w-sm">
       <h2 className="font-display text-sm font-semibold tracking-wider text-neutral-950">
-       Шинэ мэдээлэл хүлээн авах
+        {newsletter.title ?? 'Шинэ мэдээлэл хүлээн авах'}
       </h2>
       <p className="mt-4 text-sm text-neutral-700">
-       Бидний шинэ төсөл, сонирхолтой нийтлэл болон салбарын шинэ содон мэдээллүүдийг цаг алдалгүй аваарай.
+        {newsletter.description ?? 'Бидний шинэ төсөл, сонирхолтой нийтлэл болон салбарын шинэ содон мэдээллүүдийг цаг алдалгүй аваарай.'}
       </p>
       <div className="relative mt-6">
         <input
           type="email"
-          placeholder="И-мэйл хаягаа оруулна уу..."
+          placeholder={newsletter.placeholder ?? 'И-мэйл хаягаа оруулна уу...'}
           autoComplete="email"
           aria-label="Email address"
           className="block w-full rounded-2xl border border-neutral-300 bg-transparent py-4 pl-6 pr-20 text-base/6 text-neutral-950 ring-4 ring-transparent transition placeholder:text-neutral-500 focus:border-neutral-950 focus:outline-none focus:ring-neutral-950/5"
@@ -127,32 +129,34 @@ function NewsletterForm() {
   )
 }
 
-export function Footer() {
+export function Footer({ lang = 'mn', dict = {} }) {
   const { navigateTo } = useCurveNavigation()
+  const homeHref = `/${lang}`
 
   return (
     <Container as="footer" className="mt-24 w-full sm:mt-32 lg:mt-40">
       <FadeIn>
         <div className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-2">
-          <Navigation />
+          <FooterNavigation lang={lang} dict={dict} />
           <div className="flex lg:justify-end">
-            <NewsletterForm />
+            <NewsletterForm dict={dict} />
           </div>
         </div>
         <div className="mb-20 mt-24 flex flex-wrap items-center justify-between gap-x-6 gap-y-4 border-t border-neutral-950/10 pt-12">
           <Link
-            href="/"
+            href={homeHref}
             aria-label="Home"
             className="flex items-center"
             onClick={(e) => {
               e.preventDefault()
-              navigateTo('/')
+              navigateTo(homeHref)
             }}
           >
             <Logo fillOnHover />
           </Link>
           <p className="text-sm text-neutral-700 leading-none">
-            © {new Date().getFullYear()} Тэнгэрийн Илгээмж. Бүх эрх хуулиар хамгаалагдсан
+            © {new Date().getFullYear()} Тэнгэрийн Илгээмж.{' '}
+            {dict?.footer?.copyright ?? 'Бүх эрх хуулиар хамгаалагдсан'}
           </p>
         </div>
       </FadeIn>
