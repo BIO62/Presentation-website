@@ -61,34 +61,28 @@ function getActiveLang(path) {
 }
 
 const baseGreetings = [
-  { code: 'mn', text: 'Сайн байна уу' },
-  { code: 'ru', text: 'Привет' },
-  { code: 'en', text: 'Hello' },
-  { code: 'fr', text: 'Bonjour' },
-  { code: 'it', text: 'Ciao' },
-  { code: 'pt', text: 'Olá' },
-  { code: 'ja', text: 'おい' },
-  { code: 'sv', text: 'Hallå' },
-  { code: 'de', text: 'Guten tag' },
-  { code: 'nl', text: 'Hallo' },
+  { code: 'mn', text: 'Сайн байна уу', duration: 340 },
+  { code: 'en', text: 'Hello', duration: 160 },
+  { code: 'ru', text: 'Привет', duration: 160 },
+  { code: 'fr', text: 'Bonjour', duration: 160 },
+  { code: 'it', text: 'Ciao', duration: 160 },
+  { code: 'pt', text: 'Olá', duration: 160 },
+  { code: 'ja', text: 'おい', duration: 160 },
+  { code: 'sv', text: 'Hallå', duration: 160 },
+  { code: 'de', text: 'Guten tag', duration: 160 },
+  { code: 'nl', text: 'Hallo', duration: 300 },
 ]
 
 function getGreetingsForLocale(locale) {
   const primary = baseGreetings.find((g) => g.code === locale)
-  if (!primary) {
-    return baseGreetings.map((g, i) => ({
-      ...g,
-      duration: i === 0 ? 600 : i === 1 ? 500 : 150,
-    }))
-  }
+  if (!primary) return baseGreetings
 
   const others = baseGreetings.filter((g) => g.code !== locale)
-  const ordered = [primary, ...others]
-
-  return ordered.map((g, i) => ({
-    ...g,
-    duration: i === 0 ? 600 : i === 1 ? 500 : 150,
-  }))
+  return [
+    { ...primary, duration: 340 },
+    ...others.slice(0, -1).map((g) => ({ ...g, duration: 160 })),
+    { ...others[others.length - 1], duration: 300 },
+  ]
 }
 
 const CurveContext = createContext({
@@ -115,6 +109,7 @@ export function CurveProvider({ children }) {
   const topRoundRef = useRef(null)
   const bottomRoundRef = useRef(null)
   const wordsRef = useRef(null)
+  const activeWordTextRef = useRef(null)
 
   const initialMountedRef = useRef(false)
   const fallbackTimerRef = useRef(null)
@@ -137,12 +132,31 @@ export function CurveProvider({ children }) {
     const isMobile = window.innerWidth <= 540
     const isHome = isHomeRoute(window.location.pathname)
 
-    // Хэрэв Home биш хуудсан дээр бол хөшгийг доор бэлэн байдалд тавина
+    // Хэрэв Home биш хуудсан дээр анх орсон бол хөшгийг гөлгөр нээж харуулна (цагаан тасалдал үүсгэхгүй)
     if (!isHome) {
-      gsap.set(screen, { top: '100%' })
       gsap.set(words, { opacity: 0 })
-      gsap.set('header .once-in, main .once-in', { clearProps: 'all' })
-      setIsRevealed(true)
+      gsap.set(screen, { top: '0%' })
+      gsap.set(topRound, { height: '0vh' })
+      gsap.set(bottomRound, { height: isMobile ? '5vh' : '10vh' })
+
+      gsap.to(screen, {
+        duration: 0.6,
+        top: '-100%',
+        ease: 'power4.inOut',
+        delay: 0.05,
+        onComplete: () => {
+          gsap.set(screen, { top: '100%' })
+          gsap.set(bottomRound, { height: '0vh' })
+          gsap.set('header .once-in, main .once-in', { clearProps: 'all' })
+          setIsRevealed(true)
+        },
+      })
+      gsap.to(bottomRound, {
+        duration: 0.6,
+        height: '0vh',
+        ease: 'power4.inOut',
+        delay: 0.05,
+      })
       return
     }
 
@@ -168,14 +182,13 @@ export function CurveProvider({ children }) {
       tl.set(bottomRound, { height: isMobile ? '5vh' : '10vh' })
 
       tl.set('header .once-in, main .once-in', {
-        y: isMobile ? '20vh' : '50vh',
+        y: isMobile ? '20vh' : '40vh',
         opacity: 0,
       })
 
+      // Word container is visible in center of screen
       tl.set(words, {
-        opacity: 0,
-        xPercent: -50,
-        yPercent: -50,
+        opacity: 1,
         y: 0,
       })
 
@@ -188,42 +201,41 @@ export function CurveProvider({ children }) {
         tl.set(el, {
           display: i === 0 ? 'inline-flex' : 'none',
           opacity: i === 0 ? 1 : 0,
-          alignItems: 'center',
         })
       })
 
-      // 2. Floating entrance
-      tl.to(words, {
-        duration: 0.4,
-        opacity: 1,
-        xPercent: -50,
-        yPercent: -50,
-        y: -30,
-        ease: 'power3.out',
-        delay: 0.1,
-      })
-
-      // 3. Sequential word switch
+      // 2. Sequential rapid word switch (ms timings)
       wordEls.forEach((el, index) => {
-        const ms = parseInt(el.getAttribute('data-duration') || '150', 10)
-        const sec = Math.max(0.04, ms / 1000)
+        const ms = parseInt(el.getAttribute('data-duration') || '160', 10)
+        const sec = ms / 1000
 
         if (index < wordEls.length - 1) {
           const nextEl = wordEls[index + 1]
           tl.set(el, { display: 'none', opacity: 0 }, `+=${sec}`)
-          tl.set(nextEl, { display: 'inline-flex', opacity: 1, alignItems: 'center' }, '<')
+          tl.set(nextEl, { display: 'inline-flex', opacity: 1 }, '<')
         } else {
           tl.to({}, { duration: sec })
         }
       })
 
-      // 4. Loading screen sweeps up to -100%
-      tl.to(screen, {
-        duration: 0.75,
-        top: '-100%',
-        ease: 'power4.inOut',
-        delay: 0.05,
+      // 3. Word gently fades and glides up slightly
+      tl.to(words, {
+        duration: 0.24,
+        y: -24,
+        opacity: 0,
+        ease: 'power2.in',
       })
+
+      // 4. Loading screen sweeps up to -100%
+      tl.to(
+        screen,
+        {
+          duration: 0.8,
+          top: '-100%',
+          ease: 'power4.inOut',
+        },
+        '-=0.1'
+      )
       tl.call(() => {
         setIsRevealed(true)
       }, null, '<0.1')
@@ -231,38 +243,25 @@ export function CurveProvider({ children }) {
       tl.to(
         bottomRound,
         {
-          duration: 0.85,
+          duration: 0.8,
           height: '0vh',
           ease: 'power4.inOut',
         },
-        '-=0.75'
+        '<'
       )
-
-      tl.to(
-        words,
-        {
-          duration: 0.3,
-          opacity: 0,
-          ease: 'linear',
-        },
-        '-=0.75'
-      )
-
-      tl.set(screen, { top: '-100%' })
-      tl.set(bottomRound, { height: '0vh' })
 
       // 5. Header and Hero float up
       tl.to(
         'header .once-in, main .once-in',
         {
-          duration: 1.1,
+          duration: 1.05,
           y: '0vh',
           opacity: 1,
-          stagger: 0.06,
+          stagger: 0.05,
           ease: 'expo.out',
           clearProps: 'all',
         },
-        '-=0.75'
+        '-=0.6'
       )
     })
 
@@ -326,7 +325,7 @@ export function CurveProvider({ children }) {
         gsap.set(screen, { top: '100%' })
         gsap.set(topRound, { height: '0vh' })
         gsap.set(bottomRound, { height: '0vh' })
-        gsap.set(words, { opacity: 0 })
+        gsap.set(words, { opacity: 0, y: 0 })
         gsap.set('header .once-in, main .once-in', { clearProps: 'all' })
         isTransitioningRef.current = false
         currentTlRef.current = null
@@ -342,27 +341,28 @@ export function CurveProvider({ children }) {
     tl.set(topRound, { height: '0vh' })
     tl.set(bottomRound, { height: isMobile ? '5vh' : '10vh' })
 
-    // 1. Screen slides away to top (0% -> -100%)
-    tl.to(screen, {
-      duration: 0.55,
-      top: '-100%',
-      ease: 'power4.inOut',
+    // 1. Active word gently exits upward
+    tl.to(words, {
+      duration: 0.22,
+      y: -18,
+      opacity: 0,
+      ease: 'power2.in',
     })
+
+    // 2. Screen slides away to top (0% -> -100%)
+    tl.to(
+      screen,
+      {
+        duration: 0.55,
+        top: '-100%',
+        ease: 'power4.inOut',
+      },
+      '-=0.08'
+    )
 
     tl.call(() => {
       setIsRevealed(true)
     }, null, '<0.05')
-
-    // 2. Word fades out smoothly
-    tl.to(
-      words,
-      {
-        duration: 0.22,
-        opacity: 0,
-        ease: 'power2.out',
-      },
-      '<'
-    )
 
     // 3. Bottom curve smoothly flattens (10vh -> 0vh) as screen sweeps out
     tl.to(
@@ -415,6 +415,9 @@ export function CurveProvider({ children }) {
 
       const label = getRouteLabel(targetHref)
       setCurrentWord(label)
+      if (activeWordTextRef.current) {
+        activeWordTextRef.current.textContent = label
+      }
 
       const screen = loadingScreenRef.current
       const topRound = topRoundRef.current
@@ -432,12 +435,12 @@ export function CurveProvider({ children }) {
             router.push(targetHref)
           }
 
-          // Safety fallback: if router takes unusually long (>1.2s), auto-reveal so it never hangs
+          // Safety fallback: if router takes unusually long (>1.4s), auto-reveal so it never hangs
           fallbackTimerRef.current = setTimeout(() => {
             if (isTransitioningRef.current) {
               pageTransitionOut()
             }
-          }, 1200)
+          }, 1400)
         },
       })
       currentTlRef.current = tl
@@ -449,7 +452,9 @@ export function CurveProvider({ children }) {
       tl.set(screen, { top: '100%' })
       tl.set(topRound, { height: isMobile ? '5vh' : '10vh' })
       tl.set(bottomRound, { height: '0vh' })
-      tl.set(words, { opacity: 0, xPercent: -50, yPercent: -50, y: 30 })
+
+      // Words stay centered, subtle offset only, NOT bottom of screen:
+      tl.set(words, { opacity: 0, y: 16 })
       tl.set('.loading-words .home-word', {
         display: 'none',
         opacity: 0,
@@ -478,18 +483,16 @@ export function CurveProvider({ children }) {
         '<'
       )
 
-      // 3. Target label glides smoothly up into center
+      // 3. Target label fades in right in the CENTER as curtain covers screen
       tl.to(
         words,
         {
-          duration: 0.35,
+          duration: 0.28,
           opacity: 1,
-          xPercent: -50,
-          yPercent: -50,
-          y: -30,
-          ease: 'power3.out',
+          y: 0,
+          ease: 'power2.out',
         },
-        '<0.04'
+        '-=0.2'
       )
     },
     [router, pageTransitionOut]
@@ -548,19 +551,23 @@ export function CurveProvider({ children }) {
         !anchor.hasAttribute('download') &&
         anchor.getAttribute('target') !== '_blank'
       ) {
-        if (href !== window.location.pathname) {
+        const currentPure = window.location.pathname.replace(/\/+$/, '') || '/'
+        const targetPure = href.replace(/\/+$/, '') || '/'
+        if (targetPure !== currentPure) {
           e.preventDefault()
+          e.stopPropagation()
           navigateTo(href)
         }
       }
     }
 
     window.addEventListener('popstate', handlePopState)
-    document.addEventListener('click', handleGlobalClick)
+    // Capture phase intercepts before any React / Next.js internal router handles it
+    document.addEventListener('click', handleGlobalClick, { capture: true })
 
     return () => {
       window.removeEventListener('popstate', handlePopState)
-      document.removeEventListener('click', handleGlobalClick)
+      document.removeEventListener('click', handleGlobalClick, { capture: true })
     }
   }, [navigateTo, pageTransitionIn])
 
@@ -569,10 +576,10 @@ export function CurveProvider({ children }) {
       {/* 
         Dennis Snellenberg Official HTML Structure (dennissnellenberg.com):
         .loading-container
-          .loading-screen (style={{ top: pathname === '/' ? 0 : '100%' }})
+          .loading-screen (curtain with top and bottom curves)
             .rounded-div-wrap.top -> .rounded-div
-            .loading-words -> home-active words + active word
             .rounded-div-wrap.bottom -> .rounded-div
+          .loading-words (centered text, independent of moving screen)
       */}
       <div className="loading-container">
         <div
@@ -583,23 +590,23 @@ export function CurveProvider({ children }) {
             <div className="rounded-div" />
           </div>
 
-          <div ref={wordsRef} className="loading-words">
-            {greetings.map((g) => (
-              <h2 key={g.text} className="home-word" data-duration={g.duration}>
-                <div className="dot" />
-                {g.text}
-              </h2>
-            ))}
-
-            <h2 className="active">
-              <div className="dot" />
-              {currentWord}
-            </h2>
-          </div>
-
           <div ref={bottomRoundRef} className="rounded-div-wrap bottom">
             <div className="rounded-div" />
           </div>
+        </div>
+
+        <div ref={wordsRef} className="loading-words">
+          {greetings.map((g) => (
+            <h2 key={g.text} className="home-word" data-duration={g.duration}>
+              <div className="dot" />
+              <span>{g.text}</span>
+            </h2>
+          ))}
+
+          <h2 className="active">
+            <div className="dot" />
+            <span ref={activeWordTextRef}>{currentWord}</span>
+          </h2>
         </div>
       </div>
 
@@ -609,3 +616,4 @@ export function CurveProvider({ children }) {
     </CurveContext.Provider>
   )
 }
+
