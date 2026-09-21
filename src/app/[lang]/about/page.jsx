@@ -74,7 +74,7 @@ function getTeam(lang, dict) {
           image: { src: imageBenjaminRussel },
         },
         {
-          name: isRu ? 'Н. Олзий-Хутаг' : isEn ? 'N. Ulzii-Khutag' : 'Н. Өлзий-Хутаг',
+          name: isRu ? 'Н. Олзийхутаг' : isEn ? 'N. Ulziikhutag' : 'Н. Өлзийхутаг',
           role: isRu ? 'Исполнительный директор' : isEn ? 'Executive Director' : 'Гүйцэтгэх захирал',
           image: { src: imageLeslieAlexander },
         },
