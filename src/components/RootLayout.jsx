@@ -87,7 +87,7 @@ function Header({
         </div>
         <div className="flex items-center gap-x-3 sm:gap-x-6">
           {/* Language Switcher */}
-          <div className="once-in">
+          <div className="once-in relative z-30">
             <LanguageSwitcher invert={invert} currentLang={lang} />
           </div>
           {/* Contact button */}
@@ -164,7 +164,7 @@ function NavigationItem({ href, children }) {
 
 function Navigation({ lang = 'mn', dict }) {
   return (
-    <nav className="mt-px font-display text-5xl font-medium tracking-tight text-white">
+    <nav className="relative z-10 mt-px font-display text-5xl font-medium tracking-tight text-white">
       <NavigationRow>
         <NavigationItem href={`/${lang}/work`}>{dict?.nav?.brands ?? 'Брэндүүд'}</NavigationItem>
         <NavigationItem href={`/${lang}/about`}>{dict?.nav?.about ?? 'Бидний тухай'}</NavigationItem>
@@ -240,7 +240,7 @@ function RootLayoutInner({ children, lang, dict }) {
           inert={expanded ? undefined : ''}
         >
           <div className="bg-neutral-800">
-            <div ref={navRef} className="bg-neutral-950 pb-16 pt-14">
+            <div ref={navRef} className="relative z-20 bg-neutral-950 pb-16 pt-14">
               <Header
                 invert
                 panelId={panelId}

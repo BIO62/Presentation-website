@@ -160,7 +160,7 @@ export function LanguageSwitcher({ invert = false, currentLang = 'mn' }) {
       ref={containerRef}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="relative inline-block text-left"
+      className="relative z-30 inline-block text-left"
     >
       {/* Trigger Button - Sleek Circular Globe Icon Button */}
       <button
