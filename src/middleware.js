@@ -28,10 +28,12 @@ function getLocaleFromRequest(request) {
     return cookieLang
   }
 
-  // 2. Vercel Geo headers шалгах
+  // 2. CDN & Server Geo headers шалгах (Vercel, Cloudflare, AWS CloudFront, Nginx GeoIP)
   const country =
     request.headers.get('x-vercel-ip-country') || // Vercel
     request.headers.get('cf-ipcountry') || // Cloudflare
+    request.headers.get('cloudfront-viewer-country') || // AWS CloudFront
+    request.headers.get('x-country-code') || // Fastly / Nginx GeoIP
     request.headers.get('x-country') // Custom header
 
   if (country) {
