@@ -11,17 +11,17 @@
     "followUs": "Follow Us"
   },
   "hero": {
-    "title": "MONGOLIA'S ECO FUTURE BUILDING A GREENER WORLD",
-    "description": "Tengeriin Ilgeemj LLC — Official distributor of ESTEL and SYNERGETIC brands. Steadily growing in Mongolia's hair and beauty industry since 2013."
+    "title": "OFFICIAL DISTRIBUTOR OF INTERNATIONAL BRANDS",
+    "description": "Officially importing, distributing, and developing world-class brands in the Mongolian market."
   },
   "clients": {
     "heading": "International brands we officially distribute"
   },
   "stats": [
     ["2013", "Year Founded"],
-    ["70+", "Employees"],
+    ["60+", "Employees"],
     ["14", "Branches (UB, Darkhan, Erdenet)"],
-    ["4.5B ₮", "2026 Sales"]
+    ["21", "Provinces Nationwide Reach"]
   ],
   "caseStudies": {
     "sectionTitle": "Official Representative of World-Leading Brands",
@@ -29,12 +29,12 @@
     "estel": {
       "tag": "Professional Hair Care",
       "title": "The choice of 1000+ professional salons and 500+ hairdressers in Mongolia",
-      "description": "A world-leading brand with 25 years of history, manufactured in Russia. Officially supplied in Mongolia for the 6th consecutive year, training hairdressers through the ESTEL Academy."
+      "description": "A world-leading brand with 26 years of experience, 3 major manufacturing plants, and a dedicated research laboratory. Officially supplied in Mongolia since 2019, training hairdressers through the ESTEL Academy."
     },
     "synergetic": {
       "tag": "Eco Cleaning & Care",
-      "title": "Green consumption, safe for families and children",
-      "description": "Eco products with 98.8% natural ingredients. Free from SLS, parabens, and silicone — a safe green choice for families and children."
+      "title": "Hypoallergenic ECO family brand with 95%+ natural ingredients",
+      "description": "Founded in 2013, featuring eco products with over 95% natural plant-based ingredients. Serving as official distributor in Mongolia since 2022 to cultivate green living culture."
     }
   },
   "testimonial": {
@@ -42,23 +42,23 @@
   },
   "services": {
     "eyebrow": "Our Business Areas",
-    "title": "Delivering comprehensive solutions in hair care and beauty",
-    "description": "Since 2013, we have been the official brand distributor in the hair and beauty sector, continuously expanding across 4 core business areas.",
+    "title": "Comprehensive distribution solutions for international brands",
+    "description": "As the official distributor of world-class brands, we execute end-to-end operations to successfully introduce, develop, and distribute brands across Mongolia.",
     "academy": {
-      "title": "Training Academy",
-      "description": "We run regular training sessions for professional hairdressers and stylists, annually sharing knowledge with over 500 specialists."
+      "title": "Professional Training & Education",
+      "description": "Through ESTEL Academy, we conduct theory and practical training for hairdressers and beauty specialists, training over 500 professionals annually."
     },
     "salon": {
-      "title": "Salon Trade & Services",
-      "description": "We supply professional salon-focused products, maintaining permanent contracts with over 1000 salons across the country."
+      "title": "Wholesale & B2B Distribution",
+      "description": "We supply professional salon products under long-term contracts with over 1,000 professional salons across the country."
     },
     "retail": {
-      "title": "Branded & Chain Stores",
-      "description": "We operate 14 branded and chain retail stores in Ulaanbaatar, Darkhan, and Erdenet."
+      "title": "14 Branded & Chain Branches",
+      "description": "Retail operations through 14 branded and chain stores located in Ulaanbaatar, Darkhan, and Erdenet."
     },
     "online": {
-      "title": "Wholesale & Online Sales",
-      "description": "We deliver products directly to customers through wholesale and online sales channels."
+      "title": "Distribution & Online Retail",
+      "description": "Ensuring reliable product accessibility via local dealers in all 21 provinces and digital e-commerce channels."
     }
   },
   "contact": {
@@ -111,31 +111,45 @@
   },
   "about": {
     "eyebrow": "About Us",
-    "title": "Trust Since 2013",
-    "intro1": "Tengeriin Ilgeemj LLC was founded in 2013 and is the official distributor of ESTEL and SYNERGETIC brands in Mongolia.",
-    "intro2": "The company operates across four main areas: Training Academy, Salon Trade & Services, Branded & Chain Stores, and Wholesale & Online Sales — with 14 branches in Ulaanbaatar, Darkhan, and Erdenet.",
-    "intro3": "The ESTEL brand maintains permanent contracts with over 1000 salons, while SYNERGETIC is known for its 98.8% natural eco products. The company annually trains over 500 professional hairdressers, continuously contributing to industry development.",
+    "title": "Global Brands in the Mongolian Market",
+    "intro1": "Since 2013, we have operated as the official distributor of international brands, delivering certified world-class products to consumers and beauty professionals in Mongolia through official channels.",
+    "intro2": "We are a distribution company that officially imports, distributes, and sustainably develops international brands in Mongolia. Beyond importing, we comprehensively provide brand marketing, sales, logistics, customer consulting, professional training, and partner support.",
+    "intro3": "Today, we officially represent world-class brands including ESTEL Professional and SYNERGETIC, dedicated to sustainably enhancing product accessibility, professional service, and brand value.",
+    "mission": {
+      "title": "Our Mission",
+      "text": "To thoughtfully cultivate world-class quality brands in the Mongolian market, delivering reliable products, professional service, and lasting value to consumers."
+    },
     "stats": {
       "employees": "Employees",
-      "branches": "Branches",
-      "revenue": "2024 Sales"
+      "branches": "Branch Stores",
+      "provinces": "Provinces Covered"
     },
     "culture": {
-      "eyebrow": "Our Principles",
-      "title": "Quality, Eco-Friendliness, and Continuous Learning",
-      "description": "We uphold the principles established since 2013, continuously expanding our reach.",
-      "quality": {
-        "title": "Quality",
-        "text": "As the official distributor of globally recognized brands, we ensure our customers receive guaranteed, high-quality products."
-      },
-      "eco": {
-        "title": "Eco-Friendly",
-        "text": "We choose products like SYNERGETIC — 98.8% natural, SLS and paraben-free — striving to build a greener world together."
-      },
-      "learning": {
-        "title": "Continuous Learning",
-        "text": "Through our Training Academy, we share knowledge with over 500 professional hairdressers annually, contributing to industry growth."
-      }
+      "eyebrow": "Our Core Values",
+      "title": "Official Standards, Quality, and Long-Term Partnership",
+      "description": "In our daily operations and decision-making, we are guided by five fundamental corporate values.",
+      "valuesList": [
+        {
+          "title": "Official Standards",
+          "text": "We strictly adhere to the official rights, standards, and verified product specifications of our partner brands."
+        },
+        {
+          "title": "Uncompromising Quality",
+          "text": "We deliver authentic, certified products sourced directly from original manufacturers."
+        },
+        {
+          "title": "Professionalism",
+          "text": "We provide expert guidance, technical consulting, and professional education on optimal product application."
+        },
+        {
+          "title": "Customer First",
+          "text": "Beyond sales, we empower customers with comprehensive information to make well-informed, safe choices."
+        },
+        {
+          "title": "Long-Term Partnership",
+          "text": "We foster durable, mutually beneficial relationships with brand owners, dealers, salons, and consumers."
+        }
+      ]
     },
     "team": {
       "management": "Management",
@@ -145,84 +159,108 @@
   "process": {
     "eyebrow": "Our Business",
     "title": "How We Work",
-    "description": "Across three core areas — distribution, training, and retail — we continuously deliver quality products and services to our customers.",
+    "description": "Across three core pillars — distribution, training, and retail — we continuously deliver high-quality products and professional support to our market.",
     "distribution": {
       "title": "Distribution",
-      "p1part1": "As the",
-      "p1bold": "official distributor",
-      "p1part2": "of ESTEL and SYNERGETIC brands, we supply quality-guaranteed products from abroad to Mongolia.",
-      "p2part1": "We deliver our supplied products to",
-      "p2bold": "customers",
-      "p2part2": "across the country — through 14 branches, branded and chain stores in Ulaanbaatar, Darkhan, and Erdenet.",
-      "includedTitle": "Included in this stage",
-      "tags": ["Official distribution rights", "Quality guarantee", "14-branch logistics", "Branded & chain stores"]
+      "p1part1": "We import international brand products through",
+      "p1bold": "official channels",
+      "p1part2": "to the Mongolian market with complete quality assurance.",
+      "p2part1": "We reliably supply consumers in Ulaanbaatar and across 21 provinces",
+      "p2bold": "through 14 branches and nationwide retail networks",
+      "p2part2": ", ensuring widespread product availability.",
+      "includedTitle": "Distribution Advantages",
+      "tags": ["Official Distribution", "14 Branch Stores", "21 Provinces", "Guaranteed Authenticity", "Logistics Network"]
     },
     "academy": {
-      "title": "Training",
-      "p1part1": "Through the ESTEL Academy, we conduct regular training for professional hairdressers and stylists, annually sharing knowledge and skills with",
-      "p1bold": "over 500 hairdressers",
-      "p1part2": "on average.",
-      "p2": "Beyond training events, we tour all 21 provinces nationwide, working directly with regional specialists.",
-      "p3": "We also spend 40–50 million tugriks annually as sponsorship for competitions and events for hairdressers and stylists at national, capital, provincial, and regional levels."
+      "title": "Training (ESTEL Academy)",
+      "p1part1": "ESTEL Academy is a professional training center for hairdressers, salons, and beauty artists,",
+      "p1bold": "combining theoretical and hands-on practice",
+      "p1part2": ".",
+      "p2": "We train an average of over 500 hairdressers annually and tour all 21 provinces to support regional specialists. We also provide annual sponsorships for hairdressing championships.",
+      "p3": "Training Advantages: Combined theory + practice, master certified instructors, real product workshop experience, official certification, and advanced career skills.",
+      "includedTitle": "Curriculum Focus Areas",
+      "courses": [
+        "Color Theory & Mixing",
+        "Hair Coloring Techniques",
+        "Lightening & Bleaching",
+        "Grey Hair Coloring",
+        "Highlighting & Blonde Techniques",
+        "Hair Care & Restoration",
+        "Precision Haircutting",
+        "Perms & Texturizing",
+        "Proper Product Application",
+        "New Product Launches"
+      ]
     },
     "retail": {
-      "title": "Retail",
-      "p1part1": "We supply professional salon-focused products through",
-      "p1bold": "salon trade and services",
-      "p1part2": "under permanent contracts with over 1000 salons.",
-      "p2part1": "To get closer to our customers, we operate simultaneously through branded and chain stores, wholesale and",
-      "p2bold": "online",
-      "p2part2": "sales channels.",
-      "includedTitle": "Included in this stage",
-      "salon": {
-        "title": "Salon Contracts",
-        "text": "We maintain permanent contracts with over 1000 professional salons nationwide."
-      },
-      "store": {
-        "title": "Branded Stores",
-        "text": "We operate 5 specialized stores with professional salon-focused products."
-      },
-      "online": {
-        "title": "Online Sales",
-        "text": "We deliver products directly to customers through wholesale and online channels."
-      }
+      "title": "Retail & Sales",
+      "p1part1": "In Ulaanbaatar, Darkhan, and Erdenet, we provide direct consumer purchases through",
+      "p1bold": "14 branded and chain stores",
+      "p1part2": ".",
+      "p2part1": "We also supply regional consumers across",
+      "p2bold": "21 provinces through authorized dealers and retail partners",
+      "p2part2": ".",
+      "includedTitle": "6 Core Sales Channels",
+      "channels": [
+        { "title": "Branded Stores", "text": "Specialty boutiques dedicated to professional salons and stylist requirements." },
+        { "title": "Chain Stores", "text": "Broad consumer accessibility across leading supermarket and beauty retail chains." },
+        { "title": "Branch Stores", "text": "14 official branch stores located in Ulaanbaatar, Darkhan, and Erdenet." },
+        { "title": "E-Commerce", "text": "Seamless digital ordering platform with swift home and salon delivery." },
+        { "title": "Dealer Network", "text": "Consistent distribution to local regional dealers throughout all 21 provinces." },
+        { "title": "B2B / Salon Supply", "text": "Direct supply and service contracts with over 1,000 professional salons." }
+      ]
     },
     "values": {
       "eyebrow": "Our Principles",
       "title": "Reliability and Continuous Growth",
-      "description": "We uphold the principles established since 2013, continuously expanding our reach.",
-      "reliable": { "title": "Reliable", "text": "As the official supplier of globally recognized brands, we consistently maintain our quality guarantee." },
-      "stable": { "title": "Stable", "text": "Growing continuously since 2013, we now operate with 14 branches and over 70 employees." },
-      "expert": { "title": "Expert", "text": "Through the ESTEL Academy, we conduct regular annual training sessions for professional hairdressers." },
-      "eco": { "title": "Eco-Friendly", "text": "We offer customers products like SYNERGETIC — with 98.8% natural ingredients and eco-certified formulas." },
-      "accessible": { "title": "Accessible", "text": "We reach both urban and rural areas through branded stores, chain outlets, wholesale, and online channels." },
-      "supportive": { "title": "Supportive", "text": "We annually sponsor industry competitions and events, supporting the professional community." }
+      "description": "Since 2013, we have officially represented international brands in Mongolia, systematically expanding our operational scale and long-term partnerships.",
+      "reliable": { "title": "Reliable", "text": "Operating with official distribution rights, we introduce global brands while ensuring verified product quality and supply stability." },
+      "stable": { "title": "Stable", "text": "Drawing upon years of experience, we operate steadily with 14 branch stores and over 60 dedicated professionals." },
+      "expert": { "title": "Expert", "text": "Through ESTEL Academy, we consistently deliver training, technical knowledge, and practical skills support to stylists and salons." },
+      "eco": { "title": "Eco-Friendly", "text": "Delivering eco-certified products like SYNERGETIC to consumers, encouraging conscious, green choices in everyday life." },
+      "accessible": { "title": "Accessible", "text": "Reaching urban and rural consumers through branded outlets, chain stores, wholesale, and digital channels." },
+      "supportive": { "title": "Industry Support", "text": "Actively sponsoring championships, masterclasses, and competitions to advance industry talent and standards." }
     }
   },
   "work": {
     "eyebrow": "Our Brands",
     "title": "Official Representative of World-Leading Brands",
-    "description": "Since 2013, we have officially supplied ESTEL and SYNERGETIC brands to Mongolia's hairdressing and beauty industry.",
+    "description": "We officially import, develop, and distribute world-renowned brands in Mongolia for consumers and beauty businesses.",
     "estel": {
       "tag": "Professional Hair Care",
       "title": "The trusted brand of 1000+ professional salons and 500+ hairdressers in Mongolia",
-      "description": "A world-leading professional hair care brand with 25 years of production history in Russia. Supplied in Mongolia for the 6th consecutive year, annually training over 500 hairdressers through the ESTEL Academy."
+      "description": "A professional hair care brand with 26 years of experience. Equipped with 3 major manufacturing facilities and an independent R&D laboratory. Official distributor in Mongolia since 2019."
     },
     "synergetic": {
       "tag": "Eco Cleaning & Care",
-      "title": "98.8% natural ingredients — safe for families and children",
-      "description": "Eco products with 98.8% natural plant-based ingredients, manufactured in Russia. Free from SLS, parabens, and silicone — a completely safe green choice for families and children."
+      "title": "Hypoallergenic ECO brand with 95%+ natural ingredients",
+      "description": "Founded in 2013. Eco-friendly products with over 95% natural plant-based ingredients. Serving as official distributor in Mongolia since 2022."
     }
   },
   "blog": {
-    "eyebrow": "Blog",
-    "title": "News & Articles",
-    "description": "Read industry news, brand updates, and professional tips."
+    "eyebrow": "News",
+    "title": "Discover Our Latest Activities",
+    "description": "Industry news, brand updates, professional events, and expert advice.",
+    "synergetic-golden-bear-award": {
+      "title": "SYNERGETIC Wins 1st Place at the XVI National 'Golden Teddy Bear' Awards",
+      "description": "Among 128 nominees across 22 regions, SYNERGETIC baby laundry detergent took 1st place in 'Best Children's Cosmetic and Household Cleaning Product'.",
+      "tag": "Awards & Honors"
+    },
+    "estel-scalp-diagnosis-event": {
+      "title": "Scalp & Hair Diagnostics Days at ESTEL Professional Mongolia Branches",
+      "description": "On October 10-11, ESTEL branches will host complimentary scalp and hair diagnostics with personalized guidance from certified specialists.",
+      "tag": "Events & Campaigns"
+    },
+    "synergetic-animal-shelter-visit": {
+      "title": "SYNERGETIC Team Visits Animal Shelter",
+      "description": "As part of our corporate social responsibility, the team visited an animal shelter, spending time with rescue animals and promoting compassionate green living.",
+      "tag": "Social Responsibility"
+    }
   },
   "metadata": {
-    "siteTitle": "Tengeriin Ilgeemj LLC",
-    "siteDescription": "Tengeriin Ilgeemj LLC — official distributor of ESTEL and SYNERGETIC brands. Working in Mongolia's beauty industry since 2013.",
-    "about": "Tengeriin Ilgeemj LLC — official distributor of ESTEL and SYNERGETIC brands since 2013.",
+    "siteTitle": "Tengeriin Ilgeemj LLC — Official Distributor of International Brands",
+    "siteDescription": "Tengeriin Ilgeemj LLC — Official distributor of ESTEL and SYNERGETIC brands in Mongolia since 2013.",
+    "about": "Tengeriin Ilgeemj LLC — Official distributor of ESTEL and SYNERGETIC brands since 2013.",
     "process": "Tengeriin Ilgeemj LLC — operating across three core areas: distribution, training, and retail.",
     "work": "Tengeriin Ilgeemj LLC is the official distributor of ESTEL and SYNERGETIC brands in Mongolia.",
     "contact": "Contact Tengeriin Ilgeemj LLC — send your inquiry about dealership, wholesale orders, training, or other questions."

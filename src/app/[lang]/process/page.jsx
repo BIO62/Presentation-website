@@ -97,6 +97,19 @@ function Academy({ dict }) {
         <p>{a.p2}</p>
         <p>{a.p3}</p>
       </div>
+
+      {a.courses && a.courses.length > 0 && (
+        <>
+          <h3 className="mt-12 font-display text-base font-semibold text-neutral-950">
+            {a.includedTitle}
+          </h3>
+          <TagList className="mt-4">
+            {a.courses.map((course) => (
+              <TagListItem key={course}>{course}</TagListItem>
+            ))}
+          </TagList>
+        </>
+      )}
     </Section>
   )
 }
@@ -122,9 +135,19 @@ function Retail({ dict }) {
         {r.includedTitle}
       </h3>
       <List className="mt-8">
-        <ListItem title={r.salon.title}>{r.salon.text}</ListItem>
-        <ListItem title={r.store.title}>{r.store.text}</ListItem>
-        <ListItem title={r.online.title}>{r.online.text}</ListItem>
+        {r.channels ? (
+          r.channels.map((channel) => (
+            <ListItem key={channel.title} title={channel.title}>
+              {channel.text}
+            </ListItem>
+          ))
+        ) : (
+          <>
+            <ListItem title={r.salon?.title}>{r.salon?.text}</ListItem>
+            <ListItem title={r.store?.title}>{r.store?.text}</ListItem>
+            <ListItem title={r.online?.title}>{r.online?.text}</ListItem>
+          </>
+        )}
       </List>
     </Section>
   )

@@ -34,6 +34,7 @@ export async function generateMetadata({ params }) {
 }
 
 function Culture({ dict }) {
+  const values = dict.about.culture.valuesList || []
   return (
     <div className="mt-24 rounded-4xl bg-neutral-950 py-24 sm:mt-32 lg:mt-40 lg:py-32">
       <SectionIntro
@@ -45,15 +46,11 @@ function Culture({ dict }) {
       </SectionIntro>
       <Container className="mt-16">
         <GridList>
-          <GridListItem title={dict.about.culture.quality.title} invert>
-            {dict.about.culture.quality.text}
-          </GridListItem>
-          <GridListItem title={dict.about.culture.eco.title} invert>
-            {dict.about.culture.eco.text}
-          </GridListItem>
-          <GridListItem title={dict.about.culture.learning.title} invert>
-            {dict.about.culture.learning.text}
-          </GridListItem>
+          {values.map((val) => (
+            <GridListItem key={val.title} title={val.title} invert>
+              {val.text}
+            </GridListItem>
+          ))}
         </GridList>
       </Container>
     </div>
@@ -201,15 +198,22 @@ export default async function About({ params }) {
           <p>{dict.about.intro2}</p>
           <p>{dict.about.intro3}</p>
         </div>
+        {dict.about.mission && (
+          <div className="mt-12 rounded-3xl bg-neutral-50 p-8 ring-1 ring-neutral-950/5">
+            <p className="font-display text-xs font-semibold uppercase tracking-wider text-neutral-500">
+              {dict.about.mission.title}
+            </p>
+            <p className="mt-3 font-display text-xl font-medium tracking-tight text-neutral-950 sm:text-2xl">
+              {dict.about.mission.text}
+            </p>
+          </div>
+        )}
       </PageIntro>
       <Container className="mt-16">
         <StatList>
-          <StatListItem value="70+" label={dict.about.stats.employees} />
+          <StatListItem value="60+" label={dict.about.stats.employees} />
           <StatListItem value="14" label={dict.about.stats.branches} />
-          <StatListItem
-            value={lang === 'en' ? '4.5B ₮' : '4.5 тэрбум₮'}
-            label={dict.about.stats.revenue}
-          />
+          <StatListItem value="21" label={dict.about.stats.provinces} />
         </StatList>
       </Container>
 
