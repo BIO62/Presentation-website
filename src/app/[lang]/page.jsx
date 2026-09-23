@@ -8,11 +8,11 @@ import { HeroIntro } from '@/components/HeroIntro'
 import { List, ListItem } from '@/components/List'
 import { SectionIntro } from '@/components/SectionIntro'
 import { StylizedImage } from '@/components/StylizedImage'
-import { Testimonial } from '@/components/Testimonial'
+import { TestimonialRotator } from '@/components/TestimonialRotator'
 import { getDictionary, locales } from '@/dictionaries/index'
 import logoEstel from '@/images/clients/estel/logo-light.png'
 import logoSynergetic from '@/images/clients/synergetic/logo-light.png'
-import imageLaptop from '@/images/laptop.jpg'
+import imageLogistics from '@/images/global-partnership.jpg'
 
 const brands = [
   ['ESTEL', logoEstel],
@@ -170,7 +170,7 @@ function Services({ dict }) {
           <div className="flex justify-center lg:w-1/2 lg:justify-end lg:pr-12">
             <FadeIn className="w-full max-w-[33.75rem] flex-none lg:w-[45rem]">
               <StylizedImage
-                src={imageLaptop}
+                src={imageLogistics}
                 sizes="(min-width: 1024px) 41rem, 31rem"
                 className="justify-center lg:justify-end"
               />
@@ -250,12 +250,10 @@ export default async function Home({ params }) {
 
       <CaseStudies dict={dict} lang={lang} />
 
-      <Testimonial
+      <TestimonialRotator
         className="mt-24 sm:mt-32 lg:mt-40"
-        client={{ name: 'ESTEL', logo: logoEstel }}
-      >
-        {dict.testimonial.quote}
-      </Testimonial>
+        lang={lang}
+      />
 
       <Services dict={dict} />
 

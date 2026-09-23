@@ -8,9 +8,9 @@ import { PageIntro } from '@/components/PageIntro'
 import { SectionIntro } from '@/components/SectionIntro'
 import { StylizedImage } from '@/components/StylizedImage'
 import { TagList, TagListItem } from '@/components/TagList'
-import imageLaptop from '@/images/laptop.jpg'
-import imageMeeting from '@/images/meeting.jpg'
-import imageWhiteboard from '@/images/whiteboard.jpg'
+import imageAcademy from '@/images/estel-academy-session.jpg'
+import imageGrowthChart from '@/images/growth-chart.jpg'
+import imageWarehouse from '@/images/warehouse-loading.jpg'
 
 function Section({ title, image, children }) {
   return (
@@ -44,7 +44,7 @@ function Section({ title, image, children }) {
 
 function Distribution() {
   return (
-    <Section title="Нийлүүлэлт" image={{ src: imageWhiteboard }}>
+    <Section title="Нийлүүлэлт" image={{ src: imageWarehouse }}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>
           ESTEL, SYNERGETIC брэндүүдийн{' '}
@@ -56,7 +56,7 @@ function Distribution() {
         </p>
         <p>
           Нийлүүлсэн бүтээгдэхүүнээ Улаанбаатар, Дархан, Эрдэнэт хотуудад
-          нийт 14 салбар, нэрийн болон сүлжээ дэлгүүрээр дамжуулан хот,
+          нийт 10 салбар, нэрийн болон сүлжээ дэлгүүрээр дамжуулан хот,
           хөдөө орон нутгийн{' '}
           <strong className="font-semibold text-neutral-950">
             хэрэглэгчид
@@ -71,7 +71,7 @@ function Distribution() {
       <TagList className="mt-4">
         <TagListItem>Албан ёсны дистрибьюшн эрх</TagListItem>
         <TagListItem>Чанарын баталгаа</TagListItem>
-        <TagListItem>14 салбарын логистик</TagListItem>
+        <TagListItem>10 салбарын логистик</TagListItem>
         <TagListItem>Нэрийн болон сүлжээ дэлгүүр</TagListItem>
       </TagList>
     </Section>
@@ -80,13 +80,13 @@ function Distribution() {
 
 function Academy() {
   return (
-    <Section title="Сургалт" image={{ src: imageLaptop, shape: 1 }}>
+    <Section title="Сургалт" image={{ src: imageAcademy, shape: 1 }}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>
           ESTEL Академийн хүрээнд мэргэжлийн үсчин, гоо засалчдад зориулсан
           тогтмол сургалт явуулж, жил бүр дунджаар{' '}
           <strong className="font-semibold text-neutral-950">
-            500 гаруй үсчинд
+            1000 гаруй үсчинд
           </strong>{' '}
           мэдлэг, ур чадвар түгээдэг.
         </p>
@@ -107,7 +107,7 @@ function Academy() {
 
 function Retail() {
   return (
-    <Section title="Худалдаа" image={{ src: imageMeeting, shape: 2 }}>
+    <Section title="Худалдаа" image={{ src: imageGrowthChart, shape: 2 }}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>
           Мэргэжлийн салонд чиглэсэн зориулалтын бүтээгдэхүүнийг{' '}
@@ -174,7 +174,7 @@ function Values() {
             ажиллаж, чанарын баталгаагаа хадгалдаг.
           </GridListItem>
           <GridListItem title="Тогтвортой">
-            2013 оноос хойш тасралтгүй өсөж, өнөөдөр 14 салбар, 70 гаруй
+            2013 оноос хойш тасралтгүй өсөж, өнөөдөр 10 салбар, 60 гаруй
             ажилтантайгаар ажиллаж байна.
           </GridListItem>
           <GridListItem title="Мэргэшсэн">

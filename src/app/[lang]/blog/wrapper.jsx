@@ -31,6 +31,7 @@ export default async function BlogArticleWrapper({ children, _segments, params }
       : 'Бусад нийтлэлүүд'
 
   const byLabel = lang === 'ru' ? 'Автор:' : lang === 'en' ? 'by' : 'Нийтэлсэн:'
+  const readMoreLabel = lang === 'ru' ? 'Читать далее' : lang === 'en' ? 'Read more' : 'Дэлгэрэнгүй'
 
   return (
     <>
@@ -64,6 +65,7 @@ export default async function BlogArticleWrapper({ children, _segments, params }
           className="mt-24 sm:mt-32 lg:mt-40"
           title={moreArticlesLabel}
           pages={moreArticles}
+          readMoreLabel={readMoreLabel}
         />
       )}
 

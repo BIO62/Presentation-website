@@ -29,7 +29,7 @@ function EstelContentRu() {
       </h2>
       <TagList className="my-6">
         <TagListItem>1000+ салонов-партнёров</TagListItem>
-        <TagListItem>500+ обученных мастеров в год</TagListItem>
+        <TagListItem>1000+ обученных мастеров в год</TagListItem>
         <TagListItem>Обучение в 21 аймаке</TagListItem>
         <TagListItem>5 фирменных магазинов (УБ)</TagListItem>
         <TagListItem>5 специализированных филиалов</TagListItem>
@@ -43,7 +43,7 @@ function EstelContentRu() {
         ООО «Тэнгэрийн Илгээмж» развивает в Монголии образовательную платформу <strong>Академия ESTEL</strong> для непрерывного повышения квалификации мастеров:
       </p>
       <ul className="mt-4 list-disc pl-6 space-y-2 text-base text-neutral-600">
-        <li>Ежегодно более <strong>500 профессиональных парикмахеров</strong> проходят теоретические и практические курсы</li>
+        <li>Ежегодно более <strong>1000 профессиональных парикмахеров</strong> проходят теоретические и практические курсы</li>
         <li>Выездные обучающие программы охватывают специалистов во всех <strong>21 аймаках</strong> страны</li>
         <li>Ежегодная спонсорская поддержка конкурсов парикмахерского искусства составляет <strong>40–50 млн тугриков</strong></li>
       </ul>
@@ -61,7 +61,7 @@ function EstelContentRu() {
       <StatList className="my-16 !max-w-none">
         <StatListItem value="2013" label="Выход на рынок Монголии" />
         <StatListItem value="1000+" label="Салонов-партнёров" />
-        <StatListItem value="500+" label="Обученных мастеров (в год)" />
+        <StatListItem value="1000+" label="Обученных мастеров (в год)" />
         <StatListItem value="50M ₮" label="Годовой спонсорский фонд" />
       </StatList>
     </>
@@ -86,7 +86,7 @@ function EstelContentEn() {
       </h2>
       <TagList className="my-6">
         <TagListItem>1000+ partner salons</TagListItem>
-        <TagListItem>500+ stylists trained annually</TagListItem>
+        <TagListItem>1000+ stylists trained annually</TagListItem>
         <TagListItem>Workshops across 21 provinces</TagListItem>
         <TagListItem>5 branded retail stores (UB)</TagListItem>
         <TagListItem>5 professional branch stores</TagListItem>
@@ -100,7 +100,7 @@ function EstelContentEn() {
         Tengeriin Ilgeemj LLC operates the <strong>ESTEL Academy</strong> in Mongolia to continually advance the expertise of local stylists:
       </p>
       <ul className="mt-4 list-disc pl-6 space-y-2 text-base text-neutral-600">
-        <li>Theory and hands-on masterclasses delivered to over <strong>500 professionals</strong> every year</li>
+        <li>Theory and hands-on masterclasses delivered to over <strong>1000 professionals</strong> every year</li>
         <li>Direct roadshow workshops reaching stylists in all <strong>21 provinces</strong> nationwide</li>
         <li>Over <strong>40–50 million MNT</strong> invested annually in sponsoring regional and national styling championships</li>
       </ul>
@@ -118,7 +118,7 @@ function EstelContentEn() {
       <StatList className="my-16 !max-w-none">
         <StatListItem value="2013" label="Introduced to Mongolia" />
         <StatListItem value="1000+" label="Contracted Salons" />
-        <StatListItem value="500+" label="Stylists Trained / Year" />
+        <StatListItem value="1000+" label="Stylists Trained / Year" />
         <StatListItem value="50M ₮" label="Annual Sponsorship Fund" />
       </StatList>
     </>
@@ -278,6 +278,7 @@ export default async function CaseStudyLayout({ children, _segments, params }) {
   const serviceLabel = lang === 'ru' ? 'Направление' : lang === 'en' ? 'Service' : 'Чиглэл'
   const moreBrandsLabel = lang === 'ru' ? 'Другие бренды' : lang === 'en' ? 'Other Brands' : 'Бусад брэндүүд'
   const aboutBrandEyebrow = lang === 'ru' ? 'О бренде' : lang === 'en' ? 'About Brand' : 'Брэндийн тухай'
+  const readMoreLabel = lang === 'ru' ? 'Читать далее' : lang === 'en' ? 'Read more' : 'Дэлгэрэнгүй'
 
   const localizedService =
     id === 'estel'
@@ -374,6 +375,7 @@ export default async function CaseStudyLayout({ children, _segments, params }) {
           className="mt-24 sm:mt-32 lg:mt-40"
           title={moreBrandsLabel}
           pages={moreCaseStudies}
+          readMoreLabel={readMoreLabel}
         />
       )}
 

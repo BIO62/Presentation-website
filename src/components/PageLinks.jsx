@@ -20,7 +20,7 @@ function ArrowIcon(props) {
   )
 }
 
-function PageLink({ page }) {
+function PageLink({ page, readMoreLabel }) {
   return (
     <article key={page.href}>
       <Border
@@ -42,7 +42,7 @@ function PageLink({ page }) {
           className="mt-6 flex gap-x-3 text-base font-semibold text-neutral-950 transition hover:text-neutral-700"
           aria-label={`Read more: ${page.title}`}
         >
-          Read more
+          {readMoreLabel}
           <ArrowIcon className="w-6 flex-none fill-current" />
           <span className="absolute inset-0" />
         </Link>
@@ -51,7 +51,13 @@ function PageLink({ page }) {
   )
 }
 
-export function PageLinks({ title, intro, pages, className }) {
+export function PageLinks({
+  title,
+  intro,
+  pages,
+  className,
+  readMoreLabel = 'Дэлгэрэнгүй',
+}) {
   return (
     <div className={clsx('relative pt-24 sm:pt-32 lg:pt-40', className)}>
       <div className="absolute inset-x-0 top-0 -z-10 h-[884px] overflow-hidden rounded-t-4xl bg-gradient-to-b from-neutral-50">
@@ -69,7 +75,7 @@ export function PageLinks({ title, intro, pages, className }) {
         <FadeInStagger className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-2">
           {pages.map((page) => (
             <FadeIn key={page.href}>
-              <PageLink page={page} />
+              <PageLink page={page} readMoreLabel={readMoreLabel} />
             </FadeIn>
           ))}
         </FadeInStagger>

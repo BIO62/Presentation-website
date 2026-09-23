@@ -9,9 +9,9 @@ import { SectionIntro } from '@/components/SectionIntro'
 import { StylizedImage } from '@/components/StylizedImage'
 import { TagList, TagListItem } from '@/components/TagList'
 import { getDictionary, locales } from '@/dictionaries/index'
-import imageLaptop from '@/images/laptop.jpg'
-import imageMeeting from '@/images/meeting.jpg'
-import imageWhiteboard from '@/images/whiteboard.jpg'
+import imageAcademy from '@/images/estel-academy-session.jpg'
+import imageGrowthChart from '@/images/growth-chart.jpg'
+import imageWarehouse from '@/images/warehouse-loading.jpg'
 
 export async function generateStaticParams() {
   return locales.map((lang) => ({ lang }))
@@ -58,7 +58,7 @@ function Section({ title, image, children }) {
 function Distribution({ dict }) {
   const d = dict.process.distribution
   return (
-    <Section title={d.title} image={{ src: imageWhiteboard }}>
+    <Section title={d.title} image={{ src: imageWarehouse }}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>
           {d.p1part1}{' '}
@@ -87,7 +87,7 @@ function Distribution({ dict }) {
 function Academy({ dict }) {
   const a = dict.process.academy
   return (
-    <Section title={a.title} image={{ src: imageLaptop, shape: 1 }}>
+    <Section title={a.title} image={{ src: imageAcademy, shape: 1 }}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>
           {a.p1part1}{' '}
@@ -117,7 +117,7 @@ function Academy({ dict }) {
 function Retail({ dict }) {
   const r = dict.process.retail
   return (
-    <Section title={r.title} image={{ src: imageMeeting, shape: 2 }}>
+    <Section title={r.title} image={{ src: imageGrowthChart, shape: 2 }}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>
           {r.p1part1}{' '}

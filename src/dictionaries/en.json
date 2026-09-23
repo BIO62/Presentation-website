@@ -20,15 +20,15 @@
   "stats": [
     ["2013", "Year Founded"],
     ["60+", "Employees"],
-    ["14", "Branches (UB, Darkhan, Erdenet)"],
-    ["21", "Provinces Nationwide Reach"]
+    ["10", "Branches"],
+    ["4.5B ₮", "2026 Sales"]
   ],
   "caseStudies": {
     "sectionTitle": "Official Representative of World-Leading Brands",
     "sectionDescription": "We officially supply world-renowned brands in hair care, beauty, and eco-cleaning to the Mongolian market.",
     "estel": {
       "tag": "Professional Hair Care",
-      "title": "The choice of 1000+ professional salons and 500+ hairdressers in Mongolia",
+      "title": "The choice of 1000+ professional salons and 1000+ hairdressers in Mongolia",
       "description": "A world-leading brand with 26 years of experience, 3 major manufacturing plants, and a dedicated research laboratory. Officially supplied in Mongolia since 2019, training hairdressers through the ESTEL Academy."
     },
     "synergetic": {
@@ -46,15 +46,15 @@
     "description": "As the official distributor of world-class brands, we execute end-to-end operations to successfully introduce, develop, and distribute brands across Mongolia.",
     "academy": {
       "title": "Professional Training & Education",
-      "description": "Through ESTEL Academy, we conduct theory and practical training for hairdressers and beauty specialists, training over 500 professionals annually."
+      "description": "Through ESTEL Academy, we conduct theory and practical training for hairdressers and beauty specialists, training over 1000 professionals annually."
     },
     "salon": {
       "title": "Wholesale & B2B Distribution",
       "description": "We supply professional salon products under long-term contracts with over 1,000 professional salons across the country."
     },
     "retail": {
-      "title": "14 Branded & Chain Branches",
-      "description": "Retail operations through 14 branded and chain stores located in Ulaanbaatar, Darkhan, and Erdenet."
+      "title": "10 Branded & Chain Branches",
+      "description": "Retail operations through 10 branded and chain stores located in Ulaanbaatar, Darkhan, and Erdenet."
     },
     "online": {
       "title": "Distribution & Online Retail",
@@ -166,17 +166,17 @@
       "p1bold": "official channels",
       "p1part2": "to the Mongolian market with complete quality assurance.",
       "p2part1": "We reliably supply consumers in Ulaanbaatar and across 21 provinces",
-      "p2bold": "through 14 branches and nationwide retail networks",
+      "p2bold": "through 10 branches and nationwide retail networks",
       "p2part2": ", ensuring widespread product availability.",
       "includedTitle": "Distribution Advantages",
-      "tags": ["Official Distribution", "14 Branch Stores", "21 Provinces", "Guaranteed Authenticity", "Logistics Network"]
+      "tags": ["Official Distribution", "10 Branch Stores", "21 Provinces", "Guaranteed Authenticity", "Logistics Network"]
     },
     "academy": {
       "title": "Training (ESTEL Academy)",
       "p1part1": "ESTEL Academy is a professional training center for hairdressers, salons, and beauty artists,",
       "p1bold": "combining theoretical and hands-on practice",
       "p1part2": ".",
-      "p2": "We train an average of over 500 hairdressers annually and tour all 21 provinces to support regional specialists. We also provide annual sponsorships for hairdressing championships.",
+      "p2": "We train an average of over 1000 hairdressers annually and tour all 21 provinces to support regional specialists. We also provide annual sponsorships for hairdressing championships.",
       "p3": "Training Advantages: Combined theory + practice, master certified instructors, real product workshop experience, official certification, and advanced career skills.",
       "includedTitle": "Curriculum Focus Areas",
       "courses": [
@@ -195,7 +195,7 @@
     "retail": {
       "title": "Retail & Sales",
       "p1part1": "In Ulaanbaatar, Darkhan, and Erdenet, we provide direct consumer purchases through",
-      "p1bold": "14 branded and chain stores",
+      "p1bold": "10 branded and chain stores",
       "p1part2": ".",
       "p2part1": "We also supply regional consumers across",
       "p2bold": "21 provinces through authorized dealers and retail partners",
@@ -204,7 +204,7 @@
       "channels": [
         { "title": "Branded Stores", "text": "Specialty boutiques dedicated to professional salons and stylist requirements." },
         { "title": "Chain Stores", "text": "Broad consumer accessibility across leading supermarket and beauty retail chains." },
-        { "title": "Branch Stores", "text": "14 official branch stores located in Ulaanbaatar, Darkhan, and Erdenet." },
+        { "title": "Branch Stores", "text": "10 official branch stores located in Ulaanbaatar, Darkhan, and Erdenet." },
         { "title": "E-Commerce", "text": "Seamless digital ordering platform with swift home and salon delivery." },
         { "title": "Dealer Network", "text": "Consistent distribution to local regional dealers throughout all 21 provinces." },
         { "title": "B2B / Salon Supply", "text": "Direct supply and service contracts with over 1,000 professional salons." }
@@ -215,7 +215,7 @@
       "title": "Reliability and Continuous Growth",
       "description": "Since 2013, we have officially represented international brands in Mongolia, systematically expanding our operational scale and long-term partnerships.",
       "reliable": { "title": "Reliable", "text": "Operating with official distribution rights, we introduce global brands while ensuring verified product quality and supply stability." },
-      "stable": { "title": "Stable", "text": "Drawing upon years of experience, we operate steadily with 14 branch stores and over 60 dedicated professionals." },
+      "stable": { "title": "Stable", "text": "Drawing upon years of experience, we operate steadily with 10 branch stores and over 60 dedicated professionals." },
       "expert": { "title": "Expert", "text": "Through ESTEL Academy, we consistently deliver training, technical knowledge, and practical skills support to stylists and salons." },
       "eco": { "title": "Eco-Friendly", "text": "Delivering eco-certified products like SYNERGETIC to consumers, encouraging conscious, green choices in everyday life." },
       "accessible": { "title": "Accessible", "text": "Reaching urban and rural consumers through branded outlets, chain stores, wholesale, and digital channels." },
@@ -228,7 +228,7 @@
     "description": "We officially import, develop, and distribute world-renowned brands in Mongolia for consumers and beauty businesses.",
     "estel": {
       "tag": "Professional Hair Care",
-      "title": "The trusted brand of 1000+ professional salons and 500+ hairdressers in Mongolia",
+      "title": "The trusted brand of 1000+ professional salons and 1000+ hairdressers in Mongolia",
       "description": "A professional hair care brand with 26 years of experience. Equipped with 3 major manufacturing facilities and an independent R&D laboratory. Official distributor in Mongolia since 2019."
     },
     "synergetic": {

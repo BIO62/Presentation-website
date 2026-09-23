@@ -212,7 +212,7 @@ export default async function About({ params }) {
       <Container className="mt-16">
         <StatList>
           <StatListItem value="60+" label={dict.about.stats.employees} />
-          <StatListItem value="14" label={dict.about.stats.branches} />
+          <StatListItem value="10" label={dict.about.stats.branches} />
           <StatListItem value="21" label={dict.about.stats.provinces} />
         </StatList>
       </Container>
