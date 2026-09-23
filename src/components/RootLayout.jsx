@@ -382,8 +382,8 @@ function Navigation({ lang = 'mn', dict, expanded, pathname }) {
                 {dict?.navPanel?.office ?? 'Оффис'}
               </p>
               <p className="mt-1 text-xl font-semibold leading-tight text-neutral-100">
-                {dict?.offices?.sumong?.name ?? 'SUMONG PLAZA'},{' '}
-                {dict?.offices?.sumong?.detail ?? '15-р хороо, Sumong plaza 3 давхар'}
+                {dict?.offices?.sumang?.name ?? 'SUMANG PLAZA'},{' '}
+                {dict?.offices?.sumang?.detail ?? '15-р хороо, Sumang plaza 3 давхар'}
               </p>
             </div>
             <div className="text-center">

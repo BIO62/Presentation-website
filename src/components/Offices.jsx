@@ -18,19 +18,19 @@ function Office({ name, children, invert = false }) {
 }
 
 export function Offices({ dict, invert = false, ...props }) {
-  const sumong = dict?.offices?.sumong ?? {
-    name: 'SUMONG PLAZA',
+  const sumang = dict?.offices?.sumang ?? {
+    name: 'SUMANG PLAZA',
     address: 'Монгол Улс, Улаанбаатар, БЗД',
-    detail: '15-р хороо, Sumong plaza 3 давхар',
+    detail: '15-р хороо, Sumang plaza 3 давхар',
   }
 
   return (
     <ul role="list" {...props}>
       <li>
-        <Office name={sumong.name} invert={invert}>
-          {sumong.address}
+        <Office name={sumang.name} invert={invert}>
+          {sumang.address}
           <br />
-          {sumong.detail}
+          {sumang.detail}
         </Office>
       </li>
     </ul>
