@@ -142,7 +142,7 @@ export function Footer({ lang = 'mn', dict = {} }) {
             <NewsletterForm dict={dict} />
           </div>
         </div>
-        <div className="mb-20 mt-24 flex flex-wrap items-center justify-between gap-x-6 gap-y-4 border-t border-neutral-950/10 pt-12">
+        <div className="mb-28 mt-16 flex flex-col items-center gap-y-5 border-t border-neutral-950/10 pt-10 text-center sm:mt-24 sm:flex-row sm:flex-wrap sm:justify-between sm:gap-x-6 sm:pt-12 sm:text-left">
           <Link
             href={homeHref}
             aria-label="Home"
@@ -154,7 +154,7 @@ export function Footer({ lang = 'mn', dict = {} }) {
           >
             <Logo fillOnHover />
           </Link>
-          <p className="text-sm text-neutral-700 leading-none">
+          <p className="text-sm leading-relaxed text-neutral-700 sm:leading-none">
             © {new Date().getFullYear()} Тэнгэрийн Илгээмж.{' '}
             {dict?.footer?.copyright ?? 'Бүх эрх хуулиар хамгаалагдсан'}
           </p>

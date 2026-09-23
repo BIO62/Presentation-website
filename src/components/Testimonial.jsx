@@ -31,7 +31,6 @@ export function Testimonial({ children, client, className }) {
                 alt={client.name}
                 unoptimized
                 className="h-12 w-auto object-contain"
-                style={{ filter: 'brightness(0)' }}
               />
             </figcaption>
           </figure>

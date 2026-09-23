@@ -99,7 +99,6 @@ export function TestimonialRotator({ className, lang = 'mn' }) {
                   alt={current.name}
                   unoptimized
                   className="h-12 w-auto object-contain"
-                  style={{ filter: 'brightness(0)' }}
                 />
               </figcaption>
             </motion.figure>

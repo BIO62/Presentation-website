@@ -130,7 +130,6 @@ function CaseStudies({ dict, lang }) {
                       src={caseStudy.logo}
                       alt={caseStudy.client}
                       className="h-12 w-auto object-contain"
-                      style={{ filter: 'brightness(0)' }}
                       unoptimized
                     />
                   </Link>
@@ -216,8 +215,8 @@ export default async function Home({ params }) {
             <Image
               src="/logomark-color.png"
               alt=""
-              width={551}
-              height={620}
+              width={2033}
+              height={2288}
               unoptimized
               priority
               className="w-[780px] h-auto max-w-none"
@@ -234,8 +233,8 @@ export default async function Home({ params }) {
             <Image
               src="/logomark-color.png"
               alt=""
-              width={551}
-              height={620}
+              width={2033}
+              height={2288}
               unoptimized
               priority
               className="w-[360px] sm:w-[460px] h-auto max-w-none"

@@ -22,8 +22,8 @@ export function Logomark({
       <Image
         src={src}
         alt="Тэнгэрийн Илгээмж"
-        width={551}
-        height={620}
+        width={2033}
+        height={2288}
         className={clsx(
           'h-10 w-auto object-contain transition-all',
           isWhite && 'brightness-0 invert'

@@ -13,7 +13,7 @@ const routeLabels = {
     '/work/synergetic': 'SYNERGETIC',
     '/process': 'Үйл ажиллагаа',
     '/blog': 'Мэдээ мэдээлэл',
-    '/contact': 'Хүний нөөц',
+    '/contact': 'Холбоо барих',
   },
   ru: {
     '/': 'Главная',

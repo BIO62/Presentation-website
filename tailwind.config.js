@@ -50,6 +50,7 @@ module.exports = {
           { fontVariationSettings: 'normal' },
         ],
         philosopher: ['Philosopher', ...defaultTheme.fontFamily.sans],
+        condensed: ['Oswald', ...defaultTheme.fontFamily.sans],
       },
     },
   },

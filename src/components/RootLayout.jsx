@@ -20,7 +20,6 @@ import { Footer } from '@/components/Footer'
 import { GridPattern } from '@/components/GridPattern'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import { Logo } from '@/components/Logo'
-import { Offices } from '@/components/Offices'
 import { SocialMedia } from '@/components/SocialMedia'
 import imageBrands from '@/app/[lang]/work/estel/hero.jpg'
 import imageAbout from '@/images/logistics-team.jpg'
@@ -44,20 +43,33 @@ function getNavItems(lang, dict) {
     { id: 'about', href: `/${lang}/about`, label: dict?.nav?.about ?? 'Бидний тухай', image: imageAbout },
     { id: 'process', href: `/${lang}/process`, label: dict?.nav?.process ?? 'Үйл ажиллагаа', image: imageProcess },
     { id: 'blog', href: `/${lang}/blog`, label: dict?.nav?.blog ?? 'Мэдээ мэдээлэл', image: imageBlog },
-    { id: 'contact', href: `/${lang}/contact`, label: dict?.nav?.contact ?? 'Хүний нөөц', image: imageContact },
+    { id: 'contact', href: `/${lang}/contact`, label: dict?.nav?.contact ?? 'Холбоо барих', image: imageContact },
   ]
 }
 
-// Twice маягийн текст: hover хийхэд дээш гулсаж, доороос хуулбар нь орж ирнэ
+const ROLL_EASE = 'ease-[cubic-bezier(.2,1.33,.25,1)]'
+
+const MOBILE_BRAND_LABEL = { mn: 'Брэнд', ru: 'Бренды', en: 'Brands' }
+
+// Twice маягийн текст: hover хийхэд -12° хазайж дээш гарч, хуулбар нь доороос хазайж орж ирнэ.
+// pt нь "Й", "Ё" зэрэг үсгийн дээд тэмдгийг overflow-д тайрагдуулахгүй.
 function RollText({ children }) {
   return (
     <span className="relative block overflow-hidden">
-      <span className="block transition-transform duration-700 ease-[cubic-bezier(.2,1.33,.25,1)] group-hover:-translate-y-full">
+      <span
+        className={clsx(
+          'block origin-bottom-left pt-[0.2em] transition-transform duration-700 group-hover:-translate-y-[101%] group-hover:-rotate-12',
+          ROLL_EASE
+        )}
+      >
         {children}
       </span>
       <span
         aria-hidden="true"
-        className="absolute inset-0 block translate-y-full transition-transform duration-700 ease-[cubic-bezier(.2,1.33,.25,1)] group-hover:translate-y-0"
+        className={clsx(
+          'absolute left-0 top-0 block origin-top-right translate-y-[101%] -rotate-12 pt-[0.2em] transition-transform duration-700 group-hover:translate-y-0 group-hover:rotate-0',
+          ROLL_EASE
+        )}
       >
         {children}
       </span>
@@ -65,7 +77,7 @@ function RollText({ children }) {
   )
 }
 
-function TopBarLink({ href, index, expanded, active, children }) {
+function TopBarLink({ href, index, expanded, active, small = false, children }) {
   const { navigateTo } = useCurveNavigation()
 
   return (
@@ -73,7 +85,7 @@ function TopBarLink({ href, index, expanded, active, children }) {
       <motion.div
         initial={false}
         animate={expanded ? { y: '-110%', rotate: -6 } : { y: '0%', rotate: 0 }}
-        transition={{ duration: 0.8, ease: EASE, delay: index * 0.1 }}
+        transition={{ duration: 0.8, ease: EASE, delay: index * 0.08 }}
         style={{ transformOrigin: 'left bottom' }}
       >
         <Link
@@ -82,12 +94,16 @@ function TopBarLink({ href, index, expanded, active, children }) {
             e.preventDefault()
             navigateTo(href)
           }}
-          className="group relative block py-1 font-display text-[0.95rem] font-semibold uppercase tracking-wide text-neutral-950"
+          className={clsx(
+            'group relative block whitespace-nowrap pb-1 font-condensed font-semibold uppercase leading-none text-neutral-950',
+            small ? 'text-[0.95rem]' : 'text-lg'
+          )}
         >
           <RollText>{children}</RollText>
           <span
             className={clsx(
-              'absolute inset-x-0 bottom-0 h-0.5 bg-brand-yellow transition-transform duration-700 ease-[cubic-bezier(.2,1.33,.25,1)]',
+              'absolute inset-x-0 bottom-0 h-0.5 bg-brand-yellow transition-transform duration-700',
+              ROLL_EASE,
               active
                 ? 'scale-x-100'
                 : 'origin-right scale-x-0 group-hover:origin-left group-hover:scale-x-100'
@@ -104,50 +120,70 @@ function TopBar({ lang = 'mn', dict, expanded, pathname }) {
   const { navigateTo } = useCurveNavigation()
   const homeHref = `/${lang}`
   const items = getNavItems(lang, dict)
-  const left = items.slice(0, 2)
-  const right = items.slice(2)
+  const isActive = (href) => pathname?.startsWith(href)
 
-  const renderLinks = (list, offset) =>
-    list.map((item, i) => (
-      <TopBarLink
-        key={item.id}
-        href={item.href}
-        index={offset + i}
-        expanded={expanded}
-        active={pathname?.startsWith(item.href)}
-      >
-        {item.label}
-      </TopBarLink>
-    ))
+  const logo = (
+    <Link
+      href={homeHref}
+      aria-label="Home"
+      onMouseEnter={() => setLogoHovered(true)}
+      onMouseLeave={() => setLogoHovered(false)}
+      onClick={(e) => {
+        e.preventDefault()
+        navigateTo(homeHref)
+      }}
+    >
+      <Logo filled={logoHovered} />
+    </Link>
+  )
 
   return (
-    <div className="px-6 sm:px-8 lg:px-10">
-      <div className="grid grid-cols-[1fr_auto_1fr] items-center">
-        {/* Хоосон <li> нь үгсийг лого хүртэлх зайд жигд тараана */}
-        <ul role="list" className="hidden items-center justify-between md:flex">
-          {renderLinks(left, 0)}
-          <li aria-hidden="true" />
-        </ul>
-        <div className="col-start-2 once-in">
-          <Link
-            href={homeHref}
-            aria-label="Home"
-            onMouseEnter={() => setLogoHovered(true)}
-            onMouseLeave={() => setLogoHovered(false)}
-            onClick={(e) => {
-              e.preventDefault()
-              navigateTo(homeHref)
-            }}
-          >
-            <Logo filled={logoHovered} />
-          </Link>
-        </div>
-        <ul role="list" className="hidden items-center justify-between md:flex">
-          <li aria-hidden="true" />
-          {renderLinks(right, 2)}
+    <Container>
+      {/* Desktop: лого зүүн талд, цэсний нэрс баруун талд */}
+      <div className="hidden items-center justify-between lg:flex">
+        <div className="once-in">{logo}</div>
+        <ul role="list" className="flex items-center gap-x-10 xl:gap-x-12">
+          {items.map((item, i) => (
+            <TopBarLink
+              key={item.id}
+              href={item.href}
+              index={i}
+              expanded={expanded}
+              active={isActive(item.href)}
+            >
+              {item.label}
+            </TopBarLink>
+          ))}
         </ul>
       </div>
-    </div>
+
+      {/* Утас: Twice шиг — Брэнд | лого | Холбоо барих */}
+      <div className="grid grid-cols-[1fr_auto_1fr] items-center lg:hidden">
+        <ul role="list" className="justify-self-start">
+          <TopBarLink
+            href={`/${lang}/work`}
+            index={0}
+            small
+            expanded={expanded}
+            active={isActive(`/${lang}/work`)}
+          >
+            {MOBILE_BRAND_LABEL[lang] ?? MOBILE_BRAND_LABEL.mn}
+          </TopBarLink>
+        </ul>
+        <div className="once-in px-3 [&_img]:h-8">{logo}</div>
+        <ul role="list" className="justify-self-end">
+          <TopBarLink
+            href={`/${lang}/contact`}
+            index={1}
+            small
+            expanded={expanded}
+            active={isActive(`/${lang}/contact`)}
+          >
+            {dict?.footer?.contactLink ?? 'Холбоо барих'}
+          </TopBarLink>
+        </ul>
+      </div>
+    </Container>
   )
 }
 
@@ -188,7 +224,7 @@ function MenuDock({ expanded, onToggle, toggleRef, panelId, lang }) {
             )}
           />
         </span>
-        <span className="flex items-center bg-white px-4 font-display text-sm font-semibold uppercase tracking-wide text-neutral-950">
+        <span className="flex items-center bg-white px-4 font-condensed text-base font-semibold uppercase leading-none text-neutral-950">
           <RollText>{label}</RollText>
         </span>
       </button>
@@ -228,7 +264,7 @@ function MenuLink({ item, index, expanded, activeId, setHoveredId, onNavigate })
   const dimmed = activeId && activeId !== item.id
 
   return (
-    <li className="overflow-hidden">
+    <li className="shrink-0 overflow-hidden">
       <motion.div
         initial={false}
         animate={expanded ? { y: '0%', rotate: 0 } : { y: '110%', rotate: -6 }}
@@ -250,13 +286,13 @@ function MenuLink({ item, index, expanded, activeId, setHoveredId, onNavigate })
             onNavigate(item.href)
           }}
           className={clsx(
-            'group relative block whitespace-nowrap py-1 font-display font-semibold uppercase leading-none tracking-tight transition-colors duration-200',
-            'text-[9vw] sm:text-6xl lg:text-[min(4.2vw,8.5vh)]',
-            dimmed ? 'text-white/40' : 'text-white'
+            'group relative block whitespace-nowrap pb-[0.06em] font-condensed font-semibold uppercase leading-none tracking-normal transition-colors duration-200',
+            'text-[10.5vw] sm:text-7xl lg:text-[2.55vw]',
+            dimmed ? 'text-neutral-300/50' : 'text-neutral-100'
           )}
         >
-          {item.label}
-          <span className="absolute inset-x-0 bottom-0 h-0.5 origin-right scale-x-0 bg-brand-yellow transition-transform duration-500 group-hover:origin-left group-hover:scale-x-100" />
+          <RollText>{item.label}</RollText>
+          <span className="absolute inset-x-0 bottom-0 h-[3px] origin-right scale-x-0 bg-brand-yellow transition-transform duration-700 ease-[cubic-bezier(.2,1.33,.25,1)] group-hover:origin-left group-hover:scale-x-100" />
         </Link>
       </motion.div>
     </li>
@@ -281,7 +317,7 @@ function Navigation({ lang = 'mn', dict, expanded, pathname }) {
   return (
     <>
       {/* Төвийн зураг — hover хийсэн цэсийн зураг гарч ирнэ */}
-      <div className="pointer-events-none absolute left-1/2 top-[80%] w-[30vw] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl opacity-60 sm:w-[22vw] lg:top-1/2 lg:w-[min(18vw,40vh)]">
+      <div className="pointer-events-none absolute left-1/2 top-[88%] w-[40vw] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-[3px] opacity-90 sm:w-[24vw] lg:top-1/2 lg:w-[min(18.75vw,52vh)]">
         <motion.div
           initial={false}
           animate={expanded ? { y: '0%', rotate: 0 } : { y: '100%', rotate: -6 }}
@@ -291,7 +327,7 @@ function Navigation({ lang = 'mn', dict, expanded, pathname }) {
             delay: expanded ? 0.4 : 0,
           }}
           style={{ transformOrigin: 'right top' }}
-          className="relative aspect-[3/4] overflow-hidden rounded-2xl"
+          className="relative aspect-[3/4] overflow-hidden rounded-[3px]"
         >
           {items.map((item) => (
             <Image
@@ -309,10 +345,10 @@ function Navigation({ lang = 'mn', dict, expanded, pathname }) {
         </motion.div>
       </div>
 
-      <nav className="absolute inset-x-0 top-[42%] -translate-y-1/2 px-6 lg:top-1/2">
+      <nav className="absolute inset-x-0 top-[40%] -translate-y-1/2 px-6 lg:top-1/2 lg:px-[5vw]">
         <ul
           role="list"
-          className="relative z-10 flex flex-col items-center gap-y-2 lg:gap-y-1"
+          className="relative z-10 flex flex-col items-center -space-y-1 lg:flex-row lg:justify-between lg:space-y-0"
         >
           {items.map((item, index) => (
             <MenuLink
@@ -340,18 +376,21 @@ function Navigation({ lang = 'mn', dict, expanded, pathname }) {
         className="absolute inset-x-0 bottom-0 hidden pb-12 sm:block"
       >
         <Container>
-          <div className="flex items-end justify-between gap-8">
-            <div>
-              <h2 className="font-display text-sm font-semibold text-brand-yellow">
+          <div className="flex items-end justify-between gap-8 font-condensed uppercase">
+            <div className="text-center">
+              <p className="text-sm font-medium text-neutral-300/70">
                 {dict?.navPanel?.office ?? 'Оффис'}
-              </h2>
-              <Offices dict={dict} invert className="mt-3" />
+              </p>
+              <p className="mt-1 text-xl font-semibold leading-tight text-neutral-100">
+                {dict?.offices?.sumong?.name ?? 'SUMONG PLAZA'},{' '}
+                {dict?.offices?.sumong?.detail ?? '15-р хороо, Sumong plaza 3 давхар'}
+              </p>
             </div>
-            <div className="text-right">
-              <h2 className="font-display text-sm font-semibold text-brand-yellow">
+            <div className="text-center">
+              <p className="text-sm font-medium text-neutral-300/70">
                 {dict?.navPanel?.followUs ?? 'Бидэнтэй нэгд'}
-              </h2>
-              <SocialMedia className="mt-3 justify-end" invert />
+              </p>
+              <SocialMedia className="mt-2 justify-center" invert />
             </div>
           </div>
         </Container>
@@ -409,7 +448,7 @@ function RootLayoutInner({ children, lang, dict }) {
     <MotionConfig transition={shouldReduceMotion ? { duration: 0 } : undefined}>
       <header>
         <div
-          className="absolute left-0 right-0 top-0 z-40 pt-8"
+          className="absolute left-0 right-0 top-2 z-40 pt-14"
           aria-hidden={expanded ? 'true' : undefined}
           inert={expanded ? '' : undefined}
         >
@@ -444,7 +483,7 @@ function RootLayoutInner({ children, lang, dict }) {
             initial={false}
             animate={{ opacity: expanded ? 1 : 0 }}
             transition={{ duration: 0.3, delay: expanded ? 0.5 : 0 }}
-            className="relative z-10 pt-8"
+            className="relative z-10 pt-16"
           >
             <div className="flex justify-center pt-0">
               <Logo invert />
