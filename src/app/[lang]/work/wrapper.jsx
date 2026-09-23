@@ -11,41 +11,68 @@ import { TagList, TagListItem } from '@/components/TagList'
 import { getDictionary } from '@/dictionaries/index'
 import { loadMDXMetadata } from '@/lib/loadMDXMetadata'
 
+// Орос, англи агуулга нь estel/page.mdx, synergetic/page.mdx доторх монгол эхийн
+// орчуулга — баримт (он, тоо) өөрчлөгдвөл гурвууланд нь зэрэг засна.
+
+const h2 = 'font-display text-2xl font-semibold text-neutral-950'
+const p = 'mt-6 text-base text-neutral-600 leading-relaxed'
+const list = 'mt-4 list-disc pl-6 space-y-2 text-base text-neutral-600'
+
 function EstelContentRu() {
   return (
     <>
-      <h2 className="font-display text-2xl font-semibold text-neutral-950">
-        О бренде ESTEL
-      </h2>
-      <p className="mt-6 text-base text-neutral-600 leading-relaxed">
-        ESTEL Professional — ведущий международный бренд профессионального ухода за волосами, основанный в 1999 году и представленный в более чем 50 странах мира. Бренд славится своими научными разработками и неизменно высоким салонным качеством.
+      <h2 className={h2}>О бренде ESTEL</h2>
+      <p className={p}>
+        ESTEL Professional — ведущий мировой бренд профессионального ухода за волосами с
+        26-летним опытом. Бренд предлагает профессиональным парикмахерам, салонам и
+        покупателям комплексные решения для окрашивания, ухода, восстановления и укладки волос.
       </p>
-      <p className="mt-4 text-base text-neutral-600 leading-relaxed">
-        В Монголии компания <strong>ООО «Тэнгэрийн Илгээмж»</strong> с 2013 года является единственным официальным дистрибьютором ESTEL, стабильно развивая и поддерживая индустрию красоты по всей стране.
+      <p className={p}>
+        Бренд располагает <strong>3 крупными заводами</strong> и{' '}
+        <strong>собственной научно-исследовательской лабораторией</strong>. С 2019 года
+        ООО «Тэнгэрийн Илгээмж» является официальным дистрибьютором ESTEL в Монголии и
+        поставляет продукцию на рынок по официальным каналам.
+      </p>
+      <p className={p}>
+        Помимо продукции, мы оказываем парикмахерам, салонам и дилерам профессиональные
+        консультации, проводим обучение и поддерживаем правильное применение средств,
+        развивая ценность бренда ESTEL Professional на рынке Монголии.
       </p>
 
-      <h2 className="mt-16 font-display text-2xl font-semibold text-neutral-950">
-        Результаты сотрудничества
-      </h2>
+      <h2 className={`mt-16 ${h2}`}>Результаты сотрудничества</h2>
       <TagList className="my-6">
-        <TagListItem>1000+ салонов-партнёров</TagListItem>
+        <TagListItem>1000+ салонов по договору</TagListItem>
         <TagListItem>1000+ обученных мастеров в год</TagListItem>
-        <TagListItem>Обучение в 21 аймаке</TagListItem>
-        <TagListItem>5 фирменных магазинов (УБ)</TagListItem>
-        <TagListItem>5 специализированных филиалов</TagListItem>
-        <TagListItem>4 региональных тура в год</TagListItem>
+        <TagListItem>Мастер-классы по 21 аймаку</TagListItem>
+        <TagListItem>Гарантия 3 крупных заводов</TagListItem>
+        <TagListItem>10 официальных филиалов</TagListItem>
+        <TagListItem>Собственная исследовательская лаборатория</TagListItem>
       </TagList>
 
-      <h2 className="mt-16 font-display text-2xl font-semibold text-neutral-950">
-        Академия ESTEL
-      </h2>
-      <p className="mt-6 text-base text-neutral-600 leading-relaxed">
-        ООО «Тэнгэрийн Илгээмж» развивает в Монголии образовательную платформу <strong>Академия ESTEL</strong> для непрерывного повышения квалификации мастеров:
+      <h2 className={`mt-16 ${h2}`}>ESTEL Academy — профессионализм на новом уровне</h2>
+      <p className={p}>
+        ESTEL Academy — профессиональный учебный центр для парикмахеров, салонов и
+        бьюти-мастеров, <strong>сочетающий теорию и практику</strong>:
       </p>
-      <ul className="mt-4 list-disc pl-6 space-y-2 text-base text-neutral-600">
-        <li>Ежегодно более <strong>1000 профессиональных парикмахеров</strong> проходят теоретические и практические курсы</li>
-        <li>Выездные обучающие программы охватывают специалистов во всех <strong>21 аймаках</strong> страны</li>
-        <li>Ежегодная спонсорская поддержка конкурсов парикмахерского искусства составляет <strong>40–50 млн тугриков</strong></li>
+      <ul className={list}>
+        <li>
+          <strong>Теория + практика:</strong> работа на реальной продукции и
+          профессиональные сертификаты
+        </li>
+        <li>
+          <strong>Направления обучения:</strong> колористика, подбор цвета, техники
+          окрашивания, осветление, окрашивание седины, мелирование / highlight, уход и
+          лечение волос, вечерние укладки, мужские стрижки, химическая завивка, правильное
+          применение продукции
+        </li>
+        <li>
+          <strong>Охват регионов:</strong> выездные программы для специалистов во всех 21
+          аймаке
+        </li>
+        <li>
+          <strong>Поддержка отрасли:</strong> ежегодное спонсорство национальных,
+          городских, аймачных и региональных конкурсов парикмахеров
+        </li>
       </ul>
 
       <Blockquote
@@ -55,14 +82,15 @@ function EstelContentRu() {
           role: 'Официальный дистрибьютор ESTEL в Монголии',
         }}
       >
-        Наша цель — вывести мастерство парикмахеров Монголии на мировой уровень. Академия ESTEL является главным инструментом для воплощения этой цели.
+        Наша миссия — вывести мастерство парикмахеров, салонов и специалистов Монголии на
+        мировой уровень и дать каждому клиенту почувствовать гарантию высочайшего качества.
       </Blockquote>
 
       <StatList className="my-16 !max-w-none">
-        <StatListItem value="2013" label="Выход на рынок Монголии" />
-        <StatListItem value="1000+" label="Салонов-партнёров" />
+        <StatListItem value="2019" label="Официальные права в Монголии" />
+        <StatListItem value="26 лет" label="Международный опыт" />
+        <StatListItem value="3" label="Завода и R&D-лаборатория" />
         <StatListItem value="1000+" label="Обученных мастеров (в год)" />
-        <StatListItem value="50M ₮" label="Годовой спонсорский фонд" />
       </StatList>
     </>
   )
@@ -71,38 +99,57 @@ function EstelContentRu() {
 function EstelContentEn() {
   return (
     <>
-      <h2 className="font-display text-2xl font-semibold text-neutral-950">
-        About ESTEL
-      </h2>
-      <p className="mt-6 text-base text-neutral-600 leading-relaxed">
-        ESTEL Professional, founded in 1999, is a global leader in professional hair care distributed in over 50 countries worldwide. The brand is renowned for scientifically grounded formulations, technological innovation, and reliable salon-grade products.
+      <h2 className={h2}>About ESTEL</h2>
+      <p className={p}>
+        ESTEL Professional is a world-leading professional hair care brand with 26 years of
+        experience, offering complete coloring, care, restoration and styling solutions for
+        professional hairdressers, salons and consumers.
       </p>
-      <p className="mt-4 text-base text-neutral-600 leading-relaxed">
-        In Mongolia, <strong>Tengeriin Ilgeemj LLC</strong> has served as the sole official distributor of ESTEL since 2013, establishing a strong and enduring footprint across the nation’s hair and beauty industry.
+      <p className={p}>
+        The brand operates <strong>3 major manufacturing plants</strong> and an{' '}
+        <strong>independent research laboratory</strong>. Since 2019, Tengeriin Ilgeemj LLC
+        has been the official distributor of ESTEL in Mongolia, supplying the market through
+        official channels.
+      </p>
+      <p className={p}>
+        Beyond products, we provide hairdressers, salons and dealers with professional
+        consulting, training and product-application support, growing the value of ESTEL
+        Professional in the Mongolian market.
       </p>
 
-      <h2 className="mt-16 font-display text-2xl font-semibold text-neutral-950">
-        Partnership Highlights
-      </h2>
+      <h2 className={`mt-16 ${h2}`}>Partnership Highlights</h2>
       <TagList className="my-6">
-        <TagListItem>1000+ partner salons</TagListItem>
-        <TagListItem>1000+ stylists trained annually</TagListItem>
-        <TagListItem>Workshops across 21 provinces</TagListItem>
-        <TagListItem>5 branded retail stores (UB)</TagListItem>
-        <TagListItem>5 professional branch stores</TagListItem>
-        <TagListItem>4 nationwide outreach tours per year</TagListItem>
+        <TagListItem>1000+ contracted salons</TagListItem>
+        <TagListItem>1000+ hairdressers trained per year</TagListItem>
+        <TagListItem>Masterclasses across 21 provinces</TagListItem>
+        <TagListItem>Backed by 3 major plants</TagListItem>
+        <TagListItem>10 official branch stores</TagListItem>
+        <TagListItem>Independent research laboratory</TagListItem>
       </TagList>
 
-      <h2 className="mt-16 font-display text-2xl font-semibold text-neutral-950">
-        ESTEL Academy
-      </h2>
-      <p className="mt-6 text-base text-neutral-600 leading-relaxed">
-        Tengeriin Ilgeemj LLC operates the <strong>ESTEL Academy</strong> in Mongolia to continually advance the expertise of local stylists:
+      <h2 className={`mt-16 ${h2}`}>ESTEL Academy — Taking Skills to the Next Level</h2>
+      <p className={p}>
+        ESTEL Academy is a professional training center for hairdressers, salons and beauty
+        specialists, <strong>combining theory and hands-on practice</strong>:
       </p>
-      <ul className="mt-4 list-disc pl-6 space-y-2 text-base text-neutral-600">
-        <li>Theory and hands-on masterclasses delivered to over <strong>1000 professionals</strong> every year</li>
-        <li>Direct roadshow workshops reaching stylists in all <strong>21 provinces</strong> nationwide</li>
-        <li>Over <strong>40–50 million MNT</strong> invested annually in sponsoring regional and national styling championships</li>
+      <ul className={list}>
+        <li>
+          <strong>Theory + practice:</strong> hands-on work with real products and
+          professional certification
+        </li>
+        <li>
+          <strong>Core curriculum:</strong> color theory, color formulation, coloring
+          techniques, lightening, grey coverage, highlights, hair care and treatment,
+          occasion styling, men’s cuts, perms, and proper product application
+        </li>
+        <li>
+          <strong>Nationwide reach:</strong> roadshow training for specialists in all 21
+          provinces
+        </li>
+        <li>
+          <strong>Industry support:</strong> annual sponsorship of national, city,
+          provincial and regional hairdressing competitions
+        </li>
       </ul>
 
       <Blockquote
@@ -112,14 +159,16 @@ function EstelContentEn() {
           role: 'Official Distributor of ESTEL in Mongolia',
         }}
       >
-        Our mission is to elevate Mongolian hairstylists to world-class standards. The ESTEL Academy serves as the primary vehicle to achieve this vision.
+        Our mission is to raise the skills of Mongolian hairdressers, salons and specialists
+        to world standards, and to let every customer experience the highest guarantee of
+        quality.
       </Blockquote>
 
       <StatList className="my-16 !max-w-none">
-        <StatListItem value="2013" label="Introduced to Mongolia" />
-        <StatListItem value="1000+" label="Contracted Salons" />
-        <StatListItem value="1000+" label="Stylists Trained / Year" />
-        <StatListItem value="50M ₮" label="Annual Sponsorship Fund" />
+        <StatListItem value="2019" label="Official rights in Mongolia" />
+        <StatListItem value="26 yrs" label="International experience" />
+        <StatListItem value="3" label="Plants & R&D laboratory" />
+        <StatListItem value="1000+" label="Hairdressers trained (per year)" />
       </StatList>
     </>
   )
@@ -128,49 +177,43 @@ function EstelContentEn() {
 function SynergeticContentRu() {
   return (
     <>
-      <h2 className="font-display text-2xl font-semibold text-neutral-950">
-        О бренде SYNERGETIC
-      </h2>
-      <p className="mt-6 text-base text-neutral-600 leading-relaxed">
-        SYNERGETIC — ведущий российский бренд экологичных моющих и уходовых средств с содержанием до <strong>98,8% натуральных растительных компонентов</strong>. Каждый продукт разработан с заботой о здоровье человека и окружающей среде:
+      <h2 className={h2}>О бренде SYNERGETIC</h2>
+      <p className={p}>
+        SYNERGETIC — ведущий бренд экологичной продукции для дома и личного ухода, основанный
+        в 2013 году в России. Бренд сочетает современные научные решения с растительными
+        ингредиентами, создавая эффективные и удобные в использовании средства.
       </p>
-      <ul className="mt-4 list-disc pl-6 space-y-2 text-base text-neutral-600">
-        <li>Без <strong>SLS, SLES</strong> (агрессивных ПАВ)</li>
-        <li>Без <strong>парабенов</strong> и консервантов</li>
-        <li>Без <strong>силиконов</strong></li>
-        <li>Без <strong>минеральных масел</strong></li>
-        <li>Без <strong>искусственных красителей</strong></li>
-        <li><strong>Гипоаллергенный</strong> состав</li>
-      </ul>
-      <p className="mt-4 text-base text-neutral-600 leading-relaxed">
-        ООО «Тэнгэрийн Илгээмж» поставляет SYNERGETIC в Монголию, прививая культуру осознанного и экологически чистого потребления.
+      <p className={p}>
+        С 2022 года ООО «Тэнгэрийн Илгээмж» является официальным дистрибьютором SYNERGETIC в
+        Монголии: мы поставляем продукцию по официальным каналам, развиваем культуру
+        экологичного потребления и делаем экологичный выбор частью повседневной жизни.
       </p>
 
-      <h2 className="mt-16 font-display text-2xl font-semibold text-neutral-950">
-        Для кого подходит
-      </h2>
+      <h2 className={`mt-16 ${h2}`}>Ключевые преимущества продукции</h2>
       <TagList className="my-6">
-        <TagListItem>Семьи с детьми</TagListItem>
-        <TagListItem>Люди с аллергией</TagListItem>
-        <TagListItem>Эко-осознанные потребители</TagListItem>
-        <TagListItem>Ценители чистоты и уюта</TagListItem>
-        <TagListItem>Защитники природы</TagListItem>
+        <TagListItem>Более 95% натуральных ингредиентов</TagListItem>
+        <TagListItem>Гипоаллергенный состав</TagListItem>
+        <TagListItem>Без SLS, парабенов и силиконов</TagListItem>
+        <TagListItem>Безопасно для детей и всей семьи</TagListItem>
+        <TagListItem>100% биоразлагаемость</TagListItem>
+        <TagListItem>Международные эко-сертификаты</TagListItem>
       </TagList>
 
-      <h2 className="mt-16 font-display text-2xl font-semibold text-neutral-950">
-        Линейки продукции
-      </h2>
-      <p className="mt-6 text-base text-neutral-600 leading-relaxed">
-        SYNERGETIC предлагает широкий спектр сертифицированной эко-продукции:
+      <h2 className={`mt-16 ${h2}`}>Линейки продукции</h2>
+      <p className={p}>
+        SYNERGETIC предлагает комплексные линейки для семьи, личного ухода и уборки дома:
       </p>
-      <p className="mt-4 text-base text-neutral-600 leading-relaxed">
-        <strong>Уход за домом:</strong> Средства для мытья посуды, экологичные гели для стирки, кондиционеры и чистящие средства для любых поверхностей.
+      <p className={p}>
+        <strong>Уборка дома:</strong> средства для мытья посуды, гели и кондиционеры для
+        стирки, средства для пола и поверхностей, эко-решения для кухни и ванной.
       </p>
-      <p className="mt-4 text-base text-neutral-600 leading-relaxed">
-        <strong>Личная гигиена:</strong> Натуральные шампуни, бальзамы, гели для душа, зубные пасты и специализированная детская серия 0+.
+      <p className={p}>
+        <strong>Уход за телом и личная гигиена:</strong> шампуни с натуральным составом,
+        гели для душа, жидкое мыло для рук, зубные пасты и специальные детские средства.
       </p>
-      <p className="mt-4 text-base text-neutral-600 leading-relaxed">
-        <strong>Тревел-форматы:</strong> Компактные и удобные форматы для поездок и путешествий.
+      <p className={p}>
+        <strong>Культура эко-потребления:</strong> мы продвигаем «зелёный» выбор —
+        средства, безвредные для природы и полностью безопасные для здоровья.
       </p>
 
       <Blockquote
@@ -180,14 +223,15 @@ function SynergeticContentRu() {
           role: 'Официальный дистрибьютор SYNERGETIC в Монголии',
         }}
       >
-        Каждая семья в Монголии заслуживает право пользоваться безопасными и натуральными средствами. SYNERGETIC даёт нам эту абсолютную уверенность.
+        Наша миссия — по официальным каналам доставлять монгольским покупателям натуральную
+        и безопасную продукцию и вместе беречь нашу планету.
       </Blockquote>
 
       <StatList className="my-16 !max-w-none">
-        <StatListItem value="98.8%" label="Натуральные ингредиенты" />
-        <StatListItem value="0" label="SLS / Парабенов / Силикона" />
-        <StatListItem value="50+" label="Наименований продукции" />
-        <StatListItem value="Эко" label="Международные эко-сертификаты" />
+        <StatListItem value="2022" label="Официальные права в Монголии" />
+        <StatListItem value="95%+" label="Натуральных ингредиентов" />
+        <StatListItem value="2013" label="Год основания бренда" />
+        <StatListItem value="10" label="Торговых филиалов" />
       </StatList>
     </>
   )
@@ -196,49 +240,44 @@ function SynergeticContentRu() {
 function SynergeticContentEn() {
   return (
     <>
-      <h2 className="font-display text-2xl font-semibold text-neutral-950">
-        About SYNERGETIC
-      </h2>
-      <p className="mt-6 text-base text-neutral-600 leading-relaxed">
-        SYNERGETIC is a premier eco-friendly brand with formulations crafted from <strong>98.8% natural plant-based ingredients</strong>. Every formulation adheres to rigorous environmental and health safety criteria:
+      <h2 className={h2}>About SYNERGETIC</h2>
+      <p className={p}>
+        Founded in Russia in 2013, SYNERGETIC is a leading brand of eco-friendly home care
+        and personal care products. It combines modern science with plant-based ingredients
+        to create effective products that are easy to use.
       </p>
-      <ul className="mt-4 list-disc pl-6 space-y-2 text-base text-neutral-600">
-        <li>Free of <strong>SLS and SLES</strong></li>
-        <li>Free of <strong>parabens</strong> and harmful preservatives</li>
-        <li>Free of <strong>silicones</strong></li>
-        <li>Free of <strong>mineral oils</strong></li>
-        <li>Free of <strong>synthetic colorants</strong></li>
-        <li><strong>Hypoallergenic</strong> and non-irritating</li>
-      </ul>
-      <p className="mt-4 text-base text-neutral-600 leading-relaxed">
-        Tengeriin Ilgeemj LLC officially imports SYNERGETIC to Mongolia, championing green lifestyles and conscious household care.
+      <p className={p}>
+        Since 2022, Tengeriin Ilgeemj LLC has been the official distributor of SYNERGETIC in
+        Mongolia — supplying products through official channels, promoting eco-conscious
+        consumption and bringing green choices into everyday life.
       </p>
 
-      <h2 className="mt-16 font-display text-2xl font-semibold text-neutral-950">
-        Ideal For
-      </h2>
+      <h2 className={`mt-16 ${h2}`}>Key Product Features</h2>
       <TagList className="my-6">
-        <TagListItem>Families with children</TagListItem>
-        <TagListItem>Sensitive skin & allergy sufferers</TagListItem>
-        <TagListItem>Eco-conscious consumers</TagListItem>
-        <TagListItem>Wellness-focused homes</TagListItem>
-        <TagListItem>Environmental advocates</TagListItem>
+        <TagListItem>Over 95% natural ingredients</TagListItem>
+        <TagListItem>Hypoallergenic</TagListItem>
+        <TagListItem>Free of SLS, parabens and silicones</TagListItem>
+        <TagListItem>Safe for children and families</TagListItem>
+        <TagListItem>100% biodegradable</TagListItem>
+        <TagListItem>International eco certifications</TagListItem>
       </TagList>
 
-      <h2 className="mt-16 font-display text-2xl font-semibold text-neutral-950">
-        Product Lines
-      </h2>
-      <p className="mt-6 text-base text-neutral-600 leading-relaxed">
-        SYNERGETIC delivers a comprehensive portfolio of certified green products:
+      <h2 className={`mt-16 ${h2}`}>Product Lines</h2>
+      <p className={p}>
+        SYNERGETIC offers complete ranges for the family, personal care and household
+        cleaning:
       </p>
-      <p className="mt-4 text-base text-neutral-600 leading-relaxed">
-        <strong>Home Care:</strong> Plant-based dishwashing gels, eco laundry liquids, stain removers, and multi-surface cleaners.
+      <p className={p}>
+        <strong>Home Cleaning:</strong> dishwashing liquids, laundry gels and softeners,
+        floor and surface cleaners, and eco solutions for kitchens and bathrooms.
       </p>
-      <p className="mt-4 text-base text-neutral-600 leading-relaxed">
-        <strong>Personal Care:</strong> Natural shampoos, nourishing body washes, organic toothpastes, and gentle 0+ baby care essentials.
+      <p className={p}>
+        <strong>Body & Personal Care:</strong> natural shampoos, body washes, liquid hand
+        soaps, toothpastes and dedicated baby products.
       </p>
-      <p className="mt-4 text-base text-neutral-600 leading-relaxed">
-        <strong>Travel Range:</strong> Portable and convenient compact packaging for people on the move.
+      <p className={p}>
+        <strong>Eco-Conscious Living:</strong> we promote a green culture of choosing
+        products that are harmless to nature and completely safe for health.
       </p>
 
       <Blockquote
@@ -248,14 +287,15 @@ function SynergeticContentEn() {
           role: 'Official Distributor of SYNERGETIC in Mongolia',
         }}
       >
-        Mongolian consumers deserve access to authentically safe, plant-derived products. SYNERGETIC delivers that uncompromising peace of mind.
+        Our mission is to bring natural, safe products to Mongolian consumers through
+        official channels — and to build a greener world together.
       </Blockquote>
 
       <StatList className="my-16 !max-w-none">
-        <StatListItem value="98.8%" label="Natural Plant Ingredients" />
-        <StatListItem value="0" label="SLS / Parabens / Silicones" />
-        <StatListItem value="50+" label="Product Varieties" />
-        <StatListItem value="Eco" label="International Certifications" />
+        <StatListItem value="2022" label="Official rights in Mongolia" />
+        <StatListItem value="95%+" label="Natural ingredients" />
+        <StatListItem value="2013" label="Year brand was founded" />
+        <StatListItem value="10" label="Retail branches" />
       </StatList>
     </>
   )
@@ -283,13 +323,13 @@ export default async function CaseStudyLayout({ children, _segments, params }) {
   const localizedService =
     id === 'estel'
       ? lang === 'ru'
-        ? 'Профессиональный уход за волосами, Обучение'
+        ? 'Профессиональный уход за волосами, ESTEL Academy'
         : lang === 'en'
-        ? 'Professional Hair Care, Training'
+        ? 'Professional Hair Care, ESTEL Academy'
         : caseStudy?.service
       : id === 'synergetic'
       ? lang === 'ru'
-        ? 'Эко чистящие средства, Уход'
+        ? 'Экологичная бытовая химия, уход'
         : lang === 'en'
         ? 'Eco Cleaning & Care'
         : caseStudy?.service
@@ -376,6 +416,7 @@ export default async function CaseStudyLayout({ children, _segments, params }) {
           title={moreBrandsLabel}
           pages={moreCaseStudies}
           readMoreLabel={readMoreLabel}
+          lang={lang}
         />
       )}
 

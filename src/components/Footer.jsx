@@ -176,7 +176,7 @@ export function Footer({ lang = 'mn', dict = {} }) {
             <Logo fillOnHover />
           </Link>
           <p className="text-sm leading-relaxed text-neutral-700 sm:leading-none">
-            © {new Date().getFullYear()} Тэнгэрийн Илгээмж.{' '}
+            © {new Date().getFullYear()} {dict?.metadata?.siteName ?? 'Тэнгэрийн Илгээмж'}.{' '}
             {dict?.footer?.copyright ?? 'Бүх эрх хуулиар хамгаалагдсан'}
           </p>
         </div>

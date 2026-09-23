@@ -7,6 +7,8 @@ import { formatDate } from '@/lib/formatDate'
 import { getDictionary } from '@/dictionaries/index'
 import { loadMDXMetadata } from '@/lib/loadMDXMetadata'
 
+import { blogTranslations } from './translations'
+
 export default async function BlogArticleWrapper({ children, _segments, params }) {
   const lang = params?.lang ?? _segments?.find((s) => /^(mn|ru|en)$/.test(s)) ?? 'mn'
   const id = _segments?.at(-2)
@@ -30,6 +32,9 @@ export default async function BlogArticleWrapper({ children, _segments, params }
       ? 'More articles'
       : 'Бусад нийтлэлүүд'
 
+  // ru/en дээр орчуулсан агуулгыг, байхгүй бол монгол эх (MDX)-ийг харуулна
+  const Translated = blogTranslations[id]?.[lang]
+
   const byLabel = lang === 'ru' ? 'Автор:' : lang === 'en' ? 'by' : 'Нийтэлсэн:'
   const readMoreLabel = lang === 'ru' ? 'Читать далее' : lang === 'en' ? 'Read more' : 'Дэлгэрэнгүй'
 
@@ -45,7 +50,7 @@ export default async function BlogArticleWrapper({ children, _segments, params }
               dateTime={article.date}
               className="order-first text-sm text-neutral-950"
             >
-              {formatDate(article.date)}
+              {formatDate(article.date, lang)}
             </time>
             <p className="mt-6 text-sm font-semibold text-neutral-950">
               {byLabel} {article.author.name}, {article.author.role}
@@ -55,7 +60,13 @@ export default async function BlogArticleWrapper({ children, _segments, params }
 
         <FadeIn>
           <MDXComponents.wrapper className="mt-24 sm:mt-32 lg:mt-40">
-            {children}
+            {Translated ? (
+              <MDXComponents.Typography>
+                <Translated />
+              </MDXComponents.Typography>
+            ) : (
+              children
+            )}
           </MDXComponents.wrapper>
         </FadeIn>
       </Container>
@@ -66,6 +77,7 @@ export default async function BlogArticleWrapper({ children, _segments, params }
           title={moreArticlesLabel}
           pages={moreArticles}
           readMoreLabel={readMoreLabel}
+          lang={lang}
         />
       )}
 

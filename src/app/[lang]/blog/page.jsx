@@ -52,7 +52,7 @@ export default async function Blog({ params }) {
                         <dt className="sr-only">Published</dt>
                         <dd className="absolute left-0 top-0 text-sm text-neutral-950 lg:static">
                           <time dateTime={article.date}>
-                            {formatDate(article.date)}
+                            {formatDate(article.date, lang)}
                           </time>
                         </dd>
                         <dt className="sr-only">Author</dt>

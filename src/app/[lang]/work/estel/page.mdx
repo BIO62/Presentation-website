@@ -1,3 +1,4 @@
+import { getDictionary } from '@/dictionaries/index'
 import logo from '@/images/clients/estel/logo-light.png'
 import imageHero from './hero.jpg'
 
@@ -22,9 +23,13 @@ export const caseStudy = {
   },
 }
 
-export const metadata = {
-  title: `${caseStudy.client} — Манай брэнд`,
-  description: caseStudy.description,
+export async function generateMetadata({ params }) {
+  const dict = await getDictionary(params.lang)
+  const ourBrandLabel = { mn: 'Манай брэнд', ru: 'Наш бренд', en: 'Our brand' }
+  return {
+    title: `${caseStudy.client} — ${ourBrandLabel[params.lang] ?? ourBrandLabel.mn}`,
+    description: dict.work?.['estel']?.description ?? caseStudy.description,
+  }
 }
 
 ## ESTEL-ийн тухай

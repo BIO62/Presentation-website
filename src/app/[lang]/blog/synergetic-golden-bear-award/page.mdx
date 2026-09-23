@@ -1,3 +1,4 @@
+import { getDictionary } from '@/dictionaries/index'
 import imageChelseaHagon from '@/images/team/chelsea-hagon.jpeg'
 
 export const article = {
@@ -12,9 +13,13 @@ export const article = {
   },
 }
 
-export const metadata = {
-  title: article.title,
-  description: article.description,
+export async function generateMetadata({ params }) {
+  const dict = await getDictionary(params.lang)
+  const t = dict.blog?.['synergetic-golden-bear-award']
+  return {
+    title: t?.title ?? article.title,
+    description: t?.description ?? article.description,
+  }
 }
 
 ## XVI удаагийн “Алтан Бамбарууш” үндэсний шагнал
