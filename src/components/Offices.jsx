@@ -19,9 +19,9 @@ function Office({ name, children, invert = false }) {
 
 export function Offices({ dict, invert = false, ...props }) {
   const sumang = dict?.offices?.sumang ?? {
-    name: 'SUMANG PLAZA',
+    name: 'SOMANG PLAZA',
     address: 'Монгол Улс, Улаанбаатар, БЗД',
-    detail: '15-р хороо, Sumang plaza 3 давхар',
+    detail: '15-р хороо, Somang plaza 3 давхар',
   }
 
   return (
