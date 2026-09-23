@@ -1,3 +1,4 @@
+import { getDictionary } from '@/dictionaries/index'
 import imageBlakeReid from '@/images/team/blake-reid.jpeg'
 
 export const article = {
@@ -12,9 +13,13 @@ export const article = {
   },
 }
 
-export const metadata = {
-  title: article.title,
-  description: article.description,
+export async function generateMetadata({ params }) {
+  const dict = await getDictionary(params.lang)
+  const t = dict.blog?.['estel-scalp-diagnosis-event']
+  return {
+    title: t?.title ?? article.title,
+    description: t?.description ?? article.description,
+  }
 }
 
 ## Хуйх оношилгооны өдөрлөг

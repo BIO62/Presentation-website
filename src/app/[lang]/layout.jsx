@@ -12,8 +12,9 @@ export async function generateMetadata({ params }) {
   const dict = await getDictionary(lang)
   return {
     title: {
-      template: '%s - Studio',
-      default: dict.metadata.siteTitle,
+      template: `%s — ${dict.metadata.siteName}`,
+      // absolute: эцэг layout-ын template-ийг давхар залгахгүй
+      absolute: dict.metadata.siteTitle,
     },
     description: dict.metadata.siteDescription,
     icons: {

@@ -20,7 +20,7 @@ function ArrowIcon(props) {
   )
 }
 
-function PageLink({ page, readMoreLabel }) {
+function PageLink({ page, readMoreLabel, lang }) {
   return (
     <article key={page.href}>
       <Border
@@ -34,7 +34,7 @@ function PageLink({ page, readMoreLabel }) {
           dateTime={page.date}
           className="order-first text-sm text-neutral-600"
         >
-          {formatDate(page.date)}
+          {formatDate(page.date, lang)}
         </time>
         <p className="mt-2.5 text-base text-neutral-600">{page.description}</p>
         <Link
@@ -57,6 +57,7 @@ export function PageLinks({
   pages,
   className,
   readMoreLabel = 'Дэлгэрэнгүй',
+  lang = 'mn',
 }) {
   return (
     <div className={clsx('relative pt-24 sm:pt-32 lg:pt-40', className)}>
@@ -75,7 +76,7 @@ export function PageLinks({
         <FadeInStagger className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-2">
           {pages.map((page) => (
             <FadeIn key={page.href}>
-              <PageLink page={page} readMoreLabel={readMoreLabel} />
+              <PageLink page={page} readMoreLabel={readMoreLabel} lang={lang} />
             </FadeIn>
           ))}
         </FadeInStagger>

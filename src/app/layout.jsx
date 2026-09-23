@@ -3,7 +3,7 @@ import { CurveProvider } from '@/components/Curve'
 
 export const metadata = {
   title: {
-    template: '%s - Studio',
+    template: '%s — Тэнгэрийн Илгээмж',
     default: 'Тэнгэрийн Илгээмж ХХК',
   },
 }

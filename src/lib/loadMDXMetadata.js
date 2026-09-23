@@ -44,6 +44,9 @@ export async function loadMDXMetadata(directory, lang = 'mn') {
                 title: dictEntry.title ?? meta.title,
                 description: dictEntry.description ?? meta.description,
                 tag: dictEntry.tag ?? meta.tag,
+                ...(dictEntry.author
+                  ? { author: { ...meta.author, ...dictEntry.author } }
+                  : {}),
               }
             : {}),
         }

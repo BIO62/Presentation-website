@@ -18,10 +18,22 @@
     "heading": "International brands we officially distribute"
   },
   "stats": [
-    ["2013", "Year Founded"],
-    ["60+", "Employees"],
-    ["10", "Branches"],
-    ["4.5B ₮", "2026 Sales"]
+    [
+      "2013",
+      "Year Founded"
+    ],
+    [
+      "60+",
+      "Employees"
+    ],
+    [
+      "10",
+      "Branches"
+    ],
+    [
+      "4.5B ₮",
+      "2026 Sales"
+    ]
   ],
   "caseStudies": {
     "sectionTitle": "Official Representative of World-Leading Brands",
@@ -105,7 +117,7 @@
   "offices": {
     "sumang": {
       "name": "SUMANG PLAZA",
-      "address": "Mongolia, Ulaanbaatar, BZD",
+      "address": "Bayanzurkh District, Ulaanbaatar, Mongolia",
       "detail": "15th khoroo, Sumang Plaza, 3rd Floor"
     }
   },
@@ -169,7 +181,13 @@
       "p2bold": "through 10 branches and nationwide retail networks",
       "p2part2": ", ensuring widespread product availability.",
       "includedTitle": "Distribution Advantages",
-      "tags": ["Official Distribution", "10 Branch Stores", "21 Provinces", "Guaranteed Authenticity", "Logistics Network"]
+      "tags": [
+        "Official Distribution",
+        "10 Branch Stores",
+        "21 Provinces",
+        "Guaranteed Authenticity",
+        "Logistics Network"
+      ]
     },
     "academy": {
       "title": "Training (ESTEL Academy)",
@@ -202,24 +220,60 @@
       "p2part2": ".",
       "includedTitle": "6 Core Sales Channels",
       "channels": [
-        { "title": "Branded Stores", "text": "Specialty boutiques dedicated to professional salons and stylist requirements." },
-        { "title": "Chain Stores", "text": "Broad consumer accessibility across leading supermarket and beauty retail chains." },
-        { "title": "Branch Stores", "text": "10 official branch stores located in Ulaanbaatar, Darkhan, and Erdenet." },
-        { "title": "E-Commerce", "text": "Seamless digital ordering platform with swift home and salon delivery." },
-        { "title": "Dealer Network", "text": "Consistent distribution to local regional dealers throughout all 21 provinces." },
-        { "title": "B2B / Salon Supply", "text": "Direct supply and service contracts with over 1,000 professional salons." }
+        {
+          "title": "Branded Stores",
+          "text": "Specialty boutiques dedicated to professional salons and stylist requirements."
+        },
+        {
+          "title": "Chain Stores",
+          "text": "Broad consumer accessibility across leading supermarket and beauty retail chains."
+        },
+        {
+          "title": "Branch Stores",
+          "text": "10 official branch stores located in Ulaanbaatar, Darkhan, and Erdenet."
+        },
+        {
+          "title": "E-Commerce",
+          "text": "Seamless digital ordering platform with swift home and salon delivery."
+        },
+        {
+          "title": "Dealer Network",
+          "text": "Consistent distribution to local regional dealers throughout all 21 provinces."
+        },
+        {
+          "title": "B2B / Salon Supply",
+          "text": "Direct supply and service contracts with over 1,000 professional salons."
+        }
       ]
     },
     "values": {
       "eyebrow": "Our Principles",
       "title": "Reliability and Continuous Growth",
       "description": "Since 2013, we have officially represented international brands in Mongolia, systematically expanding our operational scale and long-term partnerships.",
-      "reliable": { "title": "Reliable", "text": "Operating with official distribution rights, we introduce global brands while ensuring verified product quality and supply stability." },
-      "stable": { "title": "Stable", "text": "Drawing upon years of experience, we operate steadily with 10 branch stores and over 60 dedicated professionals." },
-      "expert": { "title": "Expert", "text": "Through ESTEL Academy, we consistently deliver training, technical knowledge, and practical skills support to stylists and salons." },
-      "eco": { "title": "Eco-Friendly", "text": "Delivering eco-certified products like SYNERGETIC to consumers, encouraging conscious, green choices in everyday life." },
-      "accessible": { "title": "Accessible", "text": "Reaching urban and rural consumers through branded outlets, chain stores, wholesale, and digital channels." },
-      "supportive": { "title": "Industry Support", "text": "Actively sponsoring championships, masterclasses, and competitions to advance industry talent and standards." }
+      "reliable": {
+        "title": "Reliable",
+        "text": "Operating with official distribution rights, we introduce global brands while ensuring verified product quality and supply stability."
+      },
+      "stable": {
+        "title": "Stable",
+        "text": "Drawing upon years of experience, we operate steadily with 10 branch stores and over 60 dedicated professionals."
+      },
+      "expert": {
+        "title": "Expert",
+        "text": "Through ESTEL Academy, we consistently deliver training, technical knowledge, and practical skills support to stylists and salons."
+      },
+      "eco": {
+        "title": "Eco-Friendly",
+        "text": "Delivering eco-certified products like SYNERGETIC to consumers, encouraging conscious, green choices in everyday life."
+      },
+      "accessible": {
+        "title": "Accessible",
+        "text": "Reaching urban and rural consumers through branded outlets, chain stores, wholesale, and digital channels."
+      },
+      "supportive": {
+        "title": "Industry Support",
+        "text": "Actively sponsoring championships, masterclasses, and competitions to advance industry talent and standards."
+      }
     }
   },
   "work": {
@@ -244,17 +298,29 @@
     "synergetic-golden-bear-award": {
       "title": "SYNERGETIC Wins 1st Place at the XVI National 'Golden Teddy Bear' Awards",
       "description": "Among 128 nominees across 22 regions, SYNERGETIC baby laundry detergent took 1st place in 'Best Children's Cosmetic and Household Cleaning Product'.",
-      "tag": "Awards & Honors"
+      "tag": "Awards & Honors",
+      "author": {
+        "name": "O. Zoljargal",
+        "role": "Marketing & Brand Manager"
+      }
     },
     "estel-scalp-diagnosis-event": {
       "title": "Scalp & Hair Diagnostics Days at ESTEL Professional Mongolia Branches",
       "description": "On October 10-11, ESTEL branches will host complimentary scalp and hair diagnostics with personalized guidance from certified specialists.",
-      "tag": "Events & Campaigns"
+      "tag": "Events & Campaigns",
+      "author": {
+        "name": "Kh. Otgonbaatar",
+        "role": "Senior Technologist & Instructor"
+      }
     },
     "synergetic-animal-shelter-visit": {
       "title": "SYNERGETIC Team Visits Animal Shelter",
       "description": "As part of our corporate social responsibility, the team visited an animal shelter, spending time with rescue animals and promoting compassionate green living.",
-      "tag": "Social Responsibility"
+      "tag": "Social Responsibility",
+      "author": {
+        "name": "M. Gereltuya",
+        "role": "Branch Manager"
+      }
     }
   },
   "metadata": {
@@ -263,6 +329,7 @@
     "about": "Tengeriin Ilgeemj LLC — Official distributor of ESTEL and SYNERGETIC brands since 2013.",
     "process": "Tengeriin Ilgeemj LLC — operating across three core areas: distribution, training, and retail.",
     "work": "Tengeriin Ilgeemj LLC is the official distributor of ESTEL and SYNERGETIC brands in Mongolia.",
-    "contact": "Contact Tengeriin Ilgeemj LLC — send your inquiry about dealership, wholesale orders, training, or other questions."
+    "contact": "Contact Tengeriin Ilgeemj LLC — send your inquiry about dealership, wholesale orders, training, or other questions.",
+    "siteName": "Tengeriin Ilgeemj"
   }
 }
