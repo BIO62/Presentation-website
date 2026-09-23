@@ -14,13 +14,12 @@ import { usePathname } from 'next/navigation'
 import clsx from 'clsx'
 import { motion, MotionConfig, useReducedMotion } from 'framer-motion'
 
-import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
 import { useCurveNavigation } from '@/components/Curve'
 import { Footer } from '@/components/Footer'
 import { GridPattern } from '@/components/GridPattern'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
-import { Logo, Logomark } from '@/components/Logo'
+import { Logo } from '@/components/Logo'
 import { Offices } from '@/components/Offices'
 import { SocialMedia } from '@/components/SocialMedia'
 import imageBrands from '@/app/[lang]/work/estel/hero.jpg'
@@ -39,83 +38,97 @@ const MENU_LABELS = {
   en: { open: 'Menu', close: 'Close' },
 }
 
-function MenuToggle({ expanded, onToggle, toggleRef, panelId, invert, lang }) {
-  const labels = MENU_LABELS[lang] ?? MENU_LABELS.mn
-  const label = expanded ? labels.close : labels.open
+function getNavItems(lang, dict) {
+  return [
+    { id: 'brands', href: `/${lang}/work`, label: dict?.nav?.brands ?? 'Брэндүүд', image: imageBrands },
+    { id: 'about', href: `/${lang}/about`, label: dict?.nav?.about ?? 'Бидний тухай', image: imageAbout },
+    { id: 'process', href: `/${lang}/process`, label: dict?.nav?.process ?? 'Үйл ажиллагаа', image: imageProcess },
+    { id: 'blog', href: `/${lang}/blog`, label: dict?.nav?.blog ?? 'Мэдээ мэдээлэл', image: imageBlog },
+    { id: 'contact', href: `/${lang}/contact`, label: dict?.nav?.contact ?? 'Хүний нөөц', image: imageContact },
+  ]
+}
 
+// Twice маягийн текст: hover хийхэд дээш гулсаж, доороос хуулбар нь орж ирнэ
+function RollText({ children }) {
   return (
-    <button
-      ref={toggleRef}
-      type="button"
-      onClick={onToggle}
-      aria-expanded={expanded.toString()}
-      aria-controls={panelId}
-      aria-label={label}
-      className={clsx(
-        'group flex items-center overflow-hidden rounded-full text-sm font-semibold transition',
-        invert
-          ? 'bg-white/10 text-white ring-1 ring-white/20'
-          : 'bg-neutral-100 text-neutral-950 ring-1 ring-neutral-950/10'
-      )}
-    >
+    <span className="relative block overflow-hidden">
+      <span className="block transition-transform duration-700 ease-[cubic-bezier(.2,1.33,.25,1)] group-hover:-translate-y-full">
+        {children}
+      </span>
       <span
-        className={clsx(
-          'relative flex h-8 w-8 items-center justify-center rounded-full',
-          invert ? 'bg-brand-yellow' : 'bg-neutral-950'
-        )}
+        aria-hidden="true"
+        className="absolute inset-0 block translate-y-full transition-transform duration-700 ease-[cubic-bezier(.2,1.33,.25,1)] group-hover:translate-y-0"
       >
-        <span
-          className={clsx(
-            'absolute h-0.5 w-3.5 rounded-full transition-transform duration-500',
-            invert ? 'bg-neutral-950' : 'bg-brand-yellow',
-            expanded
-              ? 'rotate-45'
-              : '-translate-y-[3px] group-hover:scale-x-50'
-          )}
-        />
-        <span
-          className={clsx(
-            'absolute h-0.5 w-3.5 rounded-full transition-transform duration-500',
-            invert ? 'bg-neutral-950' : 'bg-brand-yellow',
-            expanded
-              ? '-rotate-45'
-              : 'translate-y-[3px] group-hover:scale-x-50'
-          )}
-        />
+        {children}
       </span>
-      {/* Hover дээр текст дээш гулсаж солигдоно */}
-      <span className="relative hidden h-5 overflow-hidden px-3 sm:block">
-        <span className="flex flex-col transition-transform duration-500 ease-[cubic-bezier(.2,1.33,.25,1)] group-hover:-translate-y-5">
-          <span className="h-5 leading-5">{label}</span>
-          <span className="h-5 leading-5" aria-hidden="true">
-            {label}
-          </span>
-        </span>
-      </span>
-    </button>
+    </span>
   )
 }
 
-function Header({
-  panelId,
-  invert = false,
-  expanded,
-  onToggle,
-  toggleRef,
-  lang = 'mn',
-  dict,
-}) {
-  let { logoHovered, setLogoHovered } = useContext(RootLayoutContext)
+function TopBarLink({ href, index, expanded, active, children }) {
   const { navigateTo } = useCurveNavigation()
-  const contactHref = `/${lang}/contact`
-  const contactLabel = dict?.nav?.contact ?? 'Хүний нөөц'
-  const homeHref = `/${lang}`
 
   return (
-    <Container>
-      <div className="flex items-center justify-between">
-        {/* Logo */}
-        <div className="once-in">
+    <li className="overflow-hidden">
+      <motion.div
+        initial={false}
+        animate={expanded ? { y: '-110%', rotate: -6 } : { y: '0%', rotate: 0 }}
+        transition={{ duration: 0.8, ease: EASE, delay: index * 0.1 }}
+        style={{ transformOrigin: 'left bottom' }}
+      >
+        <Link
+          href={href}
+          onClick={(e) => {
+            e.preventDefault()
+            navigateTo(href)
+          }}
+          className="group relative block py-1 font-display text-[0.95rem] font-semibold uppercase tracking-wide text-neutral-950"
+        >
+          <RollText>{children}</RollText>
+          <span
+            className={clsx(
+              'absolute inset-x-0 bottom-0 h-0.5 bg-brand-yellow transition-transform duration-700 ease-[cubic-bezier(.2,1.33,.25,1)]',
+              active
+                ? 'scale-x-100'
+                : 'origin-right scale-x-0 group-hover:origin-left group-hover:scale-x-100'
+            )}
+          />
+        </Link>
+      </motion.div>
+    </li>
+  )
+}
+
+function TopBar({ lang = 'mn', dict, expanded, pathname }) {
+  let { logoHovered, setLogoHovered } = useContext(RootLayoutContext)
+  const { navigateTo } = useCurveNavigation()
+  const homeHref = `/${lang}`
+  const items = getNavItems(lang, dict)
+  const left = items.slice(0, 2)
+  const right = items.slice(2)
+
+  const renderLinks = (list, offset) =>
+    list.map((item, i) => (
+      <TopBarLink
+        key={item.id}
+        href={item.href}
+        index={offset + i}
+        expanded={expanded}
+        active={pathname?.startsWith(item.href)}
+      >
+        {item.label}
+      </TopBarLink>
+    ))
+
+  return (
+    <div className="px-6 sm:px-8 lg:px-10">
+      <div className="grid grid-cols-[1fr_auto_1fr] items-center">
+        {/* Хоосон <li> нь үгсийг лого хүртэлх зайд жигд тараана */}
+        <ul role="list" className="hidden items-center justify-between md:flex">
+          {renderLinks(left, 0)}
+          <li aria-hidden="true" />
+        </ul>
+        <div className="col-start-2 once-in">
           <Link
             href={homeHref}
             aria-label="Home"
@@ -126,49 +139,60 @@ function Header({
               navigateTo(homeHref)
             }}
           >
-            <Logomark
-              className="sm:hidden"
-              invert={invert}
-              filled={logoHovered}
-            />
-            <Logo
-              className="hidden sm:block"
-              invert={invert}
-              filled={logoHovered}
-            />
+            <Logo filled={logoHovered} />
           </Link>
         </div>
-        <div className="flex items-center gap-x-3 sm:gap-x-6">
-          {/* Language Switcher */}
-          <div className="once-in relative z-30">
-            <LanguageSwitcher invert={invert} currentLang={lang} />
-          </div>
-          {/* Contact button */}
-          <div className="once-in">
-            <Button
-              href={contactHref}
-              invert={invert}
-              onClick={(e) => {
-                e.preventDefault()
-                navigateTo(contactHref)
-              }}
-            >
-              {contactLabel}
-            </Button>
-          </div>
-          <div className="once-in">
-            <MenuToggle
-              expanded={expanded}
-              onToggle={onToggle}
-              toggleRef={toggleRef}
-              panelId={panelId}
-              invert={invert}
-              lang={lang}
-            />
-          </div>
-        </div>
+        <ul role="list" className="hidden items-center justify-between md:flex">
+          <li aria-hidden="true" />
+          {renderLinks(right, 2)}
+        </ul>
       </div>
-    </Container>
+    </div>
+  )
+}
+
+// Доод голд байнга харагдах "Цэс" товч + хэл солих
+function MenuDock({ expanded, onToggle, toggleRef, panelId, lang }) {
+  const labels = MENU_LABELS[lang] ?? MENU_LABELS.mn
+  const label = expanded ? labels.close : labels.open
+
+  return (
+    <div className="fixed bottom-6 left-1/2 z-[60] flex -translate-x-1/2 items-center gap-x-2">
+      <LanguageSwitcher currentLang={lang} dropUp />
+      <button
+        ref={toggleRef}
+        type="button"
+        onClick={onToggle}
+        aria-expanded={expanded.toString()}
+        aria-controls={panelId}
+        aria-label={label}
+        className="group flex h-10 items-stretch overflow-hidden rounded-md shadow-lg shadow-neutral-950/20"
+      >
+        <span className="relative flex w-10 items-center justify-center rounded-l-md bg-neutral-950 ring-1 ring-inset ring-white/20">
+          <span
+            className={clsx(
+              'absolute h-0.5 w-4 bg-brand-yellow transition-transform duration-700 ease-[cubic-bezier(.2,1.33,.25,1)]',
+              expanded ? 'rotate-45' : '-translate-y-[5px] group-hover:scale-x-50'
+            )}
+          />
+          <span
+            className={clsx(
+              'absolute h-0.5 w-4 bg-brand-yellow transition-all duration-700',
+              expanded ? 'scale-x-0 opacity-0' : ''
+            )}
+          />
+          <span
+            className={clsx(
+              'absolute h-0.5 w-4 bg-brand-yellow transition-transform duration-700 ease-[cubic-bezier(.2,1.33,.25,1)]',
+              expanded ? '-rotate-45' : 'translate-y-[5px] group-hover:scale-x-50'
+            )}
+          />
+        </span>
+        <span className="flex items-center bg-white px-4 font-display text-sm font-semibold uppercase tracking-wide text-neutral-950">
+          <RollText>{label}</RollText>
+        </span>
+      </button>
+    </div>
   )
 }
 
@@ -244,13 +268,7 @@ function Navigation({ lang = 'mn', dict, expanded, pathname }) {
   let { setExpanded } = useContext(RootLayoutContext)
   const [hoveredId, setHoveredId] = useState(null)
 
-  const items = [
-    { id: 'brands', href: `/${lang}/work`, label: dict?.nav?.brands ?? 'Брэндүүд', image: imageBrands },
-    { id: 'about', href: `/${lang}/about`, label: dict?.nav?.about ?? 'Бидний тухай', image: imageAbout },
-    { id: 'process', href: `/${lang}/process`, label: dict?.nav?.process ?? 'Үйл ажиллагаа', image: imageProcess },
-    { id: 'blog', href: `/${lang}/blog`, label: dict?.nav?.blog ?? 'Мэдээ мэдээлэл', image: imageBlog },
-    { id: 'contact', href: `/${lang}/contact`, label: dict?.nav?.contact ?? 'Хүний нөөц', image: imageContact },
-  ]
+  const items = getNavItems(lang, dict)
 
   const currentId = items.find((item) => pathname?.startsWith(item.href))?.id
   const imageId = hoveredId ?? currentId ?? items[0].id
@@ -346,8 +364,7 @@ function RootLayoutInner({ children, lang, dict }) {
   let panelId = useId()
   let { expanded, setExpanded } = useContext(RootLayoutContext)
   let pathname = usePathname()
-  let openRef = useRef()
-  let closeRef = useRef()
+  let toggleRef = useRef()
   let shouldReduceMotion = useReducedMotion()
 
   useEffect(() => {
@@ -378,7 +395,7 @@ function RootLayoutInner({ children, lang, dict }) {
     function onKeyDown(event) {
       if (event.key === 'Escape') {
         setExpanded(false)
-        openRef.current?.focus({ preventScroll: true })
+        toggleRef.current?.focus({ preventScroll: true })
       }
     }
     window.addEventListener('keydown', onKeyDown)
@@ -392,24 +409,25 @@ function RootLayoutInner({ children, lang, dict }) {
     <MotionConfig transition={shouldReduceMotion ? { duration: 0 } : undefined}>
       <header>
         <div
-          className="absolute left-0 right-0 top-2 z-40 pt-14"
+          className="absolute left-0 right-0 top-0 z-40 pt-8"
           aria-hidden={expanded ? 'true' : undefined}
           inert={expanded ? '' : undefined}
         >
-          <Header
-            panelId={panelId}
-            toggleRef={openRef}
-            expanded={false}
+          <TopBar
             lang={lang}
             dict={dict}
-            onToggle={() => {
-              setExpanded(true)
-              window.setTimeout(() =>
-                closeRef.current?.focus({ preventScroll: true })
-              )
-            }}
+            expanded={expanded}
+            pathname={pathname}
           />
         </div>
+
+        <MenuDock
+          expanded={expanded}
+          toggleRef={toggleRef}
+          panelId={panelId}
+          lang={lang}
+          onToggle={() => setExpanded((expanded) => !expanded)}
+        />
 
         <div
           id={panelId}
@@ -426,22 +444,11 @@ function RootLayoutInner({ children, lang, dict }) {
             initial={false}
             animate={{ opacity: expanded ? 1 : 0 }}
             transition={{ duration: 0.3, delay: expanded ? 0.5 : 0 }}
-            className="relative z-10 pt-16"
+            className="relative z-10 pt-8"
           >
-            <Header
-              invert
-              panelId={panelId}
-              toggleRef={closeRef}
-              expanded={expanded}
-              lang={lang}
-              dict={dict}
-              onToggle={() => {
-                setExpanded(false)
-                window.setTimeout(() =>
-                  openRef.current?.focus({ preventScroll: true })
-                )
-              }}
-            />
+            <div className="flex justify-center pt-0">
+              <Logo invert />
+            </div>
           </motion.div>
 
           <Navigation

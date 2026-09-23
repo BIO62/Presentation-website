@@ -73,7 +73,7 @@ const languages = [
   { code: 'en', label: 'EN', name: 'English', Flag: UKFlag },
 ]
 
-export function LanguageSwitcher({ invert = false, currentLang = 'mn' }) {
+export function LanguageSwitcher({ invert = false, currentLang = 'mn', dropUp = false }) {
   const pathname = usePathname()
   const router = useRouter()
   const { navigateTo } = useCurveNavigation()
@@ -188,7 +188,14 @@ export function LanguageSwitcher({ invert = false, currentLang = 'mn' }) {
       {/* Floating Smooth Dropdown with Cascading Items */}
       <AnimatePresence>
         {isOpen && (
-          <div className="absolute left-1/2 -translate-x-1/2 sm:left-auto sm:right-0 sm:translate-x-0 top-full mt-2.5 z-50">
+          <div
+            className={clsx(
+              'absolute z-50',
+              dropUp
+                ? 'bottom-full left-1/2 mb-2.5 -translate-x-1/2'
+                : 'left-1/2 top-full mt-2.5 -translate-x-1/2 sm:left-auto sm:right-0 sm:translate-x-0'
+            )}
+          >
             <motion.div
               initial={{ opacity: 0, y: -6, scale: 0.96 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
