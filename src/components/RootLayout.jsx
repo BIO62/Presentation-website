@@ -12,7 +12,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import clsx from 'clsx'
-import { motion, MotionConfig, useReducedMotion } from 'framer-motion'
+import { AnimatePresence, motion, MotionConfig, useReducedMotion } from 'framer-motion'
 
 import { Container } from '@/components/Container'
 import { useCurveNavigation } from '@/components/Curve'
@@ -30,6 +30,8 @@ import imageContact from '@/images/hair-academy-training.jpg'
 const RootLayoutContext = createContext({})
 
 const EASE = [0.87, 0, 0.13, 1]
+
+const MENU_IMAGE_SIZES = '(min-width: 1024px) 360px, 50vw'
 
 const MENU_LABELS = {
   mn: { open: 'Цэс', close: 'Хаах' },
@@ -306,8 +308,20 @@ function Navigation({ lang = 'mn', dict, expanded, pathname }) {
 
   const items = getNavItems(lang, dict)
 
-  const currentId = items.find((item) => pathname?.startsWith(item.href))?.id
-  const imageId = hoveredId ?? currentId ?? items[0].id
+  const currentId = items.find((item) => pathname?.startsWith(item.href))?.id ?? items[0].id
+  // Twice шиг: сүүлд hover хийсэн зураг хулгана авсны дараа ч хэвээр үлдэнэ
+  const [shownId, setShownId] = useState(currentId)
+
+  useEffect(() => {
+    if (expanded) setShownId(currentId)
+  }, [expanded, currentId])
+
+  function onHover(id) {
+    setHoveredId(id)
+    if (id) setShownId(id)
+  }
+
+  const shown = items.find((item) => item.id === shownId) ?? items[0]
 
   function onNavigate(href) {
     setExpanded(false)
@@ -316,8 +330,8 @@ function Navigation({ lang = 'mn', dict, expanded, pathname }) {
 
   return (
     <>
-      {/* Төвийн зураг — hover хийсэн цэсийн зураг гарч ирнэ */}
-      <div className="pointer-events-none absolute left-1/2 top-[88%] w-[40vw] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-[3px] opacity-90 sm:w-[24vw] lg:top-1/2 lg:w-[min(18.75vw,52vh)]">
+      {/* Төвийн зураг — тогтмол 3:4 хүрээ; шинэ зураг доороос орж, хуучин нь дээш гарна */}
+      <div className="pointer-events-none absolute left-1/2 top-[88%] w-[42vw] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-md sm:w-[28vw] lg:top-1/2 lg:w-[clamp(240px,20vw,360px)]">
         <motion.div
           initial={false}
           animate={expanded ? { y: '0%', rotate: 0 } : { y: '100%', rotate: -6 }}
@@ -327,22 +341,35 @@ function Navigation({ lang = 'mn', dict, expanded, pathname }) {
             delay: expanded ? 0.4 : 0,
           }}
           style={{ transformOrigin: 'right top' }}
-          className="relative aspect-[3/4] overflow-hidden rounded-[3px]"
+          className="relative aspect-[3/4] overflow-hidden rounded-md"
         >
-          {items.map((item) => (
-            <Image
-              key={item.id}
-              src={item.image}
-              alt=""
-              fill
-              sizes="(min-width: 1024px) 15vw, 38vw"
-              className={clsx(
-                'object-cover transition duration-700',
-                imageId === item.id ? 'scale-100 opacity-100' : 'scale-110 opacity-0'
-              )}
-            />
-          ))}
+          <AnimatePresence initial={false}>
+            <motion.div
+              key={shown.id}
+              initial={{ y: '100%' }}
+              animate={{ y: '0%' }}
+              exit={{ y: '-100%' }}
+              transition={{ duration: 0.8, ease: [0.25, 1, 0.1, 1] }}
+              className="absolute inset-0"
+            >
+              <Image
+                src={shown.image}
+                alt=""
+                fill
+                quality={90}
+                sizes={MENU_IMAGE_SIZES}
+                className="object-cover"
+              />
+            </motion.div>
+          </AnimatePresence>
         </motion.div>
+      </div>
+
+      {/* Зургуудыг урьдчилан ачаална — hover хийхэд хоосон харагдахгүй */}
+      <div aria-hidden="true" className="pointer-events-none absolute h-px w-px overflow-hidden opacity-0">
+        {items.map((item) => (
+          <Image key={item.id} src={item.image} alt="" width={360} quality={90} sizes={MENU_IMAGE_SIZES} loading="eager" />
+        ))}
       </div>
 
       <nav className="absolute inset-x-0 top-[40%] -translate-y-1/2 px-6 lg:top-1/2 lg:px-[5vw]">
@@ -357,7 +384,7 @@ function Navigation({ lang = 'mn', dict, expanded, pathname }) {
               index={index}
               expanded={expanded}
               activeId={hoveredId}
-              setHoveredId={setHoveredId}
+              setHoveredId={onHover}
               onNavigate={onNavigate}
             />
           ))}
