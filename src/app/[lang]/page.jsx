@@ -32,14 +32,14 @@ export async function generateMetadata({ params }) {
 
 function Clients({ dict }) {
   return (
-    <div className="mt-24 rounded-4xl bg-neutral-950 py-20 sm:mt-32 sm:py-32 lg:mt-56">
+    <div className="mt-24 rounded-4xl bg-gradient-to-br from-neutral-950 via-brand-blue to-brand-blue-light py-20 sm:mt-32 sm:py-32 lg:mt-56">
       <Container>
         <div className="overflow-hidden">
           <div className="once-in flex items-center gap-x-8">
             <h2 className="text-center font-display text-sm font-semibold tracking-wider text-white sm:text-left">
               {dict.clients.heading}
             </h2>
-            <div className="h-px flex-auto bg-neutral-800" />
+            <div className="h-px flex-auto bg-white/20" />
           </div>
         </div>
         <ul
@@ -214,7 +214,7 @@ export default async function Home({ params }) {
         >
           <div className="once-in">
             <Image
-              src="/logomark.png"
+              src="/logomark-color.png"
               alt=""
               width={2053}
               height={2308}
@@ -232,7 +232,7 @@ export default async function Home({ params }) {
         >
           <div className="once-in">
             <Image
-              src="/logomark.png"
+              src="/logomark-color.png"
               alt=""
               width={2053}
               height={2308}

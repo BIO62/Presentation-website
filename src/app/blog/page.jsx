@@ -48,7 +48,7 @@ export default async function Blog() {
                             <Image
                               alt=""
                               {...article.author.image}
-                              className="h-12 w-12 object-cover grayscale"
+                              className="h-12 w-12 object-cover"
                             />
                           </div>
                           <div className="text-sm text-neutral-950">

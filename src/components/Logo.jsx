@@ -3,7 +3,7 @@ import clsx from 'clsx'
 
 export function Logomark({
   invert = false,
-  variant = 'black', // 'black' | 'color' | 'white'
+  variant = 'color', // 'black' | 'color' | 'white'
   filled,
   className,
   ...props
@@ -37,7 +37,7 @@ export function Logomark({
 export function Logo({
   className,
   invert = false,
-  variant = 'black', // 'black' | 'color' | 'white'
+  variant = 'color', // 'black' | 'color' | 'white'
   filled = false,
   fillOnHover = false,
   ...props
