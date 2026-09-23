@@ -4,7 +4,6 @@ import { Container } from '@/components/Container'
 import { useCurveNavigation } from '@/components/Curve'
 import { FadeIn } from '@/components/FadeIn'
 import { Logo } from '@/components/Logo'
-import { socialMediaProfiles } from '@/components/SocialMedia'
 
 function ArrowIcon(props) {
   return (
@@ -18,6 +17,16 @@ function ArrowIcon(props) {
     </svg>
   )
 }
+
+// Брэнд бүрийн албан ёсны сошиал хуудас
+const brandSocialLinks = [
+  { heading: 'ESTEL' },
+  { title: 'Facebook', href: 'https://www.facebook.com/ESTELMongolia' },
+  { title: 'Instagram', href: 'https://www.instagram.com/estelmongolia/' },
+  { heading: 'SYNERGETIC' },
+  { title: 'Facebook', href: 'https://www.facebook.com/SynergeticMongolia' },
+  { title: 'Instagram', href: 'https://www.instagram.com/synergetic_mongolia/' },
+]
 
 function FooterNavigation({ lang, dict }) {
   const { navigateTo } = useCurveNavigation()
@@ -50,7 +59,7 @@ function FooterNavigation({ lang, dict }) {
     },
     {
       title: dict?.footer?.links ?? 'Холбоос',
-      links: socialMediaProfiles,
+      links: brandSocialLinks,
     },
   ]
 
@@ -64,9 +73,19 @@ function FooterNavigation({ lang, dict }) {
             </div>
             <ul role="list" className="mt-4 text-sm text-neutral-700">
               {section.links.map((link, idx) => {
+                if (link.heading) {
+                  return (
+                    <li
+                      key={link.heading}
+                      className="mt-6 text-xs font-semibold tracking-wider text-neutral-950 first:mt-4"
+                    >
+                      {link.heading}
+                    </li>
+                  )
+                }
                 const isInternal = typeof link.href === 'string' && link.href.startsWith('/')
                 return (
-                  <li key={typeof link.title === 'string' ? link.title : idx} className="mt-4">
+                  <li key={idx} className={link.href?.startsWith('http') ? 'mt-2' : 'mt-4'}>
                     {isInternal ? (
                       <Link
                         href={link.href}
@@ -79,12 +98,14 @@ function FooterNavigation({ lang, dict }) {
                         {link.title}
                       </Link>
                     ) : (
-                      <Link
+                      <a
                         href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="transition hover:text-neutral-950"
                       >
-                        {link.title}
-                      </Link>
+                        {link.title} <span aria-hidden="true">↗</span>
+                      </a>
                     )}
                   </li>
                 )
