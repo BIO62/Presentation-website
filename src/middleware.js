@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server'
 
+import { isAdminRequest } from '@/lib/adminAuth'
+
 const locales = ['mn', 'ru', 'en']
 const defaultLocale = 'mn'
 
@@ -53,8 +55,27 @@ function getLocaleFromRequest(request) {
   return defaultLocale
 }
 
-export function middleware(request) {
+export async function middleware(request) {
   const { pathname } = request.nextUrl
+
+  // /mn/admin, /ru/admin/login гэх мэтийг /admin руу чиглүүлнэ
+  const localizedAdmin = pathname.match(/^\/(mn|ru|en)(\/admin(\/.*)?)$/)
+  if (localizedAdmin) {
+    return NextResponse.redirect(new URL(localizedAdmin[2], request.url))
+  }
+
+  // Админ хэсэг: хэлний redirect хийхгүй, нэвтрээгүй бол login руу
+  if (pathname === '/admin' || pathname.startsWith('/admin/')) {
+    const loggedIn = await isAdminRequest(request)
+    const isLogin = pathname === '/admin/login'
+    if (!loggedIn && !isLogin) {
+      return NextResponse.redirect(new URL('/admin/login', request.url))
+    }
+    if (loggedIn && isLogin) {
+      return NextResponse.redirect(new URL('/admin', request.url))
+    }
+    return NextResponse.next()
+  }
 
   // Static файлууд болон API routes-ийг алгасах
   if (

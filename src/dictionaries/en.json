@@ -80,7 +80,15 @@
       "wholesale": "Wholesale order",
       "academy": "Register for training",
       "other": "Other inquiries",
-      "submit": "Send Request"
+      "submit": "Send Request",
+      "hr": "Careers / HR",
+      "sending": "Sending...",
+      "successTitle": "Your request has been sent",
+      "successText": "We will get back to you shortly. Thank you!",
+      "again": "Send another",
+      "errorRequired": "Please enter your name and a phone number or email.",
+      "errorEmail": "The email address is invalid.",
+      "errorServer": "Something went wrong. Please try again or call us."
     },
     "officeDescription": "You can visit our office in person or contact us by phone below to submit a dealer application, wholesale order, or training registration.",
     "phoneTitle": "Phone Number",
