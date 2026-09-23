@@ -216,8 +216,8 @@ export default async function Home({ params }) {
             <Image
               src="/logomark-color.png"
               alt=""
-              width={2053}
-              height={2308}
+              width={551}
+              height={620}
               unoptimized
               priority
               className="w-[780px] h-auto max-w-none"
@@ -234,8 +234,8 @@ export default async function Home({ params }) {
             <Image
               src="/logomark-color.png"
               alt=""
-              width={2053}
-              height={2308}
+              width={551}
+              height={620}
               unoptimized
               priority
               className="w-[360px] sm:w-[460px] h-auto max-w-none"

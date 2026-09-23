@@ -8,6 +8,7 @@ import {
   useRef,
   useState,
 } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import clsx from 'clsx'
@@ -22,30 +23,82 @@ import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import { Logo, Logomark } from '@/components/Logo'
 import { Offices } from '@/components/Offices'
 import { SocialMedia } from '@/components/SocialMedia'
+import imageBrands from '@/app/[lang]/work/estel/hero.jpg'
+import imageAbout from '@/images/logistics-team.jpg'
+import imageProcess from '@/images/warehouse-loading.jpg'
+import imageBlog from '@/images/global-partnership.jpg'
+import imageContact from '@/images/hair-academy-training.jpg'
 
 const RootLayoutContext = createContext({})
 
-function XIcon(props) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <path d="m5.636 4.223 14.142 14.142-1.414 1.414L4.222 5.637z" />
-      <path d="M4.222 18.363 18.364 4.22l1.414 1.414L5.636 19.777z" />
-    </svg>
-  )
+const EASE = [0.87, 0, 0.13, 1]
+
+const MENU_LABELS = {
+  mn: { open: 'Цэс', close: 'Хаах' },
+  ru: { open: 'Меню', close: 'Закрыть' },
+  en: { open: 'Menu', close: 'Close' },
 }
 
-function MenuIcon(props) {
+function MenuToggle({ expanded, onToggle, toggleRef, panelId, invert, lang }) {
+  const labels = MENU_LABELS[lang] ?? MENU_LABELS.mn
+  const label = expanded ? labels.close : labels.open
+
   return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <path d="M2 6h20v2H2zM2 16h20v2H2z" />
-    </svg>
+    <button
+      ref={toggleRef}
+      type="button"
+      onClick={onToggle}
+      aria-expanded={expanded.toString()}
+      aria-controls={panelId}
+      aria-label={label}
+      className={clsx(
+        'group flex items-center overflow-hidden rounded-full text-sm font-semibold transition',
+        invert
+          ? 'bg-white/10 text-white ring-1 ring-white/20'
+          : 'bg-neutral-100 text-neutral-950 ring-1 ring-neutral-950/10'
+      )}
+    >
+      <span
+        className={clsx(
+          'relative flex h-8 w-8 items-center justify-center rounded-full',
+          invert ? 'bg-brand-yellow' : 'bg-neutral-950'
+        )}
+      >
+        <span
+          className={clsx(
+            'absolute h-0.5 w-3.5 rounded-full transition-transform duration-500',
+            invert ? 'bg-neutral-950' : 'bg-brand-yellow',
+            expanded
+              ? 'rotate-45'
+              : '-translate-y-[3px] group-hover:scale-x-50'
+          )}
+        />
+        <span
+          className={clsx(
+            'absolute h-0.5 w-3.5 rounded-full transition-transform duration-500',
+            invert ? 'bg-neutral-950' : 'bg-brand-yellow',
+            expanded
+              ? '-rotate-45'
+              : 'translate-y-[3px] group-hover:scale-x-50'
+          )}
+        />
+      </span>
+      {/* Hover дээр текст дээш гулсаж солигдоно */}
+      <span className="relative hidden h-5 overflow-hidden px-3 sm:block">
+        <span className="flex flex-col transition-transform duration-500 ease-[cubic-bezier(.2,1.33,.25,1)] group-hover:-translate-y-5">
+          <span className="h-5 leading-5">{label}</span>
+          <span className="h-5 leading-5" aria-hidden="true">
+            {label}
+          </span>
+        </span>
+      </span>
+    </button>
   )
 }
 
 function Header({
   panelId,
   invert = false,
-  icon: Icon,
   expanded,
   onToggle,
   toggleRef,
@@ -104,27 +157,14 @@ function Header({
             </Button>
           </div>
           <div className="once-in">
-            <button
-              ref={toggleRef}
-              type="button"
-              onClick={onToggle}
-              aria-expanded={expanded.toString()}
-              aria-controls={panelId}
-              className={clsx(
-                'group -m-2.5 rounded-full p-2.5 transition',
-                invert ? 'hover:bg-white/10' : 'hover:bg-neutral-950/10'
-              )}
-              aria-label="Toggle navigation"
-            >
-              <Icon
-                className={clsx(
-                  'h-6 w-6',
-                  invert
-                    ? 'fill-white group-hover:fill-neutral-200'
-                    : 'fill-neutral-950 group-hover:fill-neutral-700'
-                )}
-              />
-            </button>
+            <MenuToggle
+              expanded={expanded}
+              onToggle={onToggle}
+              toggleRef={toggleRef}
+              panelId={panelId}
+              invert={invert}
+              lang={lang}
+            />
           </div>
         </div>
       </div>
@@ -132,58 +172,182 @@ function Header({
   )
 }
 
-function NavigationRow({ children }) {
+function MenuTiles({ expanded }) {
   return (
-    <div className="even:mt-px sm:bg-neutral-950">
-      <Container>
-        <div className="grid grid-cols-1 sm:grid-cols-2">{children}</div>
-      </Container>
+    <div className="absolute inset-0 flex">
+      {[0, 1, 2, 3].map((i) => (
+        <motion.div
+          key={i}
+          initial={false}
+          animate={
+            expanded
+              ? { y: '-1%', rotate: 0, scaleX: 1.02, scaleY: 1.05 }
+              : { y: '100%', rotate: -6, scaleX: 1.2, scaleY: 1.05 }
+          }
+          transition={{
+            duration: 0.8,
+            ease: EASE,
+            delay: expanded ? i * 0.025 : 0.3 + i * 0.025,
+          }}
+          style={{ transformOrigin: 'right top' }}
+          className={clsx(
+            'relative h-full w-full rounded-sm bg-neutral-950',
+            i > 1 && 'hidden sm:block'
+          )}
+        />
+      ))}
     </div>
   )
 }
 
-function NavigationItem({ href, children }) {
-  const { navigateTo } = useCurveNavigation()
-  let { setExpanded } = useContext(RootLayoutContext)
+function MenuLink({ item, index, expanded, activeId, setHoveredId, onNavigate }) {
+  const dimmed = activeId && activeId !== item.id
 
   return (
-    <Link
-      href={href}
-      onClick={(e) => {
-        e.preventDefault()
-        setExpanded(false)
-        navigateTo(href)
-      }}
-      className="group relative isolate -mx-6 bg-neutral-950 px-6 py-10 even:mt-px sm:mx-0 sm:px-0 sm:py-16 sm:odd:pr-16 sm:even:mt-0 sm:even:border-l sm:even:border-neutral-800 sm:even:pl-16"
-    >
-      {children}
-      <span className="absolute inset-y-0 -z-10 w-screen bg-neutral-900 opacity-0 transition group-odd:right-0 group-even:left-0 group-hover:opacity-100" />
-    </Link>
+    <li className="overflow-hidden">
+      <motion.div
+        initial={false}
+        animate={expanded ? { y: '0%', rotate: 0 } : { y: '110%', rotate: -6 }}
+        transition={{
+          duration: 0.8,
+          ease: expanded ? [0.2, 1.33, 0.25, 1] : EASE,
+          delay: expanded ? 0.6 + index * 0.05 : index * 0.05,
+        }}
+        style={{ transformOrigin: 'right top' }}
+      >
+        <Link
+          href={item.href}
+          onMouseEnter={() => setHoveredId(item.id)}
+          onMouseLeave={() => setHoveredId(null)}
+          onFocus={() => setHoveredId(item.id)}
+          onBlur={() => setHoveredId(null)}
+          onClick={(e) => {
+            e.preventDefault()
+            onNavigate(item.href)
+          }}
+          className={clsx(
+            'group relative block whitespace-nowrap py-1 font-display font-semibold uppercase leading-none tracking-tight transition-colors duration-200',
+            'text-[9vw] sm:text-6xl lg:text-[min(4.2vw,8.5vh)]',
+            dimmed ? 'text-white/40' : 'text-white'
+          )}
+        >
+          {item.label}
+          <span className="absolute inset-x-0 bottom-0 h-0.5 origin-right scale-x-0 bg-brand-yellow transition-transform duration-500 group-hover:origin-left group-hover:scale-x-100" />
+        </Link>
+      </motion.div>
+    </li>
   )
 }
 
-function Navigation({ lang = 'mn', dict }) {
+function Navigation({ lang = 'mn', dict, expanded, pathname }) {
+  const { navigateTo } = useCurveNavigation()
+  let { setExpanded } = useContext(RootLayoutContext)
+  const [hoveredId, setHoveredId] = useState(null)
+
+  const items = [
+    { id: 'brands', href: `/${lang}/work`, label: dict?.nav?.brands ?? 'Брэндүүд', image: imageBrands },
+    { id: 'about', href: `/${lang}/about`, label: dict?.nav?.about ?? 'Бидний тухай', image: imageAbout },
+    { id: 'process', href: `/${lang}/process`, label: dict?.nav?.process ?? 'Үйл ажиллагаа', image: imageProcess },
+    { id: 'blog', href: `/${lang}/blog`, label: dict?.nav?.blog ?? 'Мэдээ мэдээлэл', image: imageBlog },
+    { id: 'contact', href: `/${lang}/contact`, label: dict?.nav?.contact ?? 'Хүний нөөц', image: imageContact },
+  ]
+
+  const currentId = items.find((item) => pathname?.startsWith(item.href))?.id
+  const imageId = hoveredId ?? currentId ?? items[0].id
+
+  function onNavigate(href) {
+    setExpanded(false)
+    navigateTo(href)
+  }
+
   return (
-    <nav className="relative z-10 mt-px font-display text-5xl font-medium tracking-tight text-white">
-      <NavigationRow>
-        <NavigationItem href={`/${lang}/work`}>{dict?.nav?.brands ?? 'Брэндүүд'}</NavigationItem>
-        <NavigationItem href={`/${lang}/about`}>{dict?.nav?.about ?? 'Бидний тухай'}</NavigationItem>
-      </NavigationRow>
-      <NavigationRow>
-        <NavigationItem href={`/${lang}/process`}>{dict?.nav?.process ?? 'Үйл ажиллагаа'}</NavigationItem>
-        <NavigationItem href={`/${lang}/blog`}>{dict?.nav?.blog ?? 'Мэдээ мэдээлэл'}</NavigationItem>
-      </NavigationRow>
-    </nav>
+    <>
+      {/* Төвийн зураг — hover хийсэн цэсийн зураг гарч ирнэ */}
+      <div className="pointer-events-none absolute left-1/2 top-[80%] w-[30vw] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl opacity-60 sm:w-[22vw] lg:top-1/2 lg:w-[min(18vw,40vh)]">
+        <motion.div
+          initial={false}
+          animate={expanded ? { y: '0%', rotate: 0 } : { y: '100%', rotate: -6 }}
+          transition={{
+            duration: 0.8,
+            ease: expanded ? [0.25, 1, 0.1, 1] : EASE,
+            delay: expanded ? 0.4 : 0,
+          }}
+          style={{ transformOrigin: 'right top' }}
+          className="relative aspect-[3/4] overflow-hidden rounded-2xl"
+        >
+          {items.map((item) => (
+            <Image
+              key={item.id}
+              src={item.image}
+              alt=""
+              fill
+              sizes="(min-width: 1024px) 15vw, 38vw"
+              className={clsx(
+                'object-cover transition duration-700',
+                imageId === item.id ? 'scale-100 opacity-100' : 'scale-110 opacity-0'
+              )}
+            />
+          ))}
+        </motion.div>
+      </div>
+
+      <nav className="absolute inset-x-0 top-[42%] -translate-y-1/2 px-6 lg:top-1/2">
+        <ul
+          role="list"
+          className="relative z-10 flex flex-col items-center gap-y-2 lg:gap-y-1"
+        >
+          {items.map((item, index) => (
+            <MenuLink
+              key={item.id}
+              item={item}
+              index={index}
+              expanded={expanded}
+              activeId={hoveredId}
+              setHoveredId={setHoveredId}
+              onNavigate={onNavigate}
+            />
+          ))}
+        </ul>
+      </nav>
+
+      {/* Доод мэдээлэл */}
+      <motion.div
+        initial={false}
+        animate={expanded ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+        transition={{
+          duration: 0.8,
+          ease: expanded ? [0.2, 1.33, 0.25, 1] : EASE,
+          delay: expanded ? 0.7 : 0,
+        }}
+        className="absolute inset-x-0 bottom-0 hidden pb-12 sm:block"
+      >
+        <Container>
+          <div className="flex items-end justify-between gap-8">
+            <div>
+              <h2 className="font-display text-sm font-semibold text-brand-yellow">
+                {dict?.navPanel?.office ?? 'Оффис'}
+              </h2>
+              <Offices dict={dict} invert className="mt-3" />
+            </div>
+            <div className="text-right">
+              <h2 className="font-display text-sm font-semibold text-brand-yellow">
+                {dict?.navPanel?.followUs ?? 'Бидэнтэй нэгд'}
+              </h2>
+              <SocialMedia className="mt-3 justify-end" invert />
+            </div>
+          </div>
+        </Container>
+      </motion.div>
+    </>
   )
 }
 
 function RootLayoutInner({ children, lang, dict }) {
   let panelId = useId()
   let { expanded, setExpanded } = useContext(RootLayoutContext)
-  const { introComplete } = useCurveNavigation()
+  let pathname = usePathname()
   let openRef = useRef()
   let closeRef = useRef()
-  let navRef = useRef()
   let shouldReduceMotion = useReducedMotion()
 
   useEffect(() => {
@@ -206,6 +370,24 @@ function RootLayoutInner({ children, lang, dict }) {
     }
   }, [])
 
+  // Цэс нээлттэй үед хуудас гүйлгэхгүй, Esc дарахад хаагдана
+  useEffect(() => {
+    if (!expanded) return
+    const previous = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    function onKeyDown(event) {
+      if (event.key === 'Escape') {
+        setExpanded(false)
+        openRef.current?.focus({ preventScroll: true })
+      }
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => {
+      document.body.style.overflow = previous
+      window.removeEventListener('keydown', onKeyDown)
+    }
+  }, [expanded])
+
   return (
     <MotionConfig transition={shouldReduceMotion ? { duration: 0 } : undefined}>
       <header>
@@ -216,13 +398,12 @@ function RootLayoutInner({ children, lang, dict }) {
         >
           <Header
             panelId={panelId}
-            icon={MenuIcon}
             toggleRef={openRef}
-            expanded={expanded}
+            expanded={false}
             lang={lang}
             dict={dict}
             onToggle={() => {
-              setExpanded((expanded) => !expanded)
+              setExpanded(true)
               window.setTimeout(() =>
                 closeRef.current?.focus({ preventScroll: true })
               )
@@ -230,58 +411,46 @@ function RootLayoutInner({ children, lang, dict }) {
           />
         </div>
 
-        <motion.div
+        <div
           id={panelId}
-          initial={false}
-          animate={{ height: expanded ? 'auto' : '0.5rem' }}
-          transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
-          className="relative z-50 overflow-hidden bg-neutral-950 pt-2"
+          className={clsx(
+            'fixed inset-0 z-50 overflow-hidden',
+            !expanded && 'pointer-events-none'
+          )}
           aria-hidden={expanded ? undefined : 'true'}
           inert={expanded ? undefined : ''}
         >
-          <div className="bg-neutral-800">
-            <div ref={navRef} className="relative z-20 bg-neutral-950 pb-16 pt-14">
-              <Header
-                invert
-                panelId={panelId}
-                icon={XIcon}
-                toggleRef={closeRef}
-                expanded={expanded}
-                lang={lang}
-                dict={dict}
-                onToggle={() => {
-                  setExpanded((expanded) => !expanded)
-                  window.setTimeout(() =>
-                    openRef.current?.focus({ preventScroll: true })
-                  )
-                }}
-              />
-            </div>
-            <Navigation lang={lang} dict={dict} />
-            <div className="relative bg-neutral-950 before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-neutral-800">
-              <Container>
-                <div className="grid grid-cols-1 gap-y-10 pb-16 pt-10 sm:grid-cols-2 sm:pt-16">
-                  <div>
-                    <h2 className="font-display text-base font-semibold text-white">
-                      {dict?.navPanel?.office ?? 'Оффис'}
-                    </h2>
-                    <Offices
-                      dict={dict}
-                      invert
-                      className="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-2"
-                    />
-                  </div>
-                  <div className="sm:border-l sm:border-transparent sm:pl-16">
-                    <h2 className="font-display text-base font-semibold text-white">
-                      {dict?.navPanel?.followUs ?? 'Бидэнтэй нэгд'}
-                    </h2>
-                    <SocialMedia className="mt-6" invert />
-                  </div>
-                </div>
-              </Container>
-            </div>
-          </div>
-        </motion.div>
+          <MenuTiles expanded={expanded} />
+
+          <motion.div
+            initial={false}
+            animate={{ opacity: expanded ? 1 : 0 }}
+            transition={{ duration: 0.3, delay: expanded ? 0.5 : 0 }}
+            className="relative z-10 pt-16"
+          >
+            <Header
+              invert
+              panelId={panelId}
+              toggleRef={closeRef}
+              expanded={expanded}
+              lang={lang}
+              dict={dict}
+              onToggle={() => {
+                setExpanded(false)
+                window.setTimeout(() =>
+                  openRef.current?.focus({ preventScroll: true })
+                )
+              }}
+            />
+          </motion.div>
+
+          <Navigation
+            lang={lang}
+            dict={dict}
+            expanded={expanded}
+            pathname={pathname}
+          />
+        </div>
       </header>
 
       <div

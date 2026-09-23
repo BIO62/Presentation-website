@@ -22,10 +22,10 @@ export function Logomark({
       <Image
         src={src}
         alt="Тэнгэрийн Илгээмж"
-        width={64}
-        height={64}
+        width={551}
+        height={620}
         className={clsx(
-          'h-12 w-12 sm:h-14 sm:w-14 object-contain transition-all',
+          'h-10 w-auto object-contain transition-all',
           isWhite && 'brightness-0 invert'
         )}
         priority
@@ -53,10 +53,10 @@ export function Logo({
       <Image
         src={src}
         alt="Tengeriin Ilgeemj"
-        width={340}
-        height={85}
+        width={882}
+        height={255}
         className={clsx(
-          'h-14 lg:h-16 w-auto object-contain transition-all',
+          'h-9 lg:h-11 w-auto object-contain transition-all',
           isWhite && 'brightness-0 invert'
         )}
         priority
