@@ -108,9 +108,8 @@ export function LanguageSwitcher({ invert = false, currentLang = 'mn', dropUp = 
     const newPath = getTargetPath(newLang)
     setIsOpen(false)
 
-    // Хэл солиход 10-үгтэй урт мэндчилгээг алгасаж, зөвхөн шинэ хэлний гарчигтай хурдан curve шилжилт хийлгэнэ
+    // Client талын navigateTo нь intro-г дахин тоглуулахгүй, зөвхөн curve шилжилт хийнэ
     try {
-      window.sessionStorage?.setItem('skip_home_intro', '1')
       router.prefetch(newPath)
     } catch {}
 

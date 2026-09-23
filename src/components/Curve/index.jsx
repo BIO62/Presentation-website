@@ -265,15 +265,20 @@ export function CurveProvider({ children }) {
       )
     })
 
-    // Safety timeout: If anything hangs, force reveal so screen is never black
+    // Safety timeout: intro гацвал дуусгаж харуулна. Intro ~3.8с үргэлжилдэг тул
+    // эрт таслахгүй (өмнө нь 3.5с-д header-ийн анимацийг дундаас нь тасалж байсан)
     const safety = setTimeout(() => {
+      if (currentTlRef.current) {
+        currentTlRef.current.progress(1)
+        return
+      }
       setIsRevealed(true)
       gsap.set(screen, { top: '100%' })
       gsap.set(topRound, { height: '0vh' })
       gsap.set(bottomRound, { height: '0vh' })
       gsap.set('header .once-in, main .once-in', { clearProps: 'all' })
       isTransitioningRef.current = false
-    }, 3500)
+    }, 6000)
 
     return () => {
       clearTimeout(safety)
@@ -435,12 +440,13 @@ export function CurveProvider({ children }) {
             router.push(targetHref)
           }
 
-          // Safety fallback: if router takes unusually long (>1.4s), auto-reveal so it never hangs
+          // Safety fallback: route удаан ачаалагдвал (>4с) хөшгийг нээнэ. 1.4с байхад
+          // удаан сүлжээнд хуучин хуудас түр харагдаад дараа нь үсэрч солигдож байсан
           fallbackTimerRef.current = setTimeout(() => {
             if (isTransitioningRef.current) {
               pageTransitionOut()
             }
-          }, 1400)
+          }, 4000)
         },
       })
       currentTlRef.current = tl
@@ -527,18 +533,49 @@ export function CurveProvider({ children }) {
 
   // ─────────────────────────────────────────────────────────────
   // Browser History Navigation (Alt + Left / Right Arrow / Back / Forward)
+  // Listener-ууд нэг л удаа бүртгэгдэнэ. Өмнө нь pathname солигдох бүрт
+  // дахин бүртгэгддэг байсан тул Next.js popstate дээр хуудсаа солих үед
+  // манай listener устгагдаж, Буцах/Урагшаа дээр анимаци огт ажилладаггүй байв.
   // ─────────────────────────────────────────────────────────────
+  const navigateToRef = useRef(navigateTo)
+  const pageTransitionOutRef = useRef(pageTransitionOut)
+  navigateToRef.current = navigateTo
+  pageTransitionOutRef.current = pageTransitionOut
+
   useEffect(() => {
     if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual'
     }
 
     function handlePopState() {
-      const targetPath = window.location.pathname
-      pageTransitionIn(targetPath, true)
+      // Next.js шинэ хуудсаа аль хэдийн (эсвэл удахгүй) render хийнэ — зурахаас
+      // өмнө хөшгөөр шууд хааж, дараа нь гөлгөр нээнэ
+      if (currentTlRef.current) currentTlRef.current.kill()
+      isTransitioningRef.current = true
+
+      const label = getRouteLabel(window.location.pathname)
+      setCurrentWord(label)
+      if (activeWordTextRef.current) activeWordTextRef.current.textContent = label
+
+      gsap.set(loadingScreenRef.current, { top: '0%' })
+      gsap.set(topRoundRef.current, { height: '0vh' })
+      gsap.set('.loading-words .home-word', { display: 'none', opacity: 0 })
+      gsap.set('.loading-words .active', { display: 'inline-flex', opacity: 1 })
+      gsap.set(wordsRef.current, { opacity: 1, y: 0 })
+
+      // pathname effect хөшгийг нээнэ; хэрэв хуудас аль хэдийн солигдсон бол энэ нээнэ
+      if (fallbackTimerRef.current) clearTimeout(fallbackTimerRef.current)
+      fallbackTimerRef.current = setTimeout(() => {
+        if (isTransitioningRef.current) pageTransitionOutRef.current()
+      }, 250)
     }
 
     function handleGlobalClick(e) {
+      // Ctrl/Cmd/Shift + click (шинэ таб), баруун/дунд товчийг браузерт үлдээнэ
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) {
+        return
+      }
+
       const anchor = e.target.closest('a')
       if (!anchor) return
 
@@ -556,7 +593,7 @@ export function CurveProvider({ children }) {
         if (targetPure !== currentPure) {
           e.preventDefault()
           e.stopPropagation()
-          navigateTo(href)
+          navigateToRef.current(href)
         }
       }
     }
@@ -569,7 +606,7 @@ export function CurveProvider({ children }) {
       window.removeEventListener('popstate', handlePopState)
       document.removeEventListener('click', handleGlobalClick, { capture: true })
     }
-  }, [navigateTo, pageTransitionIn])
+  }, [])
 
   return (
     <CurveContext.Provider value={{ navigateTo, introComplete: true, isRevealed }}>
