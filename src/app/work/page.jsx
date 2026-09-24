@@ -45,7 +45,6 @@ function Brands() {
                     src={brand.logo}
                     alt={brand.name}
                     className="h-12 w-auto object-contain"
-                    unoptimized
                   />
                 </Link>
               </h3>

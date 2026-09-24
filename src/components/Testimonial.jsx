@@ -29,7 +29,6 @@ export function Testimonial({ children, client, className }) {
               <Image
                 src={client.logo}
                 alt={client.name}
-                unoptimized
                 className="h-12 w-auto object-contain"
               />
             </figcaption>
