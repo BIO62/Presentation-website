@@ -220,7 +220,7 @@ export default async function About() {
         <StatList>
           <StatListItem value="60+" label="Ажилтан" />
           <StatListItem value="10" label="Салбар" />
-          <StatListItem value="4.5 тэрбум₮" label="Жилийн эргэлт" />
+          <StatListItem value="10,000+" label="Бүтээгдэхүүний нэр төрөл" />
         </StatList>
       </Container>
 
