@@ -1,0 +1,54 @@
+[
+  {
+    "id": "6d027d22-029d-4f1e-b3cb-ed12a81a2cc8",
+    "createdAt": 1790145236726,
+    "status": "new",
+    "starred": true,
+    "name": "Сарнай Дорж",
+    "email": "sarnai.d@yahoo.com",
+    "company": "",
+    "phone": "9505 6677",
+    "message": "ESTEL академийн дараагийн сургалт хэзээ эхлэх вэ?",
+    "inquiry": "academy",
+    "lang": "mn"
+  },
+  {
+    "id": "71f492d6-91b8-4921-b767-d1dc6d2c079b",
+    "createdAt": 1790145236677,
+    "status": "read",
+    "starred": false,
+    "name": "Anna Petrova",
+    "email": "anna.p@mail.ru",
+    "company": "Salon Anna",
+    "phone": "",
+    "message": "Здравствуйте! Интересует оптовая закупка SYNERGETIC.",
+    "inquiry": "wholesale",
+    "lang": "ru"
+  },
+  {
+    "id": "28f04662-ddf9-4050-b483-6d9eb8cdbe78",
+    "createdAt": 1790145236645,
+    "status": "new",
+    "starred": false,
+    "name": "Тэмүүлэн Бат",
+    "email": "",
+    "company": "",
+    "phone": "8800 1122",
+    "message": "Худалдааны менежерийн ажлын байранд анкет илгээх гэсэн юм. CV-гээ хаашаа явуулах вэ?",
+    "inquiry": "hr",
+    "lang": "mn"
+  },
+  {
+    "id": "94e5f97d-08cd-48fb-ab0d-49684a151952",
+    "createdAt": 1790145236610,
+    "status": "new",
+    "starred": false,
+    "name": "Болормаа Ганбат",
+    "email": "bolormaa@gmail.com",
+    "company": "Bolor Beauty Salon",
+    "phone": "9911 2233",
+    "message": "Сайн байна уу. Манай салон ESTEL-ийн бүтээгдэхүүнээр дилер болох сонирхолтой байна. Нөхцөлийн талаар мэдээлэл өгнө үү.",
+    "inquiry": "dealer",
+    "lang": "mn"
+  }
+]

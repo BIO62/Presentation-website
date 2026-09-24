@@ -97,7 +97,6 @@ export function TestimonialRotator({ className, lang = 'mn' }) {
                 <Image
                   src={current.logo}
                   alt={current.name}
-                  unoptimized
                   className="h-12 w-auto object-contain"
                   style={{ filter: 'brightness(0)' }}
                 />

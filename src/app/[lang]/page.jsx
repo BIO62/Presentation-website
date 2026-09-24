@@ -52,7 +52,6 @@ function Clients({ dict }) {
                 <Image
                   src={logo}
                   alt={client}
-                  unoptimized
                   className="max-h-12 sm:max-h-16 w-auto brightness-0 invert"
                 />
               </div>
@@ -131,7 +130,6 @@ function CaseStudies({ dict, lang }) {
                       alt={caseStudy.client}
                       className="h-12 w-auto object-contain"
                       style={{ filter: 'brightness(0)' }}
-                      unoptimized
                     />
                   </Link>
                 </h3>
@@ -218,8 +216,7 @@ export default async function Home({ params }) {
               alt=""
               width={2053}
               height={2308}
-              unoptimized
-              priority
+              sizes="780px"
               className="w-[780px] h-auto max-w-none"
             />
           </div>
@@ -236,8 +233,7 @@ export default async function Home({ params }) {
               alt=""
               width={2053}
               height={2308}
-              unoptimized
-              priority
+              sizes="460px"
               className="w-[360px] sm:w-[460px] h-auto max-w-none"
             />
           </div>

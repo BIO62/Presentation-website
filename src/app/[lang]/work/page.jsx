@@ -68,7 +68,6 @@ export default async function Work({ params }) {
                       alt={brand.name}
                       className="h-12 w-auto object-contain"
                       style={{ filter: 'brightness(0)' }}
-                      unoptimized
                     />
                   </Link>
                 </h3>
