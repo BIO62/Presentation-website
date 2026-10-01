@@ -173,7 +173,7 @@ export function Footer({ lang = 'mn', dict = {} }) {
               navigateTo(homeHref)
             }}
           >
-            <Logo fillOnHover />
+            <Logo fillOnHover lang={lang} />
           </Link>
           <p className="text-sm leading-relaxed text-neutral-700 sm:leading-none">
             © {new Date().getFullYear()} {dict?.metadata?.siteName ?? 'Тэнгэрийн Илгээмж'}.{' '}

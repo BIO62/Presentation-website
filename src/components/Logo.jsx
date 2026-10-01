@@ -40,9 +40,13 @@ export function Logo({
   variant = 'color', // 'black' | 'color' | 'white'
   filled = false,
   fillOnHover = false,
+  lang = 'en',
   ...props
 }) {
-  let src = variant === 'color' ? '/logo-color.png' : '/logo.png'
+  // Монгол хэл дээр кирилл "ТЭНГЭРИЙН ИЛГЭЭМЖ" лого, бусад хэл дээр латин лого.
+  let isMn = lang === 'mn'
+  let src = isMn ? '/logo-color-mn.png' : variant === 'color' ? '/logo-color.png' : '/logo.png'
+  let dimensions = isMn ? { width: 4276, height: 1172 } : { width: 882, height: 255 }
   let isWhite = invert || variant === 'white'
 
   return (
@@ -52,9 +56,9 @@ export function Logo({
     >
       <Image
         src={src}
-        alt="Tengeriin Ilgeemj"
-        width={882}
-        height={255}
+        alt="Тэнгэрийн Илгээмж"
+        width={dimensions.width}
+        height={dimensions.height}
         className={clsx(
           'h-9 lg:h-11 w-auto object-contain transition-all',
           isWhite && 'brightness-0 invert'

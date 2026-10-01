@@ -135,7 +135,7 @@ function TopBar({ lang = 'mn', dict, expanded, pathname }) {
         navigateTo(homeHref)
       }}
     >
-      <Logo filled={logoHovered} />
+      <Logo filled={logoHovered} lang={lang} />
     </Link>
   )
 
@@ -432,6 +432,8 @@ function RootLayoutInner({ children, lang, dict }) {
   let pathname = usePathname()
   let toggleRef = useRef()
   let shouldReduceMotion = useReducedMotion()
+  const { navigateTo } = useCurveNavigation()
+  const homeHref = `/${lang}`
 
   useEffect(() => {
     if (lang) {
@@ -513,7 +515,17 @@ function RootLayoutInner({ children, lang, dict }) {
             className="relative z-10 pt-16"
           >
             <div className="flex justify-center pt-0">
-              <Logo invert />
+              <Link
+                href={homeHref}
+                aria-label="Home"
+                onClick={(e) => {
+                  e.preventDefault()
+                  setExpanded(false)
+                  if (pathname !== homeHref) navigateTo(homeHref)
+                }}
+              >
+                <Logo invert lang={lang} />
+              </Link>
             </div>
           </motion.div>
 
