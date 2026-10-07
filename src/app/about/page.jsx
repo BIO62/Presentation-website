@@ -206,7 +206,7 @@ export default async function About() {
             Сургалтын Академи, салон худалдаа/үйлчилгээ, нэрийн болон сүлжээ
             дэлгүүр, жижиглэн-бөөний болон онлайн худалдаа гэсэн үндсэн
             чиглэлүүдээр ажилладаг. Улаанбаатар, Дархан, Эрдэнэт хотуудад
-            нийт 10 салбартай.
+            нийт 15 салбартай.
           </p>
           <p>
             ESTEL брэнд 1000 гаруй салонтой байнгын гэрээтэй ажилладаг бол
@@ -219,7 +219,7 @@ export default async function About() {
       <Container className="mt-16">
         <StatList>
           <StatListItem value="60+" label="Ажилтан" />
-          <StatListItem value="10" label="Салбар" />
+          <StatListItem value="15" label="Салбар" />
           <StatListItem value="10,000+" label="Бүтээгдэхүүний нэр төрөл" />
         </StatList>
       </Container>

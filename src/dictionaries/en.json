@@ -65,8 +65,8 @@
       "description": "We supply professional salon products under long-term contracts with over 1,000 professional salons across the country."
     },
     "retail": {
-      "title": "10 Branded & Chain Branches",
-      "description": "Retail operations through 10 branded and chain stores located in Ulaanbaatar, Darkhan, and Erdenet."
+      "title": "15 Branded & Chain Branches",
+      "description": "Retail operations through 15 branded and chain stores located in Ulaanbaatar, Darkhan, and Erdenet."
     },
     "online": {
       "title": "Distribution & Online Retail",
@@ -186,12 +186,12 @@
       "p1bold": "official channels",
       "p1part2": "to the Mongolian market with complete quality assurance.",
       "p2part1": "We reliably supply consumers in Ulaanbaatar and across 21 provinces",
-      "p2bold": "through 10 branches and nationwide retail networks",
+      "p2bold": "through 15 branches and nationwide retail networks",
       "p2part2": ", ensuring widespread product availability.",
       "includedTitle": "Distribution Advantages",
       "tags": [
         "Official Distribution",
-        "10 Branch Stores",
+        "15 Branch Stores",
         "21 Provinces",
         "Guaranteed Authenticity",
         "Logistics Network"
@@ -221,7 +221,7 @@
     "retail": {
       "title": "Retail & Sales",
       "p1part1": "In Ulaanbaatar, Darkhan, and Erdenet, we provide direct consumer purchases through",
-      "p1bold": "10 branded and chain stores",
+      "p1bold": "15 branded and chain stores",
       "p1part2": ".",
       "p2part1": "We also supply regional consumers across",
       "p2bold": "21 provinces through authorized dealers and retail partners",
@@ -238,7 +238,7 @@
         },
         {
           "title": "Branch Stores",
-          "text": "10 official branch stores located in Ulaanbaatar, Darkhan, and Erdenet."
+          "text": "15 official branch stores located in Ulaanbaatar, Darkhan, and Erdenet."
         },
         {
           "title": "E-Commerce",
@@ -264,7 +264,7 @@
       },
       "stable": {
         "title": "Stable",
-        "text": "Drawing upon years of experience, we operate steadily with 10 branch stores and over 60 dedicated professionals."
+        "text": "Drawing upon years of experience, we operate steadily with 15 branch stores and over 60 dedicated professionals."
       },
       "expert": {
         "title": "Expert",
