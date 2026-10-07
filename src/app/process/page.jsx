@@ -56,7 +56,7 @@ function Distribution() {
         </p>
         <p>
           Нийлүүлсэн бүтээгдэхүүнээ Улаанбаатар, Дархан, Эрдэнэт хотуудад
-          нийт 10 салбар, нэрийн болон сүлжээ дэлгүүрээр дамжуулан хот,
+          нийт 15 салбар, нэрийн болон сүлжээ дэлгүүрээр дамжуулан хот,
           хөдөө орон нутгийн{' '}
           <strong className="font-semibold text-neutral-950">
             хэрэглэгчид
@@ -71,7 +71,7 @@ function Distribution() {
       <TagList className="mt-4">
         <TagListItem>Албан ёсны дистрибьюшн эрх</TagListItem>
         <TagListItem>Чанарын баталгаа</TagListItem>
-        <TagListItem>10 салбарын логистик</TagListItem>
+        <TagListItem>15 салбарын логистик</TagListItem>
         <TagListItem>Нэрийн болон сүлжээ дэлгүүр</TagListItem>
       </TagList>
     </Section>
@@ -174,7 +174,7 @@ function Values() {
             ажиллаж, чанарын баталгаагаа хадгалдаг.
           </GridListItem>
           <GridListItem title="Тогтвортой">
-            2013 оноос хойш тасралтгүй өсөж, өнөөдөр 10 салбар, 60 гаруй
+            2013 оноос хойш тасралтгүй өсөж, өнөөдөр 15 салбар, 60 гаруй
             ажилтантайгаар ажиллаж байна.
           </GridListItem>
           <GridListItem title="Мэргэшсэн">

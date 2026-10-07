@@ -45,7 +45,7 @@ function EstelContentRu() {
         <TagListItem>1000+ обученных мастеров в год</TagListItem>
         <TagListItem>Мастер-классы по 21 аймаку</TagListItem>
         <TagListItem>Гарантия 3 крупных заводов</TagListItem>
-        <TagListItem>10 официальных филиалов</TagListItem>
+        <TagListItem>15 официальных филиалов</TagListItem>
         <TagListItem>Собственная исследовательская лаборатория</TagListItem>
       </TagList>
 
@@ -123,7 +123,7 @@ function EstelContentEn() {
         <TagListItem>1000+ hairdressers trained per year</TagListItem>
         <TagListItem>Masterclasses across 21 provinces</TagListItem>
         <TagListItem>Backed by 3 major plants</TagListItem>
-        <TagListItem>10 official branch stores</TagListItem>
+        <TagListItem>15 official branch stores</TagListItem>
         <TagListItem>Independent research laboratory</TagListItem>
       </TagList>
 
@@ -231,7 +231,7 @@ function SynergeticContentRu() {
         <StatListItem value="2022" label="Официальные права в Монголии" />
         <StatListItem value="95%+" label="Натуральных ингредиентов" />
         <StatListItem value="2013" label="Год основания бренда" />
-        <StatListItem value="10" label="Торговых филиалов" />
+        <StatListItem value="15" label="Торговых филиалов" />
       </StatList>
     </>
   )
@@ -295,7 +295,7 @@ function SynergeticContentEn() {
         <StatListItem value="2022" label="Official rights in Mongolia" />
         <StatListItem value="95%+" label="Natural ingredients" />
         <StatListItem value="2013" label="Year brand was founded" />
-        <StatListItem value="10" label="Retail branches" />
+        <StatListItem value="15" label="Retail branches" />
       </StatList>
     </>
   )
