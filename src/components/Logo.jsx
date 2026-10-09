@@ -46,7 +46,7 @@ export function Logo({
   // Монгол хэл дээр кирилл "ТЭНГЭРИЙН ИЛГЭЭМЖ" лого, бусад хэл дээр латин лого.
   let isMn = lang === 'mn'
   let src = isMn ? '/logo-color-mn.png' : variant === 'color' ? '/logo-color.png' : '/logo.png'
-  let dimensions = isMn ? { width: 4276, height: 1172 } : { width: 882, height: 255 }
+  let dimensions = isMn ? { width: 4195, height: 1170 } : { width: 882, height: 255 }
   let isWhite = invert || variant === 'white'
 
   return (
