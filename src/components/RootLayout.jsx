@@ -51,8 +51,6 @@ function getNavItems(lang, dict) {
 
 const ROLL_EASE = 'ease-[cubic-bezier(.2,1.33,.25,1)]'
 
-const MOBILE_BRAND_LABEL = { mn: 'Брэнд', ru: 'Бренды', en: 'Brands' }
-
 // Twice маягийн текст: hover хийхэд -12° хазайж дээш гарч, хуулбар нь доороос хазайж орж ирнэ.
 // pt нь "Й", "Ё" зэрэг үсгийн дээд тэмдгийг overflow-д тайрагдуулахгүй.
 function RollText({ children }) {
@@ -159,24 +157,13 @@ function TopBar({ lang = 'mn', dict, expanded, pathname }) {
         </ul>
       </div>
 
-      {/* Утас: Twice шиг — Брэнд | лого | Холбоо барих */}
-      <div className="grid grid-cols-[1fr_auto_1fr] items-center lg:hidden">
-        <ul role="list" className="justify-self-start">
-          <TopBarLink
-            href={`/${lang}/work`}
-            index={0}
-            small
-            expanded={expanded}
-            active={isActive(`/${lang}/work`)}
-          >
-            {MOBILE_BRAND_LABEL[lang] ?? MOBILE_BRAND_LABEL.mn}
-          </TopBarLink>
-        </ul>
-        <div className="once-in px-3 [&_img]:h-8">{logo}</div>
-        <ul role="list" className="justify-self-end">
+      {/* Утас: лого | Холбоо барих */}
+      <div className="flex items-center justify-between lg:hidden">
+        <div className="once-in [&_img]:h-8">{logo}</div>
+        <ul role="list">
           <TopBarLink
             href={`/${lang}/contact`}
-            index={1}
+            index={0}
             small
             expanded={expanded}
             active={isActive(`/${lang}/contact`)}
@@ -409,8 +396,8 @@ function Navigation({ lang = 'mn', dict, expanded, pathname }) {
                 {dict?.navPanel?.office ?? 'Оффис'}
               </p>
               <p className="mt-1 text-xl font-semibold leading-tight text-neutral-100">
-                {dict?.offices?.sumang?.name ?? 'SOMANG PLAZA'},{' '}
-                {dict?.offices?.sumang?.detail ?? '15-р хороо, Somang plaza 3 давхар'}
+                {dict?.offices?.sumang?.detail ??
+                  'Энхтайваны өргөн чөлөө, Соманг Плаза, 3 давхар 308 тоот'}
               </p>
             </div>
             <div className="text-center">

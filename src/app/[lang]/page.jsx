@@ -6,18 +6,10 @@ import { Container } from '@/components/Container'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { HeroIntro } from '@/components/HeroIntro'
 import { List, ListItem } from '@/components/List'
-import { SectionIntro } from '@/components/SectionIntro'
-import { StylizedImage } from '@/components/StylizedImage'
 import { TestimonialRotator } from '@/components/TestimonialRotator'
 import { getDictionary, locales } from '@/dictionaries/index'
 import logoEstel from '@/images/clients/estel/logo-light.png'
 import logoSynergetic from '@/images/clients/synergetic/logo-light.png'
-import imageLogistics from '@/images/global-partnership.jpg'
-
-const brands = [
-  ['ESTEL', logoEstel],
-  ['SYNERGETIC', logoSynergetic],
-]
 
 export async function generateStaticParams() {
   return locales.map((lang) => ({ lang }))
@@ -28,39 +20,6 @@ export async function generateMetadata({ params }) {
   return {
     description: dict.metadata.siteDescription,
   }
-}
-
-function Clients({ dict }) {
-  return (
-    <div className="mt-24 rounded-4xl bg-gradient-to-br from-neutral-950 via-brand-blue to-brand-blue-light py-20 sm:mt-32 sm:py-32 lg:mt-56">
-      <Container>
-        <div className="overflow-hidden">
-          <div className="once-in flex items-center gap-x-8">
-            <h2 className="text-center font-display text-sm font-semibold tracking-wider text-white sm:text-left">
-              {dict.clients.heading}
-            </h2>
-            <div className="h-px flex-auto bg-white/20" />
-          </div>
-        </div>
-        <ul
-          role="list"
-          className="mt-10 grid grid-cols-2 items-center gap-x-8 gap-y-10 sm:gap-x-16"
-        >
-          {brands.map(([client, logo]) => (
-            <li key={client} className="flex justify-center overflow-hidden">
-              <div className="once-in">
-                <Image
-                  src={logo}
-                  alt={client}
-                  className="max-h-12 sm:max-h-16 w-auto brightness-0 invert"
-                />
-              </div>
-            </li>
-          ))}
-        </ul>
-      </Container>
-    </div>
-  )
 }
 
 function Stats({ dict }) {
@@ -110,86 +69,58 @@ function CaseStudies({ dict, lang }) {
   ]
 
   return (
-    <>
-      <SectionIntro
-        title={dict.caseStudies.sectionTitle}
-        className="mt-24 sm:mt-32 lg:mt-40"
-      >
-        <p>{dict.caseStudies.sectionDescription}</p>
-      </SectionIntro>
-      <Container className="mt-16">
-        <FadeInStagger className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-          {caseStudies.map((caseStudy) => (
-            <FadeIn key={caseStudy.client} className="flex">
-              <article className="relative flex w-full flex-col rounded-3xl p-6 ring-1 ring-neutral-950/5 transition hover:bg-neutral-50 sm:p-8">
-                <h3>
-                  <Link href={caseStudy.href}>
-                    <span className="absolute inset-0 rounded-3xl" />
-                    <Image
-                      src={caseStudy.logo}
-                      alt={caseStudy.client}
-                      className="h-12 w-auto object-contain"
-                    />
-                  </Link>
-                </h3>
-                <p className="mt-6 flex gap-x-2 text-sm text-neutral-950">
-                  <span className="font-semibold">{caseStudy.year}</span>
-                  <span className="text-neutral-300" aria-hidden="true">/</span>
-                  <span>{caseStudy.tag}</span>
-                </p>
-                <p className="mt-6 font-display text-2xl font-semibold text-neutral-950">
-                  {caseStudy.title}
-                </p>
-                <p className="mt-4 text-base text-neutral-600">
-                  {caseStudy.description}
-                </p>
-              </article>
-            </FadeIn>
-          ))}
-        </FadeInStagger>
-      </Container>
-    </>
+    <Container className="mt-24 sm:mt-32 lg:mt-40">
+      <FadeInStagger className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+        {caseStudies.map((caseStudy) => (
+          <FadeIn key={caseStudy.client} className="flex">
+            <article className="relative flex w-full flex-col rounded-3xl p-6 ring-1 ring-neutral-950/5 transition hover:bg-neutral-50 sm:p-8">
+              <h3>
+                <Link href={caseStudy.href}>
+                  <span className="absolute inset-0 rounded-3xl" />
+                  <Image
+                    src={caseStudy.logo}
+                    alt={caseStudy.client}
+                    className="h-12 w-auto object-contain"
+                  />
+                </Link>
+              </h3>
+              <p className="mt-6 flex gap-x-2 text-sm text-neutral-950">
+                <span className="font-semibold">{caseStudy.year}</span>
+                <span className="text-neutral-300" aria-hidden="true">/</span>
+                <span>{caseStudy.tag}</span>
+              </p>
+              <p className="mt-6 font-display text-2xl font-semibold text-neutral-950">
+                {caseStudy.title}
+              </p>
+              <p className="mt-4 text-base text-neutral-600">
+                {caseStudy.description}
+              </p>
+            </article>
+          </FadeIn>
+        ))}
+      </FadeInStagger>
+    </Container>
   )
 }
 
 function Services({ dict }) {
   return (
-    <>
-      <SectionIntro
-        eyebrow={dict.services.eyebrow}
-        title={dict.services.title}
-        className="mt-24 sm:mt-32 lg:mt-40"
-      >
-        <p>{dict.services.description}</p>
-      </SectionIntro>
-      <Container className="mt-16">
-        <div className="lg:flex lg:items-center lg:justify-end">
-          <div className="flex justify-center lg:w-1/2 lg:justify-end lg:pr-12">
-            <FadeIn className="w-full max-w-[33.75rem] flex-none lg:w-[45rem]">
-              <StylizedImage
-                src={imageLogistics}
-                sizes="(min-width: 1024px) 41rem, 31rem"
-                className="justify-center lg:justify-end"
-              />
-            </FadeIn>
-          </div>
-          <List className="mt-16 lg:mt-0 lg:w-1/2 lg:min-w-[33rem] lg:pl-4">
-            <ListItem title={dict.services.academy.title}>
-              {dict.services.academy.description}
-            </ListItem>
-            <ListItem title={dict.services.salon.title}>
-              {dict.services.salon.description}
-            </ListItem>
-            <ListItem title={dict.services.retail.title}>
-              {dict.services.retail.description}
-            </ListItem>
-            <ListItem title={dict.services.online.title}>
-              {dict.services.online.description}
-            </ListItem>
-          </List>
-        </div>
-      </Container>
-    </>
+    <Container className="mt-24 sm:mt-32 lg:mt-40">
+      <List className="lg:max-w-3xl">
+        <ListItem title={dict.services.academy.title}>
+          {dict.services.academy.description}
+        </ListItem>
+        <ListItem title={dict.services.salon.title}>
+          {dict.services.salon.description}
+        </ListItem>
+        <ListItem title={dict.services.retail.title}>
+          {dict.services.retail.description}
+        </ListItem>
+        <ListItem title={dict.services.online.title}>
+          {dict.services.online.description}
+        </ListItem>
+      </List>
+    </Container>
   )
 }
 
@@ -238,8 +169,6 @@ export default async function Home({ params }) {
           </div>
         </div>
       </div>
-
-      <Clients dict={dict} />
 
       <Stats dict={dict} />
 

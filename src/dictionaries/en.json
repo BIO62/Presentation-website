@@ -11,11 +11,8 @@
     "followUs": "Follow Us"
   },
   "hero": {
-    "title": "OFFICIAL DISTRIBUTOR OF INTERNATIONAL BRANDS",
-    "description": "Officially importing, distributing, and developing world-class brands in the Mongolian market."
-  },
-  "clients": {
-    "heading": "International brands we officially distribute"
+    "title": "OFFICIAL DISTRIBUTOR",
+    "description": "With official rights, we bring brand products and services to the Mongolian market."
   },
   "stats": [
     [
@@ -36,8 +33,6 @@
     ]
   ],
   "caseStudies": {
-    "sectionTitle": "Official Representative of World-Leading Brands",
-    "sectionDescription": "We officially supply world-renowned brands in hair care, beauty, and eco-cleaning to the Mongolian market.",
     "estel": {
       "tag": "Professional Hair Care",
       "title": "The choice of 1000+ professional salons and 1000+ hairdressers in Mongolia",
@@ -53,9 +48,6 @@
     "quote": "With world-class quality products, professional training, and consistent supply, we have become a trusted partner in Mongolia's hair and beauty industry."
   },
   "services": {
-    "eyebrow": "Our Business Areas",
-    "title": "Comprehensive distribution solutions for international brands",
-    "description": "As the official distributor of world-class brands, we execute end-to-end operations to successfully introduce, develop, and distribute brands across Mongolia.",
     "academy": {
       "title": "Professional Training & Education",
       "description": "Through ESTEL Academy, we conduct theory and practical training for hairdressers and beauty specialists, training over 1000 professionals annually."
@@ -125,8 +117,8 @@
   "offices": {
     "sumang": {
       "name": "SOMANG PLAZA",
-      "address": "Bayanzurkh District, Ulaanbaatar, Mongolia",
-      "detail": "15th khoroo, Somang Plaza, 3rd Floor"
+      "address": "Mongolia, Ulaanbaatar, Bayanzurkh District, 15th khoroo, 13th microdistrict",
+      "detail": "Enkhtaivan Avenue, Somang Plaza, 3rd Floor, Room 308"
     }
   },
   "about": {

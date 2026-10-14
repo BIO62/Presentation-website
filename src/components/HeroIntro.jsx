@@ -1,8 +1,8 @@
 'use client'
 
 export function HeroIntro({ dict }) {
-  const title = dict?.hero?.title ?? 'ОЛОН УЛСЫН БРЭНДҮҮДИЙН АЛБАН ЁСНЫ ДИСТРИБЬЮТЕР'
-  const description = dict?.hero?.description ?? 'Дэлхийн брэндүүдийг Монголын зах зээлд албан ёсны эрхтэйгээр импортлон, түгээн хөгжүүлж байна.'
+  const title = dict?.hero?.title ?? 'АЛБАН ЁСНЫ ДИСТРИБЬЮТЕР'
+  const description = dict?.hero?.description ?? 'Албан ёсны эрхтэйгээр брэндийн бүтээгдэхүүн, үйлчилгээг Монголын зах зээлд хүргэн ажиллаж байна.'
 
   return (
     <div className="max-w-2xl xl:max-w-3xl">
