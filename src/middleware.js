@@ -23,9 +23,21 @@ const russianSpeakingCountries = new Set([
   'MD', // Молдов
 ])
 
+// Хэлний сонголт: зөвхөн browser нээлттэй байх хугацаанд санагдах session cookie
+const LANG_COOKIE = 'SITE_LANG'
+// Өмнө нь 1 жил хадгалагддаг байсан cookie: олдвол устгана
+const LEGACY_LANG_COOKIE = 'NEXT_LOCALE'
+
+function dropLegacyCookie(request, response) {
+  if (request.cookies.has(LEGACY_LANG_COOKIE)) {
+    response.cookies.delete(LEGACY_LANG_COOKIE)
+  }
+  return response
+}
+
 function getLocaleFromRequest(request) {
-  // 1. Cookie шалгах (хэрэглэгч гараараа сонгосон тохиолдолд)
-  const cookieLang = request.cookies.get('NEXT_LOCALE')?.value
+  // 1. Cookie шалгах (хэрэглэгч энэ удаагийн зочлолд гараараа сонгосон бол)
+  const cookieLang = request.cookies.get(LANG_COOKIE)?.value
   if (cookieLang && locales.includes(cookieLang)) {
     return cookieLang
   }
@@ -93,7 +105,7 @@ export async function middleware(request) {
   )
 
   if (pathnameHasLocale) {
-    return NextResponse.next()
+    return dropLegacyCookie(request, NextResponse.next())
   }
 
   // Хэл тогтоож redirect хийх
@@ -101,7 +113,7 @@ export async function middleware(request) {
   const newUrl = request.nextUrl.clone()
   newUrl.pathname = `/${locale}${pathname === '/' ? '' : pathname}`
 
-  return NextResponse.redirect(newUrl)
+  return dropLegacyCookie(request, NextResponse.redirect(newUrl))
 }
 
 export const config = {

@@ -102,8 +102,8 @@ export function LanguageSwitcher({ invert = false, currentLang = 'mn', dropUp = 
       return
     }
 
-    // Cookie-д хадгалах (хэрэглэгчийн сонголт давамгайлна - 1 жил)
-    document.cookie = `NEXT_LOCALE=${newLang}; path=/; max-age=31536000; SameSite=Lax`
+    // Session cookie (max-age-гүй): browser хаагдтал л санана. Дараагийн удаа IP-ээр дахин автоматаар тодорхойлогдоно
+    document.cookie = `SITE_LANG=${newLang}; path=/; SameSite=Lax`
 
     const newPath = getTargetPath(newLang)
     setIsOpen(false)
