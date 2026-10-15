@@ -77,15 +77,52 @@ function RollText({ children }) {
   )
 }
 
-function TopBarLink({ href, index, expanded, active, small = false, children }) {
+// Анх ачаалах үед loading хөшиг нээгдэхэд нэг л удаа true болно (хуудас солиход дахин тоглохгүй)
+function useHeaderEntered() {
+  const { isRevealed } = useCurveNavigation()
+  const [entered, setEntered] = useState(false)
+  useEffect(() => {
+    if (isRevealed) setEntered(true)
+  }, [isRevealed])
+  return entered
+}
+
+const ENTER_EASE = [0.22, 1, 0.36, 1]
+
+// Header-ийн элемент өөрийн маск дотроос доороос дээш гарна: зургийн дээгүүр хөвөхгүй
+function HeaderReveal({ entered, delay = 0, children }) {
+  return (
+    <div className="-my-1 overflow-hidden py-1">
+      <motion.div
+        initial={{ y: '110%' }}
+        animate={{ y: entered ? '0%' : '110%' }}
+        transition={{ duration: 0.9, ease: ENTER_EASE, delay }}
+      >
+        {children}
+      </motion.div>
+    </div>
+  )
+}
+
+function TopBarLink({ href, index, expanded, entered, active, small = false, children }) {
   const { navigateTo } = useCurveNavigation()
 
   return (
     <li className="overflow-hidden">
       <motion.div
-        initial={false}
-        animate={expanded ? { y: '-110%', rotate: -6 } : { y: '0%', rotate: 0 }}
-        transition={{ duration: 0.8, ease: EASE, delay: index * 0.08 }}
+        initial={{ y: '110%', rotate: 0 }}
+        animate={
+          expanded
+            ? { y: '-110%', rotate: -6 }
+            : entered
+              ? { y: '0%', rotate: 0 }
+              : { y: '110%', rotate: 0 }
+        }
+        transition={
+          entered && !expanded
+            ? { duration: 0.9, ease: ENTER_EASE, delay: 0.08 + index * 0.06 }
+            : { duration: 0.8, ease: EASE, delay: index * 0.08 }
+        }
         style={{ transformOrigin: 'left bottom' }}
       >
         <Link
@@ -121,6 +158,7 @@ function TopBar({ lang = 'mn', dict, expanded, pathname }) {
   const homeHref = `/${lang}`
   const items = getNavItems(lang, dict)
   const isActive = (href) => pathname?.startsWith(href)
+  const entered = useHeaderEntered()
 
   const logo = (
     <Link
@@ -141,14 +179,15 @@ function TopBar({ lang = 'mn', dict, expanded, pathname }) {
     <Container>
       {/* Desktop: лого зүүн талд, цэсний нэрс баруун талд */}
       <div className="hidden items-center justify-between lg:flex">
-        <div className="once-in">{logo}</div>
+        <HeaderReveal entered={entered}>{logo}</HeaderReveal>
         <ul role="list" className="flex items-center gap-x-10 xl:gap-x-12">
           {items.map((item, i) => (
             <TopBarLink
               key={item.id}
               href={item.href}
-              index={i}
+              index={i + 1}
               expanded={expanded}
+              entered={entered}
               active={isActive(item.href)}
             >
               {item.label}
@@ -159,13 +198,16 @@ function TopBar({ lang = 'mn', dict, expanded, pathname }) {
 
       {/* Утас: лого | Холбоо барих */}
       <div className="flex items-center justify-between lg:hidden">
-        <div className="once-in [&_img]:h-8">{logo}</div>
+        <div className="[&_img]:h-8">
+          <HeaderReveal entered={entered}>{logo}</HeaderReveal>
+        </div>
         <ul role="list">
           <TopBarLink
             href={`/${lang}/contact`}
             index={0}
             small
             expanded={expanded}
+            entered={entered}
             active={isActive(`/${lang}/contact`)}
           >
             {dict?.footer?.contactLink ?? 'Холбоо барих'}
@@ -464,7 +506,7 @@ function RootLayoutInner({ children, lang, dict }) {
     <MotionConfig transition={shouldReduceMotion ? { duration: 0 } : undefined}>
       <header>
         <div
-          className="absolute left-0 right-0 top-2 z-40 pt-14"
+          className="absolute left-0 right-0 top-2 z-40 pt-6 sm:pt-14"
           aria-hidden={expanded ? 'true' : undefined}
           inert={expanded ? '' : undefined}
         >
@@ -527,7 +569,7 @@ function RootLayoutInner({ children, lang, dict }) {
 
       <div
         style={{ borderTopLeftRadius: 40, borderTopRightRadius: 40 }}
-        className="relative flex flex-auto overflow-hidden bg-white pt-14"
+        className="relative flex flex-auto overflow-hidden bg-white pt-6 sm:pt-14"
       >
         <div
           className="relative isolate flex w-full flex-col pt-9"

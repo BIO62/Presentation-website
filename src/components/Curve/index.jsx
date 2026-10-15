@@ -4,6 +4,9 @@ import React, { useEffect, useRef, useState, createContext, useContext, useCallb
 import { usePathname, useRouter } from 'next/navigation'
 import gsap from 'gsap'
 
+// Header/hero одоо өөрсдийн анимацитай тул '.once-in' элемент байхгүй байж болно: хоосон selector-ийн анхааруулгыг унтраана
+gsap.config({ nullTargetWarn: false })
+
 const routeLabels = {
   mn: {
     '/': 'Нүүр хуудас',
@@ -61,28 +64,26 @@ function getActiveLang(path) {
 }
 
 const baseGreetings = [
-  { code: 'mn', text: 'Сайн байна уу', duration: 340 },
-  { code: 'en', text: 'Hello', duration: 160 },
-  { code: 'ru', text: 'Привет', duration: 160 },
-  { code: 'fr', text: 'Bonjour', duration: 160 },
-  { code: 'it', text: 'Ciao', duration: 160 },
-  { code: 'pt', text: 'Olá', duration: 160 },
-  { code: 'ja', text: 'おい', duration: 160 },
-  { code: 'sv', text: 'Hallå', duration: 160 },
-  { code: 'de', text: 'Guten tag', duration: 160 },
-  { code: 'nl', text: 'Hallo', duration: 300 },
+  { code: 'mn', text: 'Сайн байна уу' },
+  { code: 'ru', text: 'Привет' },
+  { code: 'en', text: 'Hello' },
 ]
 
-function getGreetingsForLocale(locale) {
-  const primary = baseGreetings.find((g) => g.code === locale)
-  if (!primary) return baseGreetings
+// Үг бүрийн харагдах хугацаа (ms): эхний (хуудасны хэл), дунд, сүүлийн
+const FIRST_MS = 600
+const MIDDLE_MS = 450
+const LAST_MS = 500
 
-  const others = baseGreetings.filter((g) => g.code !== locale)
-  return [
-    { ...primary, duration: 340 },
-    ...others.slice(0, -1).map((g) => ({ ...g, duration: 160 })),
-    { ...others[others.length - 1], duration: 300 },
-  ]
+function getGreetingsForLocale(locale) {
+  const primary =
+    baseGreetings.find((g) => g.code === locale) ?? baseGreetings[0]
+  const ordered = [primary, ...baseGreetings.filter((g) => g !== primary)]
+
+  return ordered.map((g, i) => ({
+    ...g,
+    duration:
+      i === 0 ? FIRST_MS : i === ordered.length - 1 ? LAST_MS : MIDDLE_MS,
+  }))
 }
 
 const CurveContext = createContext({
@@ -100,7 +101,9 @@ export function CurveProvider({ children }) {
   const greetings = getGreetingsForLocale(currentLang)
 
   const [currentWord, setCurrentWord] = useState(() => getRouteLabel(pathname))
-  const [isRevealed, setIsRevealed] = useState(true)
+  // Эхлээд false: loading хөшиг бүрэн нээгдэх үед true болно. Нүүрний тоонууд
+  // зэрэг хөшгийн ард биш, хэрэглэгчийн нүдэн дээр анимацлагдахын тулд.
+  const [isRevealed, setIsRevealed] = useState(false)
 
   const isTransitioningRef = useRef(false)
   const currentTlRef = useRef(null)
@@ -127,7 +130,10 @@ export function CurveProvider({ children }) {
     const bottomRound = bottomRoundRef.current
     const topRound = topRoundRef.current
     const words = wordsRef.current
-    if (!screen || !bottomRound || !words || !topRound) return
+    if (!screen || !bottomRound || !words || !topRound) {
+      setIsRevealed(true)
+      return
+    }
 
     const isMobile = window.innerWidth <= 540
     const isHome = isHomeRoute(window.location.pathname)

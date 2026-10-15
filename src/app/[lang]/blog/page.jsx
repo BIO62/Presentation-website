@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 
 import { Border } from '@/components/Border'
@@ -6,6 +5,7 @@ import { Button } from '@/components/Button'
 import { ContactSection } from '@/components/ContactSection'
 import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
+import { InitialsAvatar } from '@/components/InitialsAvatar'
 import { PageIntro } from '@/components/PageIntro'
 import { getDictionary, locales } from '@/dictionaries/index'
 import { formatDate } from '@/lib/formatDate'
@@ -57,13 +57,12 @@ export default async function Blog({ params }) {
                         </dd>
                         <dt className="sr-only">Author</dt>
                         <dd className="mt-6 flex gap-x-4">
-                          <div className="flex-none overflow-hidden rounded-xl bg-neutral-100">
-                            <Image
-                              alt=""
-                              {...article.author.image}
-                              className="h-12 w-12 object-cover"
-                            />
-                          </div>
+                          <InitialsAvatar
+                            name={article.author.name}
+                            image={article.author.image}
+                            className="h-12 w-12"
+                            textClassName="text-sm"
+                          />
                           <div className="text-sm text-neutral-950">
                             <div className="font-semibold">
                               {article.author.name}

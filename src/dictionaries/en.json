@@ -12,16 +12,19 @@
   },
   "hero": {
     "title": "OFFICIAL DISTRIBUTOR",
-    "description": "With official rights, we bring brand products and services to the Mongolian market."
+    "description": "With official rights, we bring brand products and services to the Mongolian market.",
+    "slider": {
+      "label": "Highlights",
+      "prev": "Previous slide",
+      "next": "Next slide",
+      "more": "Learn more",
+      "slideOf": "{index} of {total}"
+    }
   },
   "stats": [
     [
       "2013",
       "Year Founded"
-    ],
-    [
-      "60+",
-      "Employees"
     ],
     [
       "15",
@@ -42,27 +45,35 @@
       "tag": "Eco Cleaning & Care",
       "title": "Hypoallergenic ECO family brand with 95%+ natural ingredients",
       "description": "Founded in 2013, featuring eco products with over 95% natural plant-based ingredients. Serving as official distributor in Mongolia since 2022 to cultivate green living culture."
-    }
+    },
+    "more": "Learn more"
   },
   "testimonial": {
     "quote": "With world-class quality products, professional training, and consistent supply, we have become a trusted partner in Mongolia's hair and beauty industry."
   },
   "services": {
     "academy": {
-      "title": "Professional Training & Education",
-      "description": "Through ESTEL Academy, we conduct theory and practical training for hairdressers and beauty specialists, training over 1000 professionals annually."
+      "title": "ESTEL ACADEMY MONGOLIA",
+      "description": "Professional training and development that combines theory and practice to strengthen the knowledge and skills of industry specialists. Every year we reach 1,000+ professionals.",
+      "highlight": "Every year we reach 1,000+ professionals."
     },
     "salon": {
-      "title": "Wholesale & B2B Distribution",
-      "description": "We supply professional salon products under long-term contracts with over 1,000 professional salons across the country."
+      "title": "B2B SALES",
+      "description": "We supply and sell products tailored to the needs of professional hairdressers, beauty salons, retail chains, organizations and business partners, building steady orders and long-term partnerships."
     },
     "retail": {
-      "title": "15 Branded & Chain Branches",
-      "description": "Retail operations through 15 branded and chain stores located in Ulaanbaatar, Darkhan, and Erdenet."
+      "title": "BRANDED STORE CONCEPT",
+      "description": "We create a unified retail environment that brings the brand's products, features and value to customers in one place, supporting the right choice with professional advice and service."
     },
     "online": {
-      "title": "Distribution & Online Retail",
-      "description": "Ensuring reliable product accessibility via local dealers in all 21 provinces and digital e-commerce channels."
+      "title": "SALES, DISTRIBUTION & ONLINE SHOP",
+      "description": "By combining a network of dealers and trade partners across 21 aimags with online channels, we are building a sales and distribution system that makes our products widely accessible in the regions.",
+      "orderPhone": "Order line"
+    },
+    "slider": {
+      "prev": "Previous image",
+      "next": "Next image",
+      "goTo": "Image"
     }
   },
   "contact": {
@@ -126,40 +137,71 @@
     "title": "Global Brands in the Mongolian Market",
     "intro1": "Since 2013, we have operated as the official distributor of international brands, delivering certified world-class products to consumers and beauty professionals in Mongolia through official channels.",
     "intro2": "We are a distribution company that officially imports, distributes, and sustainably develops international brands in Mongolia. Beyond importing, we comprehensively provide brand marketing, sales, logistics, customer consulting, professional training, and partner support.",
-    "intro3": "Today, we officially represent world-class brands including ESTEL Professional and SYNERGETIC, dedicated to sustainably enhancing product accessibility, professional service, and brand value.",
+    "intro3": "Today we officially represent the ESTEL and SYNERGETIC brands in Mongolia, making their products accessible to consumers and industry professionals while steadily developing each brand's distinct character and value in the Mongolian market.",
+    "intro4": "For us, a brand is not just something to sell: we focus on positioning it correctly in the market and building its value over the long term. That is why, beyond sales and distribution, we develop professional training, customer advice, partner support and long-term partnerships as an integral part of our work.",
+    "intro4Highlight": "positioning it correctly in the market and building its value over the long term",
     "mission": {
       "title": "Our Mission",
-      "text": "To thoughtfully cultivate world-class quality brands in the Mongolian market, delivering reliable products, professional service, and lasting value to consumers."
+      "text": "To bring world-class quality and standards closer to Mongolian consumers and to build long-term partnerships and sustainable growth founded on trust between brands, partners and customers.",
+      "lines": [
+        "To bring world-class quality and standards closer to Mongolian consumers",
+        "and to build long-term partnerships and sustainable growth",
+        "founded on trust between brands, partners and customers."
+      ]
+    },
+    "timeline": {
+      "title": "Our history",
+      "items": [
+        {
+          "year": "2013",
+          "text": "Tengeriin Ilgeemj LLC was founded"
+        },
+        {
+          "year": "2019",
+          "text": "Became the official distributor of ESTEL Professional in Mongolia"
+        },
+        {
+          "year": "2022",
+          "text": "Became the official distributor of SYNERGETIC"
+        },
+        {
+          "year": "Today",
+          "text": "Bringing ESTEL and SYNERGETIC brands to all of Mongolia"
+        }
+      ]
     },
     "stats": {
-      "employees": "Employees",
       "branches": "Branch Stores",
       "provinces": "Provinces Covered"
     },
     "culture": {
       "eyebrow": "Our Core Values",
       "title": "Official Standards, Quality, and Long-Term Partnership",
-      "description": "In our daily operations and decision-making, we are guided by five fundamental corporate values.",
+      "description": "We value responsibility, quality, professionalism, mutual value, shared growth and long-term partnership.",
       "valuesList": [
         {
-          "title": "Official Standards",
-          "text": "We strictly adhere to the official rights, standards, and verified product specifications of our partner brands."
+          "title": "Responsibility",
+          "text": "We fully meet our commitments to partners, customers and brand owners."
         },
         {
-          "title": "Uncompromising Quality",
-          "text": "We deliver authentic, certified products sourced directly from original manufacturers."
+          "title": "Quality",
+          "text": "We deliver guaranteed products sourced through official channels."
         },
         {
           "title": "Professionalism",
-          "text": "We provide expert guidance, technical consulting, and professional education on optimal product application."
+          "text": "We advise and train on each product's features and use at a professional level."
         },
         {
-          "title": "Customer First",
-          "text": "Beyond sales, we empower customers with comprehensive information to make well-informed, safe choices."
+          "title": "Mutual value",
+          "text": "We create real benefit and value for every partner we work with."
         },
         {
-          "title": "Long-Term Partnership",
-          "text": "We foster durable, mutually beneficial relationships with brand owners, dealers, salons, and consumers."
+          "title": "Shared growth",
+          "text": "We see the growth of our salons, dealers and partners as our own growth."
+        },
+        {
+          "title": "Long-term partnership",
+          "text": "We value relationships built on years of trust, not one-time sales."
         }
       ]
     },

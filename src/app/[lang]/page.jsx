@@ -1,12 +1,17 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import clsx from 'clsx'
 
 import { ContactSection } from '@/components/ContactSection'
 import { Container } from '@/components/Container'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { HeroIntro } from '@/components/HeroIntro'
-import { List, ListItem } from '@/components/List'
+import { HeroSlider } from '@/components/HeroSlider'
+import { HomeStats } from '@/components/HomeStats'
+import { ImageSlider } from '@/components/ImageSlider'
 import { TestimonialRotator } from '@/components/TestimonialRotator'
+import { getHeroSlides } from '@/data/heroSlides'
+import { serviceGalleries } from '@/data/serviceGalleries'
 import { getDictionary, locales } from '@/dictionaries/index'
 import logoEstel from '@/images/clients/estel/logo-light.png'
 import logoSynergetic from '@/images/clients/synergetic/logo-light.png'
@@ -23,27 +28,7 @@ export async function generateMetadata({ params }) {
 }
 
 function Stats({ dict }) {
-  return (
-    <Container className="mt-24 sm:mt-32 lg:mt-40">
-      <FadeInStagger>
-        <ul
-          role="list"
-          className="grid grid-cols-2 gap-x-8 gap-y-12 lg:grid-cols-4"
-        >
-          {dict.stats.map(([value, label]) => (
-            <li key={label}>
-              <FadeIn>
-                <p className="font-display text-4xl font-semibold text-neutral-950 sm:text-5xl">
-                  {value}
-                </p>
-                <p className="mt-2 text-base text-neutral-600">{label}</p>
-              </FadeIn>
-            </li>
-          ))}
-        </ul>
-      </FadeInStagger>
-    </Container>
-  )
+  return <HomeStats stats={dict.stats} className="mt-24 sm:mt-32 lg:mt-40" />
 }
 
 function CaseStudies({ dict, lang }) {
@@ -73,10 +58,10 @@ function CaseStudies({ dict, lang }) {
       <FadeInStagger className="grid grid-cols-1 gap-8 lg:grid-cols-2">
         {caseStudies.map((caseStudy) => (
           <FadeIn key={caseStudy.client} className="flex">
-            <article className="relative flex w-full flex-col rounded-3xl p-6 ring-1 ring-neutral-950/5 transition hover:bg-neutral-50 sm:p-8">
+            <article className="group relative flex w-full flex-col rounded-3xl bg-white p-6 ring-1 ring-neutral-950/5 transition duration-300 focus-within:ring-2 focus-within:ring-brand-blue hover:-translate-y-1 hover:shadow-xl hover:shadow-neutral-950/10 active:scale-[0.99] sm:p-8">
               <h3>
-                <Link href={caseStudy.href}>
-                  <span className="absolute inset-0 rounded-3xl" />
+                <Link href={caseStudy.href} className="outline-none">
+                  <span className="absolute inset-0 z-10 rounded-3xl" />
                   <Image
                     src={caseStudy.logo}
                     alt={caseStudy.client}
@@ -92,9 +77,20 @@ function CaseStudies({ dict, lang }) {
               <p className="mt-6 font-display text-2xl font-semibold text-neutral-950">
                 {caseStudy.title}
               </p>
-              <p className="mt-4 text-base text-neutral-600">
+              <p className="mt-4 line-clamp-3 text-base text-neutral-600 lg:line-clamp-2">
                 {caseStudy.description}
               </p>
+              <div className="mt-auto flex justify-end pt-8">
+                <span
+                  aria-hidden="true"
+                  className="inline-flex items-center gap-x-1.5 rounded-full border border-neutral-300 px-4 py-1.5 text-sm font-semibold text-neutral-950 transition duration-300 group-hover:border-brand-blue group-hover:bg-brand-blue group-hover:text-white"
+                >
+                  {dict.caseStudies.more}
+                  <span className="transition-transform duration-300 group-hover:translate-x-1">
+                    →
+                  </span>
+                </span>
+              </div>
             </article>
           </FadeIn>
         ))}
@@ -103,23 +99,108 @@ function CaseStudies({ dict, lang }) {
   )
 }
 
+const SERVICE_KEYS = ['academy', 'salon', 'retail', 'online']
+
+const ONLINE_SHOPS = [
+  {
+    brand: 'ESTEL',
+    href: 'https://estelpro.mn',
+    site: 'estelpro.mn',
+    phone: '7707-2207',
+  },
+  {
+    brand: 'SYNERGETIC',
+    href: 'https://synergetic.mn',
+    site: 'synergetic.mn',
+    phone: '8900-6848',
+  },
+]
+
+function withHighlight(text, highlight) {
+  let at = highlight ? text.indexOf(highlight) : -1
+  if (at === -1) return text
+
+  return (
+    <>
+      {text.slice(0, at)}
+      <strong className="font-semibold text-neutral-950">{highlight}</strong>
+      {text.slice(at + highlight.length)}
+    </>
+  )
+}
+
+function OnlineShops({ phoneLabel }) {
+  return (
+    <ul role="list" className="mt-8 grid gap-4 sm:grid-cols-2">
+      {ONLINE_SHOPS.map((shop) => (
+        <li
+          key={shop.brand}
+          className="rounded-2xl p-5 ring-1 ring-neutral-950/10"
+        >
+          <p className="font-display text-sm font-semibold tracking-wider text-neutral-950">
+            {shop.brand}
+          </p>
+          <a
+            href={shop.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 inline-block text-base font-semibold text-brand-blue transition hover:text-neutral-950"
+          >
+            {shop.site} →
+          </a>
+          <p className="mt-2 text-sm text-neutral-600">
+            {phoneLabel}:{' '}
+            <a
+              href={`tel:${shop.phone.replace(/\D/g, '')}`}
+              className="font-semibold text-neutral-950 hover:text-brand-blue"
+            >
+              {shop.phone}
+            </a>
+          </p>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
 function Services({ dict }) {
   return (
     <Container className="mt-24 sm:mt-32 lg:mt-40">
-      <List className="lg:max-w-3xl">
-        <ListItem title={dict.services.academy.title}>
-          {dict.services.academy.description}
-        </ListItem>
-        <ListItem title={dict.services.salon.title}>
-          {dict.services.salon.description}
-        </ListItem>
-        <ListItem title={dict.services.retail.title}>
-          {dict.services.retail.description}
-        </ListItem>
-        <ListItem title={dict.services.online.title}>
-          {dict.services.online.description}
-        </ListItem>
-      </List>
+      <div className="space-y-20 sm:space-y-24 lg:space-y-32">
+        {SERVICE_KEYS.map((key, i) => {
+          let service = dict.services[key]
+
+          return (
+            <FadeIn key={key}>
+              <article>
+                <p className="font-display text-sm font-semibold text-neutral-400">
+                  {String(i + 1).padStart(2, '0')}
+                </p>
+                <div className="mt-6 grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-16">
+                  <ImageSlider
+                    images={serviceGalleries[key]}
+                    alt={service.title}
+                    labels={dict.services.slider}
+                    placeholder={String(i + 1).padStart(2, '0')}
+                    className={clsx('min-w-0', i % 2 === 1 && 'lg:order-2')}
+                  />
+                  <div className="min-w-0">
+                    <h3 className="font-display text-2xl font-semibold text-neutral-950 sm:text-3xl">
+                      {service.title}
+                    </h3>
+                    <p className="mt-6 text-base leading-relaxed text-neutral-600 sm:text-lg">
+                      {withHighlight(service.description, service.highlight)}
+                    </p>
+                    {key === 'online' && (
+                      <OnlineShops phoneLabel={service.orderPhone} />
+                    )}
+                  </div>
+                </div>
+              </article>
+            </FadeIn>
+          )
+        })}
+      </div>
     </Container>
   )
 }
@@ -130,17 +211,23 @@ export default async function Home({ params }) {
 
   return (
     <>
+      <HeroSlider
+        slides={getHeroSlides(lang)}
+        labels={dict.hero.slider}
+        className="relative z-20 mt-6 sm:mt-8"
+      />
+
       <div className="relative overflow-x-clip overflow-y-visible">
-        <Container className="relative z-10 mt-24 sm:mt-32 md:mt-56">
+        <Container className="relative z-10 mt-16 sm:mt-24">
           <HeroIntro dict={dict} />
         </Container>
 
         {/* Desktop logo watermark */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute right-0 top-[37%] -translate-y-1/2 translate-x-[50%] z-0 select-none hidden lg:block"
+          className="pointer-events-none absolute right-0 top-0 translate-x-[50%] z-0 select-none hidden lg:block"
         >
-          <div className="once-in">
+          <FadeIn>
             <Image
               src="/logomark-color.png"
               alt=""
@@ -149,15 +236,15 @@ export default async function Home({ params }) {
               sizes="780px"
               className="w-[780px] h-auto max-w-none"
             />
-          </div>
+          </FadeIn>
         </div>
 
         {/* Mobile logo watermark */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute right-0 top-[42%] -translate-y-1/2 translate-x-[50%] z-0 select-none opacity-20 lg:hidden"
+          className="pointer-events-none absolute right-0 top-0 translate-x-[50%] z-0 select-none opacity-20 lg:hidden"
         >
-          <div className="once-in">
+          <FadeIn>
             <Image
               src="/logomark-color.png"
               alt=""
@@ -166,7 +253,7 @@ export default async function Home({ params }) {
               sizes="460px"
               className="w-[360px] sm:w-[460px] h-auto max-w-none"
             />
-          </div>
+          </FadeIn>
         </div>
       </div>
 

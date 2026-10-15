@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import clsx from 'clsx'
 
 function FacebookIcon(props) {
@@ -58,9 +57,20 @@ function DribbbleIcon(props) {
 }
 
 export const socialMediaProfiles = [
-  { title: 'Facebook', href: 'https://facebook.com', icon: FacebookIcon },
-  { title: 'Instagram', href: 'https://instagram.com', icon: InstagramIcon },
-
+  {
+    brand: 'ESTEL',
+    links: [
+      { title: 'Facebook', href: 'https://www.facebook.com/ESTELMongolia', icon: FacebookIcon },
+      { title: 'Instagram', href: 'https://www.instagram.com/estelmongolia/', icon: InstagramIcon },
+    ],
+  },
+  {
+    brand: 'SYNERGETIC',
+    links: [
+      { title: 'Facebook', href: 'https://www.facebook.com/SynergeticMongolia', icon: FacebookIcon },
+      { title: 'Instagram', href: 'https://www.instagram.com/synergetic_mongolia/', icon: InstagramIcon },
+    ],
+  },
 ]
 
 export function SocialMedia({ className, invert = false }) {
@@ -68,23 +78,36 @@ export function SocialMedia({ className, invert = false }) {
     <ul
       role="list"
       className={clsx(
-        'flex gap-x-10',
+        'flex flex-wrap gap-x-8 gap-y-3',
         invert ? 'text-white' : 'text-neutral-950',
         className
       )}
     >
-      {socialMediaProfiles.map((socialMediaProfile) => (
-        <li key={socialMediaProfile.title}>
-          <Link
-            href={socialMediaProfile.href}
-            aria-label={socialMediaProfile.title}
+      {socialMediaProfiles.map((profile) => (
+        <li key={profile.brand} className="flex items-center gap-x-3">
+          <span
             className={clsx(
-              'transition',
-              invert ? 'hover:text-neutral-200' : 'hover:text-neutral-700'
+              'text-xs font-semibold tracking-wider',
+              invert ? 'text-neutral-300' : 'text-neutral-600'
             )}
           >
-            <socialMediaProfile.icon className="h-6 w-6 fill-current" />
-          </Link>
+            {profile.brand}
+          </span>
+          {profile.links.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${profile.brand} ${link.title}`}
+              className={clsx(
+                'transition',
+                invert ? 'hover:text-neutral-200' : 'hover:text-neutral-700'
+              )}
+            >
+              <link.icon className="h-5 w-5 fill-current" />
+            </a>
+          ))}
         </li>
       ))}
     </ul>
