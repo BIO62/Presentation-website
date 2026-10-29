@@ -21,11 +21,11 @@ import { GridPattern } from '@/components/GridPattern'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import { Logo } from '@/components/Logo'
 import { SocialMedia } from '@/components/SocialMedia'
-import imageBrands from '@/app/[lang]/work/estel/hero.jpg'
-import imageAbout from '@/images/logistics-team.jpg'
-import imageProcess from '@/images/warehouse-loading.jpg'
-import imageBlog from '@/images/global-partnership.jpg'
-import imageContact from '@/images/hair-academy-training.jpg'
+import imageBrands from '@/images/site/menu/menu-brands.jpg' // Сансар салбарын ESTEL хана
+import imageAbout from '@/images/site/menu/menu-about.jpg' // академийн олон хүнтэй сургалт
+import imageProcess from '@/images/site/menu/menu-process.jpg' // агуулахыг дээрээс авсан зураг
+import imageBlog from '@/images/site/menu/menu-blog.jpg' // мастер багшийн үзүүлэх сургалт
+import imageContact from '@/images/site/menu/menu-contact.jpg' // Тара салбарын хаалга
 
 const RootLayoutContext = createContext({})
 

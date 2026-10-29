@@ -9,9 +9,9 @@ import { SectionIntro } from '@/components/SectionIntro'
 import { StylizedImage } from '@/components/StylizedImage'
 import { TagList, TagListItem } from '@/components/TagList'
 import { getDictionary, locales } from '@/dictionaries/index'
-import imageAcademy from '@/images/estel-academy-session.jpg'
-import imageGrowthChart from '@/images/growth-chart.jpg'
-import imageWarehouse from '@/images/warehouse-loading.jpg'
+import imageAcademy from '@/images/site/process/process-academy.jpg' // ESTEL багш загвар өмсөгч дээр үзүүлж буй
+import imageRetail from '@/images/site/process/process-borluulalt.jpg' // Тара салбарын дотор тал
+import imageWarehouse from '@/images/site/process/process-tugeelt.jpg' // агуулах, ажилтан тавиурын дэргэд
 
 export async function generateStaticParams() {
   return locales.map((lang) => ({ lang }))
@@ -117,7 +117,7 @@ function Academy({ dict }) {
 function Retail({ dict }) {
   const r = dict.process.retail
   return (
-    <Section title={r.title} image={{ src: imageGrowthChart, shape: 2 }}>
+    <Section title={r.title} image={{ src: imageRetail, shape: 2 }}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>
           {r.p1part1}{' '}
