@@ -123,19 +123,19 @@ function getTeam(lang, dict) {
           role: isRu ? 'Генеральный директор' : isEn ? 'CEO' : 'Ерөнхий захирал',
         },
         {
-          name: isRu ? 'Н. Олзий-Хутаг' : isEn ? 'N. Ulzii-Khutag' : 'Н. Өлзий-Хутаг',
+          name: 'Н. Өлзий-Хутаг',
           role: isRu ? 'Исполнительный директор' : isEn ? 'Executive Director' : 'Гүйцэтгэх захирал',
         },
         {
-          name: isRu ? 'Ж. Нямдорж' : isEn ? 'J. Nyamdorj' : 'Ж. Нямдорж',
+          name: isEn ? 'J. Nyamdorj' : 'Ж. Нямдорж',
           role: isRu ? 'Заместитель директора' : isEn ? 'Deputy Director' : 'Орлогч захирал',
         },
         {
-          name: isRu ? 'Б. Уранчимэг' : isEn ? 'B. Uranchimeg' : 'Б. Уранчимэг',
+          name: isEn ? 'B. Uranchimeg' : 'Б. Уранчимэг',
           role: isRu ? 'Финансовый директор' : isEn ? 'Chief Financial Officer' : 'Санхүү хариуцсан захирал',
         },
         {
-          name: isRu ? 'Д. Мунхбаяр' : isEn ? 'D. Munkhbayar' : 'Д. Мөнхбаяр',
+          name: isEn ? 'D. Munkhbayar' : 'Д. Мөнхбаяр',
           role: isRu ? 'Директор по развитию продаж и сервиса' : isEn ? 'Sales & Service Development Director' : 'Борлуулалт, үйлчилгээ хөгжил хариуцсан захирал',
         },
       ],
@@ -144,19 +144,19 @@ function getTeam(lang, dict) {
       title: dict.about.team.managers,
       people: [
         {
-          name: isRu ? 'О. Золжаргал' : isEn ? 'O. Zoljargal' : 'О. Золжаргал',
+          name: isEn ? 'O. Zoljargal' : 'О. Золжаргал',
           role: isRu ? 'Менеджер филиала в Дархане' : isEn ? 'Darkhan Branch Manager' : 'Дархан салбар хариуцсан менежер',
         },
         {
-          name: isRu ? 'М. Гэрэлтуяа' : isEn ? 'M. Gereltuya' : 'М. Гэрэлтуяа',
+          name: isEn ? 'M. Gereltuya' : 'М. Гэрэлтуяа',
           role: isRu ? 'Менеджер филиала в Эрдэнэте' : isEn ? 'Erdenet Branch Manager' : 'Эрдэнэт салбар хариуцсан менежер',
         },
         {
-          name: isRu ? 'Ч. Дуламсурэн' : isEn ? 'Ch. Dulamsuren' : 'Ч. Дуламсүрэн',
+          name: isEn ? 'Ch. Dulamsuren' : 'Ч. Дуламсүрэн',
           role: isRu ? 'Менеджер фирменных магазинов' : isEn ? 'Brand Store Manager' : 'Нэрийн дэлгүүр хариуцсан менежер',
         },
         {
-          name: isRu ? 'Х. Отгонбаатар' : isEn ? 'Kh. Otgonbaatar' : 'Х. Отгонбаатар',
+          name: isEn ? 'Kh. Otgonbaatar' : 'Х. Отгонбаатар',
           role: isRu ? 'Старший технолог-преподаватель' : isEn ? 'Senior Technologist & Instructor' : 'Ахлах технологич багш',
         },
       ],
