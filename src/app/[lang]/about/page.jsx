@@ -8,7 +8,7 @@ import { PageIntro } from '@/components/PageIntro'
 import { SectionIntro } from '@/components/SectionIntro'
 import { Timeline } from '@/components/Timeline'
 import { getDictionary, locales } from '@/dictionaries/index'
-import imageDirector from '@/images/site/about/director.jpg'
+import imageDirector from '@/images/site/about/director.png'
 
 export async function generateStaticParams() {
   return locales.map((lang) => ({ lang }))
@@ -120,6 +120,7 @@ function DirectorGreeting({ greeting }) {
               />
               <Image
                 src={imageDirector}
+                quality={90}
                 alt={`${greeting.name}, ${greeting.role}`}
                 priority
                 sizes="(min-width: 1024px) 28rem, (min-width: 640px) 24rem, 100vw"
