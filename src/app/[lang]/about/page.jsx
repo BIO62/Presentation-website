@@ -123,7 +123,7 @@ function getTeam(lang, dict) {
           role: isRu ? 'Генеральный директор' : isEn ? 'CEO' : 'Ерөнхий захирал',
         },
         {
-          name: isRu ? 'Н. Олзийхутаг' : isEn ? 'N. Ulziikhutag' : 'Н. Өлзийхутаг',
+          name: isRu ? 'Н. Олзий-Хутаг' : isEn ? 'N. Ulzii-Khutag' : 'Н. Өлзий-Хутаг',
           role: isRu ? 'Исполнительный директор' : isEn ? 'Executive Director' : 'Гүйцэтгэх захирал',
         },
         {
