@@ -11,7 +11,7 @@ function BranchCard({ branch, labels }) {
   return (
     <div
       className={clsx(
-        'h-full overflow-hidden rounded-3xl ring-1 ring-neutral-950/5',
+        'overflow-hidden rounded-3xl ring-1 ring-neutral-950/5',
         !branch.image && 'p-6'
       )}
     >
@@ -100,7 +100,7 @@ export function BranchList({ groups, labels, className }) {
                   {group.city}
                 </h3>
               </FadeIn>
-              <FadeInStagger className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              <FadeInStagger className="mt-6 grid grid-cols-1 items-start gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {group.items.map((branch) => (
                   <FadeIn key={branch.id}>
                     <BranchCard branch={branch} labels={labels} />
