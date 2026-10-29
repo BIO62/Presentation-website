@@ -24,7 +24,7 @@ import newsOmc1 from '@/images/site/news/news-2026-10-20-omc-1.jpg'
 import newsOmc2 from '@/images/site/news/news-2026-10-20-omc-2.jpg'
 import newsGrayCoverage from '@/images/site/news/news-2026-10-26-gray-coverage.jpg'
 import newsBlackFriday from '@/images/site/news/news-2026-10-28-black-friday.jpg'
-import newsShineSalbar from '@/images/site/news/news-2026-10-29-shine-salbar.jpg'
+import newsShineSalbar from '@/images/site/news/news-2026-10-29-urangan-photo.jpg'
 import newsAcademySchedule from '@/images/site/news/news-2026-11-academy-schedule.jpg'
 
 const FB_ESTEL = 'https://www.facebook.com/ESTELMongolia'
