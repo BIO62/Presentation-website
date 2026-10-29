@@ -20,7 +20,7 @@
 //      }
 
 import newsDeluxe from '@/images/site/news/news-2026-06-08-deluxe.jpg'
-import newsOmc1 from '@/images/site/news/news-2026-10-20-omc-1.jpg'
+import newsOmc1 from '@/images/site/news/news-2026-10-20-omc-1-estel.jpg'
 import newsOmc2 from '@/images/site/news/news-2026-10-20-omc-2.jpg'
 import newsGrayCoverage from '@/images/site/news/news-2026-10-26-gray-coverage.jpg'
 import newsBlackFriday from '@/images/site/news/news-2026-10-28-black-friday.jpg'
