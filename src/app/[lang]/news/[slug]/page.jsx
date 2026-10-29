@@ -53,7 +53,7 @@ export default async function NewsArticle({ params }) {
     <Container as="article" className="mt-24 sm:mt-32 lg:mt-40">
       <FadeIn>
         <Link
-          href={`/${lang}#news`}
+          href={`/${lang}/blog`}
           className="inline-flex items-center gap-x-1.5 text-sm font-semibold text-neutral-950 transition hover:text-brand-blue"
         >
           <span aria-hidden="true">←</span>

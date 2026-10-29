@@ -221,6 +221,7 @@ export default async function Home({ params }) {
       <NewsSection
         items={getNews(lang)}
         labels={dict.news}
+        allHref={`/${lang}/blog`}
         className="mt-16 sm:mt-24"
       />
 

@@ -1,13 +1,13 @@
 'use client'
 
 import { useCallback, useEffect, useState } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import clsx from 'clsx'
 import useEmblaCarousel from 'embla-carousel-react'
 
 import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
+import { NewsCard } from '@/components/NewsCard'
 
 function ArrowButton({ direction, label, disabled, onClick }) {
   return (
@@ -32,51 +32,29 @@ function ArrowButton({ direction, label, disabled, onClick }) {
   )
 }
 
-// Карт бүхэлдээ дотоод хуудас (/[lang]/news/[slug]) руу холбогдоно
-function NewsCard({ item, moreLabel }) {
+// Нүүр хуудасны "Мэдээ": desktop-д 3 карт, үлдсэнийг гүйлгэнэ; утсан дээр 1 карт + swipe
+// "Бүх мэдээ →": /[lang]/blog руу
+function AllNewsLink({ href, className, children }) {
   return (
-    <article className="h-full">
-      <Link href={item.href} className="group flex h-full flex-col">
-        <div className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-neutral-100">
-          <Image
-            src={item.image}
-            alt={item.title}
-            fill
-            sizes="(min-width: 1024px) 24rem, (min-width: 640px) 50vw, 88vw"
-            className="object-cover"
-          />
-          <span className="absolute left-4 top-4 rounded-full bg-brand-yellow px-3 py-1 text-xs font-semibold text-neutral-950">
-            {item.category}
-          </span>
-        </div>
-        <time
-          dateTime={item.date}
-          className="mt-5 text-sm font-semibold tabular-nums text-neutral-500"
-        >
-          {item.dateLabel}
-        </time>
-        <h3 className="mt-2 line-clamp-2 font-display text-lg font-semibold text-neutral-950">
-          {item.title}
-        </h3>
-        <p className="mt-2 line-clamp-3 text-sm text-neutral-600">
-          {item.excerpt}
-        </p>
-        <span className="mt-4 inline-flex w-fit items-center gap-x-1.5 text-sm font-semibold text-brand-blue transition group-hover:text-neutral-950">
-          {moreLabel}
-          <span
-            aria-hidden="true"
-            className="transition-transform duration-300 group-hover:translate-x-1"
-          >
-            →
-          </span>
-        </span>
-      </Link>
-    </article>
+    <Link
+      href={href}
+      className={clsx(
+        'group inline-flex items-center gap-x-1.5 text-sm font-semibold text-brand-blue transition hover:text-neutral-950',
+        className
+      )}
+    >
+      {children}
+      <span
+        aria-hidden="true"
+        className="transition-transform duration-300 group-hover:translate-x-1"
+      >
+        →
+      </span>
+    </Link>
   )
 }
 
-// Нүүр хуудасны "Мэдээ": desktop-д 3 карт, үлдсэнийг гүйлгэнэ; утсан дээр 1 карт + swipe
-export function NewsSection({ items, labels, className }) {
+export function NewsSection({ items, labels, allHref, className }) {
   const [viewportRef, embla] = useEmblaCarousel({
     align: 'start',
     containScroll: 'trimSnaps',
@@ -118,28 +96,38 @@ export function NewsSection({ items, labels, className }) {
     >
       <Container>
         <FadeIn className="flex items-end justify-between gap-x-6">
-          <h2
-            id="news-title"
-            className="font-display text-4xl font-medium tracking-tight text-neutral-950 [text-wrap:balance] sm:text-5xl"
-          >
-            {labels.title}
-          </h2>
-          {(canPrev || canNext) && (
-            <div className="hidden flex-none gap-x-3 sm:flex">
-              <ArrowButton
-                direction="prev"
-                label={labels.prev}
-                disabled={!canPrev}
-                onClick={() => embla?.scrollPrev()}
-              />
-              <ArrowButton
-                direction="next"
-                label={labels.next}
-                disabled={!canNext}
-                onClick={() => embla?.scrollNext()}
-              />
-            </div>
-          )}
+          <div>
+            <h2
+              id="news-title"
+              className="font-display text-4xl font-medium tracking-tight text-neutral-950 [text-wrap:balance] sm:text-5xl"
+            >
+              {labels.title}
+            </h2>
+            {allHref && (
+              <AllNewsLink href={allHref} className="mt-3 sm:hidden">
+                {labels.back}
+              </AllNewsLink>
+            )}
+          </div>
+          <div className="hidden flex-none items-center gap-x-6 sm:flex">
+            {allHref && <AllNewsLink href={allHref}>{labels.back}</AllNewsLink>}
+            {(canPrev || canNext) && (
+              <div className="flex gap-x-3">
+                <ArrowButton
+                  direction="prev"
+                  label={labels.prev}
+                  disabled={!canPrev}
+                  onClick={() => embla?.scrollPrev()}
+                />
+                <ArrowButton
+                  direction="next"
+                  label={labels.next}
+                  disabled={!canNext}
+                  onClick={() => embla?.scrollNext()}
+                />
+              </div>
+            )}
+          </div>
         </FadeIn>
 
         <FadeIn className="mt-10 sm:mt-12">
