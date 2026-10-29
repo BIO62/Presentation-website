@@ -101,41 +101,72 @@ function Culture({ dict }) {
 
 // Захирлын мэндчилгээ: desktop-д зураг зүүн, захидал баруун; утсан дээр зураг дээр
 function DirectorGreeting({ greeting }) {
+  const [lead, ...rest] = greeting.paragraphs
+
   return (
-    <Container className="mt-16 sm:mt-20">
-      <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
+    <Container className="mt-16 sm:mt-24">
+      <div className="grid grid-cols-1 gap-16 lg:grid-cols-12 lg:gap-20">
+        {/* Зураг: ард нь брэнд цэнхэр блок, доор нь нэрийн карт */}
         <FadeIn className="lg:col-span-5">
-          <div className="lg:sticky lg:top-8">
-            <Image
-              src={imageDirector}
-              alt={`${greeting.name}, ${greeting.role}`}
-              priority
-              sizes="(min-width: 1024px) 28rem, (min-width: 640px) 24rem, 100vw"
-              className="w-full max-w-sm rounded-3xl bg-neutral-100 object-cover sm:max-w-md lg:max-w-none"
-            />
-            <p className="mt-6 font-display text-base font-semibold text-neutral-950">
-              {greeting.name}
-            </p>
-            <p className="mt-1 text-sm text-neutral-600">{greeting.role}</p>
+          <div className="lg:sticky lg:top-12">
+            <div className="relative mx-auto max-w-sm pb-10 pr-4 sm:max-w-md lg:max-w-none">
+              <div
+                aria-hidden="true"
+                className="absolute bottom-4 left-8 right-0 top-8 rounded-4xl bg-brand-blue"
+              />
+              <Image
+                src={imageDirector}
+                alt={`${greeting.name}, ${greeting.role}`}
+                priority
+                sizes="(min-width: 1024px) 28rem, (min-width: 640px) 24rem, 100vw"
+                className="relative w-full rounded-4xl bg-neutral-100 object-cover shadow-xl shadow-neutral-950/10"
+              />
+              <div className="absolute bottom-0 left-5 right-10 rounded-2xl bg-white px-5 py-4 shadow-lg shadow-neutral-950/10 ring-1 ring-neutral-950/5 sm:left-6">
+                <p className="font-display text-base font-semibold text-neutral-950">
+                  {greeting.name}
+                </p>
+                <p className="mt-0.5 text-sm text-neutral-600">
+                  {greeting.role}
+                </p>
+              </div>
+            </div>
           </div>
         </FadeIn>
+
+        {/* Захидал */}
         <FadeIn className="lg:col-span-7">
-          <p className="font-display text-xl font-semibold text-neutral-950 sm:text-2xl">
+          <span
+            aria-hidden="true"
+            className="sm:text-8xl block font-display text-7xl font-semibold leading-none text-brand-yellow"
+          >
+            “
+          </span>
+          <p className="-mt-4 max-w-2xl font-display text-2xl font-semibold leading-snug tracking-tight text-neutral-950 [text-wrap:balance] sm:-mt-6 sm:text-3xl">
             {greeting.salutation}
           </p>
-          <div className="mt-8 space-y-6 text-base text-neutral-600 sm:text-lg">
-            {greeting.paragraphs.map((paragraph, i) => (
+          <p className="mt-8 max-w-2xl text-lg leading-relaxed text-neutral-800 sm:text-xl">
+            {lead}
+          </p>
+          <div className="mt-6 max-w-2xl space-y-6 text-base leading-relaxed text-neutral-600 sm:text-lg">
+            {rest.map((paragraph, i) => (
               <p key={i}>{paragraph}</p>
             ))}
           </div>
-          <p className="mt-8 font-display text-lg font-semibold text-neutral-950 sm:text-xl">
-            {greeting.closing}
-          </p>
-          <div className="mt-10 text-base text-neutral-600">
-            <p>{greeting.regards}</p>
-            <p className="mt-2 font-semibold text-neutral-950">
-              {greeting.role} {greeting.name}
+          <blockquote className="mt-10 max-w-2xl border-l-4 border-brand-yellow pl-6">
+            <p className="font-display text-xl font-semibold leading-snug text-brand-blue [text-wrap:balance] sm:text-2xl">
+              {greeting.closing}
             </p>
+          </blockquote>
+          <div className="mt-12">
+            <span
+              aria-hidden="true"
+              className="block h-px w-12 bg-brand-yellow"
+            />
+            <p className="mt-5 text-sm text-neutral-500">{greeting.regards}</p>
+            <p className="mt-2 font-display text-2xl font-semibold text-neutral-950">
+              {greeting.name}
+            </p>
+            <p className="mt-1 text-sm text-neutral-600">{greeting.role}</p>
           </div>
         </FadeIn>
       </div>
