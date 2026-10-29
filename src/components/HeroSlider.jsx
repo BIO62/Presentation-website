@@ -162,7 +162,7 @@ export function HeroSlider({ slides, labels, className }) {
       {/* Зураг: ирмэгээс ирмэг хүртэл */}
       <div
         ref={viewportRef}
-        className="relative h-[72vh] max-h-[680px] min-h-[460px] overflow-hidden bg-neutral-950 lg:h-[78vh] lg:max-h-[760px] lg:min-h-[520px]"
+        className="relative h-[calc(100vw*1.15+84px)] min-h-0 overflow-hidden bg-neutral-950 md:h-[min(92vh,860px)]"
       >
         <div className="flex h-full touch-pan-y">
           {slides.map((slide, i) => (
@@ -187,7 +187,8 @@ export function HeroSlider({ slides, labels, className }) {
                   fill
                   priority={i === 0}
                   sizes="100vw"
-                  className="object-cover object-center"
+                  className="object-cover"
+                  style={{ objectPosition: slide.focus ?? '50% 50%' }}
                 />
               </div>
             </div>
@@ -198,6 +199,11 @@ export function HeroSlider({ slides, labels, className }) {
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent to-[65%]"
+        />
+        {/* Дээд хэсэгт: header-ийн цэс зургийн дээр уншигдах бараан уусгалт */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 top-0 h-56 bg-gradient-to-b from-black/55 to-transparent"
         />
         <div
           aria-hidden="true"

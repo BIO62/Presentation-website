@@ -104,7 +104,7 @@ function HeaderReveal({ entered, delay = 0, children }) {
   )
 }
 
-function TopBarLink({ href, index, expanded, entered, active, small = false, children }) {
+function TopBarLink({ href, index, expanded, entered, active, small = false, overHero = false, children }) {
   const { navigateTo } = useCurveNavigation()
 
   return (
@@ -132,7 +132,9 @@ function TopBarLink({ href, index, expanded, entered, active, small = false, chi
             navigateTo(href)
           }}
           className={clsx(
-            'group relative block whitespace-nowrap pb-1 font-condensed font-semibold uppercase leading-none text-neutral-950',
+            'group relative block whitespace-nowrap pb-1 font-condensed font-semibold uppercase leading-none',
+            // Нүүр хуудсанд hero зургийн дээр цагаан бичиг
+            overHero ? 'text-white' : 'text-neutral-950',
             small ? 'text-[0.95rem]' : 'text-lg'
           )}
         >
@@ -152,7 +154,7 @@ function TopBarLink({ href, index, expanded, entered, active, small = false, chi
   )
 }
 
-function TopBar({ lang = 'mn', dict, expanded, pathname }) {
+function TopBar({ lang = 'mn', dict, expanded, pathname, overHero = false }) {
   let { logoHovered, setLogoHovered } = useContext(RootLayoutContext)
   const { navigateTo } = useCurveNavigation()
   const homeHref = `/${lang}`
@@ -188,6 +190,7 @@ function TopBar({ lang = 'mn', dict, expanded, pathname }) {
               index={i + 1}
               expanded={expanded}
               entered={entered}
+              overHero={overHero}
               active={isActive(item.href)}
             >
               {item.label}
@@ -208,6 +211,7 @@ function TopBar({ lang = 'mn', dict, expanded, pathname }) {
             small
             expanded={expanded}
             entered={entered}
+            overHero={overHero}
             active={isActive(`/${lang}/contact`)}
           >
             {dict?.footer?.contactLink ?? 'Холбоо барих'}
@@ -463,6 +467,8 @@ function RootLayoutInner({ children, lang, dict }) {
   let shouldReduceMotion = useReducedMotion()
   const { navigateTo } = useCurveNavigation()
   const homeHref = `/${lang}`
+  // Нүүр хуудсанд hero цагаан картын дээд ирмэгээс эхэлж, header зургийн дээр байрлана
+  const isHome = pathname === homeHref || pathname === `${homeHref}/`
 
   useEffect(() => {
     if (lang) {
@@ -515,6 +521,7 @@ function RootLayoutInner({ children, lang, dict }) {
             dict={dict}
             expanded={expanded}
             pathname={pathname}
+            overHero={isHome}
           />
         </div>
 
@@ -569,10 +576,16 @@ function RootLayoutInner({ children, lang, dict }) {
 
       <div
         style={{ borderTopLeftRadius: 40, borderTopRightRadius: 40 }}
-        className="relative flex flex-auto overflow-hidden bg-white pt-6 sm:pt-14"
+        className={clsx(
+          'relative flex flex-auto overflow-hidden bg-white',
+          !isHome && 'pt-6 sm:pt-14'
+        )}
       >
         <div
-          className="relative isolate flex w-full flex-col pt-9"
+          className={clsx(
+            'relative isolate flex w-full flex-col',
+            !isHome && 'pt-9'
+          )}
         >
           <GridPattern
             className="absolute inset-x-0 -top-14 -z-10 h-[1000px] w-full fill-neutral-50 stroke-neutral-950/5 [mask-image:linear-gradient(to_bottom_left,white_40%,transparent_50%)]"

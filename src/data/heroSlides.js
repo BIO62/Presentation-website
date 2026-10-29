@@ -9,6 +9,7 @@
 //    Доод талын 01 ── 05 явцын зураас слайдын тоонд автоматаар тохирно.
 //      {
 //        image: imageNew,
+//        focus: '50% 40%',                // (заавал биш) зургийн гол хэсэг (object-position); үндсэн нь '50% 50%'
 //        tag: { mn: '...', ru: '...', en: '...' },    // (заавал биш) гарчгийн дээрх жижиг шошго
 //        title: { mn: '...', ru: '...', en: '...' },  // тайлбар
 //        href: '/process',                // (заавал биш) хэлгүй зам; /mn, /ru, /en автоматаар нэмэгдэнэ
@@ -24,6 +25,8 @@ import imageHero05 from '@/images/site/hero/hero-05-aguulah.jpg'
 export const heroSlides = [
   {
     image: imageHero01,
+    focus: '50% 30%',
+    href: '/contact',
     title: {
       mn: 'Тара центр дэх салбар дэлгүүр',
       ru: 'Фирменный магазин в Тара центре',
@@ -32,6 +35,8 @@ export const heroSlides = [
   },
   {
     image: imageHero02,
+    focus: '50% 45%',
+    href: '/contact',
     title: {
       mn: 'Сансар E-mart салбар',
       ru: 'Филиал в E-mart Сансар',
@@ -40,6 +45,8 @@ export const heroSlides = [
   },
   {
     image: imageHero03,
+    focus: '38% 25%',
+    href: '/process',
     title: {
       mn: 'ESTEL Academy Mongolia',
       ru: 'ESTEL Academy Mongolia',
@@ -48,6 +55,8 @@ export const heroSlides = [
   },
   {
     image: imageHero04,
+    focus: '50% 45%',
+    href: '/news/academy-11-sar-khuvaari',
     title: {
       mn: 'Мэргэжлийн сургалт, гэрчилгээ олголт',
       ru: 'Профессиональное обучение и сертификация',
@@ -56,6 +65,8 @@ export const heroSlides = [
   },
   {
     image: imageHero05,
+    focus: '50% 50%',
+    href: '/about',
     title: {
       mn: 'Төв агуулах, түгээлтийн сүлжээ',
       ru: 'Центральный склад и дистрибуция',
@@ -68,6 +79,7 @@ export const heroSlides = [
 export function getHeroSlides(lang) {
   return heroSlides.map((slide) => ({
     image: slide.image,
+    focus: slide.focus ?? null,
     tag: slide.tag ? slide.tag[lang] ?? slide.tag.mn : null,
     title: slide.title[lang] ?? slide.title.mn,
     href: slide.href ? `/${lang}${slide.href}` : null,

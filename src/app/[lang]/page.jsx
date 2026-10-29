@@ -215,7 +215,7 @@ export default async function Home({ params }) {
       <HeroSlider
         slides={getHeroSlides(lang)}
         labels={dict.hero.slider}
-        className="relative z-20 mt-6 sm:mt-8"
+        className="relative z-20"
       />
 
       <NewsSection
