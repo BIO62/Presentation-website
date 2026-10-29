@@ -10,13 +10,13 @@
 // 5. `mapQuery`: Google Maps-д хайх үг ("Газрын зураг ↗" холбоос үүгээр нээгдэнэ).
 // 6. `isNew: true` бол нэрийн хажууд "Шинэ" шошго гарна. `published: false` бол харагдахгүй.
 
+import branchChinggis from '@/images/site/branches/branch-chinggis.jpg'
 import branchBayangol from '@/images/site/branches/branch-bayangol.jpg'
 import branchDarkhan from '@/images/site/branches/branch-darkhan.jpg'
 import branchErdenet from '@/images/site/branches/branch-erdenet.jpg'
 import branchIkhDelguur from '@/images/site/branches/branch-ikh-delguur.jpg'
 import branchTara from '@/images/site/branches/branch-tara.jpg'
 import branchUrangan from '@/images/site/branches/branch-urangan.jpg'
-import retailSansar from '@/images/site/retail/retail-04-sansar.jpg'
 
 const UB = { mn: 'Улаанбаатар', ru: 'Улан-Батор', en: 'Ulaanbaatar' }
 
@@ -46,12 +46,20 @@ export const branches = [
   {
     id: 'sansar',
     city: UB,
-    name: { mn: 'Сансар E-mart', ru: 'E-mart Сансар', en: 'E-mart Sansar' },
+    name: {
+      mn: 'Чингисийн Emart (Сансар)',
+      ru: 'Emart Чингис (Сансар)',
+      en: 'Emart Chinggis (Sansar)',
+    },
     location: { mn: '2 давхар', ru: '2 этаж', en: '2nd floor' },
     phone: null,
-    hours: null,
-    image: retailSansar,
-    mapQuery: 'E-mart Sansar Ulaanbaatar',
+    hours: {
+      mn: 'Даваа–Ням 10:00–22:00',
+      ru: 'Пн–Вс 10:00–22:00',
+      en: 'Mon–Sun 10:00–22:00',
+    },
+    image: branchChinggis,
+    mapQuery: 'Emart Chinggis Sansar Ulaanbaatar',
     isNew: false,
     published: true,
   },
