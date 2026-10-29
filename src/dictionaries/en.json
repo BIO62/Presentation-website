@@ -382,5 +382,11 @@
     "next": "Next news",
     "back": "All news",
     "facebook": "View on Facebook"
+  },
+  "branches": {
+    "title": "Our stores",
+    "map": "Map",
+    "new": "New",
+    "all": "All stores"
   }
 }

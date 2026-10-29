@@ -165,7 +165,7 @@ function OnlineShops({ phoneLabel }) {
   )
 }
 
-function Services({ dict }) {
+function Services({ dict, lang }) {
   return (
     <Container className="mt-24 sm:mt-32 lg:mt-40">
       <div className="space-y-20 sm:space-y-24 lg:space-y-32">
@@ -192,6 +192,15 @@ function Services({ dict }) {
                     <p className="mt-6 text-base leading-relaxed text-neutral-600 sm:text-lg">
                       {withHighlight(service.description, service.highlight)}
                     </p>
+                    {key === 'retail' && (
+                      <Link
+                        href={`/${lang}/contact#branches`}
+                        className="mt-8 inline-flex items-center gap-x-1.5 text-base font-semibold text-brand-blue transition hover:text-neutral-950"
+                      >
+                        {dict.branches.all}
+                        <span aria-hidden="true">→</span>
+                      </Link>
+                    )}
                     {key === 'online' && (
                       <OnlineShops phoneLabel={service.orderPhone} />
                     )}
@@ -274,7 +283,7 @@ export default async function Home({ params }) {
         lang={lang}
       />
 
-      <Services dict={dict} />
+      <Services dict={dict} lang={lang} />
 
       <ContactSection dict={dict} lang={lang} />
     </>

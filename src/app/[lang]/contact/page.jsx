@@ -1,12 +1,14 @@
 import Link from 'next/link'
 
 import { Border } from '@/components/Border'
+import { BranchList } from '@/components/BranchList'
 import { ContactForm } from '@/components/ContactForm'
 import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
 import { Offices } from '@/components/Offices'
 import { PageIntro } from '@/components/PageIntro'
 import { SocialMedia } from '@/components/SocialMedia'
+import { getBranchGroups } from '@/data/branches'
 import { getDictionary, locales } from '@/dictionaries/index'
 
 export async function generateStaticParams() {
@@ -81,6 +83,12 @@ export default async function Contact({ params }) {
           <ContactDetails dict={dict} />
         </div>
       </Container>
+
+      <BranchList
+        groups={getBranchGroups(lang)}
+        labels={dict.branches}
+        className="mt-24 sm:mt-32 lg:mt-40"
+      />
     </>
   )
 }
