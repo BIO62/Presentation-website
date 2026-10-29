@@ -41,11 +41,13 @@ export function Logo({
   filled = false,
   fillOnHover = false,
   lang = 'en',
+  onDark = false, // зураг/бараан дэвсгэр дээр: тэмдэг өнгөөрөө, бичиг цагаан
   ...props
 }) {
   // Монгол хэл дээр кирилл "ТЭНГЭРИЙН ИЛГЭЭМЖ" лого, бусад хэл дээр латин лого.
   let isMn = lang === 'mn'
   let src = isMn ? '/logo-color-mn-v2.png' : variant === 'color' ? '/logo-color.png' : '/logo.png'
+  if (onDark) src = isMn ? '/logo-color-mn-v2-ondark.png' : '/logo-color-ondark.png'
   let dimensions = isMn ? { width: 4195, height: 1170 } : { width: 882, height: 255 }
   let isWhite = invert || variant === 'white'
 

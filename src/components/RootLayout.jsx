@@ -173,7 +173,7 @@ function TopBar({ lang = 'mn', dict, expanded, pathname, overHero = false }) {
         navigateTo(homeHref)
       }}
     >
-      <Logo filled={logoHovered} lang={lang} />
+      <Logo filled={logoHovered} lang={lang} onDark={overHero} />
     </Link>
   )
 
