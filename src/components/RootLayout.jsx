@@ -199,39 +199,73 @@ function TopBar({ lang = 'mn', dict, expanded, pathname, overHero = false }) {
         </ul>
       </div>
 
-      {/* Утас: лого | Холбоо барих. Нүүр хуудсанд зургийн дээр liquid glass самбар */}
+      {/* Утас: Apple VisionOS маягийн тунгалаг Liquid Glass Capsule (Гол руугаа бүрэн тунгалаг) */}
       <div
         className={clsx(
-          'flex items-center justify-between lg:hidden',
-          overHero &&
-            '-mx-3 rounded-2xl bg-white/10 px-3 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_8px_24px_rgba(0,0,0,0.25)] ring-1 ring-white/25'
+          'relative flex items-center justify-between lg:hidden overflow-hidden',
+          overHero && [
+            '-mx-2 sm:mx-0 rounded-full px-4 py-2 sm:px-5 sm:py-2.5',
+            'border border-white/20 border-t-white/50 border-b-white/10',
+            'shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.5),0_8px_32px_-12px_rgba(0,0,0,0.25)]',
+          ]
         )}
-        // Inline: autoprefixer-ийн browserslist нь -webkit- хувилбарыг хасдаг тул хуучин iPhone-д зориулж шууд бичнэ
-        style={
-          overHero
-            ? {
-                backdropFilter: 'blur(18px) saturate(160%)',
-                WebkitBackdropFilter: 'blur(18px) saturate(160%)',
-              }
-            : undefined
-        }
       >
-        <div className="[&_img]:h-8">
+        {/* Гол руугаа бүрэн тунгалаг уусдаг шилэн дэвсгэр + blur маск */}
+        {overHero && (
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 rounded-full"
+            style={{
+              background:
+                'linear-gradient(90deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.04) 26%, rgba(255,255,255,0) 44%, rgba(255,255,255,0) 56%, rgba(255,255,255,0.04) 74%, rgba(255,255,255,0.16) 100%)',
+              backdropFilter: 'blur(16px) saturate(180%) brightness(110%)',
+              WebkitBackdropFilter: 'blur(16px) saturate(180%) brightness(110%)',
+              maskImage:
+                'linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.35) 28%, rgba(0,0,0,0) 44%, rgba(0,0,0,0) 56%, rgba(0,0,0,0.35) 72%, rgba(0,0,0,1) 100%)',
+              WebkitMaskImage:
+                'linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.35) 28%, rgba(0,0,0,0) 44%, rgba(0,0,0,0) 56%, rgba(0,0,0,0.35) 72%, rgba(0,0,0,1) 100%)',
+            }}
+          />
+        )}
+
+        {/* Дээд талын нарийн шилэн гялбаа / glossy reflection (зах руугаа туяатай, голдоо задгай) */}
+        {overHero && (
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 top-0 h-1/2 rounded-t-full opacity-60"
+            style={{
+              background:
+                'linear-gradient(90deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.05) 25%, transparent 45%, transparent 55%, rgba(255,255,255,0.05) 75%, rgba(255,255,255,0.25) 100%)',
+            }}
+          />
+        )}
+
+        {/* Лого */}
+        <div className="relative z-10 flex items-center [&_img]:h-7 sm:[&_img]:h-8">
           <HeaderReveal entered={entered}>{logo}</HeaderReveal>
         </div>
-        <ul role="list">
-          <TopBarLink
-            href={`/${lang}/contact`}
-            index={0}
-            small
-            expanded={expanded}
-            entered={entered}
-            overHero={overHero}
-            active={isActive(`/${lang}/contact`)}
-          >
-            {dict?.footer?.contactLink ?? 'Холбоо барих'}
-          </TopBarLink>
-        </ul>
+
+        {/* Холбоо барих: Тунгалаг Glass Pill товч */}
+        <div className="relative z-10 flex items-center">
+          <HeaderReveal entered={entered} delay={0.08}>
+            <Link
+              href={`/${lang}/contact`}
+              onClick={(e) => {
+                e.preventDefault()
+                navigateTo(`/${lang}/contact`)
+              }}
+              className={clsx(
+                'group inline-flex items-center rounded-full px-3 py-1 sm:px-3.5 sm:py-1.5 transition-all',
+                overHero
+                  ? 'bg-white/12 hover:bg-white/22 border border-white/25 active:scale-95 text-white shadow-sm'
+                  : 'text-neutral-950 hover:text-neutral-700',
+                'font-condensed text-xs sm:text-sm font-semibold uppercase tracking-wider'
+              )}
+            >
+              <RollText>{dict?.footer?.contactLink ?? 'Холбоо барих'}</RollText>
+            </Link>
+          </HeaderReveal>
+        </div>
       </div>
     </Container>
   )
