@@ -107,7 +107,8 @@
     },
     "officeDescription": "You can visit our office in person or contact us by phone below to submit a dealer application, wholesale order, or training registration.",
     "phoneTitle": "Phone Number",
-    "followTitle": "Follow Us"
+    "followTitle": "Follow Us",
+    "emailTitle": "Email"
   },
   "footer": {
     "brands": "Brands",
@@ -134,12 +135,6 @@
   },
   "about": {
     "eyebrow": "About Us",
-    "title": "Global Brands in the Mongolian Market",
-    "intro1": "Since 2013, we have operated as the official distributor of international brands, delivering certified world-class products to consumers and beauty professionals in Mongolia through official channels.",
-    "intro2": "We are a distribution company that officially imports, distributes, and sustainably develops international brands in Mongolia. Beyond importing, we comprehensively provide brand marketing, sales, logistics, customer consulting, professional training, and partner support.",
-    "intro3": "Today we officially represent the ESTEL and SYNERGETIC brands in Mongolia, making their products accessible to consumers and industry professionals while steadily developing each brand's distinct character and value in the Mongolian market.",
-    "intro4": "For us, a brand is not just something to sell: we focus on positioning it correctly in the market and building its value over the long term. That is why, beyond sales and distribution, we develop professional training, customer advice, partner support and long-term partnerships as an integral part of our work.",
-    "intro4Highlight": "positioning it correctly in the market and building its value over the long term",
     "mission": {
       "title": "Our Mission",
       "text": "To bring world-class quality and standards closer to Mongolian consumers and to build long-term partnerships and sustainable growth founded on trust between brands, partners and customers.",

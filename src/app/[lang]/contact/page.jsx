@@ -11,6 +11,8 @@ import { SocialMedia } from '@/components/SocialMedia'
 import { getBranchGroups } from '@/data/branches'
 import { getDictionary, locales } from '@/dictionaries/index'
 
+const COMPANY_EMAIL = 'info@tengeriinilgeemj.mn'
+
 export async function generateStaticParams() {
   return locales.map((lang) => ({ lang }))
 }
@@ -55,6 +57,20 @@ function ContactDetails({ dict }) {
             </div>
           ))}
         </dl>
+      </Border>
+
+      <Border className="mt-16 pt-16">
+        <h2 className="font-display text-base font-semibold text-neutral-950">
+          {c.emailTitle}
+        </h2>
+        <p className="mt-6 text-sm">
+          <a
+            href={`mailto:${COMPANY_EMAIL}`}
+            className="text-neutral-600 hover:text-neutral-950"
+          >
+            {COMPANY_EMAIL}
+          </a>
+        </p>
       </Border>
 
       <Border className="mt-16 pt-16">
