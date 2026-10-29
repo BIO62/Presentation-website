@@ -9,8 +9,10 @@ import { HeroIntro } from '@/components/HeroIntro'
 import { HeroSlider } from '@/components/HeroSlider'
 import { HomeStats } from '@/components/HomeStats'
 import { ImageSlider } from '@/components/ImageSlider'
+import { NewsSection } from '@/components/NewsSection'
 import { TestimonialRotator } from '@/components/TestimonialRotator'
 import { getHeroSlides } from '@/data/heroSlides'
+import { getNews } from '@/data/news'
 import { serviceGalleries } from '@/data/serviceGalleries'
 import { getDictionary, locales } from '@/dictionaries/index'
 import logoEstel from '@/images/clients/estel/logo-light.png'
@@ -181,7 +183,6 @@ function Services({ dict }) {
                     images={serviceGalleries[key]}
                     alt={service.title}
                     labels={dict.services.slider}
-                    placeholder={String(i + 1).padStart(2, '0')}
                     className={clsx('min-w-0', i % 2 === 1 && 'lg:order-2')}
                   />
                   <div className="min-w-0">
@@ -215,6 +216,12 @@ export default async function Home({ params }) {
         slides={getHeroSlides(lang)}
         labels={dict.hero.slider}
         className="relative z-20 mt-6 sm:mt-8"
+      />
+
+      <NewsSection
+        items={getNews(lang)}
+        labels={dict.news}
+        className="mt-16 sm:mt-24"
       />
 
       <div className="relative overflow-x-clip overflow-y-visible">

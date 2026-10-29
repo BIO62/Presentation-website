@@ -1,62 +1,66 @@
 // Нүүр хуудасны дээд хэсгийн hero слайдер.
 //
 // Шинэ слайд хэрхэн нэмэх вэ:
-// 1. Зургаа src/images/ дотор хуулна (өргөн, хэвтээ зураг хамгийн тохиромжтой —
-//    desktop дээр 21:9, утсан дээр 4:3 харьцаагаар тайрагдана).
+// 1. Зургаа src/images/site/hero/ дотор хуулна (өргөн, хэвтээ зураг хамгийн тохиромжтой —
+//    дэлгэцийн ирмэг хүртэл дүүргэж, утсан дээр голын хэсэг нь харагдана).
 // 2. Энэ файлын дээд хэсэгт import мөр нэмнэ:
-//      import imageNew from '@/images/new-photo.jpg'
+//      import imageNew from '@/images/site/hero/hero-06-new.jpg'
 // 3. Доорх `heroSlides` массивт шинэ объект нэмнэ. Массив дахь дараалал = слайдын дараалал.
+//    Доод талын 01 ── 05 явцын зураас слайдын тоонд автоматаар тохирно.
 //      {
 //        image: imageNew,
-//        position: 'center',              // (заавал биш) зураг тайрах цэг, жишээ нь 'center 30%'
-//        tag: { mn: '...', ru: '...', en: '...' },    // зургийн доорх жижиг шошго
-//        title: { mn: '...', ru: '...', en: '...' },  // нэг мөр гарчиг
-//        href: '/blog/...',               // (заавал биш) хэлгүй зам; /mn, /ru, /en автоматаар нэмэгдэнэ
+//        tag: { mn: '...', ru: '...', en: '...' },    // (заавал биш) гарчгийн дээрх жижиг шошго
+//        title: { mn: '...', ru: '...', en: '...' },  // тайлбар
+//        href: '/process',                // (заавал биш) хэлгүй зам; /mn, /ru, /en автоматаар нэмэгдэнэ
 //      }
-//    Блогийн нийтлэлийн гарчгийг шинээр бичихгүй, доорх шиг dictionary-аас авна.
 // Логотой, өөр компанийн stock зураг бүү ашигла.
 
-import en from '@/dictionaries/en.json'
-import mn from '@/dictionaries/mn.json'
-import ru from '@/dictionaries/ru.json'
-import imageEstelHero from '@/app/[lang]/work/estel/hero.jpg'
-import imageEstelAcademySession from '@/images/estel-academy-session.jpg'
-import imageHairAcademyTraining from '@/images/hair-academy-training.jpg'
-
-function blogTitle(slug) {
-  return {
-    mn: mn.blog[slug].title,
-    ru: ru.blog[slug].title,
-    en: en.blog[slug].title,
-  }
-}
+import imageHero01 from '@/images/site/hero/hero-01-tara-salbar.jpg'
+import imageHero02 from '@/images/site/hero/hero-02-sansar-emart.jpg'
+import imageHero03 from '@/images/site/hero/hero-03-estel-academy.jpg'
+import imageHero04 from '@/images/site/hero/hero-04-surgalt-gerchilgee.jpg'
+import imageHero05 from '@/images/site/hero/hero-05-aguulah.jpg'
 
 export const heroSlides = [
   {
-    image: imageHairAcademyTraining,
-    position: 'center 45%',
-    tag: { mn: 'ESTEL ACADEMY', ru: 'ESTEL ACADEMY', en: 'ESTEL ACADEMY' },
+    image: imageHero01,
     title: {
-      mn: 'Онол, практик хосолсон мэргэжлийн сургалт',
-      ru: 'Профессиональное обучение, сочетающее теорию и практику',
-      en: 'Professional training that combines theory and practice',
+      mn: 'Тара центр дэх салбар дэлгүүр',
+      ru: 'Фирменный магазин в Тара центре',
+      en: 'Our store at Tara Center',
     },
-    href: '/process',
   },
   {
-    image: imageEstelAcademySession,
-    position: 'center 40%',
-    tag: { mn: '2024.10.10–11', ru: '2024.10.10–11', en: '2024.10.10–11' },
-    title: blogTitle('estel-scalp-diagnosis-event'),
-    href: '/blog/estel-scalp-diagnosis-event',
+    image: imageHero02,
+    title: {
+      mn: 'Сансар E-mart салбар',
+      ru: 'Филиал в E-mart Сансар',
+      en: 'Sansar E-mart branch',
+    },
   },
   {
-    // Түр зураг: SYNERGETIC-ийн шагналын зураг ирэхээр солино.
-    image: imageEstelHero,
-    position: 'center 55%',
-    tag: { mn: 'SYNERGETIC', ru: 'SYNERGETIC', en: 'SYNERGETIC' },
-    title: blogTitle('synergetic-golden-bear-award'),
-    href: '/blog/synergetic-golden-bear-award',
+    image: imageHero03,
+    title: {
+      mn: 'ESTEL Academy Mongolia',
+      ru: 'ESTEL Academy Mongolia',
+      en: 'ESTEL Academy Mongolia',
+    },
+  },
+  {
+    image: imageHero04,
+    title: {
+      mn: 'Мэргэжлийн сургалт, гэрчилгээ олголт',
+      ru: 'Профессиональное обучение и сертификация',
+      en: 'Professional training & certification',
+    },
+  },
+  {
+    image: imageHero05,
+    title: {
+      mn: 'Төв агуулах, түгээлтийн сүлжээ',
+      ru: 'Центральный склад и дистрибуция',
+      en: 'Central warehouse & distribution',
+    },
   },
 ]
 
@@ -64,8 +68,7 @@ export const heroSlides = [
 export function getHeroSlides(lang) {
   return heroSlides.map((slide) => ({
     image: slide.image,
-    position: slide.position ?? 'center',
-    tag: slide.tag[lang] ?? slide.tag.mn,
+    tag: slide.tag ? slide.tag[lang] ?? slide.tag.mn : null,
     title: slide.title[lang] ?? slide.title.mn,
     href: slide.href ? `/${lang}${slide.href}` : null,
   }))

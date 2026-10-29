@@ -373,5 +373,11 @@
     "work": "Tengeriin Ilgeemj LLC is the official distributor of ESTEL and SYNERGETIC brands in Mongolia.",
     "contact": "Contact Tengeriin Ilgeemj LLC — send your inquiry about dealership, wholesale orders, training, or other questions.",
     "siteName": "Tengeriin Ilgeemj"
+  },
+  "news": {
+    "title": "News",
+    "more": "Read more",
+    "prev": "Previous news",
+    "next": "Next news"
   }
 }

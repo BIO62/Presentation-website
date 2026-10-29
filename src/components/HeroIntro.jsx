@@ -9,7 +9,7 @@ const EASE = [0.22, 1, 0.36, 1]
 
 export function HeroIntro({ dict }) {
   const title = dict?.hero?.title ?? 'АЛБАН ЁСНЫ ДИСТРИБЬЮТЕР'
-  const description = dict?.hero?.description ?? 'Албан ёсны эрхтэйгээр брэндийн бүтээгдэхүүн, үйлчилгээг Монголын зах зээлд хүргэн ажиллаж байна.'
+  const description = dict?.hero?.description ?? 'Албан ёсны эрхтэйгээр брэнд бүтээгдэхүүн, үйлчилгээг Монголын зах зээлд хүргэн ажиллаж байна.'
 
   const ref = useRef(null)
   const reduceMotion = useReducedMotion()

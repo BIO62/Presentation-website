@@ -33,10 +33,12 @@ function Caption({ slide, moreLabel, reduceMotion }) {
         {...linkProps}
         className="group block rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-4 focus-visible:ring-offset-transparent"
       >
-        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-yellow sm:text-xs">
-          {slide.tag}
-        </p>
-        <p className="mt-2 line-clamp-3 font-display text-xl font-semibold leading-snug text-white [text-wrap:balance] sm:mt-3 sm:line-clamp-2 sm:text-2xl lg:text-[1.875rem] lg:leading-tight">
+        {slide.tag && (
+          <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-yellow sm:mb-3 sm:text-xs">
+            {slide.tag}
+          </p>
+        )}
+        <p className="line-clamp-3 font-display text-xl font-semibold leading-snug text-white [text-wrap:balance] sm:line-clamp-2 sm:text-2xl lg:text-[1.875rem] lg:leading-tight">
           {slide.title}
         </p>
         {slide.href && (

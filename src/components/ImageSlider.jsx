@@ -43,7 +43,6 @@ export function ImageSlider({
   alt = '',
   sizes = '(min-width: 1024px) 36rem, 100vw',
   labels = { prev: 'Өмнөх зураг', next: 'Дараагийн зураг', goTo: 'Зураг' },
-  placeholder,
   className,
 }) {
   const hasMany = images.length > 1
@@ -80,21 +79,8 @@ export function ImageSlider({
     }
   }, [embla, onSelect])
 
-  // Зураг хараахан ороогүй үед: дугаартай цэвэрхэн placeholder
-  if (images.length === 0) {
-    return (
-      <div className={className}>
-        <div
-          aria-hidden="true"
-          className="flex aspect-[4/3] items-center justify-center rounded-3xl bg-brand-blue/[0.07]"
-        >
-          <span className="font-display text-7xl font-semibold text-brand-blue/20 sm:text-8xl">
-            {placeholder}
-          </span>
-        </div>
-      </div>
-    )
-  }
+  // Зураг байхгүй бол юу ч харуулахгүй
+  if (images.length === 0) return null
 
   return (
     <div className={className}>
