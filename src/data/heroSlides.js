@@ -26,7 +26,6 @@ export const heroSlides = [
   {
     image: imageHero01,
     focus: '50% 30%',
-    href: '/contact',
     title: {
       mn: 'Тара центр дэх салбар дэлгүүр',
       ru: 'Фирменный магазин в Тара центре',
@@ -36,7 +35,6 @@ export const heroSlides = [
   {
     image: imageHero02,
     focus: '50% 45%',
-    href: '/contact',
     title: {
       mn: 'Сансар E-mart салбар',
       ru: 'Филиал в E-mart Сансар',
@@ -46,7 +44,6 @@ export const heroSlides = [
   {
     image: imageHero03,
     focus: '38% 25%',
-    href: '/process',
     title: {
       mn: 'ESTEL Academy Mongolia',
       ru: 'ESTEL Academy Mongolia',
@@ -56,7 +53,6 @@ export const heroSlides = [
   {
     image: imageHero04,
     focus: '50% 45%',
-    href: '/news/academy-11-sar-khuvaari',
     title: {
       mn: 'Мэргэжлийн сургалт, гэрчилгээ олголт',
       ru: 'Профессиональное обучение и сертификация',
@@ -65,8 +61,7 @@ export const heroSlides = [
   },
   {
     image: imageHero05,
-    focus: '50% 50%',
-    href: '/about',
+    focus: '57% 45%',
     title: {
       mn: 'Төв агуулах, түгээлтийн сүлжээ',
       ru: 'Центральный склад и дистрибуция',
