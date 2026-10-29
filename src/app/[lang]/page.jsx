@@ -231,7 +231,7 @@ export default async function Home({ params }) {
         items={getNews(lang)}
         labels={dict.news}
         allHref={`/${lang}/blog`}
-        className="mt-16 sm:mt-24"
+        className="mt-10 sm:mt-14 lg:mt-16"
       />
 
       <div className="relative overflow-x-clip overflow-y-visible">

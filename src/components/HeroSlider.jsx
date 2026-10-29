@@ -38,7 +38,7 @@ function Caption({ slide, moreLabel, reduceMotion }) {
             {slide.tag}
           </p>
         )}
-        <p className="line-clamp-3 font-display text-xl font-semibold leading-snug text-white [text-wrap:balance] sm:line-clamp-2 sm:text-2xl lg:text-[1.875rem] lg:leading-tight">
+        <p className="line-clamp-2 font-display text-base font-semibold leading-snug text-white [text-wrap:balance] sm:text-2xl lg:text-[1.875rem] lg:leading-tight">
           {slide.title}
         </p>
         {slide.href && (
@@ -162,7 +162,7 @@ export function HeroSlider({ slides, labels, className }) {
       {/* Зураг: ирмэгээс ирмэг хүртэл */}
       <div
         ref={viewportRef}
-        className="relative h-[calc(100vw*1.15+84px)] min-h-0 overflow-hidden bg-neutral-950 md:h-[min(92vh,860px)]"
+        className="relative h-[calc(100vw*0.75+84px)] min-h-0 overflow-hidden bg-neutral-950 md:h-[min(92vh,860px)]"
       >
         <div className="flex h-full touch-pan-y">
           {slides.map((slide, i) => (
@@ -177,7 +177,7 @@ export function HeroSlider({ slides, labels, className }) {
                 className={clsx(
                   'absolute inset-0',
                   started && i === selected
-                    ? 'scale-[1.06] transition-transform duration-[6000ms] ease-linear'
+                    ? 'scale-100 transition-transform duration-[6000ms] ease-linear md:scale-[1.06]'
                     : 'scale-100 transition-transform delay-700 duration-0'
                 )}
               >
@@ -212,7 +212,7 @@ export function HeroSlider({ slides, labels, className }) {
       </div>
 
       {/* Тайлбар + явцын зураас (зургийн дотор, Container-ийн хэмжээгээр) */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 pb-6 sm:pb-10">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 pb-4 sm:pb-10">
         <Container>
           <div className="pointer-events-auto">
             <AnimatePresence mode="wait" initial={false}>
@@ -226,7 +226,7 @@ export function HeroSlider({ slides, labels, className }) {
           </div>
 
           {hasMany && (
-            <div className="pointer-events-auto mt-6 flex items-center gap-x-4 sm:mt-8">
+            <div className="pointer-events-auto mt-3 flex items-center gap-x-4 sm:mt-8">
               <span className="font-display text-sm font-semibold tabular-nums text-white">
                 {pad(selected + 1)}
               </span>
