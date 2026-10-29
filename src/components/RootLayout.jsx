@@ -199,8 +199,23 @@ function TopBar({ lang = 'mn', dict, expanded, pathname, overHero = false }) {
         </ul>
       </div>
 
-      {/* Утас: лого | Холбоо барих */}
-      <div className="flex items-center justify-between lg:hidden">
+      {/* Утас: лого | Холбоо барих. Нүүр хуудсанд зургийн дээр liquid glass самбар */}
+      <div
+        className={clsx(
+          'flex items-center justify-between lg:hidden',
+          overHero &&
+            '-mx-3 rounded-2xl bg-white/10 px-3 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_8px_24px_rgba(0,0,0,0.25)] ring-1 ring-white/25'
+        )}
+        // Inline: autoprefixer-ийн browserslist нь -webkit- хувилбарыг хасдаг тул хуучин iPhone-д зориулж шууд бичнэ
+        style={
+          overHero
+            ? {
+                backdropFilter: 'blur(18px) saturate(160%)',
+                WebkitBackdropFilter: 'blur(18px) saturate(160%)',
+              }
+            : undefined
+        }
+      >
         <div className="[&_img]:h-8">
           <HeaderReveal entered={entered}>{logo}</HeaderReveal>
         </div>
