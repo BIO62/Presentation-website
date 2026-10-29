@@ -1,13 +1,14 @@
-import { Border } from '@/components/Border'
+import Image from 'next/image'
+
 import { ContactSection } from '@/components/ContactSection'
 import { Container } from '@/components/Container'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { HomeStats } from '@/components/HomeStats'
-import { TeamCard } from '@/components/TeamCard'
 import { PageIntro } from '@/components/PageIntro'
 import { SectionIntro } from '@/components/SectionIntro'
 import { Timeline } from '@/components/Timeline'
 import { getDictionary, locales } from '@/dictionaries/index'
+import imageDirector from '@/images/site/about/director.jpg'
 
 export async function generateStaticParams() {
   return locales.map((lang) => ({ lang }))
@@ -19,19 +20,6 @@ export async function generateMetadata({ params }) {
     title: dict.about.eyebrow,
     description: dict.metadata.about,
   }
-}
-
-function withHighlight(text, highlight) {
-  let at = highlight ? text.indexOf(highlight) : -1
-  if (at === -1) return text
-
-  return (
-    <>
-      {text.slice(0, at)}
-      <strong className="font-semibold text-neutral-950">{highlight}</strong>
-      {text.slice(at + highlight.length)}
-    </>
-  )
 }
 
 function Mission({ mission }) {
@@ -61,7 +49,10 @@ function Mission({ mission }) {
 function History({ timeline }) {
   return (
     <>
-      <SectionIntro title={timeline.title} className="mt-24 sm:mt-32 lg:mt-40" />
+      <SectionIntro
+        title={timeline.title}
+        className="mt-24 sm:mt-32 lg:mt-40"
+      />
       <Container className="mt-16">
         <Timeline items={timeline.items} />
       </Container>
@@ -108,94 +99,45 @@ function Culture({ dict }) {
   )
 }
 
-function getTeam(lang, dict) {
-  const isRu = lang === 'ru'
-  const isEn = lang === 'en'
-
-  // image нь заавал биш: жинхэнэ зураг ирэхээр `image: { src: imagePerson }` нэмэхэд
-  // нэрийн эхний үсгийн avatar-ын оронд зураг гарна.
-  return [
-    {
-      title: dict.about.team.management,
-      people: [
-        {
-          name: isEn ? 'Oleg Tulin' : 'Тулин Олег',
-          role: isRu ? 'Генеральный директор' : isEn ? 'CEO' : 'Ерөнхий захирал',
-        },
-        {
-          name: 'Н. Өлзий-Хутаг',
-          role: isRu ? 'Исполнительный директор' : isEn ? 'Executive Director' : 'Гүйцэтгэх захирал',
-        },
-        {
-          name: isEn ? 'J. Nyamdorj' : 'Ж. Нямдорж',
-          role: isRu ? 'Заместитель директора' : isEn ? 'Deputy Director' : 'Орлогч захирал',
-        },
-        {
-          name: isEn ? 'B. Uranchimeg' : 'Б. Уранчимэг',
-          role: isRu ? 'Финансовый директор' : isEn ? 'Chief Financial Officer' : 'Санхүү хариуцсан захирал',
-        },
-        {
-          name: isEn ? 'D. Munkhbayar' : 'Д. Мөнхбаяр',
-          role: isRu ? 'Директор по развитию продаж и сервиса' : isEn ? 'Sales & Service Development Director' : 'Борлуулалт, үйлчилгээ хөгжил хариуцсан захирал',
-        },
-      ],
-    },
-    {
-      title: dict.about.team.managers,
-      people: [
-        {
-          name: isEn ? 'O. Zoljargal' : 'О. Золжаргал',
-          role: isRu ? 'Менеджер филиала в Дархане' : isEn ? 'Darkhan Branch Manager' : 'Дархан салбар хариуцсан менежер',
-        },
-        {
-          name: isEn ? 'M. Gereltuya' : 'М. Гэрэлтуяа',
-          role: isRu ? 'Менеджер филиала в Эрдэнэте' : isEn ? 'Erdenet Branch Manager' : 'Эрдэнэт салбар хариуцсан менежер',
-        },
-        {
-          name: isEn ? 'Ch. Dulamsuren' : 'Ч. Дуламсүрэн',
-          role: isRu ? 'Менеджер фирменных магазинов' : isEn ? 'Brand Store Manager' : 'Нэрийн дэлгүүр хариуцсан менежер',
-        },
-        {
-          name: isEn ? 'Kh. Otgonbaatar' : 'Х. Отгонбаатар',
-          role: isRu ? 'Старший технолог-преподаватель' : isEn ? 'Senior Technologist & Instructor' : 'Ахлах технологич багш',
-        },
-      ],
-    },
-  ]
-}
-
-function Team({ lang, dict }) {
-  const team = getTeam(lang, dict)
-
+// Захирлын мэндчилгээ: desktop-д зураг зүүн, захидал баруун; утсан дээр зураг дээр
+function DirectorGreeting({ greeting }) {
   return (
-    <Container className="mt-24 sm:mt-32 lg:mt-40">
-      <div className="space-y-24">
-        {team.map((group) => (
-          <FadeInStagger key={group.title}>
-            <Border as={FadeIn} />
-            <div className="grid grid-cols-1 gap-6 pt-12 sm:pt-16 lg:grid-cols-4 xl:gap-8">
-              <FadeIn>
-                <h2 className="whitespace-pre-line font-display text-2xl font-semibold text-neutral-950">
-                  {group.title}
-                </h2>
-              </FadeIn>
-              <div className="lg:col-span-3">
-                <ul
-                  role="list"
-                  className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-8"
-                >
-                  {group.people.map((person) => (
-                    <li key={person.name}>
-                      <FadeIn>
-                        <TeamCard person={person} />
-                      </FadeIn>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </FadeInStagger>
-        ))}
+    <Container className="mt-16 sm:mt-20">
+      <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
+        <FadeIn className="lg:col-span-5">
+          <div className="lg:sticky lg:top-8">
+            <Image
+              src={imageDirector}
+              alt={`${greeting.name}, ${greeting.role}`}
+              priority
+              sizes="(min-width: 1024px) 28rem, (min-width: 640px) 24rem, 100vw"
+              className="w-full max-w-sm rounded-3xl bg-neutral-100 object-cover sm:max-w-md lg:max-w-none"
+            />
+            <p className="mt-6 font-display text-base font-semibold text-neutral-950">
+              {greeting.name}
+            </p>
+            <p className="mt-1 text-sm text-neutral-600">{greeting.role}</p>
+          </div>
+        </FadeIn>
+        <FadeIn className="lg:col-span-7">
+          <p className="font-display text-xl font-semibold text-neutral-950 sm:text-2xl">
+            {greeting.salutation}
+          </p>
+          <div className="mt-8 space-y-6 text-base text-neutral-600 sm:text-lg">
+            {greeting.paragraphs.map((paragraph, i) => (
+              <p key={i}>{paragraph}</p>
+            ))}
+          </div>
+          <p className="mt-8 font-display text-lg font-semibold text-neutral-950 sm:text-xl">
+            {greeting.closing}
+          </p>
+          <div className="mt-10 text-base text-neutral-600">
+            <p>{greeting.regards}</p>
+            <p className="mt-2 font-semibold text-neutral-950">
+              {greeting.role} {greeting.name}
+            </p>
+          </div>
+        </FadeIn>
       </div>
     </Container>
   )
@@ -207,13 +149,12 @@ export default async function About({ params }) {
 
   return (
     <>
-      <PageIntro eyebrow={dict.about.eyebrow} title={dict.about.title}>
-        <p>{dict.about.intro1}</p>
-        <div className="mt-10 max-w-2xl space-y-6 text-base">
-          <p>{dict.about.intro3}</p>
-          <p>{withHighlight(dict.about.intro4, dict.about.intro4Highlight)}</p>
-        </div>
-      </PageIntro>
+      <PageIntro
+        eyebrow={dict.about.eyebrow}
+        title={dict.about.greeting.title}
+      />
+
+      <DirectorGreeting greeting={dict.about.greeting} />
 
       <HomeStats
         stats={[
@@ -228,8 +169,6 @@ export default async function About({ params }) {
       <History timeline={dict.about.timeline} />
 
       <Culture dict={dict} />
-
-      <Team lang={lang} dict={dict} />
 
       <ContactSection dict={dict} lang={lang} />
     </>

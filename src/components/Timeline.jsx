@@ -22,16 +22,28 @@ function TimelineItem({ item, reduceMotion }) {
         className={clsx(
           'absolute left-0 top-[11px] h-[15px] w-[15px] rounded-full ring-2 transition duration-500 lg:left-[calc(13.5rem-7px)]',
           lit
-            ? 'scale-110 bg-brand-blue-light ring-brand-blue-light shadow-[0_0_0_6px_rgba(53,99,201,0.18),0_0_18px_rgba(53,99,201,0.55)]'
+            ? 'scale-110 bg-brand-blue-light shadow-[0_0_0_6px_rgba(53,99,201,0.18),0_0_18px_rgba(53,99,201,0.55)] ring-brand-blue-light'
             : 'bg-white ring-neutral-300'
         )}
       />
       <p className="whitespace-nowrap font-display text-3xl font-semibold text-neutral-950 lg:text-right">
         {item.year}
       </p>
-      <p className="text-lg text-neutral-600 sm:text-xl lg:pt-1">
-        {item.text}
-      </p>
+      <div className="lg:pt-1">
+        {item.title && (
+          <h3 className="font-display text-lg font-semibold text-neutral-950 sm:text-xl">
+            {item.title}
+          </h3>
+        )}
+        <p
+          className={clsx(
+            'text-neutral-600',
+            item.title ? 'mt-2 text-base sm:text-lg' : 'text-lg sm:text-xl'
+          )}
+        >
+          {item.text}
+        </p>
+      </div>
     </li>
   )
 }

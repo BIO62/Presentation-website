@@ -154,19 +154,23 @@
       "items": [
         {
           "year": "2013",
-          "text": "Tengeriin Ilgeemj LLC was founded"
+          "title": "The beginning",
+          "text": "Tengeriin Ilgeemj LLC was founded and began its operations."
         },
         {
           "year": "2019",
-          "text": "Became the official distributor of ESTEL Professional in Mongolia"
+          "title": "A new partnership",
+          "text": "Became the official distributor of ESTEL Professional in Mongolia, expanding into professional salons, beauty and hair care."
         },
         {
           "year": "2022",
-          "text": "Became the official distributor of SYNERGETIC"
+          "title": "Growth and development",
+          "text": "Became the official distributor of SYNERGETIC in Mongolia, broadening our product range and expanding our market presence."
         },
         {
           "year": "Today",
-          "text": "Bringing ESTEL and SYNERGETIC brands to all of Mongolia"
+          "title": "Shared value",
+          "text": "We bring ESTEL Professional and SYNERGETIC products and services to consumers across Mongolia, growing steadily on quality, professional expertise and long-term partnership."
         }
       ]
     },
@@ -208,6 +212,22 @@
     "team": {
       "management": "Management",
       "managers": "Managers\nOur Team"
+    },
+    "greeting": {
+      "title": "A message from our founder",
+      "salutation": "Dear partners and colleagues, warm greetings to you all.",
+      "paragraphs": [
+        "I believe that the value of any business is measured not only by today's achievements, but by the trust built over many years, the principles it consistently upholds, and the value it will create in the future.",
+        "Grounded in this belief, Tengeriin Ilgeemj LLC has grown with the aim of bringing world-class quality and standards closer to consumers in Mongolia.",
+        "For us, sustainable growth is not only about expanding the scale of our business. It is a responsibility: to earn our customers' trust, to contribute to our partners' development, to give our employees room to grow, and to create positive value for society.",
+        "That is why quality, responsibility, professional expertise, mutual respect and long-term partnership are the core principles of our work. We strive to put them into practice in our everyday work, in every decision we make and in every new idea we pursue.",
+        "Going forward, we will keep embracing change and every new opportunity, continually improve what we do, and grow together with our customers and partners. For us, the greatest success is not limited to today's results: it is creating value that will still be worthy of trust tomorrow.",
+        "I extend my heartfelt thanks to all our clients, partner organizations, colleagues and customers who have placed their trust in us, worked alongside us and contributed to our journey."
+      ],
+      "closing": "Let's value trust, uphold quality and grow through shared success.",
+      "regards": "Sincerely,",
+      "role": "Founder, Tengeriin Ilgeemj LLC",
+      "name": "Н. Өлзий-Хутаг"
     }
   },
   "process": {
