@@ -16,6 +16,7 @@ const routeLabels = {
     '/work/synergetic': 'SYNERGETIC',
     '/process': 'Үйл ажиллагаа',
     '/blog': 'Мэдээ мэдээлэл',
+    '/news': 'Мэдээ мэдээлэл',
     '/contact': 'Холбоо барих',
   },
   ru: {
@@ -26,6 +27,7 @@ const routeLabels = {
     '/work/synergetic': 'SYNERGETIC',
     '/process': 'Деятельность',
     '/blog': 'Новости',
+    '/news': 'Новости',
     '/contact': 'Контакты',
   },
   en: {
@@ -36,20 +38,28 @@ const routeLabels = {
     '/work/synergetic': 'SYNERGETIC',
     '/process': 'Our Business',
     '/blog': 'News',
+    '/news': 'News',
     '/contact': 'Contact',
   },
 }
 
+// Олдохгүй замд slug эсвэл англи зам биш, сайтын нэр гарна
+const siteNames = {
+  mn: 'Тэнгэрийн Илгээмж',
+  ru: 'Тэнгэрийн Илгээмж',
+  en: 'Tengeriin Ilgeemj',
+}
+
 function getRouteLabel(href) {
   if (!href) return '...'
-  const langMatch = href.match(/^\/(mn|ru|en)(\/|$)/)
+  const path = href.split(/[?#]/)[0]
+  const langMatch = path.match(/^\/(mn|ru|en)(\/|$)/)
   const lang = langMatch ? langMatch[1] : 'mn'
-  const pure = href.replace(/^\/(mn|ru|en)/, '') || '/'
-  return (
-    routeLabels[lang]?.[pure] ??
-    routeLabels.mn[pure] ??
-    (pure.slice(1).charAt(0).toUpperCase() + pure.slice(2))
-  )
+  const pure = path.replace(/^\/(mn|ru|en)/, '').replace(/\/+$/, '') || '/'
+  const labels = routeLabels[lang] ?? routeLabels.mn
+  // 1) бүтэн зам  2) эхний сегмент (/news/..., /blog/... → Мэдээ мэдээлэл; /work/... → Брэндүүд)  3) сайтын нэр
+  const firstSegment = '/' + pure.split('/')[1]
+  return labels[pure] ?? labels[firstSegment] ?? siteNames[lang] ?? siteNames.mn
 }
 
 function isHomeRoute(path) {
