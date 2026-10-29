@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import clsx from 'clsx'
 
-// "Н. Өлзий-Хутаг" → "НӨ", "Oleg Tulin" → "OT"
+// "Н. Өлзийхутаг" → "НӨ", "Oleg Tulin" → "OT"
 export function initials(name) {
   return name
     .split(/\s+/)
