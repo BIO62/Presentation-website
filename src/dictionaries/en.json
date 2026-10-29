@@ -378,6 +378,8 @@
     "title": "News",
     "more": "Read more",
     "prev": "Previous news",
-    "next": "Next news"
+    "next": "Next news",
+    "back": "All news",
+    "facebook": "View on Facebook"
   }
 }

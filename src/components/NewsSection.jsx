@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import clsx from 'clsx'
 import useEmblaCarousel from 'embla-carousel-react'
 
@@ -31,40 +32,36 @@ function ArrowButton({ direction, label, disabled, onClick }) {
   )
 }
 
+// Карт бүхэлдээ дотоод хуудас (/[lang]/news/[slug]) руу холбогдоно
 function NewsCard({ item, moreLabel }) {
   return (
-    <article className="flex h-full flex-col">
-      <div className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-neutral-100">
-        <Image
-          src={item.image}
-          alt={item.title}
-          fill
-          sizes="(min-width: 1024px) 24rem, (min-width: 640px) 50vw, 88vw"
-          className="object-cover"
-        />
-        <span className="absolute left-4 top-4 rounded-full bg-brand-yellow px-3 py-1 text-xs font-semibold text-neutral-950">
-          {item.category}
-        </span>
-      </div>
-      <time
-        dateTime={item.date}
-        className="mt-5 text-sm font-semibold tabular-nums text-neutral-500"
-      >
-        {item.dateLabel}
-      </time>
-      <h3 className="mt-2 line-clamp-2 font-display text-lg font-semibold text-neutral-950">
-        {item.title}
-      </h3>
-      <p className="mt-2 line-clamp-3 text-sm text-neutral-600">
-        {item.excerpt}
-      </p>
-      {item.link && (
-        <a
-          href={item.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group mt-4 inline-flex w-fit items-center gap-x-1.5 text-sm font-semibold text-brand-blue transition hover:text-neutral-950"
+    <article className="h-full">
+      <Link href={item.href} className="group flex h-full flex-col">
+        <div className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-neutral-100">
+          <Image
+            src={item.image}
+            alt={item.title}
+            fill
+            sizes="(min-width: 1024px) 24rem, (min-width: 640px) 50vw, 88vw"
+            className="object-cover"
+          />
+          <span className="absolute left-4 top-4 rounded-full bg-brand-yellow px-3 py-1 text-xs font-semibold text-neutral-950">
+            {item.category}
+          </span>
+        </div>
+        <time
+          dateTime={item.date}
+          className="mt-5 text-sm font-semibold tabular-nums text-neutral-500"
         >
+          {item.dateLabel}
+        </time>
+        <h3 className="mt-2 line-clamp-2 font-display text-lg font-semibold text-neutral-950">
+          {item.title}
+        </h3>
+        <p className="mt-2 line-clamp-3 text-sm text-neutral-600">
+          {item.excerpt}
+        </p>
+        <span className="mt-4 inline-flex w-fit items-center gap-x-1.5 text-sm font-semibold text-brand-blue transition group-hover:text-neutral-950">
           {moreLabel}
           <span
             aria-hidden="true"
@@ -72,8 +69,8 @@ function NewsCard({ item, moreLabel }) {
           >
             →
           </span>
-        </a>
-      )}
+        </span>
+      </Link>
     </article>
   )
 }
@@ -101,10 +98,24 @@ export function NewsSection({ items, labels, className }) {
     }
   }, [embla, update])
 
+  // "← Бүх мэдээ" (/[lang]#news) холбоосоор ирэхэд энэ хэсэг рүү гүйлгэнэ:
+  // хуудас хооронд шилжихэд Next.js #hash-ийг өөрөө гүйлгэдэггүй
+  useEffect(() => {
+    if (window.location.hash !== '#news') return
+    const timer = setTimeout(() => {
+      document.getElementById('news')?.scrollIntoView({ block: 'start' })
+    }, 150)
+    return () => clearTimeout(timer)
+  }, [])
+
   if (!items.length) return null
 
   return (
-    <section aria-labelledby="news-title" className={className}>
+    <section
+      id="news"
+      aria-labelledby="news-title"
+      className={clsx('scroll-mt-8', className)}
+    >
       <Container>
         <FadeIn className="flex items-end justify-between gap-x-6">
           <h2
@@ -136,7 +147,7 @@ export function NewsSection({ items, labels, className }) {
             <div className="-ml-6 flex touch-pan-y">
               {items.map((item) => (
                 <div
-                  key={item.id}
+                  key={item.slug}
                   className={clsx(
                     'min-w-0 flex-[0_0_88%] pl-6',
                     'sm:flex-[0_0_50%] lg:flex-[0_0_33.3333%]'
