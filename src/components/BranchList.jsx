@@ -16,7 +16,7 @@ function BranchCard({ branch, labels }) {
       )}
     >
       {branch.image && (
-        <div className="relative aspect-[4/3]">
+        <div className="relative aspect-square">
           <Image
             src={branch.image}
             alt={branch.name}

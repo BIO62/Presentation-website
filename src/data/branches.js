@@ -10,8 +10,13 @@
 // 5. `mapQuery`: Google Maps-д хайх үг ("Газрын зураг ↗" холбоос үүгээр нээгдэнэ).
 // 6. `isNew: true` бол нэрийн хажууд "Шинэ" шошго гарна. `published: false` бол харагдахгүй.
 
+import branchBayangol from '@/images/site/branches/branch-bayangol.jpg'
+import branchDarkhan from '@/images/site/branches/branch-darkhan.jpg'
+import branchErdenet from '@/images/site/branches/branch-erdenet.jpg'
+import branchIkhDelguur from '@/images/site/branches/branch-ikh-delguur.jpg'
+import branchTara from '@/images/site/branches/branch-tara.jpg'
+import branchUrangan from '@/images/site/branches/branch-urangan.jpg'
 import retailSansar from '@/images/site/retail/retail-04-sansar.jpg'
-import retailTara from '@/images/site/retail/retail-01-tara.jpg'
 
 const UB = { mn: 'Улаанбаатар', ru: 'Улан-Батор', en: 'Ulaanbaatar' }
 
@@ -22,10 +27,18 @@ export const branches = [
     id: 'tara',
     city: UB,
     name: { mn: 'Тара центр', ru: 'Тара центр', en: 'Tara Center' },
-    location: { mn: 'B-227 тоот', ru: 'пав. B-227', en: 'Unit B-227' },
+    location: {
+      mn: '2 давхар, B-227',
+      ru: '2 этаж, пав. B-227',
+      en: '2nd floor, Unit B-227',
+    },
     phone: null,
-    hours: null,
-    image: retailTara,
+    hours: {
+      mn: 'Даваа–Ням 10:00–20:00',
+      ru: 'Пн–Вс 10:00–20:00',
+      en: 'Mon–Sun 10:00–20:00',
+    },
+    image: branchTara,
     mapQuery: 'Tara center Ulaanbaatar',
     isNew: false,
     published: true,
@@ -49,7 +62,7 @@ export const branches = [
     location: { mn: '1 давхар', ru: '1 этаж', en: '1st floor' },
     phone: null,
     hours: null,
-    image: null,
+    image: branchUrangan,
     mapQuery: 'Emart Urangan Ulaanbaatar',
     isNew: true,
     published: true,
@@ -60,8 +73,12 @@ export const branches = [
     name: { mn: 'Баянгол E-mart', ru: 'E-mart Баянгол', en: 'E-mart Bayangol' },
     location: { mn: '3 давхар', ru: '3 этаж', en: '3rd floor' },
     phone: null,
-    hours: null,
-    image: null,
+    hours: {
+      mn: 'Даваа–Ням 10:00–22:00',
+      ru: 'Пн–Вс 10:00–22:00',
+      en: 'Mon–Sun 10:00–22:00',
+    },
+    image: branchBayangol,
     mapQuery: 'E-mart Bayangol Ulaanbaatar',
     isNew: false,
     published: true,
@@ -76,8 +93,12 @@ export const branches = [
     },
     location: { mn: '1 давхар', ru: '1 этаж', en: '1st floor' },
     phone: null,
-    hours: null,
-    image: null,
+    hours: {
+      mn: 'Даваа–Ням 09:00–22:00',
+      ru: 'Пн–Вс 09:00–22:00',
+      en: 'Mon–Sun 09:00–22:00',
+    },
+    image: branchIkhDelguur,
     mapQuery: 'State Department Store Ulaanbaatar',
     isNew: false,
     published: true,
@@ -88,8 +109,12 @@ export const branches = [
     name: { mn: 'Аму молл', ru: 'Аму молл', en: 'Amu Mall' },
     location: { mn: '2 давхар', ru: '2 этаж', en: '2nd floor' },
     phone: null,
-    hours: null,
-    image: null,
+    hours: {
+      mn: 'Даваа–Ням 10:00–20:00',
+      ru: 'Пн–Вс 10:00–20:00',
+      en: 'Mon–Sun 10:00–20:00',
+    },
+    image: branchDarkhan,
     mapQuery: 'Amu Mall Darkhan',
     isNew: false,
     published: true,
@@ -100,8 +125,12 @@ export const branches = [
     name: { mn: 'Орхон молл', ru: 'Орхон молл', en: 'Orkhon Mall' },
     location: { mn: '2 давхар', ru: '2 этаж', en: '2nd floor' },
     phone: null,
-    hours: null,
-    image: null,
+    hours: {
+      mn: 'Даваа–Ням 10:00–20:00',
+      ru: 'Пн–Вс 10:00–20:00',
+      en: 'Mon–Sun 10:00–20:00',
+    },
+    image: branchErdenet,
     mapQuery: 'Orkhon Mall Erdenet',
     isNew: false,
     published: true,
