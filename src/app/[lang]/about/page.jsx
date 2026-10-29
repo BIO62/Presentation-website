@@ -23,25 +23,29 @@ export async function generateMetadata({ params }) {
 }
 
 function Mission({ mission }) {
-  const lines = mission.lines?.length ? mission.lines : [mission.text]
-
   return (
     <Container className="mt-24 sm:mt-32 lg:mt-40">
       <FadeIn>
-        <h2 className="font-display text-sm font-semibold uppercase tracking-widest text-neutral-500">
-          {mission.title}
-        </h2>
+        <div className="relative isolate overflow-hidden rounded-4xl bg-brand-blue px-6 py-12 sm:px-12 sm:py-16 lg:px-20 lg:py-24">
+          {/* Ард нь логоны бүдэг тэмдэг */}
+          <Image
+            src="/logomark-white.png"
+            alt=""
+            aria-hidden="true"
+            width={512}
+            height={512}
+            className="pointer-events-none absolute -bottom-24 -right-24 -z-10 w-72 opacity-[0.06] sm:w-96 lg:-bottom-32 lg:-right-20 lg:w-[30rem]"
+          />
+          <h2 className="flex items-center gap-x-3 text-xs font-semibold uppercase tracking-[0.2em] text-brand-yellow sm:text-sm">
+            <span aria-hidden="true" className="h-px w-8 bg-brand-yellow" />
+            {mission.title}
+          </h2>
+          {/* Нэг урсгал догол мөр, мөрүүд жигд хуваагдана */}
+          <p className="mt-6 max-w-4xl font-display text-xl font-medium leading-[1.45] tracking-tight text-white [text-wrap:balance] sm:mt-8 sm:text-3xl sm:leading-[1.35] lg:text-4xl">
+            {mission.text}
+          </p>
+        </div>
       </FadeIn>
-      <FadeInStagger
-        faster
-        className="mt-8 max-w-6xl font-display text-2xl font-medium leading-[1.4] tracking-tight text-neutral-950 sm:text-4xl sm:leading-[1.3]"
-      >
-        {lines.map((line) => (
-          <FadeIn key={line} className="[text-wrap:balance]">
-            {line}
-          </FadeIn>
-        ))}
-      </FadeInStagger>
     </Container>
   )
 }
