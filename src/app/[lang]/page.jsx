@@ -114,7 +114,7 @@ const ONLINE_SHOPS = [
     brand: 'SYNERGETIC',
     href: 'https://synergetic.mn',
     site: 'synergetic.mn',
-    phone: '8900-6848',
+    phone: '7713-4040',
   },
 ]
 

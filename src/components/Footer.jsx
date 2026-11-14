@@ -23,6 +23,8 @@ const brandSocialLinks = [
   { heading: 'ESTEL' },
   { title: 'Facebook', href: 'https://www.facebook.com/ESTELMongolia' },
   { title: 'Instagram', href: 'https://www.instagram.com/estelmongolia/' },
+  { heading: 'ESTEL ACADEMY' },
+  { title: 'Facebook', href: 'https://www.facebook.com/profile.php?id=100090370504042' },
   { heading: 'SYNERGETIC' },
   { title: 'Facebook', href: 'https://www.facebook.com/SynergeticMongolia' },
   { title: 'Instagram', href: 'https://www.instagram.com/synergetic_mongolia/' },

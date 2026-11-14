@@ -65,6 +65,12 @@ export const socialMediaProfiles = [
     ],
   },
   {
+    brand: 'ESTEL ACADEMY',
+    links: [
+      { title: 'Facebook', href: 'https://www.facebook.com/profile.php?id=100090370504042', icon: FacebookIcon },
+    ],
+  },
+  {
     brand: 'SYNERGETIC',
     links: [
       { title: 'Facebook', href: 'https://www.facebook.com/SynergeticMongolia', icon: FacebookIcon },
