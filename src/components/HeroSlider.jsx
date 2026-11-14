@@ -176,7 +176,8 @@ export function HeroSlider({ slides, labels, className }) {
               <div
                 className={clsx(
                   'absolute inset-0',
-                  started && i === selected
+                  // Жижиг зурагт (still) томруулах хөдөлгөөн хийхгүй: илүү бүдгэрэхгүй
+                  started && i === selected && !slide.still
                     ? 'scale-100 transition-transform duration-[6000ms] ease-linear md:scale-[1.06]'
                     : 'scale-100 transition-transform delay-700 duration-0'
                 )}
@@ -188,24 +189,9 @@ export function HeroSlider({ slides, labels, className }) {
                   priority={i === 0}
                   quality={90}
                   sizes="100vw"
-                  className={clsx(
-                    'object-cover',
-                    // Жижиг/босоо постер: desktop-д ард нь бүдэг дэвсгэр болно
-                    slide.fit === 'contain' && 'md:scale-110 md:blur-2xl md:brightness-75'
-                  )}
+                  className="object-cover"
                   style={{ objectPosition: slide.focus ?? '50% 50%' }}
                 />
-                {slide.fit === 'contain' && (
-                  // Desktop-д постерыг сунгахгүй, бүтнээр нь хурц харуулна
-                  <Image
-                    src={slide.image}
-                    alt=""
-                    fill
-                    quality={90}
-                    sizes="(min-width: 768px) 46vw, 1px"
-                    className="hidden object-contain drop-shadow-2xl md:block md:pb-16 md:pl-[48%] md:pr-[6%] md:pt-32"
-                  />
-                )}
               </div>
             </div>
           ))}

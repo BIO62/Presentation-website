@@ -10,7 +10,7 @@
 //      {
 //        image: imageNew,
 //        focus: '50% 40%',                // (заавал биш) зургийн гол хэсэг (object-position); үндсэн нь '50% 50%'
-//        fit: 'contain',                  // (заавал биш) жижиг/босоо постер: desktop-д бүтнээр нь, ард нь бүдэг дэвсгэртэй
+//        still: true,                     // (заавал биш) жижиг зураг: томруулах хөдөлгөөнгүй (бүдгэрэхгүй)
 //        tag: { mn: '...', ru: '...', en: '...' },    // (заавал биш) гарчгийн дээрх жижиг шошго
 //        title: { mn: '...', ru: '...', en: '...' },  // тайлбар
 //        href: '/process',                // (заавал биш) хэлгүй зам; /mn, /ru, /en автоматаар нэмэгдэнэ
@@ -63,8 +63,8 @@ export const heroSlides = [
   },
   {
     image: imageHero09,
-    focus: '50% 25%',
-    fit: 'contain',
+    focus: '50% 35%',
+    still: true,
     title: {
       mn: 'SYNERGETIC Mongolia',
       ru: 'SYNERGETIC Mongolia',
@@ -74,7 +74,7 @@ export const heroSlides = [
   {
     image: imageHero10,
     focus: '50% 50%',
-    fit: 'contain',
+    still: true,
     title: {
       mn: 'SYNERGETIC ертөнц',
       ru: 'Мир SYNERGETIC',
@@ -88,7 +88,7 @@ export function getHeroSlides(lang) {
   return heroSlides.map((slide) => ({
     image: slide.image,
     focus: slide.focus ?? null,
-    fit: slide.fit ?? 'cover',
+    still: slide.still ?? false,
     tag: slide.tag ? slide.tag[lang] ?? slide.tag.mn : null,
     title: slide.title[lang] ?? slide.title.mn,
     href: slide.href ? `/${lang}${slide.href}` : null,
