@@ -223,6 +223,16 @@
       "regards": "Sincerely,",
       "role": "Founder, Tengeriin Ilgeemj LLC",
       "name": "N. Ulziikhutag"
+    },
+    "teamSpirit": {
+      "title": "A team united by our motto: Trust, Heart, Dedication"
+    },
+    "incentive": {
+      "title": "BEST EMPLOYEE INCENTIVE PROGRAM",
+      "paragraphs": [
+        "We select our best employees, and the company fully covers all the costs of travel and of visiting international manufacturing facilities, creating the conditions for them to broaden their professional knowledge and experience and to discover new environments and new opportunities."
+      ],
+      "closing": "For us, an employee’s success is the shared success of the whole organization."
     }
   },
   "process": {
@@ -339,8 +349,8 @@
     "description": "We officially import, develop, and distribute world-renowned brands in Mongolia for consumers and beauty businesses.",
     "estel": {
       "tag": "Professional Hair Care",
-      "title": "The trusted brand of 1000+ professional salons and 1000+ hairdressers in Mongolia",
-      "description": "A professional hair care brand with 26 years of experience. Equipped with 3 major manufacturing facilities and an independent R&D laboratory. Official distributor in Mongolia since 2019."
+      "title": "ESTEL PROFESSIONAL",
+      "description": "The story of a professional beauty brand that began in Saint Petersburg, Russia"
     },
     "synergetic": {
       "tag": "Eco Cleaning & Care",

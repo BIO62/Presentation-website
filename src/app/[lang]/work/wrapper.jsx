@@ -1,6 +1,7 @@
 import { Blockquote } from '@/components/Blockquote'
 import { ContactSection } from '@/components/ContactSection'
 import { Container } from '@/components/Container'
+import { EstelContent } from '@/components/EstelContent'
 import { FadeIn } from '@/components/FadeIn'
 import { GrayscaleTransitionImage } from '@/components/GrayscaleTransitionImage'
 import { MDXComponents } from '@/components/MDXComponents'
@@ -11,168 +12,13 @@ import { TagList, TagListItem } from '@/components/TagList'
 import { getDictionary } from '@/dictionaries/index'
 import { loadMDXMetadata } from '@/lib/loadMDXMetadata'
 
-// Орос, англи агуулга нь estel/page.mdx, synergetic/page.mdx доторх монгол эхийн
+// ESTEL хуудасны агуулга гурван хэлээрээ src/data/estelPage.js дотор (EstelContent).
+// SYNERGETIC-ийн орос, англи агуулга нь synergetic/page.mdx доторх монгол эхийн
 // орчуулга — баримт (он, тоо) өөрчлөгдвөл гурвууланд нь зэрэг засна.
 
 const h2 = 'font-display text-2xl font-semibold text-neutral-950'
 const p = 'mt-6 text-base text-neutral-600 leading-relaxed'
 const list = 'mt-4 list-disc pl-6 space-y-2 text-base text-neutral-600'
-
-function EstelContentRu() {
-  return (
-    <>
-      <h2 className={h2}>О бренде ESTEL</h2>
-      <p className={p}>
-        ESTEL Professional — ведущий мировой бренд профессионального ухода за волосами с
-        26-летним опытом. Бренд предлагает профессиональным парикмахерам, салонам и
-        покупателям комплексные решения для окрашивания, ухода, восстановления и укладки волос.
-      </p>
-      <p className={p}>
-        Бренд располагает <strong>3 крупными заводами</strong> и{' '}
-        <strong>собственной научно-исследовательской лабораторией</strong>. С 2019 года
-        ООО «Тэнгэрийн Илгээмж» является официальным дистрибьютором ESTEL в Монголии и
-        поставляет продукцию на рынок по официальным каналам.
-      </p>
-      <p className={p}>
-        Помимо продукции, мы оказываем парикмахерам, салонам и дилерам профессиональные
-        консультации, проводим обучение и поддерживаем правильное применение средств,
-        развивая ценность бренда ESTEL Professional на рынке Монголии.
-      </p>
-
-      <h2 className={`mt-16 ${h2}`}>Результаты сотрудничества</h2>
-      <TagList className="my-6">
-        <TagListItem>1000+ салонов по договору</TagListItem>
-        <TagListItem>1000+ обученных мастеров в год</TagListItem>
-        <TagListItem>Мастер-классы по 21 аймаку</TagListItem>
-        <TagListItem>Гарантия 3 крупных заводов</TagListItem>
-        <TagListItem>15 официальных филиалов</TagListItem>
-        <TagListItem>Собственная исследовательская лаборатория</TagListItem>
-      </TagList>
-
-      <h2 className={`mt-16 ${h2}`}>ESTEL Academy — профессионализм на новом уровне</h2>
-      <p className={p}>
-        ESTEL Academy — профессиональный учебный центр для парикмахеров, салонов и
-        бьюти-мастеров, <strong>сочетающий теорию и практику</strong>:
-      </p>
-      <ul className={list}>
-        <li>
-          <strong>Теория + практика:</strong> работа на реальной продукции и
-          профессиональные сертификаты
-        </li>
-        <li>
-          <strong>Направления обучения:</strong> колористика, подбор цвета, техники
-          окрашивания, осветление, окрашивание седины, мелирование / highlight, уход и
-          лечение волос, вечерние укладки, мужские стрижки, химическая завивка, правильное
-          применение продукции
-        </li>
-        <li>
-          <strong>Охват регионов:</strong> выездные программы для специалистов во всех 21
-          аймаке
-        </li>
-        <li>
-          <strong>Поддержка отрасли:</strong> ежегодное спонсорство национальных,
-          городских, аймачных и региональных конкурсов парикмахеров
-        </li>
-      </ul>
-
-      <Blockquote
-        className="my-16"
-        author={{
-          name: 'ООО «Тэнгэрийн Илгээмж»',
-          role: 'Официальный дистрибьютор ESTEL в Монголии',
-        }}
-      >
-        Наша миссия — вывести мастерство парикмахеров, салонов и специалистов Монголии на
-        мировой уровень и дать каждому клиенту почувствовать гарантию высочайшего качества.
-      </Blockquote>
-
-      <StatList className="my-16 !max-w-none">
-        <StatListItem value="2019" label="Официальные права в Монголии" />
-        <StatListItem value="26 лет" label="Международный опыт" />
-        <StatListItem value="3" label="Завода и R&D-лаборатория" />
-        <StatListItem value="1000+" label="Обученных мастеров (в год)" />
-      </StatList>
-    </>
-  )
-}
-
-function EstelContentEn() {
-  return (
-    <>
-      <h2 className={h2}>About ESTEL</h2>
-      <p className={p}>
-        ESTEL Professional is a world-leading professional hair care brand with 26 years of
-        experience, offering complete coloring, care, restoration and styling solutions for
-        professional hairdressers, salons and consumers.
-      </p>
-      <p className={p}>
-        The brand operates <strong>3 major manufacturing plants</strong> and an{' '}
-        <strong>independent research laboratory</strong>. Since 2019, Tengeriin Ilgeemj LLC
-        has been the official distributor of ESTEL in Mongolia, supplying the market through
-        official channels.
-      </p>
-      <p className={p}>
-        Beyond products, we provide hairdressers, salons and dealers with professional
-        consulting, training and product-application support, growing the value of ESTEL
-        Professional in the Mongolian market.
-      </p>
-
-      <h2 className={`mt-16 ${h2}`}>Partnership Highlights</h2>
-      <TagList className="my-6">
-        <TagListItem>1000+ contracted salons</TagListItem>
-        <TagListItem>1000+ hairdressers trained per year</TagListItem>
-        <TagListItem>Masterclasses across 21 provinces</TagListItem>
-        <TagListItem>Backed by 3 major plants</TagListItem>
-        <TagListItem>15 official branch stores</TagListItem>
-        <TagListItem>Independent research laboratory</TagListItem>
-      </TagList>
-
-      <h2 className={`mt-16 ${h2}`}>ESTEL Academy — Taking Skills to the Next Level</h2>
-      <p className={p}>
-        ESTEL Academy is a professional training center for hairdressers, salons and beauty
-        specialists, <strong>combining theory and hands-on practice</strong>:
-      </p>
-      <ul className={list}>
-        <li>
-          <strong>Theory + practice:</strong> hands-on work with real products and
-          professional certification
-        </li>
-        <li>
-          <strong>Core curriculum:</strong> color theory, color formulation, coloring
-          techniques, lightening, grey coverage, highlights, hair care and treatment,
-          occasion styling, men’s cuts, perms, and proper product application
-        </li>
-        <li>
-          <strong>Nationwide reach:</strong> roadshow training for specialists in all 21
-          provinces
-        </li>
-        <li>
-          <strong>Industry support:</strong> annual sponsorship of national, city,
-          provincial and regional hairdressing competitions
-        </li>
-      </ul>
-
-      <Blockquote
-        className="my-16"
-        author={{
-          name: 'Tengeriin Ilgeemj LLC',
-          role: 'Official Distributor of ESTEL in Mongolia',
-        }}
-      >
-        Our mission is to raise the skills of Mongolian hairdressers, salons and specialists
-        to world standards, and to let every customer experience the highest guarantee of
-        quality.
-      </Blockquote>
-
-      <StatList className="my-16 !max-w-none">
-        <StatListItem value="2019" label="Official rights in Mongolia" />
-        <StatListItem value="26 yrs" label="International experience" />
-        <StatListItem value="3" label="Plants & R&D laboratory" />
-        <StatListItem value="1000+" label="Hairdressers trained (per year)" />
-      </StatList>
-    </>
-  )
-}
 
 function SynergeticContentRu() {
   return (
@@ -392,13 +238,12 @@ export default async function CaseStudyLayout({ children, _segments, params }) {
         </header>
 
         <Container className="mt-24 sm:mt-32 lg:mt-40">
+          {id === 'estel' ? (
+            <EstelContent lang={lang} sliderLabels={dict.services.slider} />
+          ) : (
           <FadeIn>
             <MDXComponents.wrapper>
-              {isRu && id === 'estel' ? (
-                <EstelContentRu />
-              ) : isEn && id === 'estel' ? (
-                <EstelContentEn />
-              ) : isRu && id === 'synergetic' ? (
+              {isRu && id === 'synergetic' ? (
                 <SynergeticContentRu />
               ) : isEn && id === 'synergetic' ? (
                 <SynergeticContentEn />
@@ -407,6 +252,7 @@ export default async function CaseStudyLayout({ children, _segments, params }) {
               )}
             </MDXComponents.wrapper>
           </FadeIn>
+          )}
         </Container>
       </article>
 
