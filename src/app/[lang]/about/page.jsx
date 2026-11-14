@@ -4,11 +4,37 @@ import { ContactSection } from '@/components/ContactSection'
 import { Container } from '@/components/Container'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { HomeStats } from '@/components/HomeStats'
+import { ImageSlider } from '@/components/ImageSlider'
 import { PageIntro } from '@/components/PageIntro'
 import { SectionIntro } from '@/components/SectionIntro'
 import { Timeline } from '@/components/Timeline'
 import { getDictionary, locales } from '@/dictionaries/index'
 import imageDirector from '@/images/site/about/director.png'
+import incentive01 from '@/images/site/incentive/incentive-01.jpg'
+import incentive02 from '@/images/site/incentive/incentive-02.jpg'
+import incentive03 from '@/images/site/incentive/incentive-03.jpg'
+import incentive04 from '@/images/site/incentive/incentive-04.jpg'
+import incentive05 from '@/images/site/incentive/incentive-05.jpg'
+import incentive06 from '@/images/site/incentive/incentive-06.jpg'
+import team01 from '@/images/site/team/team-01.jpg'
+import team02 from '@/images/site/team/team-02.jpg'
+import team03 from '@/images/site/team/team-03.jpg'
+import team04 from '@/images/site/team/team-04.jpg'
+import team05 from '@/images/site/team/team-05.jpg'
+import team06 from '@/images/site/team/team-06.jpg'
+
+// Хамт олны болон шилдэг ажилтны аяллын зургууд. Зураг нэмэх: зургаа
+// src/images/site/team/ эсвэл src/images/site/incentive/ дотор хуулж, дээр import
+// мөр нэмээд доорх массивт нэрийг нь нэмнэ (дараалал = слайдерын дараалал).
+const teamImages = [team01, team02, team03, team04, team05, team06]
+const incentiveImages = [
+  incentive01,
+  incentive02,
+  incentive03,
+  incentive04,
+  incentive05,
+  incentive06,
+]
 
 export async function generateStaticParams() {
   return locales.map((lang) => ({ lang }))
@@ -61,6 +87,63 @@ function History({ timeline }) {
         <Timeline items={timeline.items} />
       </Container>
     </>
+  )
+}
+
+// Хамт олон: гарчиг + хамт олны зургийн слайдер
+function TeamSpirit({ team, sliderLabels }) {
+  return (
+    <Container className="mt-24 sm:mt-32 lg:mt-40">
+      <FadeIn>
+        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-16">
+          <div className="min-w-0">
+            <span aria-hidden="true" className="block h-px w-12 bg-brand-yellow" />
+            <h2 className="mt-6 font-display text-3xl font-medium tracking-tight text-neutral-950 [text-wrap:balance] sm:text-4xl lg:text-5xl lg:leading-tight">
+              {team.title}
+            </h2>
+          </div>
+          <ImageSlider
+            images={teamImages}
+            alt={team.title}
+            labels={sliderLabels}
+            className="min-w-0"
+          />
+        </div>
+      </FadeIn>
+    </Container>
+  )
+}
+
+// Шилдэг ажилтны урамшууллын хөтөлбөр: зураг зүүн, текст баруун
+function Incentive({ incentive, sliderLabels }) {
+  return (
+    <Container className="mt-24 sm:mt-32 lg:mt-40">
+      <FadeIn>
+        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-16">
+          <ImageSlider
+            images={incentiveImages}
+            alt={incentive.title}
+            labels={sliderLabels}
+            className="min-w-0 max-lg:order-2"
+          />
+          <div className="min-w-0">
+            <h2 className="font-display text-2xl font-semibold tracking-tight text-neutral-950 [text-wrap:balance] sm:text-3xl">
+              {incentive.title}
+            </h2>
+            <div className="mt-6 space-y-6 text-base leading-relaxed text-neutral-600 sm:text-lg">
+              {incentive.paragraphs.map((paragraph, i) => (
+                <p key={i}>{paragraph}</p>
+              ))}
+            </div>
+            <blockquote className="mt-8 border-l-4 border-brand-yellow pl-6">
+              <p className="font-display text-lg font-semibold leading-snug text-brand-blue [text-wrap:balance] sm:text-xl">
+                {incentive.closing}
+              </p>
+            </blockquote>
+          </div>
+        </div>
+      </FadeIn>
+    </Container>
   )
 }
 
@@ -203,6 +286,16 @@ export default async function About({ params }) {
       {dict.about.mission && <Mission mission={dict.about.mission} />}
 
       <History timeline={dict.about.timeline} />
+
+      <TeamSpirit
+        team={dict.about.teamSpirit}
+        sliderLabels={dict.services.slider}
+      />
+
+      <Incentive
+        incentive={dict.about.incentive}
+        sliderLabels={dict.services.slider}
+      />
 
       <Culture dict={dict} />
 
