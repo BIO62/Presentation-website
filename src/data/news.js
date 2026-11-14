@@ -26,14 +26,169 @@ import newsGrayCoverage from '@/images/site/news/news-2026-10-26-gray-coverage.j
 import newsBlackFriday from '@/images/site/news/news-2026-10-28-black-friday.jpg'
 import newsShineSalbar from '@/images/site/news/news-2026-10-29-urangan-photo.jpg'
 import newsAcademySchedule from '@/images/site/news/news-2026-11-academy-schedule.jpg'
+import newsBlackFridayNov from '@/images/site/news/news-2026-11-12-black-friday.png'
+import newsDarkhanExpo from '@/images/site/news/news-2026-11-12-darkhan-beauty-expo.png'
+import newsSynergeticNomin from '@/images/site/news/news-2026-11-13-synergetic-nomin.png'
+import newsHighlightBlond from '@/images/site/news/news-2026-11-14-highlight-blond.png'
 
 const FB_ESTEL = 'https://www.facebook.com/ESTELMongolia'
 const FB_ACADEMY = 'https://www.facebook.com/profile.php?id=100090370504042'
 
 const TRAINING = { mn: 'Сургалт', ru: 'Обучение', en: 'Training' }
 const ACHIEVEMENT = { mn: 'Амжилт', ru: 'Достижения', en: 'Achievement' }
+const SALE = { mn: 'Хямдрал', ru: 'Акция', en: 'Sale' }
+const EVENT = { mn: 'Арга хэмжээ', ru: 'Мероприятие', en: 'Event' }
 
 export const news = [
+  {
+    slug: 'highlight-blond-surgaltiin-ur-dun',
+    date: '2026-11-14',
+    category: TRAINING,
+    image: newsHighlightBlond,
+    title: {
+      mn: 'High Light Blond сургалтын үр дүн',
+      ru: 'Результаты курса High Light Blond',
+      en: 'High Light Blond training results',
+    },
+    excerpt: {
+      mn: 'ESTEL Academy-ийн High Light Blond буюу үс цайруулалтын сургалтад хамрагдсан үсчдийн сурсан мэдлэг, эзэмшсэн ур чадварын бодит үр дүн.',
+      ru: 'Реальные результаты мастеров, прошедших в ESTEL Academy курс High Light Blond по осветлению волос.',
+      en: 'Real results from the hairdressers who completed the High Light Blond hair lightening course at ESTEL Academy.',
+    },
+    body: {
+      mn: [
+        'Онолын мэдлэгээс бодит үр дүн хүртэл суралцсан үсчдэдээ баяр хүргэе.',
+        'ESTEL Academy-ийн High Light Blond буюу үс цайруулалтын сургалтад хамрагдсан үсчдийн маань сурсан мэдлэг, эзэмшсэн ур чадварын бодит үр дүнг хүргэж байна.',
+      ],
+      ru: [
+        'Поздравляем мастеров, которые прошли путь от теории до реального результата.',
+        'Представляем реальные результаты знаний и навыков, которые наши мастера получили на курсе ESTEL Academy High Light Blond по осветлению волос.',
+      ],
+      en: [
+        'Congratulations to our hairdressers, who went all the way from theory to real results.',
+        'Here are the real results of the knowledge and skills gained by the hairdressers who took the High Light Blond hair lightening course at ESTEL Academy.',
+      ],
+    },
+    link: 'https://www.facebook.com/reel/1006345245161256/',
+    published: true,
+  },
+  {
+    slug: 'synergetic-black-friday-nomin',
+    date: '2026-11-13',
+    endDate: '2026-11-20',
+    category: SALE,
+    image: newsSynergeticNomin,
+    title: {
+      mn: 'SYNERGETIC Black Friday — Номин сүлжээ дэлгүүрт',
+      ru: 'SYNERGETIC Black Friday — в сети магазинов «Номин»',
+      en: 'SYNERGETIC Black Friday at Nomin stores',
+    },
+    excerpt: {
+      mn: 'Номин төв болон орон нутгийн нийт 44 салбар дэлгүүрээс SYNERGETIC ECO бүтээгдэхүүнээ 20% хямдралтай үнээр аваарай. 11.13–11.20.',
+      ru: 'В 44 магазинах сети «Номин» в столице и регионах — скидка 20% на эко-продукцию SYNERGETIC. 13–20 ноября.',
+      en: '20% off SYNERGETIC ECO products at all 44 Nomin stores in the capital and the regions. November 13–20.',
+    },
+    body: {
+      mn: [
+        'Black Friday Номин сүлжээ дэлгүүрт үргэлжилсээр байна.',
+        'Номин төв болон орон нутгийн нийт 44 салбар дэлгүүрээс SYNERGETIC ECO бүтээгдэхүүнүүдээ 20% хямдралтай үнээр худалдан аваарай.',
+        '2026.11.13–20 хүртэл 7 хоногийн турш Номингийн бүх сүлжээ дэлгүүрээр үргэлжилнэ. Онлайн захиалга: www.nomin.mn',
+      ],
+      ru: [
+        'Black Friday продолжается в сети магазинов «Номин».',
+        'В 44 магазинах «Номин» в столице и регионах эко-продукцию SYNERGETIC можно купить со скидкой 20%.',
+        'Акция действует 7 дней, с 13 по 20 ноября 2026 года, во всех магазинах сети. Онлайн-заказ: www.nomin.mn',
+      ],
+      en: [
+        'Black Friday continues at Nomin stores.',
+        'Get SYNERGETIC ECO products at 20% off in all 44 Nomin stores in the capital and the regions.',
+        'The offer runs for 7 days, November 13–20, 2026, across the whole Nomin chain. Online orders: www.nomin.mn',
+      ],
+    },
+    link: 'https://www.facebook.com/SynergeticMongolia/posts/pfbid0oJoRzZTaGBTvHe3neUxbgrFhYFpSpzoXo223SGKbZEMKaNorLMSSzgLNcnAinVLwl',
+    published: true,
+  },
+  {
+    slug: 'darkhan-international-beauty-expo-2026',
+    date: '2026-11-13',
+    endDate: '2026-11-15',
+    category: EVENT,
+    image: newsDarkhanExpo,
+    title: {
+      mn: 'Darkhan International Beauty Expo 2026',
+      ru: 'Darkhan International Beauty Expo 2026',
+      en: 'Darkhan International Beauty Expo 2026',
+    },
+    excerpt: {
+      mn: 'Дархан хотод 3 дахь жилдээ болж буй гоо сайхны үзэсгэлэн худалдаанд ESTEL, SYNERGETIC оролцож байна. Хуйх оношилгоо үнэгүй. 11.13–15, Grand Yak Event Hall.',
+      ru: 'ESTEL и SYNERGETIC участвуют в выставке красоты, которая проходит в Дархане третий год подряд. Бесплатная диагностика кожи головы. 13–15 ноября, Grand Yak Event Hall.',
+      en: 'ESTEL and SYNERGETIC are at the beauty expo held in Darkhan for the third year running. Free scalp diagnostics. November 13–15, Grand Yak Event Hall.',
+    },
+    body: {
+      mn: [
+        'Дархан хотод 3 дахь жилдээ зохион байгуулагдаж буй гоо сайхны үзэсгэлэн худалдаанд бид оролцож байна.',
+        'ESTEL: бүх бүтээгдэхүүн 10%–50% хямдралтай, мэргэжлийн хуйх оношилгоо үнэгүй.',
+        'SYNERGETIC: бүх бүтээгдэхүүн 10%–40% хямдралтай, 200,000₮-өөс дээш худалдан авалт хийсэн эхний 50 хэрэглэгчид бэлэгтэй.',
+        '2026.11.13–15, 12:00–20:00. Grand Yak Event Hall, Дархан хот.',
+      ],
+      ru: [
+        'Мы участвуем в выставке-ярмарке красоты, которая проходит в Дархане третий год подряд.',
+        'ESTEL: скидки 10%–50% на всю продукцию и бесплатная профессиональная диагностика кожи головы.',
+        'SYNERGETIC: скидки 10%–40% на всю продукцию, подарки первым 50 покупателям при покупке от 200,000₮.',
+        '13–15 ноября 2026 года, 12:00–20:00. Grand Yak Event Hall, г. Дархан.',
+      ],
+      en: [
+        'We are taking part in the beauty expo held in Darkhan for the third year running.',
+        'ESTEL: 10%–50% off all products and free professional scalp diagnostics.',
+        'SYNERGETIC: 10%–40% off all products, with gifts for the first 50 customers who spend over 200,000₮.',
+        'November 13–15, 2026, 12:00–20:00. Grand Yak Event Hall, Darkhan.',
+      ],
+    },
+    link: 'https://www.facebook.com/ESTELMongolia/posts/pfbid08XWXkQwMZiHuqiiSN8LGkLNcLtYHS4Dv8Dx2q4212nF7bw8NUMmBaXBCvUDugZpBl',
+    published: true,
+  },
+  {
+    slug: 'estel-black-friday-11-11',
+    date: '2026-11-11',
+    endDate: '2026-11-17',
+    category: SALE,
+    image: newsBlackFridayNov,
+    title: {
+      mn: 'ESTEL Black Friday — 10%–50% хямдрал',
+      ru: 'ESTEL Black Friday — скидки 10%–50%',
+      en: 'ESTEL Black Friday — 10%–50% off',
+    },
+    excerpt: {
+      mn: 'Бүх салбарт 10%–50% хүртэлх хөнгөлөлт. Блондерууд 30%, PRO ART GLOSS 20% хямдарлаа. 11.11–11.17-г дуустал. Захиалга: estelpro.mn',
+      ru: 'Скидки 10%–50% во всех филиалах. Блондеры — 30%, PRO ART GLOSS — 20%. До 17 ноября включительно. Заказ: estelpro.mn',
+      en: '10%–50% off in all branches. Blonders 30% off, PRO ART GLOSS 20% off. Through November 17. Order at estelpro.mn',
+    },
+    body: {
+      mn: [
+        'Таны хүсэн хүлээсэн их хямдрал эхэллээ! Бүх салбарт 10%–50% хүртэлх хөнгөлөлттэй үнээр бүтээгдэхүүнээ худалдан аваарай. Өнгөлөгч маскууд ч хямдарлаа.',
+        'Блондерууд 30%, PRO ART GLOSS 20% хямдралтай.',
+        'Бүтээгдэхүүний нөөц хязгаартай. 11.11–11.17-г дуустал үргэлжилнэ. Онлайн захиалга: estelpro.mn/black-friday',
+        'Салбарууд: Уранганы Emart 1 давхар; Тара центр 2 давхар, В-227; Сансар, Чингисийн Emart 2 давхар; Баянгол, 10-р хорооллын Emart 3 давхар; Их дэлгүүр 1 давхар; Эрдэнэт, Орхон молл 2 давхар; Дархан, Аму молл 2 давхар.',
+        'Pocket Zero / Sono / Storepay-р төлбөрөө хуваан төлөх боломжтой.',
+      ],
+      ru: [
+        'Долгожданная большая распродажа началась! Во всех филиалах — скидки от 10% до 50%. Скидки действуют и на оттеночные маски.',
+        'Блондеры — со скидкой 30%, PRO ART GLOSS — со скидкой 20%.',
+        'Количество товара ограничено. Акция действует до 17 ноября включительно. Онлайн-заказ: estelpro.mn/black-friday',
+        'Филиалы: Emart Уранган, 1 этаж; Тара центр, 2 этаж, В-227; Emart Чингис (Сансар), 2 этаж; Emart Баянгол (10-й микрорайон), 3 этаж; Их дэлгүүр, 1 этаж; Эрдэнэт, Орхон молл, 2 этаж; Дархан, Аму молл, 2 этаж.',
+        'Доступна оплата в рассрочку через Pocket Zero / Sono / Storepay.',
+      ],
+      en: [
+        'The big sale you have been waiting for is here! Get 10%–50% off in all our branches, including tinting masks.',
+        'Blonders are 30% off and PRO ART GLOSS is 20% off.',
+        'Stock is limited. The sale runs through November 17. Online orders: estelpro.mn/black-friday',
+        'Branches: Emart Urangan, 1st floor; Tara Center, 2nd floor, B-227; Emart Chinggis (Sansar), 2nd floor; Emart Bayangol (10th khoroolol), 3rd floor; Ikh Delguur, 1st floor; Erdenet, Orkhon Mall, 2nd floor; Darkhan, Amu Mall, 2nd floor.',
+        'Pay in installments with Pocket Zero / Sono / Storepay.',
+      ],
+    },
+    link: 'https://www.facebook.com/ESTELMongolia/posts/pfbid035S5Lrz7KPQ7WbyGM2SRAzFXWsHV1QUvSMJe4VXp5TVxmPoVJ1D9qDFSchPtmkh7gl',
+    published: true,
+  },
   {
     slug: 'emart-urangan-salbar',
     date: '2026-10-29',
