@@ -16,17 +16,49 @@ import incentive03 from '@/images/site/incentive/incentive-03.jpg'
 import incentive04 from '@/images/site/incentive/incentive-04.jpg'
 import incentive05 from '@/images/site/incentive/incentive-05.jpg'
 import incentive06 from '@/images/site/incentive/incentive-06.jpg'
+import incentive07 from '@/images/site/incentive/incentive-07.jpg'
+import incentive08 from '@/images/site/incentive/incentive-08.jpg'
+import incentive09 from '@/images/site/incentive/incentive-09.jpg'
+import incentive10 from '@/images/site/incentive/incentive-10.jpg'
+import incentive11 from '@/images/site/incentive/incentive-11.jpg'
 import team01 from '@/images/site/team/team-01.jpg'
 import team02 from '@/images/site/team/team-02.jpg'
 import team03 from '@/images/site/team/team-03.jpg'
 import team04 from '@/images/site/team/team-04.jpg'
 import team05 from '@/images/site/team/team-05.jpg'
 import team06 from '@/images/site/team/team-06.jpg'
+import team07 from '@/images/site/team/team-07.jpg'
+import team08 from '@/images/site/team/team-08.jpg'
+import team09 from '@/images/site/team/team-09.jpg'
+import team10 from '@/images/site/team/team-10.jpg'
+import team11 from '@/images/site/team/team-11.jpg'
+import team12 from '@/images/site/team/team-12.jpg'
+import team13 from '@/images/site/team/team-13.jpg'
+import team14 from '@/images/site/team/team-14.jpg'
+import team15 from '@/images/site/team/team-15.jpg'
+import team16 from '@/images/site/team/team-16.jpg'
 
 // Хамт олны болон шилдэг ажилтны аяллын зургууд. Зураг нэмэх: зургаа
 // src/images/site/team/ эсвэл src/images/site/incentive/ дотор хуулж, дээр import
 // мөр нэмээд доорх массивт нэрийг нь нэмнэ (дараалал = слайдерын дараалал).
-const teamImages = [team01, team02, team03, team04, team05, team06]
+const teamImages = [
+  team01,
+  team02,
+  team07,
+  team03,
+  team16,
+  team04,
+  team08,
+  team09,
+  team05,
+  team10,
+  team11,
+  team12,
+  team13,
+  team14,
+  team06,
+  team15,
+]
 const incentiveImages = [
   incentive01,
   incentive02,
@@ -34,6 +66,11 @@ const incentiveImages = [
   incentive04,
   incentive05,
   incentive06,
+  incentive07,
+  incentive08,
+  incentive09,
+  incentive10,
+  incentive11,
 ]
 
 export async function generateStaticParams() {

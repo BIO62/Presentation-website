@@ -1,5 +1,6 @@
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { ImageSlider } from '@/components/ImageSlider'
+import { ScrollToHash } from '@/components/ScrollToHash'
 import { estelGalleries, getEstelPage } from '@/data/estelPage'
 
 const prose = 'mx-auto max-w-3xl'
@@ -48,6 +49,7 @@ export function EstelContent({ lang, sliderLabels }) {
 
   return (
     <div className="space-y-24 sm:space-y-32">
+      <ScrollToHash />
       {/* 1. ESTEL PROFESSIONAL: гарчиг нь хуудасны дээд хэсэгт */}
       <FadeIn>
         <section className={prose}>
@@ -95,7 +97,7 @@ export function EstelContent({ lang, sliderLabels }) {
       </section>
 
       {/* 4. ESTEL Academy Mongolia */}
-      <section className={wide}>
+      <section id="academy" className={`${wide} scroll-mt-24`}>
         <FadeIn>
           <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-16">
             <div className="min-w-0">
@@ -153,7 +155,7 @@ export function EstelContent({ lang, sliderLabels }) {
 
       {/* 5. Хамтын амжилт – түүхэн аялал */}
       <FadeIn>
-        <section className={wide}>
+        <section id="journey" className={`${wide} scroll-mt-24`}>
           <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-16">
             <ImageSlider
               images={estelGalleries.journey}

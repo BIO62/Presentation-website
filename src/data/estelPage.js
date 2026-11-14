@@ -11,6 +11,7 @@ import academy01 from '@/images/site/academy/academy-01.jpg'
 import academy02 from '@/images/site/academy/academy-02.jpg'
 import academy06 from '@/images/site/academy/academy-06.jpg'
 import academy07 from '@/images/site/academy/academy-07.jpg'
+import academy08 from '@/images/site/academy/academy-08-technologists.jpg'
 import fukuoka01 from '@/images/site/fukuoka/fukuoka-01.jpg'
 import fukuoka02 from '@/images/site/fukuoka/fukuoka-02.jpg'
 import fukuoka03 from '@/images/site/fukuoka/fukuoka-03.jpg'
@@ -18,7 +19,7 @@ import heroCertificates from '@/images/site/hero/hero-06-academy-gerchilgee.jpg'
 import heroAcademyTeam from '@/images/site/hero/hero-07-academy-hamt-olon.jpg'
 
 export const estelGalleries = {
-  academy: [heroCertificates, heroAcademyTeam, academy07, academy01, academy02, academy06],
+  academy: [heroCertificates, heroAcademyTeam, academy07, academy08, academy01, academy02, academy06],
   journey: [fukuoka01, fukuoka02, fukuoka03],
 }
 

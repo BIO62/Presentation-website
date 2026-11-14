@@ -192,6 +192,15 @@ function Services({ dict, lang }) {
                     <p className="mt-6 text-base leading-relaxed text-neutral-600 sm:text-lg">
                       {withHighlight(service.description, service.highlight)}
                     </p>
+                    {key === 'academy' && (
+                      <Link
+                        href={`/${lang}/work/estel#academy`}
+                        className="mt-8 inline-flex items-center gap-x-1.5 text-base font-semibold text-brand-blue transition hover:text-neutral-950"
+                      >
+                        {dict.caseStudies.more}
+                        <span aria-hidden="true">→</span>
+                      </Link>
+                    )}
                     {key === 'retail' && (
                       <Link
                         href={`/${lang}/contact#branches`}
