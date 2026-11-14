@@ -186,10 +186,26 @@ export function HeroSlider({ slides, labels, className }) {
                   alt=""
                   fill
                   priority={i === 0}
+                  quality={90}
                   sizes="100vw"
-                  className="object-cover"
+                  className={clsx(
+                    'object-cover',
+                    // Жижиг/босоо постер: desktop-д ард нь бүдэг дэвсгэр болно
+                    slide.fit === 'contain' && 'md:scale-110 md:blur-2xl md:brightness-75'
+                  )}
                   style={{ objectPosition: slide.focus ?? '50% 50%' }}
                 />
+                {slide.fit === 'contain' && (
+                  // Desktop-д постерыг сунгахгүй, бүтнээр нь хурц харуулна
+                  <Image
+                    src={slide.image}
+                    alt=""
+                    fill
+                    quality={90}
+                    sizes="(min-width: 768px) 46vw, 1px"
+                    className="hidden object-contain drop-shadow-2xl md:block md:pb-16 md:pl-[48%] md:pr-[6%] md:pt-32"
+                  />
+                )}
               </div>
             </div>
           ))}
